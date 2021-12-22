@@ -3,9 +3,6 @@ const imagesStyles = {
     maxWidth: "100%",
     height: "auto",
   },
-  imgFull: {
-    width: "100%",
-  },
   imgRounded: {
     borderRadius: "6px !important",
   },

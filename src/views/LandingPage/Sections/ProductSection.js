@@ -35,14 +35,14 @@ export default function ProductSection() {
       <br />
       <div>
         <GridContainer>
-          <GridItem xs={12} sm={12} md={4}>
+          <GridItem xs={12} sm={12} md={6}>
             <img
               src={image}
               alt="..."
               className={classes.imgRounded + " " + classes.imgFluid}
             />
           </GridItem>
-          <GridContainer md={8}>
+          <GridContainer xs={12} sm={12} md={6}>
             <GridItem xs={12} sm={12} md={6}>
               <InfoArea
                 title="Free Chat"

@@ -50,7 +50,7 @@ export default function LoginPage(props) {
       >
         <div className={classes.container}>
           <GridContainer>
-            <GridItem justifyContent="left" xs={12} sm={12} md={5}>
+            <GridItem justifyContent="left" xs={12} sm={12} md={8}>
               <h1>Get in touch</h1>
               <h>
                 You need more information?Check what other persons are saying
@@ -63,7 +63,7 @@ export default function LoginPage(props) {
               </p>
             </GridItem>
 
-            <GridItem justify="flex-end" xs={12} sm={12} md={5}>
+            <GridItem xs={12} sm={12} md={4}>
               <Card className={classes[cardAnimaton]}>
                 <form className={classes.form}>
                   <CardHeader color="primary" className={classes.cardHeader}>

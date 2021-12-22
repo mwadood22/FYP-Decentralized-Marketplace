@@ -12,7 +12,8 @@ import GridItem from "components/Grid/GridItem.js";
 //import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
-//import CardFooter from "components/Card/CardFooter.js";
+import CardFooter from "components/Card/CardFooter.js";
+//import Parallax from "components/Parallax/Parallax.js";
 
 import styles from "assets/jss/material-kit-react/views/landingPageSections/teamStyle.js";
 
@@ -36,36 +37,113 @@ export default function ClientSection() {
         <GridContainer>
           <GridItem xs={12} sm={12} md={4}>
             <Card carousel>
-              <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
+              {/* <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
                 <img src={team1} alt="..." className={imageClasses} />
-              </GridItem>
-              <h4 className={classes.cardTitle}>
-                AR Huzaifa
-                <br />
-                <small className={classes.smallTitle}>Model</small>
-              </h4>
+              </GridItem> */}
+              <svg
+                className={classes.svgIcon}
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z" />
+              </svg>
+
               <CardBody>
                 <p className={classes.description}>
                   You can write here details about one of your team members. You
                   can give more details about what they do. Feel free to add
                   some <a href="#pablo">links</a> for people to be able to
-                  follow them outside the site.
+                  follow them outside the site.You can write here details about
+                  one of your team members. You can give more details about what
+                  they do. Feel free to add some <a href="#pablo">links</a> for
+                  people to be able to follow them outside the site.
                 </p>
               </CardBody>
-              {/* <CardFooter className={classes.justifyCenter}>
-                <Button justIcon color="transparent" className={classes.margin5}>
-                  <i className={classes.socials + " fab fa-twitter"} />
-                </Button>
-                <Button justIcon color="transparent" className={classes.margin5}>
-                  <i className={classes.socials + " fab fa-instagram"} />
-                </Button>
-                <Button justIcon color="transparent" className={classes.margin5}>
-                  <i className={classes.socials + " fab fa-facebook"} />
-                </Button>
-              </CardFooter> */}
+              <CardFooter className={classes.justifyCenter}>
+                <h4 className={classes.cardMargin}>
+                  AR Huzaifa
+                  <br />
+                  <small className={classes.smallTitle}>Model</small>
+                </h4>
+              </CardFooter>
             </Card>
+            <div className={classes.profile}>
+              <img src={team1} alt="..." className={imageClasses} />
+            </div>
           </GridItem>
           <GridItem xs={12} sm={12} md={4}>
+            <Card carousel>
+              {/* <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
+                <img src={team1} alt="..." className={imageClasses} />
+              </GridItem> */}
+              <svg
+                className={classes.svgIcon}
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z" />
+              </svg>
+
+              <CardBody>
+                <p className={classes.description}>
+                  You can write here details about one of your team members. You
+                  can give more details about what they do. Feel free to add
+                  some <a href="#pablo">links</a> for people to be able to
+                  follow them outside the site.You can write here details about
+                  one of your team members. You can give more details about what
+                  they do. Feel free to add some <a href="#pablo">links</a> for
+                  people to be able to follow them outside the site.
+                </p>
+              </CardBody>
+              <CardFooter className={classes.justifyCenter}>
+                <h4 className={classes.cardMargin}>
+                  M.Wadood
+                  <br />
+                  <small className={classes.smallTitle}>Designer</small>
+                </h4>
+              </CardFooter>
+            </Card>
+            <div className={classes.profile}>
+              <img src={team2} alt="..." className={imageClasses} />
+            </div>
+          </GridItem>
+          <GridItem xs={12} sm={12} md={4}>
+            <Card carousel>
+              {/* <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
+                <img src={team1} alt="..." className={imageClasses} />
+              </GridItem> */}
+              <svg
+                className={classes.svgIcon}
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z" />
+              </svg>
+
+              <CardBody>
+                <p className={classes.description}>
+                  You can write here details about one of your team members. You
+                  can give more details about what they do. Feel free to add
+                  some <a href="#pablo">links</a> for people to be able to
+                  follow them outside the site.You can write here details about
+                  one of your team members. You can give more details about what
+                  they do. Feel free to add some <a href="#pablo">links</a> for
+                  people to be able to follow them outside the site.
+                </p>
+              </CardBody>
+              <CardFooter className={classes.justifyCenter}>
+                <h4 className={classes.cardMargin}>
+                  Arooj Sikandar
+                  <br />
+                  <small className={classes.smallTitle}>Model</small>
+                </h4>
+              </CardFooter>
+            </Card>
+            <div className={classes.profile}>
+              <img src={team3} alt="..." className={imageClasses} />
+            </div>
+          </GridItem>
+          {/* <GridItem xs={12} sm={12} md={4}>
             <Card carousel>
               <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
                 <img src={team2} alt="..." className={imageClasses} />
@@ -83,15 +161,18 @@ export default function ClientSection() {
                   follow them outside the site.
                 </p>
               </CardBody>
-              {/* <CardFooter className={classes.justifyCenter}>
+              <CardFooter className={classes.justifyCenter}>
                 <Button justIcon color="transparent" className={classes.margin5}>
                   <i className={classes.socials + " fab fa-twitter"} />
                 </Button>
                 <Button justIcon color="transparent" className={classes.margin5}>
                   <i className={classes.socials + " fab fa-linkedin"} />
                 </Button>
-              </CardFooter> */}
+              </CardFooter>
             </Card>
+            <div className={classes.profile}>
+              <img src={team2} alt="..." className={imageClasses} />
+            </div>
           </GridItem>
           <GridItem xs={12} sm={12} md={4}>
             <Card carousel>
@@ -111,7 +192,7 @@ export default function ClientSection() {
                   follow them outside the site.
                 </p>
               </CardBody>
-              {/* <CardFooter className={classes.justifyCenter}>
+              <CardFooter className={classes.justifyCenter}>
                 <Button justIcon color="transparent" className={classes.margin5}>
                   <i className={classes.socials + " fab fa-twitter"} />
                 </Button>
@@ -121,9 +202,12 @@ export default function ClientSection() {
                 <Button justIcon color="transparent" className={classes.margin5}>
                   <i className={classes.socials + " fab fa-facebook"} />
                 </Button>
-              </CardFooter> */}
+              </CardFooter>
             </Card>
-          </GridItem>
+            <div className={classes.profile}>
+              <img src={team3} alt="..." className={imageClasses} />
+            </div>
+          </GridItem> */}
         </GridContainer>
       </div>
     </div>
