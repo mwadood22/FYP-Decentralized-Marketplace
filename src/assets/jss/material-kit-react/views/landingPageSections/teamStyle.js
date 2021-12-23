@@ -6,9 +6,16 @@ import {
 import imagesStyle from "assets/jss/material-kit-react/imagesStyles.js";
 
 const teamStyle = {
+  gigImg: {
+    height: "150%",
+  },
   marginClass: {
     marginBottom: "40px",
     image: 'url("assets/img/faces/avatar.jpg")',
+  },
+  gigCard: {
+    width: "75%",
+    height: "70%",
   },
   svgIcon: {
     width: "20%",
