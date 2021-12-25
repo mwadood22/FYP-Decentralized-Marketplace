@@ -7,15 +7,16 @@ import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
 
 // core components
-import Search from "@material-ui/icons/Search";
+
 import Header from "components/Header/Header.js";
 import Footer from "components/Footer/Footer.js";
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
+//import GridContainer from "components/Grid/GridContainer.js";
+//import GridItem from "components/Grid/GridItem.js";
+//import Button from "components/CustomButtons/Button.js";
+//import Search from "@material-ui/icons/Search";
+//import CustomInput from "components/CustomInput/CustomInput.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
 
 //import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 //import Search from "@material-ui/icons/Search";
@@ -29,6 +30,7 @@ import ProductSection from "./Sections/ProductSection.js";
 import ClientSection from "./Sections/ClientSection.js";
 import ServicesSection from "./Sections/ServicesSection.js";
 import SectionCarousel from "./Sections/SectionCarousel.js";
+import HeaderCarousel from "./Sections/HeaderCarousel.js";
 
 const dashboardRoutes = [];
 
@@ -37,6 +39,7 @@ const useStyles = makeStyles(styles);
 export default function LandingPage(props) {
   const classes = useStyles();
   const { ...rest } = props;
+
   return (
     <div>
       <Header
@@ -51,51 +54,8 @@ export default function LandingPage(props) {
         }}
         {...rest}
       />
-      <Parallax filter image={require("assets/img/landing-top.jpg").default}>
-        <div className={classes.container}>
-          <GridContainer>
-            <GridItem xs={12} sm={12} md={6}>
-              <h1 className={classes.title}>Your tasking Partner</h1>
-              <h4>
-                Making your daily live{"'"}s tasks easier by providing
-                assistance all that you need. This change is committed.
-              </h4>
-
-              <div>
-                <CustomInput
-                  white
-                  inputProps={{
-                    placeholder: "Search",
-                    inputProps: {
-                      "aria-label": "Search",
-                      className: classes.searchInput,
-                    },
-                  }}
-                />
-                <Button
-                  justIcon
-                  round
-                  color="white"
-                  className={classes.searchBtn}
-                >
-                  <Search className={classes.searchIcon} />
-                </Button>
-              </div>
-              <div className={classes.getStarted}>
-                <Button
-                  color="danger"
-                  size="lg"
-                  href="/signup-page"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <i className="fas fa-check" />
-                  Get Started
-                </Button>
-              </div>
-            </GridItem>
-          </GridContainer>
-        </div>
+      <Parallax>
+        <HeaderCarousel />
       </Parallax>
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div className={classes.container}>
