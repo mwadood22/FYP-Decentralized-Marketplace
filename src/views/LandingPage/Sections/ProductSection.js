@@ -20,18 +20,6 @@ export default function ProductSection() {
   const classes = useStyles();
   return (
     <div className={classes.section}>
-      <GridContainer justify="center">
-        <GridItem xs={12} sm={12} md={8}>
-          <h2 className={classes.title}>Why choose MARKAZ</h2>
-          <h5 className={classes.description}>
-            This is the paragraph where you can write more details about your
-            product. Keep you user engaged by providing meaningful information.
-            Remember that by this time, the user is curious, the user is
-            curious.
-          </h5>
-        </GridItem>
-      </GridContainer>
-      <br />
       <div>
         <GridContainer>
           <GridItem xs={12} sm={12} md={6}>
@@ -48,6 +36,7 @@ export default function ProductSection() {
             />
           </GridItem>
           <GridContainer xs={12} sm={12} md={6}>
+            <h2 className={classes.title}>Why choose MARKAZ</h2>
             <h5 className={classes.description + " " + classes.sectionDisc}>
               This is the paragraph where you can write more details about your
               product. Keep you user engaged by providing meaningful

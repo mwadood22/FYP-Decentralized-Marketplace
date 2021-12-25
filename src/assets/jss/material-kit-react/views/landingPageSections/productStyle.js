@@ -1,10 +1,13 @@
 import { title } from "assets/jss/material-kit-react.js";
 import imagesStyles from "assets/jss/material-kit-react/imagesStyles.js";
 
+//import image from "assets/img/sign.jpg";
 const productStyle = {
   section: {
     padding: "70px 0",
     textAlign: "center",
+    //backgroundImage: "url(" + image + ")",
+    backgroundColor: "#210753",
   },
   title: {
     ...title,
@@ -13,10 +16,16 @@ const productStyle = {
     minHeight: "32px",
     textDecoration: "none",
     marginLeft: "10px",
+    fontFamily: '"Macan","Helvetica Neue","Helvetica","Arial",sans-serif',
+    fontWeight: "700",
+    color: "#ffffff",
+    textAlign: "Left",
   },
   description: {
-    color: "#999",
+    color: "#ffffff",
     marginLeft: "10px",
+    fontFamily: '"Macan","Helvetica Neue","Helvetica","Arial",sans-serif',
+    fontWeight: "400",
   },
   imgClass: {
     maxHeight: "80%",
@@ -24,7 +33,9 @@ const productStyle = {
     marginTop: "20px",
   },
   sectionDisc: {
-    marginTop: "170px",
+    marginTop: "-250px",
+    textAlign: "Left",
+    marginLeft: "10px",
   },
   ...imagesStyles,
 };
