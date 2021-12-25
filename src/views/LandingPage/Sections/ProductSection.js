@@ -23,19 +23,6 @@ export default function ProductSection() {
       <div>
         <GridContainer>
           <GridItem xs={12} sm={12} md={6}>
-            <img
-              src={image}
-              alt="..."
-              className={
-                classes.imgRounded +
-                " " +
-                classes.imgFluid +
-                " " +
-                classes.imgClass
-              }
-            />
-          </GridItem>
-          <GridContainer xs={12} sm={12} md={6}>
             <h2 className={classes.title}>Why choose MARKAZ</h2>
             <h5 className={classes.description + " " + classes.sectionDisc}>
               This is the paragraph where you can write more details about your
@@ -86,7 +73,20 @@ export default function ProductSection() {
                 vertical
               />
             </GridItem> */}
-          </GridContainer>
+          </GridItem>
+          <GridItem xs={12} sm={12} md={6}>
+            <img
+              src={image}
+              alt="..."
+              className={
+                classes.imgRounded +
+                " " +
+                classes.imgFluid +
+                " " +
+                classes.imgClass
+              }
+            />
+          </GridItem>
         </GridContainer>
       </div>
     </div>

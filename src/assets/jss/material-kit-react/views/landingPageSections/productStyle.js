@@ -33,7 +33,7 @@ const productStyle = {
     marginTop: "20px",
   },
   sectionDisc: {
-    marginTop: "-250px",
+    //marginTop: "-250px",
     textAlign: "Left",
     marginLeft: "10px",
   },
