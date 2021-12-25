@@ -10,22 +10,32 @@ const teamStyle = {
     height: "100%",
     width: "100%",
   },
+
   cardLayout: {
     height: "350px",
+    "&:hover,&:focus": {
+      color: "#FFFFFF",
+      backgroundColor: "gray",
+      opacity: "70%",
+      boxShadow:
+        "0 14px 26px -12px rgba(153, 153, 153, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(153, 153, 153, 0.2)",
+    },
   },
   serviceCardText: {
     position: "absolute",
-    color: "#3C4858",
-    fontSize: "10px",
+    color: "white",
+    fontSize: "15px",
     marginTop: "2rem",
     marginLeft: "2rem",
     textDecoration: "none",
+    textAlign: "left",
     fontWeight: "700",
-    fontFamily: `"Roboto Slab", "Times New Roman", serif`,
+    fontFamily: `Macan,"Helvetica Neue",Helvetica,Arial,sans-serif`,
+    //fontFamily: `"Roboto Slab", "Times New Roman", serif`,
   },
   serviceCardHeading: {
     position: "absolute",
-    color: "#3C4858",
+    color: "white",
     fontSize: "20px",
     marginTop: "4.5rem",
     marginLeft: "2rem",
@@ -35,7 +45,6 @@ const teamStyle = {
   },
   marginClass: {
     marginBottom: "40px",
-    image: 'url("assets/img/faces/avatar.jpg")',
   },
   gigCard: {
     width: "75%",

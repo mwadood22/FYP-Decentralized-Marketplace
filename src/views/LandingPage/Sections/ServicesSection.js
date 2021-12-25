@@ -5,6 +5,8 @@ import React from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Slider from "react-slick";
+import { Link } from "react-router-dom";
+
 //import Parallax from "components/Parallax/Parallax.js";
 
 // @material-ui/icons
@@ -20,9 +22,14 @@ import Card from "components/Card/Card.js";
 import styles from "assets/jss/material-kit-react/views/landingPageSections/teamStyle.js";
 //import GridContainer from "components/Grid/GridContainer";
 
-import team1 from "assets/img/faces/avatar.jpg";
-import team2 from "assets/img/faces/christian.jpg";
-import team3 from "assets/img/faces/kendall.jpg";
+import carpenter from "assets/img/services/carpenter.jpg";
+import chef from "assets/img/services/chef.jpg";
+import driver from "assets/img/services/driver.jpg";
+import electrician from "assets/img/services/electrician.jpg";
+import gardener from "assets/img/services/gardener.jpg";
+import painter from "assets/img/services/painter.jpg";
+import plumbing from "assets/img/services/plumbing.jpg";
+import helper from "assets/img/services/helper.jpg";
 //import { cardTitle } from "assets/jss/material-kit-react";
 
 const useStyles = makeStyles(styles);
@@ -36,7 +43,7 @@ export default function ServicesSection() {
     speed: 500,
     slidesToShow: 5,
     slidesToScroll: 1,
-    autoplay: false,
+    autoplay: true,
   };
   //const imageClasses = classNames(classes.imgCardTop);
   //const cardClasses = classNames(classes.cardTitle, classes.cardMargin);
@@ -45,14 +52,19 @@ export default function ServicesSection() {
       <h2 className={classes.title}>Explore our Services</h2>
       <Slider {...settings}>
         <div className={classes.marginClass}>
-          <GridItem xs={12} sm={12}>
-            <Card carousel className={classes.cardLayout}>
-              <img src={team1} alt="..." className={classes.serviceCardImg} />
-              <div className={classes.serviceCardText}>Share your message</div>
-              <div className={classes.serviceCardHeading}>Voice Over</div>
-            </Card>
-          </GridItem>
-          {/* <GridItem xs={12} sm={12} className={classes.marginAuto}>
+          <Link to="/service-page">
+            <GridItem xs={12} sm={12}>
+              <Card carousel className={classes.cardLayout}>
+                <img
+                  src={helper}
+                  alt="..."
+                  className={classes.serviceCardImg}
+                />
+                <div className={classes.serviceCardText}>Lend a hand</div>
+                <div className={classes.serviceCardHeading}>Helper</div>
+              </Card>
+            </GridItem>
+            {/* <GridItem xs={12} sm={12} className={classes.marginAuto}>
             <Card carousel>
               <h4 className={classes.infoCardHeader}>
                 AR Huzaifa
@@ -93,60 +105,115 @@ export default function ServicesSection() {
               </CardFooter>
             </Card>
           </GridItem> */}
+          </Link>
+        </div>
+
+        <div>
+          <Link to="/service-page">
+            <GridItem xs={12} sm={12}>
+              <Card carousel className={classes.cardLayout}>
+                <img
+                  src={electrician}
+                  alt="..."
+                  className={classes.serviceCardImg}
+                />
+                <div className={classes.serviceCardText}>See our spark</div>
+                <div className={classes.serviceCardHeading}>Electrician</div>
+              </Card>
+            </GridItem>
+          </Link>
         </div>
         <div>
-          <GridItem xs={12} sm={12}>
-            <Card carousel className={classes.cardLayout}>
-              <img src={team2} alt="..." className={classes.serviceCardImg} />
-              <div className={classes.serviceCardText}>Share your message</div>
-              <div className={classes.serviceCardHeading}>Voice Over</div>
-            </Card>
-          </GridItem>
+          <Link to="/service-page">
+            <GridItem xs={12} sm={12}>
+              <Card carousel className={classes.cardLayout}>
+                <img
+                  src={plumbing}
+                  alt="..."
+                  className={classes.serviceCardImg}
+                />
+                <div className={classes.serviceCardText}>Say no to leaks</div>
+                <div className={classes.serviceCardHeading}>Plumber</div>
+              </Card>
+            </GridItem>
+          </Link>
         </div>
         <div>
-          <GridItem xs={12} sm={12}>
-            <Card carousel className={classes.cardLayout}>
-              <img src={team3} alt="..." className={classes.serviceCardImg} />
-              <div className={classes.serviceCardText}>Share your message</div>
-              <div className={classes.serviceCardHeading}>Voice Over</div>
-            </Card>
-          </GridItem>
+          <Link to="/service-page">
+            <GridItem xs={12} sm={12}>
+              <Card carousel className={classes.cardLayout}>
+                <img
+                  src={painter}
+                  alt="..."
+                  className={classes.serviceCardImg}
+                />
+                <div className={classes.serviceCardText}>
+                  Make walls stand out
+                </div>
+                <div className={classes.serviceCardHeading}>Painter</div>
+              </Card>
+            </GridItem>
+          </Link>
         </div>
         <div>
-          <GridItem xs={12} sm={12}>
-            <Card carousel className={classes.cardLayout}>
-              <img src={team1} alt="..." className={classes.serviceCardImg} />
-              <div className={classes.serviceCardText}>Share your message</div>
-              <div className={classes.serviceCardHeading}>Voice Over</div>
-            </Card>
-          </GridItem>
+          <Link to="/service-page">
+            <GridItem xs={12} sm={12}>
+              <Card carousel className={classes.cardLayout}>
+                <img
+                  src={carpenter}
+                  alt="..."
+                  className={classes.serviceCardImg}
+                />
+                <div className={classes.serviceCardText}>
+                  Assembling made easy
+                </div>
+                <div className={classes.serviceCardHeading}>Carpenter</div>
+              </Card>
+            </GridItem>
+          </Link>
         </div>
         <div>
-          <GridItem xs={12} sm={12}>
-            <Card carousel className={classes.cardLayout}>
-              <img src={team2} alt="..." className={classes.serviceCardImg} />
-              <div className={classes.serviceCardText}>Share your message</div>
-              <div className={classes.serviceCardHeading}>Voice Over</div>
-            </Card>
-          </GridItem>
+          <Link to="/service-page">
+            <GridItem xs={12} sm={12}>
+              <Card carousel className={classes.cardLayout}>
+                <img
+                  src={gardener}
+                  alt="..."
+                  className={classes.serviceCardImg}
+                />
+                <div className={classes.serviceCardText}>Let gardens bloom</div>
+                <div className={classes.serviceCardHeading}>Gardener</div>
+              </Card>
+            </GridItem>
+          </Link>
         </div>
         <div>
-          <GridItem xs={12} sm={12}>
-            <Card carousel className={classes.cardLayout}>
-              <img src={team3} alt="..." className={classes.serviceCardImg} />
-              <div className={classes.serviceCardText}>Share your message</div>
-              <div className={classes.serviceCardHeading}>Voice Over</div>
-            </Card>
-          </GridItem>
+          <Link to="/service-page">
+            <GridItem xs={12} sm={12}>
+              <Card carousel className={classes.cardLayout}>
+                <img src={chef} alt="..." className={classes.serviceCardImg} />
+                <div className={classes.serviceCardText}>
+                  Food changes the mood
+                </div>
+                <div className={classes.serviceCardHeading}>Chef</div>
+              </Card>
+            </GridItem>
+          </Link>
         </div>
         <div>
-          <GridItem xs={12} sm={12}>
-            <Card carousel className={classes.cardLayout}>
-              <img src={team1} alt="..." className={classes.serviceCardImg} />
-              <div className={classes.serviceCardText}>Share your message</div>
-              <div className={classes.serviceCardHeading}>Voice Over</div>
-            </Card>
-          </GridItem>
+          <Link to="/service-page">
+            <GridItem xs={12} sm={12}>
+              <Card carousel className={classes.cardLayout}>
+                <img
+                  src={driver}
+                  alt="..."
+                  className={classes.serviceCardImg}
+                />
+                <div className={classes.serviceCardText}>Travel with ease</div>
+                <div className={classes.serviceCardHeading}>Driver</div>
+              </Card>
+            </GridItem>
+          </Link>
         </div>
       </Slider>
       {/* <GridItem xs={12} sm={12} md={4}>
