@@ -58,16 +58,7 @@ export default function LandingPage(props) {
                 Making your daily live{"'"}s tasks easier by providing
                 assistance all that you need.
               </h4>
-              {/* <Button
-                color="danger"
-                size="lg"
-                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="fas fa-play" />
-                Watch video
-              </Button> */}
+
               <div>
                 <CustomInput
                   white
@@ -86,6 +77,18 @@ export default function LandingPage(props) {
                   className={classes.searchBtn}
                 >
                   <Search className={classes.searchIcon} />
+                </Button>
+              </div>
+              <div className={classes.getStarted}>
+                <Button
+                  color="danger"
+                  size="lg"
+                  href="/signup-page"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i className="fas fa-check" />
+                  Get Started
                 </Button>
               </div>
             </GridItem>

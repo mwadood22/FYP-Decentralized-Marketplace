@@ -8,13 +8,23 @@ const productStyle = {
   },
   title: {
     ...title,
-    marginBottom: "1rem",
+    //marginBottom: "1rem",
     marginTop: "30px",
     minHeight: "32px",
     textDecoration: "none",
+    marginLeft: "10px",
   },
   description: {
     color: "#999",
+    marginLeft: "10px",
+  },
+  imgClass: {
+    maxHeight: "80%",
+    width: "80%",
+    marginTop: "20px",
+  },
+  sectionDisc: {
+    marginTop: "170px",
   },
   ...imagesStyles,
 };

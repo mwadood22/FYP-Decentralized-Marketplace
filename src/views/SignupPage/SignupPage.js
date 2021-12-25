@@ -6,7 +6,7 @@ import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
 import Email from "@material-ui/icons/Email";
 import People from "@material-ui/icons/People";
-import ContactPhone from "@material-ui/icons/ContactPhone";
+//import ContactPhone from "@material-ui/icons/ContactPhone";
 // core components
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
@@ -52,7 +52,7 @@ export default function LoginPage(props) {
       >
         <div className={classes.container}>
           <GridContainer justify="center">
-            <GridItem xs={12} sm={12} md={5}>
+            <GridItem xs={12} sm={12} md={4}>
               <Card className={classes[cardAnimaton]}>
                 <form className={classes.form}>
                   <CardHeader color="primary" className={classes.cardHeader}>
@@ -136,21 +136,6 @@ export default function LoginPage(props) {
                           </InputAdornment>
                         ),
                         autoComplete: "off",
-                      }}
-                    />
-                    <CustomInput
-                      labelText="Contact"
-                      id="contact"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        type: "contact",
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <ContactPhone className={classes.inputIconsColor} />
-                          </InputAdornment>
-                        ),
                       }}
                     />
                   </CardBody>

@@ -66,14 +66,14 @@ export default function ServicesSection() {
                 <Button
                   color="info"
                   size="sm"
-                  href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"
+                  href="/service-page"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <i className="fas fa-search" />
                   View Service
                 </Button>
-                <Button
+                {/* <Button
                   color="success"
                   size="sm"
                   href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"
@@ -82,7 +82,7 @@ export default function ServicesSection() {
                 >
                   <i className="fas fa-gavel" />
                   Make Bid
-                </Button>
+                </Button> */}
               </CardFooter>
             </Card>
           </GridItem>
@@ -107,14 +107,14 @@ export default function ServicesSection() {
                 <Button
                   color="info"
                   size="sm"
-                  href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"
+                  href="/service-page"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <i className="fas fa-search" />
                   View Service
                 </Button>
-                <Button
+                {/* <Button
                   color="success"
                   size="sm"
                   href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"
@@ -123,7 +123,7 @@ export default function ServicesSection() {
                 >
                   <i className="fas fa-gavel" />
                   Make Bid
-                </Button>
+                </Button> */}
               </CardFooter>
             </Card>
           </GridItem>
@@ -148,14 +148,14 @@ export default function ServicesSection() {
                 <Button
                   color="info"
                   size="sm"
-                  href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"
+                  href="/service-page"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <i className="fas fa-search" />
                   View Service
                 </Button>
-                <Button
+                {/* <Button
                   color="success"
                   size="sm"
                   href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"
@@ -164,7 +164,7 @@ export default function ServicesSection() {
                 >
                   <i className="fas fa-gavel" />
                   Make Bid
-                </Button>
+                </Button> */}
               </CardFooter>
             </Card>
           </GridItem>
@@ -189,14 +189,14 @@ export default function ServicesSection() {
                 <Button
                   color="info"
                   size="sm"
-                  href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"
+                  href="/service-page"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <i className="fas fa-search" />
                   View Service
                 </Button>
-                <Button
+                {/* <Button
                   color="success"
                   size="sm"
                   href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"
@@ -205,7 +205,7 @@ export default function ServicesSection() {
                 >
                   <i className="fas fa-gavel" />
                   Make Bid
-                </Button>
+                </Button> */}
               </CardFooter>
             </Card>
           </GridItem>

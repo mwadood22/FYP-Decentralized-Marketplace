@@ -54,7 +54,7 @@ export default function ProfilePage(props) {
     <div>
       <Header
         color="transparent"
-        brand="Material Kit React"
+        brand="MARKAZ"
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
@@ -96,7 +96,7 @@ export default function ProfilePage(props) {
             <GridContainer justify="center">
               <GridItem xs={12} sm={12} md={12}>
                 <NavPills
-                  color="gray"
+                  color="primary"
                   horizontal={{
                     tabsGrid: { xs: 12, sm: 2, md: 2 },
                     contentGrid: { xs: 12, sm: 10, md: 10 },
