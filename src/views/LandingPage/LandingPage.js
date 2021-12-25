@@ -93,7 +93,7 @@ export default function LandingPage(props) {
 
       {/* </Parallax> */}
       <div className={classNames(classes.main, classes.mainRaised)}>
-        <div className={classes.container}>
+        <div>
           <ServicesSection />
           <ProductSection />
 
