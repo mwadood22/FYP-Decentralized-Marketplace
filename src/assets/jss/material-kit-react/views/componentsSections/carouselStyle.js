@@ -9,6 +9,10 @@ const carouselStyle = {
     marginLeft: "auto !important",
     marginRight: "auto !important",
   },
+  absolute: {
+    position: "absolute",
+    zIndex: "1",
+  },
 };
 
 export default carouselStyle;

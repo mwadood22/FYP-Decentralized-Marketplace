@@ -1,13 +1,37 @@
-import {
-  cardTitle,
-  title,
-  infoCardHeader,
-} from "assets/jss/material-kit-react.js";
+import { cardTitle, title } from "assets/jss/material-kit-react.js";
 import imagesStyle from "assets/jss/material-kit-react/imagesStyles.js";
 
 const teamStyle = {
   gigImg: {
     height: "150%",
+  },
+  serviceCardImg: {
+    position: "relative",
+    height: "100%",
+    width: "100%",
+  },
+  cardLayout: {
+    height: "350px",
+  },
+  serviceCardText: {
+    position: "absolute",
+    color: "#3C4858",
+    fontSize: "10px",
+    marginTop: "2rem",
+    marginLeft: "2rem",
+    textDecoration: "none",
+    fontWeight: "700",
+    fontFamily: `"Roboto Slab", "Times New Roman", serif`,
+  },
+  serviceCardHeading: {
+    position: "absolute",
+    color: "#3C4858",
+    fontSize: "20px",
+    marginTop: "4.5rem",
+    marginLeft: "2rem",
+    textDecoration: "none",
+    fontWeight: "700",
+    fontFamily: `"Roboto Slab", "Times New Roman", serif`,
   },
   marginClass: {
     marginBottom: "40px",
@@ -22,8 +46,6 @@ const teamStyle = {
     margin: "0 auto",
     marginTop: "20px",
   },
-  infoCardHeader,
-  cardBackground: {},
   profile: {
     textAlign: "center",
     "& img": {

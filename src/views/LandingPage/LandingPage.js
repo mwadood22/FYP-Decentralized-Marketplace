@@ -16,7 +16,7 @@ import Footer from "components/Footer/Footer.js";
 //import Search from "@material-ui/icons/Search";
 //import CustomInput from "components/CustomInput/CustomInput.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
-import Parallax from "components/Parallax/Parallax.js";
+//import Parallax from "components/Parallax/Parallax.js";
 
 //import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 //import Search from "@material-ui/icons/Search";
@@ -54,9 +54,11 @@ export default function LandingPage(props) {
         }}
         {...rest}
       />
-      <Parallax>
-        <HeaderCarousel />
-      </Parallax>
+      {/* <Parallax> */}
+
+      <HeaderCarousel />
+
+      {/* </Parallax> */}
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div className={classes.container}>
           <ServicesSection />
