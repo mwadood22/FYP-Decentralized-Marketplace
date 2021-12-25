@@ -12,9 +12,9 @@ import Header from "components/Header/Header.js";
 import Footer from "components/Footer/Footer.js";
 //import GridContainer from "components/Grid/GridContainer.js";
 //import GridItem from "components/Grid/GridItem.js";
-//import Button from "components/CustomButtons/Button.js";
-//import Search from "@material-ui/icons/Search";
-//import CustomInput from "components/CustomInput/CustomInput.js";
+import Button from "components/CustomButtons/Button.js";
+import Search from "@material-ui/icons/Search";
+import CustomInput from "components/CustomInput/CustomInput.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 //import Parallax from "components/Parallax/Parallax.js";
 
@@ -55,8 +55,41 @@ export default function LandingPage(props) {
         {...rest}
       />
       {/* <Parallax> */}
+      <div className={classes.carouselOptions}>
+        <h1 className={classes.title}>Your tasking Partner</h1>
+        <h4>
+          Making your daily live{"'"}s tasks easier by providing assistance all
+          that you need. This change is committed.
+        </h4>
 
-      <HeaderCarousel />
+        <CustomInput
+          white
+          inputProps={{
+            placeholder: "Search",
+            inputProps: {
+              "aria-label": "Search",
+              className: classes.searchInput,
+            },
+          }}
+        />
+        <Button justIcon round color="white" className={classes.searchBtn}>
+          <Search className={classes.searchIcon} />
+        </Button>
+
+        <Button
+          color="danger"
+          size="lg"
+          href="/signup-page"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i className="fas fa-check" />
+          Get Started
+        </Button>
+      </div>
+      <div className={classes.carouselBack}>
+        <HeaderCarousel />
+      </div>
 
       {/* </Parallax> */}
       <div className={classNames(classes.main, classes.mainRaised)}>

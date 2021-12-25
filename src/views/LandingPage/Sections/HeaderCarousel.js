@@ -2,7 +2,7 @@ import React from "react";
 // react component for creating beautiful carousel
 import Carousel from "react-slick";
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
+// import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
 //import LocationOn from "@material-ui/icons/LocationOn";
 // core components
@@ -14,17 +14,17 @@ import image1 from "assets/img/bg.jpg";
 //import image2 from "assets/img/bg2.jpg";
 //import image3 from "assets/img/bg3.jpg";
 
-import Button from "components/CustomButtons/Button.js";
-import Search from "@material-ui/icons/Search";
-import CustomInput from "components/CustomInput/CustomInput.js";
+// import Button from "components/CustomButtons/Button.js";
+// import Search from "@material-ui/icons/Search";
+// import CustomInput from "components/CustomInput/CustomInput.js";
 
-import styles from "assets/jss/material-kit-react/views/componentsSections/carouselStyle.js";
+// import styles from "assets/jss/material-kit-react/views/componentsSections/carouselStyle.js";
 //import { createFalse } from "typescript";
 
-const useStyles = makeStyles(styles);
+// const useStyles = makeStyles(styles);
 
 export default function HeaderCarousel() {
-  const classes = useStyles();
+  //const classes = useStyles();
   const settings = {
     dots: false,
     infinite: true,
@@ -35,15 +35,17 @@ export default function HeaderCarousel() {
   };
   return (
     <div>
-      <Carousel {...settings}>
-        <div>
-          <img src={image1} alt="First slide" className="slick-image" />
-        </div>
-        <div>
-          <img src={image1} alt="First slide" className="slick-image" />
-        </div>
-      </Carousel>
-      <div className={classes.absolute}>
+      <div>
+        <Carousel {...settings}>
+          <div>
+            <img src={image1} alt="First slide" className="slick-image" />
+          </div>
+          <div>
+            <img src={image1} alt="First slide" className="slick-image" />
+          </div>
+        </Carousel>
+      </div>
+      {/* <div>
         <h1 className={classes.title}>Your tasking Partner</h1>
         <h4>
           Making your daily live{"'"}s tasks easier by providing assistance all
@@ -74,7 +76,7 @@ export default function HeaderCarousel() {
           <i className="fas fa-check" />
           Get Started
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 }

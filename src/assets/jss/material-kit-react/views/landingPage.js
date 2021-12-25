@@ -1,6 +1,14 @@
 import { container, title } from "assets/jss/material-kit-react.js";
 
 const landingPageStyle = {
+  carouselBack: {
+    zIndex: "1",
+  },
+  carouselOptions: {
+    position: "absolute",
+    zIndex: "2",
+    marginTop: "100px",
+  },
   container: {
     zIndex: "12",
     color: "#FFFFFF",

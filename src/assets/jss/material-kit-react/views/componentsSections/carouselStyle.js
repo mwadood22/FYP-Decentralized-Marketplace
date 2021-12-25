@@ -11,7 +11,13 @@ const carouselStyle = {
   },
   absolute: {
     position: "absolute",
-    zIndex: "1",
+  },
+  absolute1: {
+    position: "absolute",
+    zIndex: "-1",
+  },
+  relative: {
+    position: "relative",
   },
 };
 
