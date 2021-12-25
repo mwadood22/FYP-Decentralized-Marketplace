@@ -16,6 +16,7 @@ import Button from "components/CustomButtons/Button.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
+
 //import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 //import Search from "@material-ui/icons/Search";
 
@@ -27,6 +28,7 @@ import ProductSection from "./Sections/ProductSection.js";
 //import WorkSection from "./Sections/WorkSection.js";
 import ClientSection from "./Sections/ClientSection.js";
 import ServicesSection from "./Sections/ServicesSection.js";
+import SectionCarousel from "./Sections/SectionCarousel.js";
 
 const dashboardRoutes = [];
 
@@ -97,9 +99,11 @@ export default function LandingPage(props) {
       </Parallax>
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div className={classes.container}>
-          <ProductSection />
           <ServicesSection />
+          <ProductSection />
+
           <ClientSection />
+          <SectionCarousel />
           {/* <TeamSection /> */}
           {/* <WorkSection /> */}
         </div>

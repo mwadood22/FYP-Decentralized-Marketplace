@@ -18,6 +18,7 @@ import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 
 import styles from "assets/jss/material-kit-react/views/landingPageSections/teamStyle.js";
+//import GridContainer from "components/Grid/GridContainer";
 
 //import team1 from "assets/img/faces/avatar.jpg";
 //import team2 from "assets/img/faces/christian.jpg";
@@ -42,7 +43,7 @@ export default function ServicesSection() {
   return (
     <div className={classes.section}>
       {/* </Slider> */}
-      <h2 className={classes.title}>Choose from services of your choice</h2>
+      <h2 className={classes.title}>Explore our Services</h2>
       <Slider {...settings}>
         <div className={classes.marginClass}>
           <GridItem xs={12} sm={12} className={classes.marginAuto}>
@@ -64,7 +65,7 @@ export default function ServicesSection() {
               </CardBody>
               <CardFooter className={classes.justifyCenter}>
                 <Button
-                  color="info"
+                  color="primary"
                   size="sm"
                   href="/service-page"
                   target="_blank"
