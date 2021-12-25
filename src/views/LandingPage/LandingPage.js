@@ -56,7 +56,7 @@ export default function LandingPage(props) {
               <h1 className={classes.title}>Your tasking Partner</h1>
               <h4>
                 Making your daily live{"'"}s tasks easier by providing
-                assistance all that you need.
+                assistance all that you need. This change is committed.
               </h4>
 
               <div>
