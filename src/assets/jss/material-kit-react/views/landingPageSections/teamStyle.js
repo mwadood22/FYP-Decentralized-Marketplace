@@ -2,15 +2,11 @@ import { cardTitle, title } from "assets/jss/material-kit-react.js";
 import imagesStyle from "assets/jss/material-kit-react/imagesStyles.js";
 
 const teamStyle = {
-  gigImg: {
-    height: "150%",
-  },
   serviceCardImg: {
     position: "relative",
     height: "100%",
     width: "100%",
   },
-
   cardLayout: {
     height: "350px",
     "&:hover,&:focus": {
@@ -80,7 +76,11 @@ const teamStyle = {
     marginLeft: "auto",
     marginRight: "auto",
   },
-  cardTitle,
+  cardTitle: {
+    ...cardTitle,
+    textAlign: "left",
+    fontSize: "15px",
+  },
   cardMargin: {
     ...cardTitle,
     marginBottom: "60px",
@@ -91,6 +91,7 @@ const teamStyle = {
   description: {
     marginTop: "20px",
     color: "#999",
+    textAlign: "left",
   },
   justifyCenter: {
     justifyContent: "center !important",

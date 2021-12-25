@@ -6,6 +6,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
+//import { ServicesView } from "views/ServicePage/Sections/ServicesView";
 
 //import Parallax from "components/Parallax/Parallax.js";
 

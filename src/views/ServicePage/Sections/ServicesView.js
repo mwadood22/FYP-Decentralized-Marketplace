@@ -12,23 +12,23 @@ import { makeStyles } from "@material-ui/core/styles";
 // core components
 //import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
+//import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
-import CardFooter from "components/Card/CardFooter.js";
+//import CardFooter from "components/Card/CardFooter.js";
 import Paginations from "components/Pagination/Pagination.js";
 
 import styles from "assets/jss/material-kit-react/views/landingPageSections/teamStyle.js";
 import GridContainer from "components/Grid/GridContainer";
 
-import team1 from "assets/img/faces/avatar.jpg";
+//import team1 from "assets/img/faces/avatar.jpg";
 import team2 from "assets/img/faces/christian.jpg";
-import team3 from "assets/img/faces/kendall.jpg";
+//import team3 from "assets/img/faces/kendall.jpg";
 //import { cardTitle } from "assets/jss/material-kit-react";
 
 const useStyles = makeStyles(styles);
 
-export default function ServicesSection() {
+export default function ServicesView() {
   const classes = useStyles();
   //   const settings = {
   //     dots: true,
@@ -39,7 +39,7 @@ export default function ServicesSection() {
   //     slidesToScroll: 1,
   //     autoplay: false,
   //   };
-  const imageClasses = classNames(classes.imgCardTop);
+  const imageClasses = classNames(classes.imgCard);
   //const cardClasses = classNames(classes.cardTitle, classes.cardMargin);
   return (
     <div className={classes.section}>
@@ -210,53 +210,32 @@ export default function ServicesSection() {
         </GridItem>
       </div> */}
       <GridContainer>
-        <GridItem xs={12} sm={12} md={4}>
-          <Card carousel className={classes.gigCard}>
-            <GridItem
-              xs={12}
-              sm={12}
-              md={12}
-              className={(classes.itemGrid, classes.gigImg)}
-            >
-              <img src={team1} alt="..." className={imageClasses} />
-            </GridItem>
-            <h4 className={classes.cardTitle}>
-              AR Huzaifa
-              <br />
-              <small className={classes.smallTitle}>Designer</small>
-            </h4>
+        <GridItem xs={12} sm={12} md={3}>
+          <Card carousel>
+            <img src={team2} alt="..." className={imageClasses} />
             <CardBody>
-              <p className={classes.description}>
-                You can write here details about one of your team members.
-              </p>
+              <h4 className={classes.cardTitle}>M.Wadood</h4>
+              <p className={classes.description}>I can do plumbing well!</p>
             </CardBody>
-            <CardFooter className={classes.justifyCenter}>
-              <Button
-                color="info"
-                size="sm"
-                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="fas fa-search" />
-                View Service
-              </Button>
-              <Button
-                color="success"
-                size="sm"
-                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="fas fa-gavel" />
-                Make Bid
-              </Button>
-            </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
+        <GridItem xs={12} sm={12} md={3}>
           <Card carousel>
-            <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
+            <img src={team2} alt="..." className={imageClasses} />
+            <CardBody>
+              <h4 className={classes.cardTitle}>M.Wadood</h4>
+              <p className={classes.description}>I can do plumbing well!</p>
+            </CardBody>
+          </Card>
+        </GridItem>
+        <GridItem xs={12} sm={12} md={3}>
+          <Card carousel>
+            <img src={team2} alt="..." className={imageClasses} />
+            <CardBody>
+              <h4 className={classes.cardTitle}>M.Wadood</h4>
+              <p className={classes.description}>I can do plumbing well!</p>
+            </CardBody>
+            {/* <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
               <img src={team2} alt="..." className={imageClasses} />
             </GridItem>
             <h4 className={classes.cardTitle}>
@@ -272,196 +251,34 @@ export default function ServicesSection() {
                 outside the site.
               </p>
             </CardBody>
-            <CardFooter className={classes.justifyCenter}>
-              <Button
-                color="info"
-                size="sm"
-                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="fas fa-search" />
-                View Service
-              </Button>
-              <Button
-                color="success"
-                size="sm"
-                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="fas fa-gavel" />
-                Make Bid
-              </Button>
-            </CardFooter>
+            <CardFooter className={classes.justifyCenter}></CardFooter> */}
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
+        <GridItem xs={12} sm={12} md={3}>
           <Card carousel>
-            <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
-              <img src={team3} alt="..." className={imageClasses} />
-            </GridItem>
-            <h4 className={classes.cardTitle}>
-              Arooj Sikandar
-              <br />
-              <small className={classes.smallTitle}>Model</small>
-            </h4>
+            <img src={team2} alt="..." className={imageClasses} />
             <CardBody>
-              <p className={classes.description}>
-                You can write here details about one of your team members. You
-                can give more details about what they do. Feel free to add some{" "}
-                <a href="#pablo">links</a> for people to be able to follow them
-                outside the site.
-              </p>
+              <h4 className={classes.cardTitle}>M.Wadood</h4>
+              <p className={classes.description}>I can do plumbing well!</p>
             </CardBody>
-            <CardFooter className={classes.justifyCenter}>
-              <Button
-                color="info"
-                size="sm"
-                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="fas fa-search" />
-                View Service
-              </Button>
-              <Button
-                color="success"
-                size="sm"
-                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="fas fa-gavel" />
-                Make Bid
-              </Button>
-            </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
+        <GridItem xs={12} sm={12} md={3}>
           <Card carousel>
-            <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
-              <img src={team1} alt="..." className={imageClasses} />
-            </GridItem>
-            <h4 className={classes.cardTitle}>
-              AR Huzaifa
-              <br />
-              <small className={classes.smallTitle}>Designer</small>
-            </h4>
+            <img src={team2} alt="..." className={imageClasses} />
             <CardBody>
-              <p className={classes.description}>
-                You can write here details about one of your team members. You
-                can give more details about what they do. Feel free to add some{" "}
-                <a href="#pablo">links</a> for people to be able to follow them
-                outside the site.
-              </p>
+              <h4 className={classes.cardTitle}>M.Wadood</h4>
+              <p className={classes.description}>I can do plumbing well!</p>
             </CardBody>
-            <CardFooter className={classes.justifyCenter}>
-              <Button
-                color="info"
-                size="sm"
-                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="fas fa-search" />
-                View Service
-              </Button>
-              <Button
-                color="success"
-                size="sm"
-                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="fas fa-gavel" />
-                Make Bid
-              </Button>
-            </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
+        <GridItem xs={12} sm={12} md={3}>
           <Card carousel>
-            <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
-              <img src={team2} alt="..." className={imageClasses} />
-            </GridItem>
-            <h4 className={classes.cardTitle}>
-              M.Wadood
-              <br />
-              <small className={classes.smallTitle}>Designer</small>
-            </h4>
+            <img src={team2} alt="..." className={imageClasses} />
             <CardBody>
-              <p className={classes.description}>
-                You can write here details about one of your team members. You
-                can give more details about what they do. Feel free to add some{" "}
-                <a href="#pablo">links</a> for people to be able to follow them
-                outside the site.
-              </p>
+              <h4 className={classes.cardTitle}>M.Wadood</h4>
+              <p className={classes.description}>I can do plumbing well!</p>
             </CardBody>
-            <CardFooter className={classes.justifyCenter}>
-              <Button
-                color="info"
-                size="sm"
-                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="fas fa-search" />
-                View Service
-              </Button>
-              <Button
-                color="success"
-                size="sm"
-                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="fas fa-gavel" />
-                Make Bid
-              </Button>
-            </CardFooter>
-          </Card>
-        </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
-          <Card carousel>
-            <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
-              <img src={team3} alt="..." className={imageClasses} />
-            </GridItem>
-            <h4 className={classes.cardTitle}>
-              Arooj Sikandar
-              <br />
-              <small className={classes.smallTitle}>Model</small>
-            </h4>
-            <CardBody>
-              <p className={classes.description}>
-                You can write here details about one of your team members. You
-                can give more details about what they do. Feel free to add some{" "}
-                <a href="#pablo">links</a> for people to be able to follow them
-                outside the site.
-              </p>
-            </CardBody>
-            <CardFooter className={classes.justifyCenter}>
-              <Button
-                color="info"
-                size="sm"
-                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="fas fa-search" />
-                View Service
-              </Button>
-              <Button
-                color="success"
-                size="sm"
-                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="fas fa-gavel" />
-                Make Bid
-              </Button>
-            </CardFooter>
           </Card>
         </GridItem>
       </GridContainer>
