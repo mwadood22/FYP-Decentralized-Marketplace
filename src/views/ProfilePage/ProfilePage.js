@@ -20,6 +20,19 @@ import Parallax from "components/Parallax/Parallax.js";
 
 import profile from "assets/img/faces/christian.jpg";
 
+import Button from "components/CustomButtons/Button.js";
+import Card from "components/Card/Card.js";
+import CardBody from "components/Card/CardBody.js";
+import CardHeader from "components/Card/CardHeader.js";
+import CardFooter from "components/Card/CardFooter.js";
+import CustomInput from "components/CustomInput/CustomInput.js";
+
+import InputAdornment from "@material-ui/core/InputAdornment";
+import Icon from "@material-ui/core/Icon";
+// @material-ui/icons
+import Email from "@material-ui/icons/Email";
+import People from "@material-ui/icons/People";
+
 // import studio1 from "assets/img/examples/studio-1.jpg";
 // import studio2 from "assets/img/examples/studio-2.jpg";
 // import studio3 from "assets/img/examples/studio-3.jpg";
@@ -41,6 +54,10 @@ import styles from "assets/jss/material-kit-react/views/profilePage.js";
 const useStyles = makeStyles(styles);
 
 export default function ProfilePage(props) {
+  //const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
+  //setTimeout(function () {
+  //  setCardAnimation("");
+  //}, 700);
   const classes = useStyles();
   const { ...rest } = props;
   const imageClasses = classNames(
@@ -78,25 +95,20 @@ export default function ProfilePage(props) {
                     <img src={profile} alt="..." className={imageClasses} />
                   </div>
                   <div className={classes.name}>
-                    <h3 className={classes.title}>Christian Louboutin</h3>
-                    <h6>DESIGNER</h6>
-                    {/* <Button justIcon link className={classes.margin5}>
-                      <i className={"fab fa-twitter"} />
-                    </Button>
-                    <Button justIcon link className={classes.margin5}>
-                      <i className={"fab fa-instagram"} />
-                    </Button>
-                    <Button justIcon link className={classes.margin5}>
-                      <i className={"fab fa-facebook"} />
-                    </Button> */}
+                    <h3 className={classes.title}>M.Wadood</h3>
                   </div>
                 </div>
               </GridItem>
             </GridContainer>
             <GridContainer justify="center">
-              <GridItem xs={12} sm={12} md={12}>
+              <GridItem
+                xs={12}
+                sm={12}
+                md={12}
+                // className={classes.contentContainer}
+              >
                 <NavPills
-                  color="primary"
+                  color="gray"
                   horizontal={{
                     tabsGrid: { xs: 12, sm: 2, md: 2 },
                     contentGrid: { xs: 12, sm: 10, md: 10 },
@@ -135,6 +147,105 @@ export default function ProfilePage(props) {
                       tabButton: "Edit",
                       tabIcon: Edit,
                       tabContent: (
+                        <Card className={classes.contentContainer}>
+                          <form className={classes.form}>
+                            <CardHeader
+                              color="gray"
+                              className={classes.cardHeader}
+                            >
+                              <h4>Edit Info</h4>
+                            </CardHeader>
+                            <p className={classes.divider}></p>
+                            <CardBody>
+                              <CustomInput
+                                labelText="Edit Name"
+                                id="first"
+                                formControlProps={{
+                                  fullWidth: true,
+                                }}
+                                inputProps={{
+                                  type: "text",
+                                  endAdornment: (
+                                    <InputAdornment position="end">
+                                      <People
+                                        className={classes.inputIconsColor}
+                                      />
+                                    </InputAdornment>
+                                  ),
+                                }}
+                              />
+                              <CustomInput
+                                labelText="Edit Email"
+                                id="email"
+                                formControlProps={{
+                                  fullWidth: true,
+                                }}
+                                inputProps={{
+                                  type: "email",
+                                  endAdornment: (
+                                    <InputAdornment position="end">
+                                      <Email
+                                        className={classes.inputIconsColor}
+                                      />
+                                    </InputAdornment>
+                                  ),
+                                }}
+                              />
+                              <CustomInput
+                                labelText="Old Password"
+                                id="password"
+                                formControlProps={{
+                                  fullWidth: true,
+                                }}
+                                inputProps={{
+                                  type: "password",
+                                  endAdornment: (
+                                    <InputAdornment position="end">
+                                      <Icon className={classes.inputIconsColor}>
+                                        lock_outline
+                                      </Icon>
+                                    </InputAdornment>
+                                  ),
+                                  autoComplete: "off",
+                                }}
+                              />
+                              <CustomInput
+                                labelText="New Password"
+                                id="password"
+                                formControlProps={{
+                                  fullWidth: true,
+                                }}
+                                inputProps={{
+                                  type: "password",
+                                  endAdornment: (
+                                    <InputAdornment position="end">
+                                      <Icon className={classes.inputIconsColor}>
+                                        lock_outline
+                                      </Icon>
+                                    </InputAdornment>
+                                  ),
+                                  autoComplete: "on",
+                                }}
+                              />
+                            </CardBody>
+                            <CardFooter className={classes.cardFooter}>
+                              <Button color="gray" href="/profile-page">
+                                Submit
+                              </Button>
+                            </CardFooter>
+                          </form>
+                        </Card>
+                      ),
+                    },
+                    {
+                      tabButton: "Projects History",
+                      tabIcon: Schedule,
+                      tabContent: <Table />,
+                    },
+                    {
+                      tabButton: "Payments",
+                      tabIcon: Payment,
+                      tabContent: (
                         <span>
                           <p>
                             Efficiently unleash cross-media information without
@@ -153,11 +264,6 @@ export default function ProfilePage(props) {
                           </p>
                         </span>
                       ),
-                    },
-                    {
-                      tabButton: "Projects History",
-                      tabIcon: Schedule,
-                      tabContent: <Table />,
                     },
                     {
                       tabButton: "Payments",
@@ -313,7 +419,7 @@ export default function ProfilePage(props) {
           </div>
         </div>
       </div>
-      <Footer />
+      <Footer className={classes.profileFooter} />
     </div>
   );
 }

@@ -7,7 +7,7 @@ const productStyle = {
     padding: "70px 0",
     textAlign: "center",
     //backgroundImage: "url(" + image + ")",
-    backgroundColor: "#210753",
+    background: "linear-gradient(60deg, #d5d0e5, #f3e6e8)",
   },
   title: {
     ...title,
