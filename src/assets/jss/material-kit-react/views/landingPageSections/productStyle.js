@@ -7,11 +7,7 @@ const productStyle = {
     padding: "70px 0",
     textAlign: "center",
     //backgroundImage: "url(" + image + ")",
-<<<<<<< Updated upstream
-    background: "linear-gradient(60deg, #d5d0e5, #f3e6e8)",
-=======
     backgroundColor: "#f7f9fd",
->>>>>>> Stashed changes
   },
   title: {
     ...title,
