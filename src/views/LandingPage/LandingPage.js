@@ -29,8 +29,10 @@ import ProductSection from "./Sections/ProductSection.js";
 //import WorkSection from "./Sections/WorkSection.js";
 import ClientSection from "./Sections/ClientSection.js";
 import ServicesSection from "./Sections/ServicesSection.js";
-import SectionCarousel from "./Sections/SectionCarousel.js";
+//import SectionCarousel from "./Sections/SectionCarousel.js";
 import HeaderCarousel from "./Sections/HeaderCarousel.js";
+import GuidesSection from "./Sections/GuidesSection.js";
+import ProductSection2 from "./Sections/ProductSection2.js";
 
 const dashboardRoutes = [];
 
@@ -98,7 +100,9 @@ export default function LandingPage(props) {
           <ProductSection />
 
           <ClientSection />
-          <SectionCarousel />
+          <ProductSection2 />
+          <GuidesSection />
+
           {/* <TeamSection /> */}
           {/* <WorkSection /> */}
         </div>

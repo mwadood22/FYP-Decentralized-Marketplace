@@ -10,9 +10,9 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Card from "components/Card/Card.js";
 
-import image1 from "assets/img/bg.jpg";
-import image2 from "assets/img/bg2.jpg";
-import image3 from "assets/img/bg3.jpg";
+import landing from "assets/img/landing-top.jpg";
+//import image2 from "assets/img/image1.jpg";
+//import image3 from "assets/img/image1.jpg";
 
 import styles from "assets/jss/material-kit-react/views/componentsSections/carouselStyle.js";
 
@@ -36,7 +36,11 @@ export default function SectionCarousel() {
             <Card carousel>
               <Carousel {...settings}>
                 <div>
-                  <img src={image1} alt="First slide" className="slick-image" />
+                  <img
+                    src={landing}
+                    alt="First slide"
+                    className="slick-image"
+                  />
                   <div className="slick-caption">
                     <h4>
                       <LocationOn className="slick-icons" />
@@ -46,7 +50,7 @@ export default function SectionCarousel() {
                 </div>
                 <div>
                   <img
-                    src={image2}
+                    src={landing}
                     alt="Second slide"
                     className="slick-image"
                   />
@@ -58,7 +62,11 @@ export default function SectionCarousel() {
                   </div>
                 </div>
                 <div>
-                  <img src={image3} alt="Third slide" className="slick-image" />
+                  <img
+                    src={landing}
+                    alt="Third slide"
+                    className="slick-image"
+                  />
                   <div className="slick-caption">
                     <h4>
                       <LocationOn className="slick-icons" />

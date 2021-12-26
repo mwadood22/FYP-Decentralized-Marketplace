@@ -10,7 +10,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 //import InfoArea from "components/InfoArea/InfoArea.js";
-import image from "assets/img/worker.jpg";
+import helper from "assets/img/services/helper.jpg";
+import List from "components/List/List.js";
 
 import styles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
 
@@ -23,60 +24,16 @@ export default function ProductSection() {
       <div>
         <GridContainer>
           <GridItem xs={12} sm={12} md={6}>
-            <h2 className={classes.title}>Why choose MARKAZ</h2>
-            <h5 className={classes.description + " " + classes.sectionDisc}>
-              This is the paragraph where you can write more details about your
-              product. Keep you user engaged by providing meaningful
-              information. Remember that by this time, the user is curious,
-              otherwise he wouldn
-              {"'"}t scroll to get here. Add a button if you want the user to
-              see more. This is the paragraph where you can write more details
-              about your product. Keep you user engaged by providing meaningful
-              information. Remember that by this time, the user is curious,
-              otherwise he wouldn
-              {"'"}t scroll to get here. Add a button if you want the user to
-              see more.
-            </h5>
-            {/* <GridItem xs={12} sm={12} md={6}>
-              <InfoArea
-                title="Free Chat"
-                description="Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough."
-                icon={Chat}
-                iconColor="info"
-                vertical
-              />
-            </GridItem>
-            <GridItem xs={12} sm={12} md={6}>
-              <InfoArea
-                title="Verified Users"
-                description="Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough."
-                icon={VerifiedUser}
-                iconColor="success"
-                vertical
-              />
-            </GridItem>
-            <GridItem xs={12} sm={12} md={6}>
-              <InfoArea
-                title="Fingerprint"
-                description="Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough."
-                icon={Fingerprint}
-                iconColor="danger"
-                vertical
-              />
-            </GridItem>
-            <GridItem xs={12} sm={12} md={6}>
-              <InfoArea
-                title="Fingerprint"
-                description="Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough."
-                icon={Fingerprint}
-                iconColor="danger"
-                vertical
-              />
-            </GridItem> */}
+            <h2 className={classes.title}>
+              Connecting to the world of<br></br>freelance labour
+            </h2>
+            <div className={classes.description + " " + classes.sectionDisc}>
+              <List />
+            </div>
           </GridItem>
           <GridItem xs={12} sm={12} md={6}>
             <img
-              src={image}
+              src={helper}
               alt="..."
               className={
                 classes.imgRounded +

@@ -32,7 +32,7 @@ export default function ClientSection() {
   );
   return (
     <div className={classes.section}>
-      <h2 className={classes.title}>Our clients love us!</h2>
+      <h2 className={classes.title}>Hear it from the experts!</h2>
       <div>
         <GridContainer>
           <GridItem xs={12} sm={12} md={4}>
