@@ -2,12 +2,14 @@ import { container, title } from "assets/jss/material-kit-react.js";
 
 const landingPageStyle = {
   carouselBack: {
+    height: "570px",
     zIndex: "1",
   },
   carouselOptions: {
     position: "absolute",
     zIndex: "2",
-    marginTop: "100px",
+    marginTop: "150px",
+    marginLeft: "150px",
   },
   container: {
     zIndex: "12",
@@ -15,10 +17,13 @@ const landingPageStyle = {
     ...container,
   },
   searchBtn: {
-    marginTop: "20px",
+    marginTop: "27.3px",
+    marginLeft: "10px",
   },
   searchInput: {
     width: "400px",
+    background: "white",
+    borderRadius: "4px",
   },
   title: {
     ...title,

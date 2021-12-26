@@ -47,7 +47,7 @@ import People from "@material-ui/icons/People";
 import Schedule from "@material-ui/icons/Schedule";
 import Edit from "@material-ui/icons/Edit";
 import Person from "@material-ui/icons/Person";
-import Payment from "@material-ui/icons/Payment";
+// import Payment from "@material-ui/icons/Payment";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 
@@ -242,52 +242,29 @@ export default function ProfilePage(props) {
                       tabIcon: Schedule,
                       tabContent: <Table />,
                     },
-                    {
-                      tabButton: "Payments",
-                      tabIcon: Payment,
-                      tabContent: (
-                        <span>
-                          <p>
-                            Efficiently unleash cross-media information without
-                            cross-media value. Quickly maximize timely
-                            deliverables for real-time schemas.
-                          </p>
-                          <br />
-                          <p>
-                            Dramatically maintain clicks-and-mortar solutions
-                            without functional solutions. Dramatically visualize
-                            customer directed convergence without revolutionary
-                            ROI. Collaboratively administrate empowered markets
-                            via plug-and-play networks. Dynamically
-                            procrastinate B2C users after installed base
-                            benefits.
-                          </p>
-                        </span>
-                      ),
-                    },
-                    {
-                      tabButton: "Payments",
-                      tabIcon: Payment,
-                      tabContent: (
-                        <span>
-                          <p>
-                            Efficiently unleash cross-media information without
-                            cross-media value. Quickly maximize timely
-                            deliverables for real-time schemas.
-                          </p>
-                          <br />
-                          <p>
-                            Dramatically maintain clicks-and-mortar solutions
-                            without functional solutions. Dramatically visualize
-                            customer directed convergence without revolutionary
-                            ROI. Collaboratively administrate empowered markets
-                            via plug-and-play networks. Dynamically
-                            procrastinate B2C users after installed base
-                            benefits.
-                          </p>
-                        </span>
-                      ),
-                    },
+                    // {
+                    //   tabButton: "Payments",
+                    //   tabIcon: Payment,
+                    //   tabContent: (
+                    //     <span>
+                    //       <p>
+                    //         Efficiently unleash cross-media information without
+                    //         cross-media value. Quickly maximize timely
+                    //         deliverables for real-time schemas.
+                    //       </p>
+                    //       <br />
+                    //       <p>
+                    //         Dramatically maintain clicks-and-mortar solutions
+                    //         without functional solutions. Dramatically visualize
+                    //         customer directed convergence without revolutionary
+                    //         ROI. Collaboratively administrate empowered markets
+                    //         via plug-and-play networks. Dynamically
+                    //         procrastinate B2C users after installed base
+                    //         benefits.
+                    //       </p>
+                    //     </span>
+                    //   ),
+                    // },
                   ]}
                 />
               </GridItem>

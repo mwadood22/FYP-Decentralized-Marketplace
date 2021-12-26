@@ -5,6 +5,9 @@ const carouselStyle = {
     padding: "70px 0",
   },
   container,
+  headContainer: {
+    height: "570px",
+  },
   marginAuto: {
     marginLeft: "auto !important",
     marginRight: "auto !important",

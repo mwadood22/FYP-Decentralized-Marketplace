@@ -268,6 +268,12 @@ const buttonStyle = {
     lineHeight: "1.5",
     borderRadius: "0.2rem",
   },
+  md: {
+    padding: "0.80625rem 1.75rem",
+    fontSize: "0.7875rem",
+    lineHeight: "1.4444",
+    borderRadius: "0.2rem",
+  },
   round: {
     borderRadius: "30px",
   },

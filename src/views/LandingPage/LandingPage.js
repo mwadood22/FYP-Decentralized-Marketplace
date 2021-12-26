@@ -13,7 +13,7 @@ import Footer from "components/Footer/Footer.js";
 //import GridContainer from "components/Grid/GridContainer.js";
 //import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
-import Search from "@material-ui/icons/Search";
+// import Search from "@material-ui/icons/Search";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 //import Parallax from "components/Parallax/Parallax.js";
@@ -58,35 +58,39 @@ export default function LandingPage(props) {
       />
       {/* <Parallax> */}
       <div className={classes.carouselOptions}>
-        <h1 className={classes.title}>Your tasking Partner</h1>
-        <h4>
-          Making your daily live{"'"}s tasks easier by providing assistance all
-          that you need.
-        </h4>
-
+        <h1 className={classes.title}>
+          Your tasking Partner
+          <h4>
+            Making your daily live{"'"}s tasks easier by providing assistance
+            all that you need.
+          </h4>
+        </h1>
+        <br />
         <CustomInput
-          white
+          black
           inputProps={{
             placeholder: "Search",
             inputProps: {
               "aria-label": "Search",
               className: classes.searchInput,
+              underline: "false",
             },
           }}
         />
-        <Button justIcon round color="white" className={classes.searchBtn}>
+        {/* <Button justIcon round color="white" className={classes.searchBtn}>
           <Search className={classes.searchIcon} />
-        </Button>
+        </Button> */}
 
         <Button
-          color="danger"
-          size="lg"
+          color="white"
+          size="md"
           href="/signup-page"
           target="_blank"
           rel="noopener noreferrer"
+          className={classes.searchBtn}
         >
           <i className="fas fa-check" />
-          Get Started
+          Search
         </Button>
       </div>
       <div className={classes.carouselBack}>

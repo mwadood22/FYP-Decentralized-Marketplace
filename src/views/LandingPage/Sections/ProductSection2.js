@@ -23,7 +23,7 @@ export default function ProductSection() {
     <div className={classes.section}>
       <div className={classes.section2}>
         <GridContainer>
-          <GridItem xs={12} sm={12} md={5}>
+          <GridItem xs={12} sm={12} md={6}>
             <h2 className={classes.title}>
               Making it easy for you to find what you need
             </h2>

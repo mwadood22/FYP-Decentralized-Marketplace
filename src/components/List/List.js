@@ -13,7 +13,9 @@ import ListItemText from "@mui/material/ListItemText";
 //import Checkbox from "@mui/material/Checkbox";
 import Grid from "@mui/material/Grid";
 //import Typography from "@mui/material/Typography";
-import CheckCircle from "@mui/icons-material/CheckCircle";
+import CheckCircle from "@mui/icons-material/LibraryAddCheck";
+// import Check from "@mui/icons-material/Check";
+
 //import DeleteIcon from "@mui/icons-material/Delete";
 //import { makeStyles } from "@material-ui/core/styles";
 //import styles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";

@@ -24,16 +24,15 @@ const productStyle = {
     marginLeft: "100px",
     fontFamily: '"Macan","Helvetica Neue","Helvetica","Arial",sans-serif',
     fontWeight: "700",
-    fontSize: "48px",
+    fontSize: "30px",
     textAlign: "Left",
     color: "#404145",
   },
   description: {
     color: "#404145",
-    marginLeft: "10px",
+    marginLeft: "100px",
     fontFamily: '"Macan","Helvetica Neue","Helvetica","Arial",sans-serif',
-    fontWeight: "400",
-    fontSize: "100px",
+    textAlign: "left",
   },
   imgClass: {
     maxHeight: "90%",
@@ -41,11 +40,7 @@ const productStyle = {
     marginTop: "0px",
     verticalAlign: "baseline",
   },
-  sectionDisc: {
-    //marginTop: "-250px",
-    textAlign: "Left",
-    marginLeft: "90px",
-  },
+
   ...imagesStyles,
 };
 

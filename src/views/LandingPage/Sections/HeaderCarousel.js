@@ -2,7 +2,7 @@ import React from "react";
 // react component for creating beautiful carousel
 import Carousel from "react-slick";
 // @material-ui/core components
-// import { makeStyles } from "@material-ui/core/styles";
+//import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
 //import LocationOn from "@material-ui/icons/LocationOn";
 // core components
@@ -19,10 +19,10 @@ import image2 from "assets/img/land.jpg";
 // import Search from "@material-ui/icons/Search";
 // import CustomInput from "components/CustomInput/CustomInput.js";
 
-// import styles from "assets/jss/material-kit-react/views/componentsSections/carouselStyle.js";
+//import styles from "assets/jss/material-kit-react/views/componentsSections/carouselStyle.js";
 //import { createFalse } from "typescript";
 
-// const useStyles = makeStyles(styles);
+//const useStyles = makeStyles(styles);
 
 export default function HeaderCarousel() {
   //const classes = useStyles();

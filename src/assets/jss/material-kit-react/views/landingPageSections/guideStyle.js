@@ -43,8 +43,8 @@ const teamStyle = {
     marginBottom: "40px",
   },
   gigCard: {
-    width: "75%",
-    height: "70%",
+    // width: "75%",
+    // height: "70%",
   },
   svgIcon: {
     width: "20%",
@@ -76,14 +76,14 @@ const teamStyle = {
   },
   title2: {
     ...title,
-    marginBottom: "1rem",
+    marginBottom: "3rem",
     marginTop: "0px",
     marginLeft: "100px",
     minHeight: "32px",
     textDecoration: "none",
     fontFamily: '"Macan","Helvetica Neue","Helvetica","Arial",sans-serif',
     fontWeight: "700",
-    fontSize: "48px",
+    fontSize: "40px",
     textAlign: "left",
   },
   ...imagesStyle,
@@ -93,13 +93,13 @@ const teamStyle = {
     height: "100%",
   },
   img: {
-    height: "350px",
+    height: "250px",
   },
   cardTitle: {
     ...cardTitle,
     textAlign: "left",
     fontSize: "30px",
-    fontWeight: "700",
+    fontWeight: "600",
     fontFamily: '"Macan","Helvetica Neue","Helvetica","Arial",sans-serif',
   },
 
@@ -111,7 +111,7 @@ const teamStyle = {
     color: "#6c757d",
   },
   description: {
-    marginTop: "20px",
+    // marginTop: "20px",
     color: "#999",
     textAlign: "left",
   },
@@ -133,12 +133,13 @@ const teamStyle = {
     margin: "5px",
   },
   sectionguide: {
-    marginLeft: "250px",
-    marginRight: "100px",
+    // marginLeft: "250px",
+    // marginRight: "100px",
   },
   card: {
-    width: "600px",
-    height: "500px",
+    margin: "auto",
+    width: "400px",
+    height: "370px",
     "&:hover,&:focus": {
       color: "#FFFFFF",
       backgroundColor: "white",
