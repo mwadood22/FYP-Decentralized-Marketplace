@@ -13,8 +13,9 @@ import ListItemText from "@mui/material/ListItemText";
 //import Checkbox from "@mui/material/Checkbox";
 import Grid from "@mui/material/Grid";
 //import Typography from "@mui/material/Typography";
-import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutlineOutlined";
-// import Check from "@mui/icons-material/Check";
+//import Check from "@mui/icons-material/CheckBox";
+//import CheckCircle from "@mui/icons-material/CheckCircle";
+import DownloadDoneIcon from "@mui/icons-material/DownloadDone";
 
 //import DeleteIcon from "@mui/icons-material/Delete";
 //import { makeStyles } from "@material-ui/core/styles";
@@ -32,37 +33,37 @@ export default function InteractiveList() {
         <List dense={dense}>
           <ListItem>
             <ListItemIcon>
-              <CheckCircleOutlineOutlinedIcon />
+              <DownloadDoneIcon />
             </ListItemIcon>
             <ListItemText
-              primary="No need to worry about hourly rates.Maximize your benefit and bid for your work."
+              primary="Explore and hire the perfect worker for your task."
               secondary={secondary ? "Secondary text" : null}
             />
           </ListItem>
           <ListItem>
             <ListItemIcon>
-              <CheckCircleOutlineOutlinedIcon />
+              <DownloadDoneIcon />
             </ListItemIcon>
             <ListItemText
-              primary="Explore our services and get help with your everyday tasks."
+              primary="Use crypto tokens to avail our services."
               secondary={secondary ? "Secondary text" : null}
             />
           </ListItem>
           <ListItem>
             <ListItemIcon>
-              <CheckCircleOutlineOutlinedIcon />
+              <DownloadDoneIcon />
             </ListItemIcon>
             <ListItemText
-              primary="Make payments through secure and reliable channels."
+              primary="Create custom job posts and connect to your desired worker."
               secondary={secondary ? "Secondary text" : null}
             />
           </ListItem>
           <ListItem>
             <ListItemIcon>
-              <CheckCircleOutlineOutlinedIcon />
+              <DownloadDoneIcon />
             </ListItemIcon>
             <ListItemText
-              primary="Get help from the trusted workers anywhere anytime."
+              primary="Get 24/7 support and guidlines to have a better experience."
               secondary={secondary ? "Secondary text" : null}
             />
           </ListItem>

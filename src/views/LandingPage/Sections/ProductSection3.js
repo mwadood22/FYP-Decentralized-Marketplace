@@ -9,11 +9,10 @@ import { makeStyles } from "@material-ui/core/styles";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
+import Button from "components/CustomButtons/Button.js";
 //import InfoArea from "components/InfoArea/InfoArea.js";
-import helper from "assets/img/services/helper.jpg";
-import List from "components/List/List.js";
 
-import styles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
+import styles from "assets/jss/material-kit-react/views/landingPageSections/productStyle3.js";
 
 const useStyles = makeStyles(styles);
 
@@ -23,26 +22,13 @@ export default function ProductSection() {
     <div className={classes.section}>
       <div>
         <GridContainer>
-          <GridItem xs={12} sm={12} md={6}>
+          <GridItem xs={12} sm={12} md={12}>
             <h2 className={classes.title}>
-              Connecting to the world of<br></br>freelance labour
+              Connect, Collaborate and get your work done !
             </h2>
-            <div className={classes.description + " " + classes.sectionDisc}>
-              <List />
-            </div>
-          </GridItem>
-          <GridItem xs={12} sm={12} md={6}>
-            <img
-              src={helper}
-              alt="..."
-              className={
-                classes.imgRounded +
-                " " +
-                classes.imgFluid +
-                " " +
-                classes.imgClass
-              }
-            />
+            <Button color="primary" href="/signup-page">
+              Get Started
+            </Button>
           </GridItem>
         </GridContainer>
       </div>

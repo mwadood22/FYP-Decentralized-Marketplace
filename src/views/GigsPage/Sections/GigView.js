@@ -31,7 +31,7 @@ import gig3 from "assets/img/gigs/gig3.jpg";
 // import gig5 from "assets/img/gigs/gig5.jpg";
 import gig6 from "assets/img/gigs/gig6.jpg";
 
-import { Divider } from "@mui/material";
+//import { Divider } from "@mui/material";
 
 import IconButton from "@material-ui/core/IconButton";
 import Dialog from "@material-ui/core/Dialog";
@@ -73,12 +73,10 @@ export default function GigView() {
   return (
     <div className={classes.section}>
       {/* </Slider> */}
-      <h2 className={classes.title}>Create your gigs </h2>
-      <Divider></Divider>
 
       <GridContainer>
         <GridItem xs={12} sm={12} md={3}>
-          <Card carousel>
+          <Card>
             <img src={gig1} alt="..." className={imageClasses} />
             <CardBody>
               <h4 className={classes.cardTitle}>M.Wadood</h4>
@@ -145,9 +143,10 @@ export default function GigView() {
         <GridItem xs={12} sm={12} md={6} lg={2}>
           <Button
             justify="center"
-            color="primary"
+            color="#009577"
             block
             onClick={() => setClassicModal(true)}
+            className={classes.btn}
           >
             Create a new gig
           </Button>

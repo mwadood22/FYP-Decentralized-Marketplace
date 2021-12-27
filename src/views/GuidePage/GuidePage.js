@@ -26,7 +26,7 @@ import styles from "assets/jss/material-kit-react/views/GigPage.js";
 //import TeamSection from "./Sections/TeamSection.js";
 //import WorkSection from "./Sections/WorkSection.js";
 //import ClientSection from "./Sections/ClientSection.js";
-import GigView from "views/GigsPage/Sections/GigView.js";
+import GuideView from "views/GuidePage/Sections/GuideView.js";
 
 const dashboardRoutes = [];
 
@@ -38,14 +38,14 @@ export default function LandingPage(props) {
   return (
     <div>
       <Header
-        color="black"
+        color="transparent"
         routes={dashboardRoutes}
         brand="MARKAZ"
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
           height: 400,
-          color: "black",
+          color: "white",
         }}
         {...rest}
       />
@@ -53,10 +53,10 @@ export default function LandingPage(props) {
         <div className={classes.container}>
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>
-              <h1 className={classes.title}>Create your gigs</h1>
+              <h1 className={classes.title}>How to buy services</h1>
               <h4>
-                Let your customers know about your services. Attract more
-                clients and earn more money.
+                Follow the step by step guide to hire a worker for your everyday
+                tasks.
               </h4>
               {/* <Button
                 color="danger"
@@ -75,7 +75,7 @@ export default function LandingPage(props) {
 
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div className={classes.container}>
-          <GigView />
+          <GuideView />
           {/* <ProductSection /> */}
 
           {/* <ClientSection /> */}

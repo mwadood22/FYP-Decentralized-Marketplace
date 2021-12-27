@@ -22,7 +22,7 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 
-import image from "assets/img/bg7.jpg";
+//import image from "assets/img/bg7.jpg";
 
 const useStyles = makeStyles(styles);
 
@@ -37,7 +37,7 @@ export default function LoginPage(props) {
     <div>
       <Header
         absolute
-        color="transparent"
+        color="black"
         brand="MARKAZ"
         rightLinks={<HeaderLinks />}
         {...rest}
@@ -45,7 +45,7 @@ export default function LoginPage(props) {
       <div
         className={classes.pageHeader}
         style={{
-          backgroundImage: "url(" + image + ")",
+          backgroundColor: "#008060",
           backgroundSize: "cover",
           backgroundPosition: "top center",
         }}
@@ -55,7 +55,7 @@ export default function LoginPage(props) {
             <GridItem xs={12} sm={12} md={4}>
               <Card className={classes[cardAnimaton]}>
                 <form className={classes.form}>
-                  <CardHeader color="primary" className={classes.cardHeader}>
+                  <CardHeader color="gray" className={classes.cardHeader}>
                     <h4>Sign-Up</h4>
                     <div className={classes.socialLine}>
                       <Button

@@ -10,10 +10,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 //import InfoArea from "components/InfoArea/InfoArea.js";
-import helper from "assets/img/services/product.jpg";
-import List2 from "components/List/List2.js";
+import helper from "assets/img/services/helper.jpg";
+import List from "components/List/List.js";
 
-import styles from "assets/jss/material-kit-react/views/landingPageSections/productStyle2.js";
+import styles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
 
 const useStyles = makeStyles(styles);
 
@@ -23,6 +23,12 @@ export default function ProductSection() {
     <div className={classes.section}>
       <div>
         <GridContainer>
+          <GridItem xs={12} sm={12} md={6}>
+            <h2 className={classes.title}>Why People Choose Us</h2>
+            <div className={classes.description + " " + classes.sectionDisc}>
+              <List />
+            </div>
+          </GridItem>
           <GridItem xs={12} sm={12} md={6}>
             <img
               src={helper}
@@ -35,14 +41,6 @@ export default function ProductSection() {
                 classes.imgClass
               }
             />
-          </GridItem>
-          <GridItem xs={12} sm={12} md={6}>
-            <h2 className={classes.title}>
-              Connecting to the world of<br></br>freelance labour
-            </h2>
-            <div className={classes.description}>
-              <List2 />
-            </div>
           </GridItem>
         </GridContainer>
       </div>

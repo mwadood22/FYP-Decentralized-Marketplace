@@ -19,6 +19,10 @@ const profilePageStyle = {
       transform: "translate3d(0, -50%, 0)",
     },
   },
+  background: {
+    height: "300px",
+    backgroundColor: "#008060",
+  },
   description: {
     margin: "1.071rem auto 0",
     maxWidth: "600px",

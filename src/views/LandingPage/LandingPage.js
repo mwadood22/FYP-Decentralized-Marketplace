@@ -24,7 +24,7 @@ import HeaderLinks from "components/Header/HeaderLinks.js";
 import styles from "assets/jss/material-kit-react/views/landingPage.js";
 
 // Sections for this page
-import ProductSection from "./Sections/ProductSection.js";
+
 //import TeamSection from "./Sections/TeamSection.js";
 //import WorkSection from "./Sections/WorkSection.js";
 import ClientSection from "./Sections/ClientSection.js";
@@ -32,7 +32,9 @@ import ServicesSection from "./Sections/ServicesSection.js";
 //import SectionCarousel from "./Sections/SectionCarousel.js";
 import HeaderCarousel from "./Sections/HeaderCarousel.js";
 import GuidesSection from "./Sections/GuidesSection.js";
-//import ProductSection2 from "./Sections/ProductSection2.js";
+import ProductSection1 from "./Sections/ProductSection1.js";
+import ProductSection2 from "./Sections/ProductSection2.js";
+import ProductSection3 from "./Sections/ProductSection3.js";
 
 const dashboardRoutes = [];
 
@@ -101,11 +103,13 @@ export default function LandingPage(props) {
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div>
           <ServicesSection />
-          <ProductSection />
+          <ProductSection1 />
+          <ProductSection2 />
 
           <ClientSection />
 
           <GuidesSection />
+          <ProductSection3 />
 
           {/* <TeamSection /> */}
           {/* <WorkSection /> */}

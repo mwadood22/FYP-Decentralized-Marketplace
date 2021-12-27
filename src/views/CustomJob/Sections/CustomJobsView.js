@@ -30,7 +30,7 @@ import team3 from "assets/img/faces/face2.jpg";
 import team4 from "assets/img/faces/face3.jpg";
 import team5 from "assets/img/faces/face5.jpg";
 import team6 from "assets/img/faces/face6.jpg";
-import { Divider } from "@mui/material";
+//import { Divider } from "@mui/material";
 
 import IconButton from "@material-ui/core/IconButton";
 import Dialog from "@material-ui/core/Dialog";
@@ -71,10 +71,6 @@ export default function CustomJobsView() {
   //const cardClasses = classNames(classes.cardTitle, classes.cardMargin);
   return (
     <div className={classes.section}>
-      {/* </Slider> */}
-      <h2 className={classes.title}>Post custom job requests </h2>
-      <Divider></Divider>
-
       <GridContainer>
         <GridItem xs={12} sm={12} md={3}>
           <Card carousel>
@@ -135,12 +131,13 @@ export default function CustomJobsView() {
         <GridItem xs={12} sm={12} md={6} lg={2}>
           <Button
             justify="center"
-            color="primary"
+            color="#009577"
             block
             onClick={() => setClassicModal(true)}
+            className={classes.button}
           >
             Post a new job
-          </Button>
+          </Button>{" "}
           <Dialog
             classes={{
               root: classes.center,

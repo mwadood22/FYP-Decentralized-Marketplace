@@ -4,7 +4,7 @@ import imagesStyles from "assets/jss/material-kit-react/imagesStyles.js";
 //import image from "assets/img/sign.jpg";
 const productStyle = {
   section: {
-    padding: "70px 0",
+    padding: "70px 0px",
     textAlign: "center",
     //backgroundImage: "url(" + image + ")",
     //backgroundColor: "#f7f9fd",
@@ -16,16 +16,17 @@ const productStyle = {
     //backgroundColor: "#f7f9fd",
     backgroundColor: "#461326",
   },
+
   title: {
     ...title,
     //marginBottom: "1rem",
     marginTop: "0px",
+    textAlign: "center",
     textDecoration: "none",
     marginLeft: "100px",
     fontFamily: '"Macan","Helvetica Neue","Helvetica","Arial",sans-serif',
     fontWeight: "700",
     fontSize: "30px",
-    textAlign: "Left",
     color: "#FFFFFF",
   },
   description: {

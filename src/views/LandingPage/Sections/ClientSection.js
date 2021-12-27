@@ -32,7 +32,7 @@ export default function ClientSection() {
   );
   return (
     <div className={classes.section}>
-      <h2 className={classes.title}>Hear it from the experts!</h2>
+      <h2 className={classes.title}>What they are saying!</h2>
       <div>
         <GridContainer>
           <GridItem xs={12} sm={12} md={4}>
@@ -62,8 +62,7 @@ export default function ClientSection() {
               <CardFooter className={classes.justifyCenter}>
                 <h4 className={classes.cardMargin}>
                   AR Huzaifa
-                  <br />
-                  <small className={classes.smallTitle}>Model</small>
+                  <br></br>
                 </h4>
               </CardFooter>
             </Card>
@@ -99,7 +98,6 @@ export default function ClientSection() {
                 <h4 className={classes.cardMargin}>
                   M.Wadood
                   <br />
-                  <small className={classes.smallTitle}>Designer</small>
                 </h4>
               </CardFooter>
             </Card>
@@ -135,7 +133,6 @@ export default function ClientSection() {
                 <h4 className={classes.cardMargin}>
                   Arooj Sikandar
                   <br />
-                  <small className={classes.smallTitle}>Model</small>
                 </h4>
               </CardFooter>
             </Card>
