@@ -114,17 +114,18 @@ export default function HeaderLinks(props) {
         <Button
           color="transparent"
           href="/customjobs-page"
-          target="_blank"
+          //target="_blank"
           className={classes.navLink}
         >
           Post Jobs
         </Button>
+        {/* </Link> */}
       </ListItem>
       <ListItem className={classes.listItem}>
         <Button
           color="transparent"
           href="/gigs-page"
-          target="_blank"
+          //target="_blank"
           className={classes.navLink}
         >
           Gigs
@@ -134,7 +135,7 @@ export default function HeaderLinks(props) {
         <Button
           color="transparent"
           href="/customjobs-page"
-          target="_blank"
+          //target="_blank"
           className={classes.navLink}
         >
           Find jobs
@@ -144,7 +145,7 @@ export default function HeaderLinks(props) {
         <Button
           color="transparent"
           href="/customjobs-page"
-          target="_blank"
+          //target="_blank"
           className={classes.navLink}
         >
           Become a worker

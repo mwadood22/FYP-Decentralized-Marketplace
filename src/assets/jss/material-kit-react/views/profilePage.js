@@ -7,6 +7,7 @@ const profilePageStyle = {
     width: "700px",
     margin: "auto",
     marginTop: "40px",
+    marginBottom: "40px",
   },
   container,
   profile: {

@@ -25,10 +25,10 @@ import GridContainer from "components/Grid/GridContainer";
 
 //import team1 from "assets/img/faces/avatar.jpg";
 import gig1 from "assets/img/gigs/gig1.jpg";
-import gig2 from "assets/img/gigs/gig2.jpg";
+// import gig2 from "assets/img/gigs/gig2.jpg";
 import gig3 from "assets/img/gigs/gig3.jpg";
-import gig4 from "assets/img/gigs/gig4.jpg";
-import gig5 from "assets/img/gigs/gig5.jpg";
+// import gig4 from "assets/img/gigs/gig4.jpg";
+// import gig5 from "assets/img/gigs/gig5.jpg";
 import gig6 from "assets/img/gigs/gig6.jpg";
 
 import { Divider } from "@mui/material";
@@ -88,7 +88,7 @@ export default function GigView() {
         </GridItem>
         <GridItem xs={12} sm={12} md={3}>
           <Card carousel>
-            <img src={gig2} alt="..." className={imageClasses} />
+            <img src={gig6} alt="..." className={imageClasses} />
             <CardBody>
               <h4 className={classes.cardTitle}>M.Wadood</h4>
               <p className={classes.description}>I can do plumbing well!</p>
@@ -106,7 +106,7 @@ export default function GigView() {
         </GridItem>
         <GridItem xs={12} sm={12} md={3}>
           <Card carousel>
-            <img src={gig4} alt="..." className={imageClasses} />
+            <img src={gig1} alt="..." className={imageClasses} />
             <CardBody>
               <h4 className={classes.cardTitle}>M.Wadood</h4>
               <p className={classes.description}>I can do plumbing well!</p>
@@ -115,7 +115,7 @@ export default function GigView() {
         </GridItem>
         <GridItem xs={12} sm={12} md={3}>
           <Card carousel>
-            <img src={gig5} alt="..." className={imageClasses} />
+            <img src={gig3} alt="..." className={imageClasses} />
             <CardBody>
               <h4 className={classes.cardTitle}>M.Wadood</h4>
               <p className={classes.description}>I can do plumbing well!</p>
