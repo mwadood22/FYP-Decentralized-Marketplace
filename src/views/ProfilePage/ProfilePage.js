@@ -16,6 +16,7 @@ import GridItem from "components/Grid/GridItem.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import NavPills from "components/NavPills/NavPills.js";
 import Table from "components/Table/Table.js";
+//import Table2 from "components/Table2/Table2.js";
 import Parallax from "components/Parallax/Parallax.js";
 
 import profile from "assets/img/faces/christian.jpg";
@@ -23,7 +24,7 @@ import profile from "assets/img/faces/christian.jpg";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
-import CardHeader from "components/Card/CardHeader.js";
+//import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 
@@ -80,11 +81,7 @@ export default function ProfilePage(props) {
         }}
         {...rest}
       />
-      <Parallax
-        small
-        filter
-        image={require("assets/img/profile-bg.jpg").default}
-      />
+      <Parallax small filter image={require("assets/img/abc.jpg").default} />
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div>
           <div className={classes.container}>
@@ -95,7 +92,7 @@ export default function ProfilePage(props) {
                     <img src={profile} alt="..." className={imageClasses} />
                   </div>
                   <div className={classes.name}>
-                    <h3 className={classes.title}>M.Wadood</h3>
+                    <h3 className={classes.title}>M.Wadood ul Haq</h3>
                   </div>
                 </div>
               </GridItem>
@@ -108,7 +105,7 @@ export default function ProfilePage(props) {
                 // className={classes.contentContainer}
               >
                 <NavPills
-                  color="gray"
+                  color="primary"
                   horizontal={{
                     tabsGrid: { xs: 12, sm: 2, md: 2 },
                     contentGrid: { xs: 12, sm: 10, md: 10 },
@@ -117,31 +114,7 @@ export default function ProfilePage(props) {
                     {
                       tabButton: "Profile",
                       tabIcon: Person,
-                      tabContent: (
-                        <span>
-                          <p>
-                            Collaboratively administrate empowered markets via
-                            plug-and-play networks. Dynamically procrastinate
-                            B2C users after installed base benefits.
-                          </p>
-                          <br />
-                          <p>
-                            Dramatically visualize customer directed convergence
-                            without revolutionary ROI. Collaboratively
-                            administrate empowered markets via plug-and-play
-                            networks. Dynamically procrastinate B2C users after
-                            installed base benefits.
-                          </p>
-                          <br />
-                          <p>
-                            Dramatically visualize customer directed convergence
-                            without revolutionary ROI. Collaboratively
-                            administrate empowered markets via plug-and-play
-                            networks. Dynamically procrastinate B2C users after
-                            installed base benefits.
-                          </p>
-                        </span>
-                      ),
+                      tabContent: <p></p>,
                     },
                     {
                       tabButton: "Edit",
@@ -149,12 +122,6 @@ export default function ProfilePage(props) {
                       tabContent: (
                         <Card className={classes.contentContainer}>
                           <form className={classes.form}>
-                            <CardHeader
-                              color="gray"
-                              className={classes.cardHeader}
-                            >
-                              <h4>Edit Info</h4>
-                            </CardHeader>
                             <p className={classes.divider}></p>
                             <CardBody>
                               <CustomInput
@@ -229,7 +196,7 @@ export default function ProfilePage(props) {
                               />
                             </CardBody>
                             <CardFooter className={classes.cardFooter}>
-                              <Button color="gray" href="/profile-page">
+                              <Button color="primary" href="/profile-page">
                                 Submit
                               </Button>
                             </CardFooter>
@@ -242,6 +209,7 @@ export default function ProfilePage(props) {
                       tabIcon: Schedule,
                       tabContent: <Table />,
                     },
+
                     // {
                     //   tabButton: "Payments",
                     //   tabIcon: Payment,

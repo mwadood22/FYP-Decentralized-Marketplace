@@ -55,8 +55,7 @@ export default function ServicesView() {
               className={imageClasses + " " + classes.img}
             />
             <CardBody>
-              <h4 className={classes.cardTitle}>M.Wadood</h4>
-              <p className={classes.description}>I can do plumbing well!</p>
+              <h4 className={classes.cardTitle}>Hire a worker</h4>
             </CardBody>
           </Card>
         </GridItem>
@@ -69,10 +68,7 @@ export default function ServicesView() {
               className={imageClasses + " " + classes.img}
             />
             <CardBody>
-              <h4 className={classes.cardTitle}>Sell your services online</h4>
-              <p className={classes.description}>
-                Step by step guide to understand how become a sucessfull tasker{" "}
-              </p>
+              <h4 className={classes.cardTitle}>Sell your services</h4>
             </CardBody>
           </Card>
         </GridItem>

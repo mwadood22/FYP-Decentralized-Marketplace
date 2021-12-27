@@ -25,7 +25,7 @@ export default function HeaderLinks(props) {
   const classes = useStyles();
   return (
     <List className={classes.list}>
-      <ListItem className={classes.listItem}>
+      {/*<ListItem className={classes.listItem}>
         <CustomDropdown
           noLiPadding
           buttonText="Components"
@@ -33,6 +33,7 @@ export default function HeaderLinks(props) {
             className: classes.navLink,
             color: "transparent",
           }}
+          }
           buttonIcon={Apps}
           dropdownList={[
             <Link to="/" className={classes.dropdownLink}>
@@ -57,7 +58,7 @@ export default function HeaderLinks(props) {
         >
           <CloudDownload className={classes.icons} /> Download
         </Button>
-      </ListItem>
+        </ListItem>*/}
       {/* <ListItem className={classes.listItem}>
         <Tooltip
           id="instagram-twitter"
@@ -109,6 +110,47 @@ export default function HeaderLinks(props) {
           </Button>
         </Tooltip>
       </ListItem> */}
+      <ListItem className={classes.listItem}>
+        <Button
+          color="transparent"
+          href="/customjobs-page"
+          target="_blank"
+          className={classes.navLink}
+        >
+          Post Jobs
+        </Button>
+      </ListItem>
+      <ListItem className={classes.listItem}>
+        <Button
+          color="transparent"
+          href="/gigs-page"
+          target="_blank"
+          className={classes.navLink}
+        >
+          Gigs
+        </Button>
+      </ListItem>
+      <ListItem className={classes.listItem}>
+        <Button
+          color="transparent"
+          href="/customjobs-page"
+          target="_blank"
+          className={classes.navLink}
+        >
+          Find jobs
+        </Button>
+      </ListItem>
+      <ListItem className={classes.listItem}>
+        <Button
+          color="transparent"
+          href="/customjobs-page"
+          target="_blank"
+          className={classes.navLink}
+        >
+          Become a worker
+        </Button>
+      </ListItem>
+
       <ListItem className={classes.listItem}>
         <Tooltip
           id="instagram-tooltip"

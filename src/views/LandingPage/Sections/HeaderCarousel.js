@@ -10,8 +10,9 @@ import Carousel from "react-slick";
 // import GridItem from "components/Grid/GridItem.js";
 // import Card from "components/Card/Card.js";
 
-import image1 from "assets/img/image1.jpg";
-import image2 from "assets/img/land.jpg";
+import image1 from "assets/img/TopCarousel/car1.jpg";
+import image2 from "assets/img/TopCarousel/car2.jpg";
+import image3 from "assets/img/TopCarousel/car3.jpg";
 //import image2 from "assets/img/bg2.jpg";
 //import image3 from "assets/img/bg3.jpg";
 
@@ -43,6 +44,9 @@ export default function HeaderCarousel() {
           </div>
           <div>
             <img src={image2} alt="First slide" className="slick-image" />
+          </div>
+          <div>
+            <img src={image3} alt="First slide" className="slick-image" />
           </div>
         </Carousel>
       </div>

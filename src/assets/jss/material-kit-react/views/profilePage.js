@@ -4,7 +4,7 @@ import imagesStyle from "assets/jss/material-kit-react/imagesStyles.js";
 
 const profilePageStyle = {
   contentContainer: {
-    width: "400px",
+    width: "700px",
     margin: "auto",
     marginTop: "40px",
   },
