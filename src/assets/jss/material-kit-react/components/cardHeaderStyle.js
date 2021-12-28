@@ -5,6 +5,7 @@ import {
   infoCardHeader,
   primaryCardHeader,
   grayCardHeader,
+  greenCardHeader,
 } from "assets/jss/material-kit-react.js";
 const cardHeaderStyle = {
   cardHeader: {
@@ -26,6 +27,7 @@ const cardHeaderStyle = {
   infoCardHeader,
   primaryCardHeader,
   grayCardHeader,
+  greenCardHeader,
 };
 
 export default cardHeaderStyle;

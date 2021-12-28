@@ -12,6 +12,8 @@ import {
   dangerBoxShadow,
   roseColor,
   roseBoxShadow,
+  greenColor,
+  greenBoxShadow,
 } from "assets/jss/material-kit-react.js";
 
 const customDropdownStyle = (theme) => ({
@@ -72,6 +74,13 @@ const customDropdownStyle = (theme) => ({
         "0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(33, 33, 33, 0.4)",
       backgroundColor: "#212121",
       color: "#fff",
+    },
+  },
+  greenHover: {
+    "&:hover": {
+      backgroundColor: greenColor,
+      color: "#FFFFFF",
+      ...greenBoxShadow,
     },
   },
   primaryHover: {

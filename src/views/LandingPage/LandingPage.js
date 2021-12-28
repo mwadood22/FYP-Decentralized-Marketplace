@@ -84,7 +84,7 @@ export default function LandingPage(props) {
         </Button> */}
 
         <Button
-          color="danger"
+          color="green"
           size="md"
           href="/signup-page"
           target="_blank"

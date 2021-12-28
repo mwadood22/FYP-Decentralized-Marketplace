@@ -26,7 +26,7 @@ export default function ProductSection() {
             <h2 className={classes.title}>
               Connect, Collaborate and get your work done !
             </h2>
-            <Button color="primary" href="/signup-page">
+            <Button color="black" href="/signup-page">
               Get Started
             </Button>
           </GridItem>
