@@ -35,9 +35,14 @@ export default function LoginPage(props) {
     <div>
       <Header
         absolute
-        color="black"
+        color="transparent"
         brand="MARKAZ"
         rightLinks={<HeaderLinks />}
+        fixed
+        changeColorOnScroll={{
+          height: 40,
+          color: "white",
+        }}
         {...rest}
       />
       <div
