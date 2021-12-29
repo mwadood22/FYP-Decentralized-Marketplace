@@ -45,7 +45,7 @@ const workerPageStyle = {
       left: "0",
       top: "0",
       content: '""',
-      backgroundColor: "#e5e4e2",
+      backgroundColor: "white",
     },
     "& footer li a,& footer li a:hover,& footer li a:active": {
       color: "#FFFFFF",
