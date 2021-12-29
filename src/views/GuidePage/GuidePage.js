@@ -19,7 +19,7 @@ import Parallax from "components/Parallax/Parallax.js";
 //import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 //import Search from "@material-ui/icons/Search";
 
-import styles from "assets/jss/material-kit-react/views/GigPage.js";
+import styles from "assets/jss/material-kit-react/views/landingPageSections/guidepage.js";
 
 // Sections for this page
 //import ProductSection from "./Sections/ProductSection.js";
@@ -72,6 +72,7 @@ export default function LandingPage(props) {
           {/* <TeamSection /> */}
           {/* <WorkSection /> */}
         </div>
+        <br></br>
         <br></br>
         <br></br>
         <br></br>

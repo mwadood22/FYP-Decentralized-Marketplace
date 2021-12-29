@@ -11,34 +11,51 @@ import Typography from "@mui/material/Typography";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 
-import styles from "assets/jss/material-kit-react/views/GigPage.js";
+import styles from "assets/jss/material-kit-react/views/landingPageSections/guidepage.js";
 const useStyles = makeStyles(styles);
 
 const steps = [
   {
     label: "Sign Up",
-    description: `Sign up to markaz by providing your email and password. `,
+    description: `Sign up to markaz by providing your email and password.
+    Sign up to markaz by providing your email and password.
+    Sign up to markaz by providing your email and password.
+    Sign up to markaz by providing your email and password.
+    Sign up to markaz by providing your email and password.
+    An ad group contains one or more ads which target a shared set of keywords `,
   },
   {
     label: "Find Worker",
-    description:
-      "An ad group contains one or more ads which target a shared set of keywords.",
+    description: `
+    An ad group contains one or more ads which target a shared set of keywords 
+    An ad group contains one or more ads which target a shared set of keywords 
+    An ad group contains one or more ads which target a shared set of keywords 
+    An ad group contains one or more ads which target a shared set of keywords
+    An ad group contains one or more ads which target a shared set of keywords  `,
   },
   {
     label: "Post Jobs",
     description: `Try out different ad text to see what brings in the most customers,
               and learn how to enhance your ads using features like ad extensions.
               If you run into any problems with your ads, find out how to tell if
+              they're running and how to resolve approval issues.any problems with your ads, find out how to tell if
               they're running and how to resolve approval issues.`,
   },
   {
     label: "Hire Worker",
-    description: `Sign up to markaz by providing your email and password. `,
+    description: `Try out different ad text to see what brings in the most customers,
+    and learn how to enhance your ads using features like ad extensions.
+    If you run into any problems with your ads, find out how to tell if
+    they're running and how to resolve approval issues.any problems with your ads, find out how to tell if
+    they're running and how to resolve approval issues. `,
   },
   {
     label: "Pay",
-    description:
-      "An ad group contains one or more ads which target a shared set of keywords.",
+    description: `Try out different ad text to see what brings in the most customers,
+    and learn how to enhance your ads using features like ad extensions.
+    If you run into any problems with your ads, find out how to tell if
+    they're running and how to resolve approval issues.any problems with your ads, find out how to tell if
+    they're running and how to resolve approval issues. `,
   },
 ];
 
@@ -59,7 +76,7 @@ export default function VerticalLinearStepper() {
   };
 
   return (
-    <Box sx={{ maxWidth: 400 }}>
+    <Box sx={{ maxWidth: 700 }}>
       <Stepper activeStep={activeStep} orientation="vertical">
         {steps.map((step, index) => (
           <Step className={classes.stepper} key={step.label}>
