@@ -131,7 +131,7 @@ export default function CustomJobsView() {
         <GridItem xs={12} sm={12} md={6} lg={2}>
           <Button
             justify="center"
-            color="#009577"
+            color="black"
             block
             onClick={() => setClassicModal(true)}
             className={classes.button}

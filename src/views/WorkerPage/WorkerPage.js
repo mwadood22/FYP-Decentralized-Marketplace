@@ -95,7 +95,7 @@ export default function WorkerPage(props) {
               <GridItem xs={12} sm={12} md={6}>
                 <Card className={classes[cardAnimaton]}>
                   <form className={classes.form}>
-                    <CardHeader color="green" className={classes.cardHeader}>
+                    <CardHeader color="primary" className={classes.cardHeader}>
                       <h4>A step away from becoming a worker!</h4>
                     </CardHeader>
                     <p className={classes.divider}></p>

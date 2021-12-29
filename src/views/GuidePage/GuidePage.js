@@ -26,7 +26,8 @@ import styles from "assets/jss/material-kit-react/views/GigPage.js";
 //import TeamSection from "./Sections/TeamSection.js";
 //import WorkSection from "./Sections/WorkSection.js";
 //import ClientSection from "./Sections/ClientSection.js";
-import GuideView from "views/GuidePage/Sections/GuideView.js";
+//import GuideView from "views/GuidePage/Sections/GuideView.js";
+import GuideView2 from "views/GuidePage/Sections/GuideView2.js";
 
 const dashboardRoutes = [];
 
@@ -55,33 +56,25 @@ export default function LandingPage(props) {
             <GridItem xs={12} sm={12} md={6}>
               <h1 className={classes.title}>How to buy services</h1>
               <h4>
-                Follow the step by step guide to hire a worker for your everyday
-                tasks.
+                Follow our step by step guide to hire the perfect worker for
+                your everyday tasks.
               </h4>
-              {/* <Button
-                color="danger"
-                size="lg"
-                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="fas fa-play" />
-                Watch video
-              </Button> */}
             </GridItem>
           </GridContainer>
         </div>
       </Parallax>
 
       <div className={classNames(classes.main, classes.mainRaised)}>
-        <div className={classes.container}>
-          <GuideView />
+        <div className={classes.content}>
+          <GuideView2 />
           {/* <ProductSection /> */}
-
           {/* <ClientSection /> */}
           {/* <TeamSection /> */}
           {/* <WorkSection /> */}
         </div>
+        <br></br>
+        <br></br>
+        <br></br>
       </div>
       <Footer />
     </div>

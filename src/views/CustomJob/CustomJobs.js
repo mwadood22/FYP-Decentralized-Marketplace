@@ -52,7 +52,7 @@ export default function CustomJobs(props) {
       <Parallax className={classes.background}>
         <div className={classes.container}>
           <GridContainer>
-            <GridItem xs={12} sm={12} md={6}>
+            <GridItem xs={12} sm={12} md={7}>
               <h1 className={classes.title}>Create Custom Job Posts</h1>
               <h4>
                 Specify your details and hire the perfect worker for your

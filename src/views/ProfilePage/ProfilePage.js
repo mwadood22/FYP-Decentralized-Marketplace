@@ -48,6 +48,8 @@ import People from "@material-ui/icons/People";
 import Schedule from "@material-ui/icons/Schedule";
 import Edit from "@material-ui/icons/Edit";
 import Person from "@material-ui/icons/Person";
+import BuildIcon from "@mui/icons-material/Build";
+import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
 // import Payment from "@material-ui/icons/Payment";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
@@ -191,7 +193,7 @@ export default function ProfilePage(props) {
                               />
                             </CardBody>
                             <CardFooter className={classes.cardFooter}>
-                              <Button color="primary" href="/profile-page">
+                              <Button color="black" href="/profile-page">
                                 Submit
                               </Button>
                             </CardFooter>
@@ -200,9 +202,20 @@ export default function ProfilePage(props) {
                       ),
                     },
                     {
+                      tabButton: "Skills",
+                      tabIcon: BuildIcon,
+                      tabContent: <p></p>,
+                    },
+
+                    {
                       tabButton: "Projects History",
                       tabIcon: Schedule,
                       tabContent: <Table />,
+                    },
+                    {
+                      tabButton: "About Myself",
+                      tabIcon: EmojiPeopleIcon,
+                      tabContent: <p></p>,
                     },
 
                     // {

@@ -76,7 +76,7 @@ const successColor = "#4caf50";
 const infoColor = "#00acc1";
 const roseColor = "#e91e63";
 const grayColor = "#485461";
-const blackColor = "#00000";
+const blackColor = "#000000";
 const greenColor = "#008060";
 
 const primaryBoxShadow = {

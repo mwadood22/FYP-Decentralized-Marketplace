@@ -137,16 +137,12 @@ export default function LoginPage(props) {
                     />
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <p>Not a member?</p>
-                    <Button
-                      simple
-                      color="primary"
-                      size="lg"
-                      href="/signup-page"
-                    >
-                      Signup now
-                    </Button>
+                    <Button color="green">Continue</Button>
                   </CardFooter>
+                  Not a member?
+                  <Button simple color="primary" size="lg" href="/signup-page">
+                    Signup now
+                  </Button>
                 </form>
               </Card>
             </GridItem>

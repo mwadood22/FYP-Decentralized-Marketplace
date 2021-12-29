@@ -38,21 +38,21 @@ export default function LandingPage(props) {
   return (
     <div>
       <Header
-        color="black"
+        color="transparent"
         routes={dashboardRoutes}
         brand="MARKAZ"
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
           height: 400,
-          color: "black",
+          color: "white",
         }}
         {...rest}
       />
       <Parallax className={classes.background}>
         <div className={classes.container}>
           <GridContainer>
-            <GridItem xs={12} sm={12} md={6}>
+            <GridItem xs={12} sm={12} md={7}>
               <h1 className={classes.title}>Create your gigs</h1>
               <h4>
                 Let your customers know about your services. Attract more

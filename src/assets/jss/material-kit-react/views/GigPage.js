@@ -16,13 +16,21 @@ const landingPageStyle = {
     color: "#FFFFFF",
     ...container,
   },
-
+  content: {
+    zIndex: "12",
+    color: "#000000",
+    ...container,
+  },
   background: {
-    height: "500px",
+    height: "350px",
     backgroundColor: "#008060",
   },
   btn: {
     backgroundColor: "#008060",
+  },
+
+  stepper: {
+    marginTop: "100px",
   },
 
   searchBtn: {
