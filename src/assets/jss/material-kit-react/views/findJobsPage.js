@@ -18,6 +18,11 @@ const workerPageStyle = {
   textFields: {
     marginBottom: "20px",
   },
+  newClass: {
+    border: "1.5px gray",
+    borderStyle: "solid",
+    borderRadius: "3px",
+  },
   container: {
     ...container,
     zIndex: "2",
