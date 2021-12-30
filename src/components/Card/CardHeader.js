@@ -38,6 +38,7 @@ CardHeader.propTypes = {
     "primary",
     "gray",
     "green",
+    "black",
   ]),
   plain: PropTypes.bool,
   children: PropTypes.node,
