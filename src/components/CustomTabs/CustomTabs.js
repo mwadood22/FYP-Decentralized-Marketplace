@@ -35,6 +35,7 @@ export default function CustomTabs(props) {
       <CardHeader color={headerColor} plain={plainTabs}>
         {title !== undefined ? <div className={cardTitle}>{title}</div> : null}
         <Tabs
+          centered
           value={value}
           onChange={handleChange}
           classes={{

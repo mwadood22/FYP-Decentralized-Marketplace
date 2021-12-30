@@ -35,7 +35,7 @@ export default function LoginPage(props) {
     <div>
       <Header
         absolute
-        color="transparent"
+        color="white"
         brand="MARKAZ"
         rightLinks={<HeaderLinks />}
         {...rest}
@@ -50,23 +50,23 @@ export default function LoginPage(props) {
       >
         <div className={classes.container}>
           <GridContainer>
-            <GridItem justifyContent="left" xs={12} sm={12} md={8}>
+            <GridItem justifyContent="left" xs={12} sm={12} md={6}>
               <h1>Get in touch</h1>
-              <h>
-                You need more information?Check what other persons are saying
-                about our services.They are very happy with their experience.
+              <h className={classes.subheading}>
+                You need more information? Check what other persons are saying
+                about our services.Send us a message in case of any query.
               </h>
               <h2>Find us at the office</h2>
-              <p>
+              <p className={classes.subheading}>
                 Johar Iqbal Town<br></br>
                 288 Block C<br></br>Lahore,Pakistan
               </p>
             </GridItem>
 
-            <GridItem xs={12} sm={12} md={4}>
+            <GridItem xs={12} sm={12} md={6}>
               <Card className={classes[cardAnimaton]}>
                 <form className={classes.form}>
-                  <CardHeader color="primary" className={classes.cardHeader}>
+                  <CardHeader color="gray" className={classes.cardHeader}>
                     <h4>Contact Us</h4>
                   </CardHeader>
                   <p className={classes.divider}></p>
@@ -121,7 +121,7 @@ export default function LoginPage(props) {
                     />
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Button color="primary" href="/contact-page">
+                    <Button color="green" href="/contact-page">
                       Send Message
                     </Button>
                   </CardFooter>
@@ -130,7 +130,7 @@ export default function LoginPage(props) {
             </GridItem>
           </GridContainer>
         </div>
-        <Footer whiteFont />
+        <Footer />
       </div>
     </div>
   );

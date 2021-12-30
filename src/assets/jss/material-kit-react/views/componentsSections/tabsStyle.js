@@ -7,6 +7,10 @@ const tabsStyle = {
   },
   container,
   textCenter: {
+    //textAlign: "center",
+  },
+
+  tabs: {
     textAlign: "center",
   },
 };

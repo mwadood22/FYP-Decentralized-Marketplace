@@ -20,7 +20,7 @@ const profilePageStyle = {
     },
   },
   background: {
-    height: "300px",
+    height: "260px",
     backgroundColor: "#008060",
   },
   description: {

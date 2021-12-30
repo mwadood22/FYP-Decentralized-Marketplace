@@ -62,6 +62,9 @@ const landingPageStyle = {
     position: "relative",
     zIndex: "3",
   },
+  tabs: {
+    textAlign: "center",
+  },
   mainRaised: {
     margin: "-60px 30px 0px",
     borderRadius: "6px",

@@ -6,13 +6,19 @@ const signupPageStyle = {
     zIndex: "2",
     position: "relative",
     paddingTop: "20vh",
-    color: "#FFFFFF",
+    color: "#000000",
     paddingBottom: "200px",
   },
   cardHidden: {
     opacity: "0",
     transform: "translate3d(0, -60px, 0)",
   },
+
+  subheading: {
+    //fontWeight: "100",
+    fontFamily: `Macan,"Helvetica Neue",Helvetica,Arial,sans-serif`,
+  },
+
   pageHeader: {
     minHeight: "100vh",
     height: "auto",
@@ -34,7 +40,8 @@ const signupPageStyle = {
       left: "0",
       top: "0",
       content: '""',
-      backgroundColor: "#008060",
+      //backgroundColor: "#008060",
+      backgroundColor: "#f7f9fd",
     },
     "& footer li a,& footer li a:hover,& footer li a:active": {
       color: "#FFFFFF",

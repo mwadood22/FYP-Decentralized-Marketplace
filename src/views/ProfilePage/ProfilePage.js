@@ -96,6 +96,7 @@ export default function ProfilePage(props) {
                   <div className={classes.name}>
                     <h3 className={classes.title}>M.Wadood ul Haq</h3>
                   </div>
+                  <h>Plumber</h>
                 </div>
               </GridItem>
             </GridContainer>
