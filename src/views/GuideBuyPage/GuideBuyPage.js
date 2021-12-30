@@ -26,7 +26,7 @@ import styles from "assets/jss/material-kit-react/views/landingPageSections/guid
 //import TeamSection from "./Sections/TeamSection.js";
 //import WorkSection from "./Sections/WorkSection.js";
 //import ClientSection from "./Sections/ClientSection.js";
-import GuideBuy from "views/GuidePage/Sections/GuideBuy.js";
+import GuideBuy from "views/GuideBuyPage/Sections/GuideBuy.js";
 //import GuideView2 from "views/GuidePage/Sections/GuideView2.js";
 
 const dashboardRoutes = [];
