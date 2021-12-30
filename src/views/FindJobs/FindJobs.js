@@ -67,8 +67,7 @@ export default function FindJobs(props) {
                 inputProps: {
                   "aria-label": "Search",
                   className: classes.searchInput,
-                  // underline: false,
-                  error: true,
+                  //error: true,
                 },
               }}
             />
