@@ -1,130 +1,285 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Stepper from "@mui/material/Stepper";
-import Step from "@mui/material/Step";
-import StepLabel from "@mui/material/StepLabel";
-import StepContent from "@mui/material/StepContent";
-//import Button from "@mui/material/Button";
-import Button from "components/CustomButtons/Button.js";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
+import React from "react";
+// @material-ui/core components
+import { makeStyles } from "@material-ui/core/styles";
+
 //import List from "@mui/material/List";
 //import ListItem from "@mui/material/ListItem";
 //import ListItemText from "@mui/material/ListItemText";
-//import classNames from "classnames";
-// @material-ui/core components
-//import { makeStyles } from "@material-ui/core/styles";
 
-//import styles from "assets/jss/material-kit-react/views/landingPageSections/guidepage.js";
-//const useStyles = makeStyles(styles);
+// @material-ui/icons
+//import Face from "@material-ui/icons/Face";
+//import Chat from "@material-ui/icons/Chat";
+//import Build from "@material-ui/icons/Build";
+// core components
+import GridContainer from "components/Grid/GridContainer.js";
+import GridItem from "components/Grid/GridItem.js";
+import CustomTabs from "components/CustomTabs/CustomTabs.js";
+import Card from "components/Card/Card.js";
+import CardBody from "components/Card/CardBody.js";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemIcon from "@mui/material/ListItemIcon";
+//import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutlineOutlined";
+import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/FileDownloadDone";
+//import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/ArrowRightAlt";
+//import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/East";
 
-const steps = [
-  {
-    label: "Sign Up",
-    description: `Sign up to the website by providing your email and password.
-    Verify your details and explore our services. `,
-  },
+import styles from "assets/jss/material-kit-react/views/componentsSections/tabsStyle.js";
+import CardHeader from "components/Card/CardHeader";
+//import GuideView2 from "views/GuidePage/Sections/GuideView2.js";
 
-  {
-    label: "Find Worker",
-    description: `Use filters to search any services.
-    Explore the profiles of workers and find your desired worker.
-    Post your custom jobs and let the workers contact you.
-    Let the workers bid for your jobs. `,
-    /*<List>
-        <ListItem>
-          <ListItemText primary="No need to worry about hourly rates.Maximize your benefit and bid for your work." />
-        </ListItem>
-        <ListItem>
-          <ListItemText primary="No need to worry about hourly rates.Maximize your benefit and bid for your work." />
-        </ListItem>
-        <ListItem>
-          <ListItemText primary="No need to worry about hourly rates.Maximize your benefit and bid for your work." />
-        </ListItem>
-      </List>*/
-  },
-  {
-    label: "Hire Worker",
-    description: `Compare the bids and select the most suitable worker.
-    Check out worker's reviews/ratings and decide.
-    Contact the worker and finalize the job.
-    Hire the worker and get your task done. `,
-  },
-  {
-    label: "Pay",
-    description: `Once your task is complete, pay the custmer using our any of our payment channels.
-    We provide the following payments channels:
-        1- Cash on Delivery.
-        2- Bank Payments.
-        3- Crypto Tokens.
-    Verify your payment and you're done! 
-   `,
-  },
-];
+const useStyles = makeStyles(styles);
 
-export default function VerticalLinearStepper() {
-  //const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
-
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleReset = () => {
-    setActiveStep(0);
-  };
-
+export default function GuideView() {
+  const [dense] = React.useState(false);
+  const [secondary] = React.useState(false);
+  const classes = useStyles();
   return (
-    <Box sx={{ maxWidth: 900 }}>
-      <Stepper activeStep={activeStep} orientation="vertical">
-        {steps.map((step, index) => (
-          <Step key={step.label}>
-            <StepLabel
-              optional={
-                index === 2 ? (
-                  <Typography variant="caption">Last step</Typography>
-                ) : null
-              }
-            >
-              {step.label}
-            </StepLabel>
-            <StepContent>
-              <Typography>{step.description}</Typography>
-              <Box sx={{ mb: 2 }}>
-                <div>
-                  <Button
-                    color="green"
-                    variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    {index === steps.length - 1 ? "Finish" : "Continue"}
-                  </Button>
-                  <Button
-                    disabled={index === 0}
-                    onClick={handleBack}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    Back
-                  </Button>
-                </div>
-              </Box>
-            </StepContent>
-          </Step>
-        ))}
-      </Stepper>
-      {activeStep === steps.length && (
-        <Paper square elevation={0} sx={{ p: 3 }}>
-          {/*<Typography>All steps completed - you&apos;re finished</Typography>*/}
-          <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
-            Back to top
-          </Button>
-        </Paper>
-      )}
-    </Box>
+    <div className={classes.container}>
+      <div id="nav-tabs">
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={12}>
+            <CustomTabs
+              plainTabs
+              centered
+              headerColor="gray"
+              tabs={[
+                {
+                  tabName: "Sign-Up",
+                  tabContent: (
+                    <GridContainer className={classes.container}>
+                      <GridItem xs={12} sm={12} md={8}>
+                        <Card className={classes.card}>
+                          <CardHeader>
+                            <h2>Sign-Up</h2>
+                          </CardHeader>
+                          <CardBody>
+                            <List dense={dense}>
+                              <ListItem>
+                                <ListItemIcon>
+                                  <CheckCircleOutlineOutlinedIcon />
+                                </ListItemIcon>
+                                <ListItemText
+                                  primary="Sign up to the website by providing your email and password."
+                                  secondary={
+                                    secondary ? "Secondary text" : null
+                                  }
+                                />
+                              </ListItem>
+                              <ListItem>
+                                <ListItemIcon>
+                                  <CheckCircleOutlineOutlinedIcon />
+                                </ListItemIcon>
+                                <ListItemText
+                                  primary="Verify your details and explore our services."
+                                  secondary={
+                                    secondary ? "Secondary text" : null
+                                  }
+                                />
+                              </ListItem>
+                            </List>
+                          </CardBody>
+                        </Card>
+                      </GridItem>
+                    </GridContainer>
+                  ),
+                },
+                {
+                  tabName: "Find Worker",
+                  tabContent: (
+                    <GridContainer className={classes.container}>
+                      <GridItem xs={12} sm={12} md={8}>
+                        <Card className={classes.card}>
+                          <CardHeader>
+                            <h2>Find Worker</h2>
+                          </CardHeader>
+                          <CardBody>
+                            <List dense={dense}>
+                              <ListItem>
+                                <ListItemIcon>
+                                  <CheckCircleOutlineOutlinedIcon />
+                                </ListItemIcon>
+                                <ListItemText
+                                  primary="Use filters to search any services."
+                                  secondary={
+                                    secondary ? "Secondary text" : null
+                                  }
+                                />
+                              </ListItem>
+                              <ListItem>
+                                <ListItemIcon>
+                                  <CheckCircleOutlineOutlinedIcon />
+                                </ListItemIcon>
+                                <ListItemText
+                                  primary="Explore the profiles of workers and find your desired worker."
+                                  secondary={
+                                    secondary ? "Secondary text" : null
+                                  }
+                                />
+                              </ListItem>
+                              <ListItem>
+                                <ListItemIcon>
+                                  <CheckCircleOutlineOutlinedIcon />
+                                </ListItemIcon>
+                                <ListItemText
+                                  primary="Post your custom jobs by providing required details about your task and let the workers contact you."
+                                  secondary={
+                                    secondary ? "Secondary text" : null
+                                  }
+                                />
+                              </ListItem>
+                              <ListItem>
+                                <ListItemIcon>
+                                  <CheckCircleOutlineOutlinedIcon />
+                                </ListItemIcon>
+                                <ListItemText
+                                  primary="Let the workers bid for your jobs."
+                                  secondary={
+                                    secondary ? "Secondary text" : null
+                                  }
+                                />
+                              </ListItem>
+                            </List>
+                          </CardBody>
+                        </Card>
+                      </GridItem>
+                    </GridContainer>
+                  ),
+                },
+                {
+                  tabName: "Hire Worker",
+                  tabContent: (
+                    <GridContainer className={classes.container}>
+                      <GridItem xs={12} sm={12} md={8}>
+                        <Card className={classes.card}>
+                          <CardHeader>
+                            <h2>Hire Worker</h2>
+                          </CardHeader>
+                          <CardBody>
+                            <List dense={dense}>
+                              <ListItem>
+                                <ListItemIcon>
+                                  <CheckCircleOutlineOutlinedIcon />
+                                </ListItemIcon>
+                                <ListItemText
+                                  primary="Compare the bids and select the most suitable worker."
+                                  secondary={
+                                    secondary ? "Secondary text" : null
+                                  }
+                                />
+                              </ListItem>
+                              <ListItem>
+                                <ListItemIcon>
+                                  <CheckCircleOutlineOutlinedIcon />
+                                </ListItemIcon>
+                                <ListItemText
+                                  primary=" Check out worker's profile. Compare reviews/ratings and decide."
+                                  secondary={
+                                    secondary ? "Secondary text" : null
+                                  }
+                                />
+                              </ListItem>
+                              <ListItem>
+                                <ListItemIcon>
+                                  <CheckCircleOutlineOutlinedIcon />
+                                </ListItemIcon>
+                                <ListItemText
+                                  primary="Contact the worker and finalize the job."
+                                  secondary={
+                                    secondary ? "Secondary text" : null
+                                  }
+                                />
+                              </ListItem>
+                              <ListItem>
+                                <ListItemIcon>
+                                  <CheckCircleOutlineOutlinedIcon />
+                                </ListItemIcon>
+                                <ListItemText
+                                  primary="Hire the worker and get your task done. "
+                                  secondary={
+                                    secondary ? "Secondary text" : null
+                                  }
+                                />
+                              </ListItem>
+                            </List>
+                          </CardBody>
+                        </Card>
+                      </GridItem>
+                    </GridContainer>
+                  ),
+                },
+
+                {
+                  tabName: "Make Payment ",
+                  tabContent: (
+                    <GridContainer className={classes.container}>
+                      <GridItem xs={12} sm={12} md={8}>
+                        <Card className={classes.card}>
+                          <CardHeader>
+                            <h2>Make Payment</h2>
+                          </CardHeader>
+                          <CardBody>
+                            <List dense={dense}>
+                              <ListItem>
+                                <ListItemIcon>
+                                  <CheckCircleOutlineOutlinedIcon />
+                                </ListItemIcon>
+                                <ListItemText
+                                  primary="Once your task is complete, pay the custmer using our any of our payment channels."
+                                  secondary={
+                                    secondary ? "Secondary text" : null
+                                  }
+                                />
+                              </ListItem>
+                              <ListItem>
+                                <ListItemIcon>
+                                  <CheckCircleOutlineOutlinedIcon />
+                                </ListItemIcon>
+                                <ListItemText
+                                  primary=" We provide the following payments channels:
+                                  1- Cash on Delivery.
+                                  2- Bank Payments.
+                                  3- Crypto Tokens."
+                                  secondary={
+                                    secondary ? "Secondary text" : null
+                                  }
+                                />
+                              </ListItem>
+                              <ListItem>
+                                <ListItemIcon>
+                                  <CheckCircleOutlineOutlinedIcon />
+                                </ListItemIcon>
+                                <ListItemText
+                                  primary="Contact the worker and finalize the job."
+                                  secondary={
+                                    secondary ? "Secondary text" : null
+                                  }
+                                />
+                              </ListItem>
+                              <ListItem>
+                                <ListItemIcon>
+                                  <CheckCircleOutlineOutlinedIcon />
+                                </ListItemIcon>
+                                <ListItemText
+                                  primary="Verify your payment and you're done!  "
+                                  secondary={
+                                    secondary ? "Secondary text" : null
+                                  }
+                                />
+                              </ListItem>
+                            </List>
+                          </CardBody>
+                        </Card>
+                      </GridItem>
+                    </GridContainer>
+                  ),
+                },
+              ]}
+            />
+          </GridItem>
+        </GridContainer>
+      </div>
+    </div>
   );
 }
