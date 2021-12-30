@@ -17,6 +17,7 @@ import GigsPage from "views/GigsPage/GigsPage.js";
 import CustomJobs from "views/CustomJob/CustomJobs.js";
 import GuidePage from "views/GuidePage/GuidePage.js";
 import WorkerPage from "views/WorkerPage/WorkerPage.js";
+import FindJobs from "views/FindJobs/FindJobs.js";
 
 var hist = createBrowserHistory();
 
@@ -33,6 +34,7 @@ ReactDOM.render(
       <Route path="/customjobs-page" component={CustomJobs} />
       <Route path="/guide-page" component={GuidePage} />
       <Route path="/worker-page" component={WorkerPage} />
+      <Route path="/findjobs-page" component={FindJobs} />
 
       <Route path="/" component={LandingPage} />
     </Switch>

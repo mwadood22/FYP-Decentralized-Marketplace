@@ -12,6 +12,7 @@ import HeaderLinks from "components/Header/HeaderLinks.js";
 import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
+
 // import Button from "components/CustomButtons/Button.js";
 // import Card from "components/Card/Card.js";
 // import CardBody from "components/Card/CardBody.js";
@@ -72,16 +73,18 @@ export default function WorkerPage(props) {
       <div className={classes.pageHeader}>
         <div className={classes.container}>
           {/* <Paper elevation={3} style={styles.paperContainer}> */}
-          <GridContainer justify="left">
+          <GridContainer xs={12} sm={12} md={12}>
             <GridItem xs={12} sm={12} md={6}>
+              {/* <GridItem xs={12} sm={12} md={12}> */}
               {/* <Card className={classes[cardAnimaton]}> */}
               <form className={classes.form}>
-                {/* <CardHeader color="green" className={classes.cardHeader}>
+                <GridContainer>
+                  {/* <CardHeader color="green" className={classes.cardHeader}>
                     <h4>A step away from becoming a worker!</h4>
                   </CardHeader> */}
-                {/* <p className={classes.divider}></p> */}
-                {/* <CardBody> */}
-                {/* <CustomInput
+                  {/* <p className={classes.divider}></p> */}
+                  {/* <CardBody> */}
+                  {/* <CustomInput
                       labelText="City..."
                       id="city"
                       formControlProps={{
@@ -96,8 +99,8 @@ export default function WorkerPage(props) {
                         ),
                       }}
                     /> */}
-                <GridContainer xs={12} sm={12} md={12}>
-                  <GridItem xs={12} sm={12} md={6}>
+
+                  <GridItem xs={6} sm={6} md={6}>
                     <TextField
                       margin="normal"
                       required
@@ -107,7 +110,7 @@ export default function WorkerPage(props) {
                       variant="standard"
                     />
                   </GridItem>
-                  <GridItem xs={12} sm={12} md={6}>
+                  <GridItem xs={6} sm={6} md={6}>
                     <TextField
                       margin="normal"
                       required
@@ -117,9 +120,8 @@ export default function WorkerPage(props) {
                       variant="standard"
                     />
                   </GridItem>
-                </GridContainer>
-                <GridContainer xs={12} sm={12} md={12}>
-                  <GridItem xs={12} sm={12} md={6}>
+
+                  <GridItem xs={6} sm={6} md={6}>
                     <TextField
                       margin="normal"
                       required
@@ -129,7 +131,7 @@ export default function WorkerPage(props) {
                       variant="standard"
                     />
                   </GridItem>
-                  <GridItem xs={12} sm={12} md={6}>
+                  <GridItem xs={6} sm={6} md={6}>
                     <TextField
                       fullWidth
                       variant="standard"
@@ -148,45 +150,51 @@ export default function WorkerPage(props) {
                       ))}
                     </TextField>
                   </GridItem>
-                </GridContainer>
-                <TextField
-                  margin="normal"
-                  fullWidth
-                  multiline
-                  id="desc"
-                  label="Description"
-                  variant="standard"
-                />
-
-                <TextField
-                  required
-                  fullWidth
-                  variant="standard"
-                  id="outlined-select-currency"
-                  select
-                  margin="normal"
-                  label="Select"
-                  value={currency}
-                  onChange={handleChange}
-                  helperText="Choose a category"
-                >
-                  {currencies.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.value}
-                    </MenuItem>
-                  ))}
-                </TextField>
-                {/* </CardBody> */}
-                {/* <CardFooter className={classes.cardFooter}>
+                  <GridItem>
+                    <TextField
+                      required
+                      fullWidth
+                      variant="standard"
+                      id="outlined-select-currency"
+                      select
+                      margin="normal"
+                      label="Select"
+                      value={currency}
+                      onChange={handleChange}
+                      helperText="Choose a category"
+                    >
+                      {currencies.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                          {option.value}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                  </GridItem>
+                  <GridItem>
+                    <TextField
+                      margin="normal"
+                      fullWidth
+                      multiline
+                      rows={4}
+                      textarea
+                      id="desc"
+                      label="Description"
+                    />
+                  </GridItem>
+                  {/* </CardBody> */}
+                  {/* <CardFooter className={classes.cardFooter}>
                     <Button color="black" size="lg" href="/signup-page">
                       Submit
                     </Button>
                   </CardFooter> */}
+                </GridContainer>
               </form>
               {/* </Card> */}
+              {/* </GridItem> */}
             </GridItem>
-            {/* <GridItem xs={12} sm={12} md={6}>
-              <img
+            <GridItem xs={12} sm={12} md={6}>
+              {/* <GridItem xs={12} sm={12} md={12}> */}
+              {/* <img
                 src={helper}
                 alt="..."
                 className={
@@ -196,8 +204,14 @@ export default function WorkerPage(props) {
                   " " +
                   classes.imgClass
                 }
-              />
-            </GridItem> */}
+              /> */}
+              <div className={classes.textSection}>
+                <h2>MARKAZ</h2>
+
+                <h3>Your Tasking Partner</h3>
+              </div>
+              {/* </GridItem> */}
+            </GridItem>
           </GridContainer>
           {/* </Paper> */}
         </div>
