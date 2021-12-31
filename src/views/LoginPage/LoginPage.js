@@ -35,7 +35,7 @@ export default function LoginPage(props) {
     <div>
       <Header
         absolute
-        color="transparent"
+        color="white"
         brand="MARKAZ"
         rightLinks={<HeaderLinks />}
         fixed

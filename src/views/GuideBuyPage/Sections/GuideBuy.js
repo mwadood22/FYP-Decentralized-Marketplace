@@ -226,7 +226,7 @@ export default function GuideView() {
                                   <CheckCircleOutlineOutlinedIcon />
                                 </ListItemIcon>
                                 <ListItemText
-                                  primary="Once your task is complete, pay the custmer using our any of our payment channels."
+                                  primary="Once your task is complete, pay the custmer using any of our payment channels."
                                   secondary={
                                     secondary ? "Secondary text" : null
                                   }

@@ -40,11 +40,24 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import Slide from "@material-ui/core/Slide";
 
-import CustomInput from "components/CustomInput/CustomInput.js";
+//import CustomInput from "components/CustomInput/CustomInput.js";
 
 // @material-ui/icons
 
+import TextField from "@mui/material/TextField";
+import MenuItem from "@mui/material/MenuItem";
 import Close from "@material-ui/icons/Close";
+const currencies = [
+  {
+    value: "Lahore",
+  },
+  {
+    value: "Sukkur",
+  },
+  {
+    value: "Multan",
+  },
+];
 
 //import team3 from "assets/img/faces/kendall.jpg";
 //import { cardTitle } from "assets/jss/material-kit-react";
@@ -57,6 +70,11 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 Transition.displayName = "Transition";
 
 export default function GigView() {
+  const [currency, setCurrency] = React.useState("None");
+
+  const handleChange = (event) => {
+    setCurrency(event.target.value);
+  };
   const classes = useStyles();
   const [classicModal, setClassicModal] = React.useState(false);
   //   const settings = {
@@ -183,64 +201,84 @@ export default function GigView() {
               className={classes.modalBody}
             >
               <form className={classes.form}>
-                <CustomInput
-                  labelText="Title: "
-                  id="title"
-                  formControlProps={{
-                    fullWidth: true,
-                  }}
-                  inputProps={{
-                    type: "text",
-                  }}
-                />
-                <CustomInput
-                  labelText="Domain:"
-                  id="domain"
-                  formControlProps={{
-                    fullWidth: true,
-                  }}
-                  inputProps={{
-                    type: "text",
-                  }}
-                />
-                <CustomInput
-                  labelText="Budget: "
-                  id="budget"
-                  formControlProps={{
-                    fullWidth: true,
-                  }}
-                  inputProps={{
-                    type: "text",
+                <GridContainer>
+                  <GridItem>
+                    <TextField
+                      margin="normal"
+                      fullWidth
+                      multiline
+                      rows={5}
+                      textarea
+                      id="desc"
+                      label="Gig Description"
+                    />
+                  </GridItem>
 
-                    autoComplete: "off",
-                  }}
-                />
-                <CustomInput
-                  labelText="Detail:"
-                  id="desc"
-                  formControlProps={{
-                    fullWidth: true,
-                  }}
-                  inputProps={{
-                    type: "text",
-
-                    autoComplete: "off",
-                  }}
-                />
+                  <GridItem xs={6} sm={6} md={7}>
+                    <TextField
+                      margin="normal"
+                      required
+                      fullWidth
+                      id="budget"
+                      label="Budget"
+                      variant="standard"
+                    />
+                  </GridItem>
+                  <GridItem xs={6} sm={6} md={5}>
+                    <TextField
+                      fullWidth
+                      variant="standard"
+                      id="outlined-select-currency"
+                      select
+                      margin="normal"
+                      label=" "
+                      value={currency}
+                      onChange={handleChange}
+                      helperText="Choose a city"
+                    >
+                      {currencies.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                          {option.value}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                  </GridItem>
+                  <GridItem>
+                    <TextField
+                      required
+                      fullWidth
+                      variant="standard"
+                      id="outlined-select-currency"
+                      select
+                      margin="normal"
+                      label="Select"
+                      value={currency}
+                      onChange={handleChange}
+                      helperText="Choose a category"
+                    >
+                      {currencies.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                          {option.value}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                  </GridItem>
+                </GridContainer>
               </form>
             </DialogContent>
             <DialogActions className={classes.modalFooter}>
               <Button
+                size="sm"
                 onClick={() => setClassicModal(false)}
-                color="transparent"
-                simple
+                color="green"
               >
                 Submit
               </Button>
+
               <Button
+                color="black"
+                size="sm"
                 onClick={() => setClassicModal(false)}
-                color="danger"
-                simple
               >
                 Close
               </Button>
