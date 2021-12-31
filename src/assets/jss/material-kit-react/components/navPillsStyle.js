@@ -6,6 +6,8 @@ import {
   warningColor,
   dangerColor,
   grayColor,
+  greenColor,
+  blackColor,
 } from "assets/jss/material-kit-react.js";
 
 const navPillsStyle = (theme) => ({
@@ -78,6 +80,22 @@ const navPillsStyle = (theme) => ({
     "&,&:hover": {
       color: "#FFFFFF",
       backgroundColor: primaryColor,
+      boxShadow:
+        "0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4)",
+    },
+  },
+  green: {
+    "&,&:hover": {
+      color: "#FFFFFF",
+      backgroundColor: greenColor,
+      boxShadow:
+        "0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4)",
+    },
+  },
+  black: {
+    "&,&:hover": {
+      color: "#FFFFFF",
+      backgroundColor: blackColor,
       boxShadow:
         "0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4)",
     },

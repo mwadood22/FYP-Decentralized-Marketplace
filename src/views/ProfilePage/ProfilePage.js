@@ -103,7 +103,7 @@ export default function ProfilePage(props) {
             <GridContainer justify="center">
               <GridItem xs={12} sm={12} md={12}>
                 <NavPills
-                  color="primary"
+                  color="green"
                   horizontal={{
                     tabsGrid: { xs: 12, sm: 2, md: 2 },
                     contentGrid: { xs: 12, sm: 10, md: 10 },
@@ -112,7 +112,31 @@ export default function ProfilePage(props) {
                     {
                       tabButton: "Profile",
                       tabIcon: Person,
-                      tabContent: <p></p>,
+                      tabContent: (
+                        <div className={classes.profilePill}>
+                          <i className="fas fa-envelope"></i>
+                          <b className={classes.desc}>Email</b>
+                          <p>wadood@gmail.com</p>
+                          <hr className={classes.hr} />
+                          <i className="fas fa-home"></i>
+                          <b className={classes.desc}>Address</b>
+                          <p>Street: 24, Housing Colony</p>
+                          <hr className={classes.hr} />
+                          <i className="fas fa-map-marker"></i>
+                          <b className={classes.desc}>City</b>
+                          <p>Islamabad</p>
+                          <hr className={classes.hr} />
+                          <i className="fas fa-file-alt"></i>
+                          <b className={classes.desc}>Description</b>
+                          <p>
+                            ckjhwkvwhevhwejkve cewjchewucv jewcbejkbcjnwejc
+                            kjcnwjkne ckjhwkvwhevhwejkve cewjchewucv
+                            jewcbejkbcjnwejc kjcnwjkne ckjhwkvwhevhwejkve
+                            cewjchewucv jewcbejkbcjnwejc kjcnwjkne
+                          </p>
+                          <hr className={classes.hr} />
+                        </div>
+                      ),
                     },
                     {
                       tabButton: "Edit",

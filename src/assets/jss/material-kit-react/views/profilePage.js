@@ -3,6 +3,19 @@ import { container, title } from "assets/jss/material-kit-react.js";
 import imagesStyle from "assets/jss/material-kit-react/imagesStyles.js";
 
 const profilePageStyle = {
+  hr: {
+    backgroundColor: "#5E8C5D",
+    border: "1px solid #5E8C5D",
+    borderRadius: "5px",
+  },
+  desc: {
+    padding: "5px",
+  },
+  profilePill: {
+    width: "600px",
+    margin: "auto",
+    marginTop: "60px",
+  },
   contentContainer: {
     width: "700px",
     margin: "auto",
