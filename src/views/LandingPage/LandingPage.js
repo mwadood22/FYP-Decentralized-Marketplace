@@ -71,7 +71,7 @@ export default function LandingPage(props) {
         <CustomInput
           black
           inputProps={{
-            placeholder: "Search",
+            placeholder: "Search for services of your choice...",
             inputProps: {
               "aria-label": "Search",
               className: classes.searchInput,

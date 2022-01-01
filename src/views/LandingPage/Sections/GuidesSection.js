@@ -4,6 +4,8 @@ import classNames from "classnames";
 //import Carousel from "react-slick";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
+
 //import Slider from "react-slick";
 //import Parallax from "components/Parallax/Parallax.js";
 
@@ -47,30 +49,41 @@ export default function ServicesView() {
     <div className={classes.section}>
       {/* </Slider> */}
       <h2 className={classes.title2}>Check out our step by step guides</h2>
+      {/* <Link to="guidebuy-page"> */}
       <GridContainer className={classes.sectionguide}>
         <GridItem xs={12} sm={12} md={6}>
           <Card className={classes.card}>
-            <img
-              src={guide1}
-              alt="..."
-              className={imageClasses + " " + classes.img}
-            />
-            <CardBody>
-              <h4 className={classes.cardTitle}>Hire a worker</h4>
-            </CardBody>
+            <Link to="guidebuy-page" className={classes.color}>
+              <img
+                src={guide1}
+                alt="..."
+                className={imageClasses + " " + classes.img}
+              />
+              <CardBody>
+                <h4 className={classes.cardTitle}>Hire a worker</h4>
+                <p className={classes.body}>
+                  Step by step procedure for hiring a worker.
+                </p>
+              </CardBody>
+            </Link>
           </Card>
         </GridItem>
-
+        {/* </Link> */}
         <GridItem xs={12} sm={12} md={6}>
           <Card className={classes.card}>
-            <img
-              src={guide2}
-              alt="..."
-              className={imageClasses + " " + classes.img}
-            />
-            <CardBody>
-              <h4 className={classes.cardTitle}>Sell your services</h4>
-            </CardBody>
+            <Link to="guidebuy-page" className={classes.color}>
+              <img
+                src={guide2}
+                alt="..."
+                className={imageClasses + " " + classes.img}
+              />
+              <CardBody>
+                <h4 className={classes.cardTitle}>Sell your services</h4>
+                <p className={classes.body}>
+                  Step by step procedure for selling services.
+                </p>
+              </CardBody>
+            </Link>
           </Card>
         </GridItem>
       </GridContainer>

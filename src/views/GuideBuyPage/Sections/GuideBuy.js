@@ -43,7 +43,7 @@ export default function GuideView() {
             <CustomTabs
               plainTabs
               centered
-              headerColor="gray"
+              headerColor="green"
               tabs={[
                 {
                   tabName: "Sign-Up",

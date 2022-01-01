@@ -2,6 +2,9 @@ import { cardTitle, title } from "assets/jss/material-kit-react.js";
 import imagesStyle from "assets/jss/material-kit-react/imagesStyles.js";
 
 const teamStyle = {
+  body: {
+    textAlign: "left",
+  },
   serviceCardImg: {
     position: "relative",
     height: "100%",
@@ -133,20 +136,25 @@ const teamStyle = {
     margin: "5px",
   },
   sectionguide: {
-    // marginLeft: "250px",
+    justifyContent: "center",
     // marginRight: "100px",
+    // paddingLeft: "80px",
   },
   card: {
     margin: "auto",
+    color: "black",
     width: "400px",
     height: "370px",
     "&:hover,&:focus": {
-      color: "#FFFFFF",
+      color: "black",
       backgroundColor: "white",
       opacity: "80%",
       boxShadow:
         "0 14px 26px -12px rgba(153, 153, 153, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(153, 153, 153, 0.2)",
     },
+  },
+  color: {
+    color: "black",
   },
 };
 

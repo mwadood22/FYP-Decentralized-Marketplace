@@ -153,7 +153,7 @@ const grayCardHeader = {
 };
 const greenCardHeader = {
   color: "#fff",
-  background: "linear-gradient(60deg, #bbdbbe ,#deebdd)",
+  background: "#008060",
   ...greenBoxShadow,
 };
 const blackCardHeader = {

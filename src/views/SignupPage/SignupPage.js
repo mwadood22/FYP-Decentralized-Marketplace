@@ -55,7 +55,7 @@ export default function SignupPage(props) {
             <GridItem xs={12} sm={12} md={4}>
               <Card className={classes[cardAnimaton]}>
                 <form className={classes.form}>
-                  <CardHeader color="gray" className={classes.cardHeader}>
+                  <CardHeader color="green" className={classes.cardHeader}>
                     <h4>Sign-Up</h4>
                     <div className={classes.socialLine}>
                       <Button

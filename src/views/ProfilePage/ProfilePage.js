@@ -48,8 +48,8 @@ import People from "@material-ui/icons/People";
 import Schedule from "@material-ui/icons/Schedule";
 import Edit from "@material-ui/icons/Edit";
 import Person from "@material-ui/icons/Person";
-import BuildIcon from "@mui/icons-material/Build";
-import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
+// import BuildIcon from "@mui/icons-material/Build";
+// import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
 // import Payment from "@material-ui/icons/Payment";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
@@ -78,7 +78,7 @@ export default function ProfilePage(props) {
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
-          height: 200,
+          height: 100,
           color: "white",
         }}
         {...rest}
@@ -226,22 +226,22 @@ export default function ProfilePage(props) {
                         </Card>
                       ),
                     },
-                    {
-                      tabButton: "Skills",
-                      tabIcon: BuildIcon,
-                      tabContent: <p></p>,
-                    },
+                    // {
+                    //   tabButton: "Skills",
+                    //   tabIcon: BuildIcon,
+                    //   tabContent: <p></p>,
+                    // },
 
                     {
                       tabButton: "Projects History",
                       tabIcon: Schedule,
                       tabContent: <Table />,
                     },
-                    {
-                      tabButton: "About Myself",
-                      tabIcon: EmojiPeopleIcon,
-                      tabContent: <p></p>,
-                    },
+                    // {
+                    //   tabButton: "About Myself",
+                    //   tabIcon: EmojiPeopleIcon,
+                    //   tabContent: <p></p>,
+                    // },
 
                     // {
                     //   tabButton: "Payments",

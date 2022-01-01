@@ -74,7 +74,7 @@ const teamStyle = {
     textDecoration: "none",
     fontFamily: '"Macan","Helvetica Neue","Helvetica","Arial",sans-serif',
     fontWeight: "700",
-    fontSize: "30px",
+    fontSize: "35px",
   },
   title2: {
     ...title,
@@ -85,7 +85,7 @@ const teamStyle = {
     textDecoration: "none",
     fontFamily: '"Macan","Helvetica Neue","Helvetica","Arial",sans-serif',
     fontWeight: "700",
-    fontSize: "30px",
+    fontSize: "35px",
     textAlign: "left",
   },
   ...imagesStyle,

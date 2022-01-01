@@ -24,6 +24,7 @@ const landingPageStyle = {
     width: "400px",
     background: "white",
     borderRadius: "4px",
+    paddingLeft: "8px",
   },
   title: {
     ...title,

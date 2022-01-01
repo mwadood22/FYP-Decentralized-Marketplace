@@ -2,11 +2,14 @@ import { container } from "assets/jss/material-kit-react.js";
 // import imagesStyles from "assets/jss/material-kit-react/imagesStyles.js";
 
 const workerPageStyle = {
+  card: {
+    padding: "20px",
+  },
   textSection: {
     //margin: "auto",
     color: "green",
     textAlign: "center",
-    marginTop: "100px",
+    marginTop: "150px",
   },
   imgClass: {
     // maxHeight: "90%",
