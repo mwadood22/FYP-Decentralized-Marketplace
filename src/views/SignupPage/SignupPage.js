@@ -140,7 +140,7 @@ export default function SignupPage(props) {
                     />
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Button color="green" href="/landing-page">
+                    <Button color="black" href="/landing-page">
                       Get started
                     </Button>
                   </CardFooter>

@@ -23,6 +23,8 @@ const cardStyle = {
   },
   cardCarousel: {
     overflow: "hidden",
+
+    borderRadius: "4px",
   },
 };
 

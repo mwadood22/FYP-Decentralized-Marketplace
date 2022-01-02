@@ -54,10 +54,10 @@ export default function LandingPage(props) {
         <div className={classes.container}>
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>
-              <h1 className={classes.title}>How to buy services</h1>
+              <h1 className={classes.title}>How to sell services</h1>
               <h4>
-                Follow our step by step guide to hire the perfect worker for
-                your everyday tasks.
+                Follow our step by step guide to become a worker and sell your
+                services.
               </h4>
             </GridItem>
           </GridContainer>

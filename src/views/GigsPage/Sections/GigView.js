@@ -33,21 +33,22 @@ import gig6 from "assets/img/gigs/gig6.jpg";
 
 //import { Divider } from "@mui/material";
 
-import IconButton from "@material-ui/core/IconButton";
-import Dialog from "@material-ui/core/Dialog";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogActions from "@material-ui/core/DialogActions";
+//import IconButton from "@material-ui/core/IconButton";
+//import Dialog from "@material-ui/core/Dialog";
+//import DialogTitle from "@material-ui/core/DialogTitle";
+//import DialogContent from "@material-ui/core/DialogContent";
+//import DialogActions from "@material-ui/core/DialogActions";
 import Slide from "@material-ui/core/Slide";
 
 //import CustomInput from "components/CustomInput/CustomInput.js";
 
 // @material-ui/icons
 
-import TextField from "@mui/material/TextField";
-import MenuItem from "@mui/material/MenuItem";
-import Close from "@material-ui/icons/Close";
-const currencies = [
+//import TextField from "@mui/material/TextField";
+//import MenuItem from "@mui/material/MenuItem";
+//import Close from "@material-ui/icons/Close";
+{
+  /*const currencies = [
   {
     value: "Lahore",
   },
@@ -57,7 +58,8 @@ const currencies = [
   {
     value: "Multan",
   },
-];
+];*/
+}
 
 //import team3 from "assets/img/faces/kendall.jpg";
 //import { cardTitle } from "assets/jss/material-kit-react";
@@ -70,13 +72,13 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 Transition.displayName = "Transition";
 
 export default function GigView() {
-  const [currency, setCurrency] = React.useState("None");
+  //const [currency, setCurrency] = React.useState("None");
 
-  const handleChange = (event) => {
-    setCurrency(event.target.value);
-  };
+  //const handleChange = (event) => {
+  //setCurrency(event.target.value);
+  //};
   const classes = useStyles();
-  const [classicModal, setClassicModal] = React.useState(false);
+  //const [classicModal, setClassicModal] = React.useState(false);
   //   const settings = {
   //     dots: true,
   //     color: "black",
@@ -160,130 +162,15 @@ export default function GigView() {
       <GridContainer>
         <GridItem xs={12} sm={12} md={6} lg={2}>
           <Button
+            href="/creategig-page"
             justify="center"
             color="black"
             block
-            onClick={() => setClassicModal(true)}
+            //onClick={() => setClassicModal(true)}
             className={classes.btn}
           >
             Create a new gig
           </Button>
-          <Dialog
-            classes={{
-              root: classes.center,
-              paper: classes.modal,
-            }}
-            open={classicModal}
-            TransitionComponent={Transition}
-            keepMounted
-            onClose={() => setClassicModal(false)}
-            aria-labelledby="classic-modal-slide-title"
-            aria-describedby="classic-modal-slide-description"
-          >
-            <DialogTitle
-              id="classic-modal-slide-title"
-              disableTypography
-              className={classes.modalHeader}
-            >
-              <IconButton
-                className={classes.modalCloseButton}
-                key="close"
-                aria-label="Close"
-                color="inherit"
-                onClick={() => setClassicModal(false)}
-              >
-                <Close className={classes.modalClose} />
-              </IconButton>
-              <h4 className={classes.modalTitle}>Create a new gig</h4>
-            </DialogTitle>
-            <DialogContent
-              id="classic-modal-slide-description"
-              className={classes.modalBody}
-            >
-              <form className={classes.form}>
-                <GridContainer>
-                  <GridItem>
-                    <TextField
-                      margin="normal"
-                      fullWidth
-                      multiline
-                      rows={5}
-                      textarea
-                      id="desc"
-                      label="Gig Description"
-                    />
-                  </GridItem>
-
-                  <GridItem xs={6} sm={6} md={7}>
-                    <TextField
-                      margin="normal"
-                      required
-                      fullWidth
-                      id="budget"
-                      label="Budget"
-                      variant="standard"
-                    />
-                  </GridItem>
-                  <GridItem xs={6} sm={6} md={5}>
-                    <TextField
-                      fullWidth
-                      variant="standard"
-                      id="outlined-select-currency"
-                      select
-                      margin="normal"
-                      label=" "
-                      value={currency}
-                      onChange={handleChange}
-                      helperText="Choose a city"
-                    >
-                      {currencies.map((option) => (
-                        <MenuItem key={option.value} value={option.value}>
-                          {option.value}
-                        </MenuItem>
-                      ))}
-                    </TextField>
-                  </GridItem>
-                  <GridItem>
-                    <TextField
-                      required
-                      fullWidth
-                      variant="standard"
-                      id="outlined-select-currency"
-                      select
-                      margin="normal"
-                      label="Select"
-                      value={currency}
-                      onChange={handleChange}
-                      helperText="Choose a category"
-                    >
-                      {currencies.map((option) => (
-                        <MenuItem key={option.value} value={option.value}>
-                          {option.value}
-                        </MenuItem>
-                      ))}
-                    </TextField>
-                  </GridItem>
-                </GridContainer>
-              </form>
-            </DialogContent>
-            <DialogActions className={classes.modalFooter}>
-              <Button
-                size="sm"
-                onClick={() => setClassicModal(false)}
-                color="green"
-              >
-                Submit
-              </Button>
-
-              <Button
-                color="black"
-                size="sm"
-                onClick={() => setClassicModal(false)}
-              >
-                Close
-              </Button>
-            </DialogActions>
-          </Dialog>
         </GridItem>
       </GridContainer>
 

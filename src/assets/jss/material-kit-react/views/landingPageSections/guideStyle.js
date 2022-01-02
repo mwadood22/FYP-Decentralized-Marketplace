@@ -4,7 +4,9 @@ import imagesStyle from "assets/jss/material-kit-react/imagesStyles.js";
 const teamStyle = {
   body: {
     textAlign: "left",
+    //fontFamily: `Macan,"Helvetica Neue",Helvetica,Arial,sans-serif`,
   },
+
   serviceCardImg: {
     position: "relative",
     height: "100%",
@@ -64,8 +66,9 @@ const teamStyle = {
     },
   },
   section: {
-    padding: "70px 0",
+    padding: "0 0",
     textAlign: "center",
+    marginBottom: "60px",
   },
   title: {
     ...title,
@@ -86,7 +89,7 @@ const teamStyle = {
     textDecoration: "none",
     fontFamily: '"Macan","Helvetica Neue","Helvetica","Arial",sans-serif',
     fontWeight: "700",
-    fontSize: "40px",
+    fontSize: "35px",
     textAlign: "left",
   },
   ...imagesStyle,
@@ -96,12 +99,12 @@ const teamStyle = {
     height: "100%",
   },
   img: {
-    height: "250px",
+    height: "220px",
   },
   cardTitle: {
     ...cardTitle,
     textAlign: "left",
-    fontSize: "30px",
+    fontSize: "25px",
     fontWeight: "600",
     fontFamily: '"Macan","Helvetica Neue","Helvetica","Arial",sans-serif',
   },
@@ -143,8 +146,8 @@ const teamStyle = {
   card: {
     margin: "auto",
     color: "black",
-    width: "400px",
-    height: "370px",
+    width: "380px",
+    height: "330px",
     "&:hover,&:focus": {
       color: "black",
       backgroundColor: "white",

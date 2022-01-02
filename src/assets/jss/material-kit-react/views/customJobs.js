@@ -1,18 +1,26 @@
-import { container } from "assets/jss/material-kit-react.js";
-import { title } from "assets/jss/material-kit-react.js";
+import { container, title } from "assets/jss/material-kit-react.js";
 // import imagesStyles from "assets/jss/material-kit-react/imagesStyles.js";
 
 const workerPageStyle = {
-  card: {
-    padding: "20px",
+  new: {
+    marginLeft: "15px",
   },
-  textSection: {
-    //margin: "auto",
-    color: "green",
-    textAlign: "center",
-    marginTop: "150px",
+  searchBtn: {
+    margin: "27px 0px 0px 4px",
+    height: "36px",
   },
-
+  searchInput: {
+    width: "600px",
+    border: "1.5px #DCDFDC",
+    borderStyle: "solid",
+    borderRadius: 4,
+    // marginLeft: "15px",
+    paddingLeft: "5px",
+  },
+  desc: {
+    color: "black",
+    marginLeft: "15px",
+  },
   title: {
     ...title,
     marginBottom: "1rem",
@@ -21,10 +29,21 @@ const workerPageStyle = {
     textDecoration: "none",
     fontFamily: '"Macan","Helvetica Neue","Helvetica","Arial",sans-serif',
     fontWeight: "700",
-    fontSize: "35px",
-    //textAlign: "center",
+    fontSize: "30px",
+    marginLeft: "15px",
   },
-
+  heading: {
+    padding: "10px 0px 10px",
+  },
+  jobBtn: {
+    margin: "10px 10px",
+  },
+  textSection: {
+    //margin: "auto",
+    color: "green",
+    textAlign: "center",
+    marginTop: "100px",
+  },
   imgClass: {
     // maxHeight: "90%",
     width: "100%",
@@ -35,8 +54,13 @@ const workerPageStyle = {
   textFields: {
     marginBottom: "20px",
   },
-  background: {
-    backgroundColor: "#e5e5e5",
+  jobCard: {
+    display: "inline",
+    // border: "1.5px gray",
+    // borderStyle: "solid",
+    // borderRadius: "3px",
+    // margin: "10px 5px",
+    padding: "20px",
   },
   container: {
     ...container,

@@ -21,29 +21,27 @@ export default function ProductSection() {
   const classes = useStyles();
   return (
     <div className={classes.section}>
-      <div>
-        <GridContainer>
-          <GridItem xs={12} sm={12} md={6}>
-            <h2 className={classes.title}>Why People Choose Us</h2>
-            <div className={classes.description + " " + classes.sectionDisc}>
-              <List />
-            </div>
-          </GridItem>
-          <GridItem xs={12} sm={12} md={6}>
-            <img
-              src={helper}
-              alt="..."
-              className={
-                classes.imgRounded +
-                " " +
-                classes.imgFluid +
-                " " +
-                classes.imgClass
-              }
-            />
-          </GridItem>
-        </GridContainer>
-      </div>
+      <GridContainer>
+        <GridItem xs={12} sm={12} md={6}>
+          <h2 className={classes.title}>Why People Choose Us</h2>
+          <div className={classes.description + " " + classes.sectionDisc}>
+            <List />
+          </div>
+        </GridItem>
+        <GridItem xs={12} sm={12} md={6}>
+          <img
+            src={helper}
+            alt="..."
+            className={
+              classes.imgRounded +
+              " " +
+              classes.imgFluid +
+              " " +
+              classes.imgClass
+            }
+          />
+        </GridItem>
+      </GridContainer>
     </div>
   );
 }

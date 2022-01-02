@@ -24,7 +24,7 @@ const productStyle = {
     marginLeft: "100px",
     fontFamily: '"Macan","Helvetica Neue","Helvetica","Arial",sans-serif',
     fontWeight: "700",
-    fontSize: "30px",
+    fontSize: "35px",
     textAlign: "Left",
     color: "#FFFFFF",
   },

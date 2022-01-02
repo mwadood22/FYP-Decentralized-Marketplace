@@ -3,6 +3,7 @@ import React from "react";
 import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
+import Button from "components/CustomButtons/Button.js";
 
 // @material-ui/icons
 
@@ -58,16 +59,18 @@ export default function CustomJobs(props) {
                 Specify your details and hire the perfect worker for your
                 everyday tasks.
               </h4>
-              {/* <Button
-                color="danger"
-                size="lg"
-                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"
-                target="_blank"
+              <Button
+                color="black"
+                size="md"
+                href="/createjob-page"
+                //target="_blank"
                 rel="noopener noreferrer"
+                className={classes.button}
+                //block
               >
-                <i className="fas fa-play" />
-                Watch video
-              </Button> */}
+                {/*<i className="fas fa-play" />*/}
+                Post a new job
+              </Button>
             </GridItem>
           </GridContainer>
         </div>

@@ -71,7 +71,7 @@ export default function ServicesView() {
         {/* </Link> */}
         <GridItem xs={12} sm={12} md={6}>
           <Card className={classes.card}>
-            <Link to="guidebuy-page" className={classes.color}>
+            <Link to="guidesell-page" className={classes.color}>
               <img
                 src={guide2}
                 alt="..."

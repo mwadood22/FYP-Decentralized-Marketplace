@@ -15,22 +15,10 @@ import GridItem from "components/Grid/GridItem.js";
 
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
-//import CardBody from "components/Card/CardBody.js";
-import CardHeader from "components/Card/CardHeader.js";
-//import CardFooter from "components/Card/CardFooter.js";
-//import CustomInput from "components/CustomInput/CustomInput.js";
-import InputAdornment from "@material-ui/core/InputAdornment";
-//import Chip from "@mui/material/Chip";
-//import Autocomplete from "@mui/material/Autocomplete";
-//import Stack from "@mui/material/Stack";
-//import Icon from "@material-ui/core/Icon";
-//import Email from "@material-ui/icons/Email";
-import People from "@material-ui/icons/People";
-import LocationCity from "@material-ui/icons/LocationCity";
-import Language from "@material-ui/icons/Language";
-import Edit from "@material-ui/icons/Edit";
-import Photo from "@material-ui/icons/Photo";
-
+// import CardBody from "components/Card/CardBody.js";
+// import CardHeader from "components/Card/CardHeader.js";
+// import CardFooter from "components/Card/CardFooter.js";
+// import CustomInput from "components/CustomInput/CustomInput.js";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 // import Paper from "@mui/material/Paper";
@@ -41,7 +29,6 @@ import styles from "assets/jss/material-kit-react/views/workerpage.js";
 // import helper from "assets/img/services/helper.jpg";
 
 const useStyles = makeStyles(styles);
-
 const currencies = [
   {
     value: "Lahore",
@@ -53,7 +40,6 @@ const currencies = [
     value: "Multan",
   },
 ];
-
 export default function WorkerPage(props) {
   const [currency, setCurrency] = React.useState("None");
 
@@ -89,13 +75,31 @@ export default function WorkerPage(props) {
           {/* <Paper elevation={3} style={styles.paperContainer}> */}
           <GridContainer xs={12} sm={12} md={12}>
             <GridItem xs={12} sm={12} md={7}>
+              {/* <GridItem xs={12} sm={12} md={12}> */}
               <Card className={(classes[cardAnimaton], classes.card)}>
                 <form className={classes.form}>
-                  <CardHeader color="green" className={classes.cardHeader}>
-                    <h4> One step away from becoming a worker !</h4>
-                  </CardHeader>
-                  <p className={classes.divider}></p>
                   <GridContainer>
+                    {/* <CardHeader color="green" className={classes.cardHeader}>
+                    <h4>A step away from becoming a worker!</h4>
+                  </CardHeader> */}
+                    {/* <p className={classes.divider}></p> */}
+                    {/* <CardBody> */}
+                    {/* <CustomInput
+                      labelText="City..."
+                      id="city"
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        type: "city",
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <Email className={classes.inputIconsColor} />
+                          </InputAdornment>
+                        ),
+                      }}
+                    /> */}
+
                     <GridItem xs={6} sm={6} md={6}>
                       <TextField
                         margin="normal"
@@ -103,14 +107,6 @@ export default function WorkerPage(props) {
                         fullWidth
                         id="username"
                         label="Username"
-                        InputProps={{
-                          type: "text",
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <People className={classes.inputIconsColor} />
-                            </InputAdornment>
-                          ),
-                        }}
                         variant="standard"
                       />
                     </GridItem>
@@ -119,16 +115,8 @@ export default function WorkerPage(props) {
                         margin="normal"
                         required
                         fullWidth
-                        id="photo"
-                        label="Photo"
-                        InputProps={{
-                          type: "text",
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <Photo className={classes.inputIconsColor} />
-                            </InputAdornment>
-                          ),
-                        }}
+                        id="contact"
+                        label="Contact"
                         variant="standard"
                       />
                     </GridItem>
@@ -138,58 +126,42 @@ export default function WorkerPage(props) {
                         margin="normal"
                         required
                         fullWidth
-                        id="language"
-                        label="Language"
-                        InputProps={{
-                          type: "text",
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <Language className={classes.inputIconsColor} />
-                            </InputAdornment>
-                          ),
-                        }}
+                        id="address"
+                        label="Address"
                         variant="standard"
                       />
                     </GridItem>
                     <GridItem xs={6} sm={6} md={6}>
                       <TextField
-                        margin="normal"
-                        required
                         fullWidth
-                        id="city"
-                        label="City"
-                        InputProps={{
-                          type: "text",
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <LocationCity
-                                className={classes.inputIconsColor}
-                              />
-                            </InputAdornment>
-                          ),
-                        }}
                         variant="standard"
-                      />
-                    </GridItem>
-                    <GridItem xs={6} sm={6} md={12}>
-                      <TextField
-                        //required
-                        fullWidth
                         id="outlined-select-currency"
                         select
                         margin="normal"
                         label=" "
                         value={currency}
                         onChange={handleChange}
-                        helperText="Enter your skills"
-                        InputProps={{
-                          endAdornment: (
-                            <InputAdornment position="start">
-                              <Edit className={classes.inputIconsColor} />
-                            </InputAdornment>
-                          ),
-                        }}
+                        helperText="Choose a city"
+                      >
+                        {currencies.map((option) => (
+                          <MenuItem key={option.value} value={option.value}>
+                            {option.value}
+                          </MenuItem>
+                        ))}
+                      </TextField>
+                    </GridItem>
+                    <GridItem>
+                      <TextField
+                        required
+                        fullWidth
                         variant="standard"
+                        id="outlined-select-currency"
+                        select
+                        margin="normal"
+                        label="Select"
+                        value={currency}
+                        onChange={handleChange}
+                        helperText="Choose a category"
                       >
                         {currencies.map((option) => (
                           <MenuItem key={option.value} value={option.value}>
@@ -202,23 +174,28 @@ export default function WorkerPage(props) {
                       <TextField
                         margin="normal"
                         fullWidth
-                        required
                         multiline
-                        rows={8}
+                        rows={4}
                         textarea
                         id="desc"
-                        label="Tell us about yourself"
+                        label="Description"
                       />
                     </GridItem>
-
                     <GridItem>
                       <Button color="black" href="/dashboard-page">
                         Get started
                       </Button>
                     </GridItem>
+                    {/* </CardBody> */}
+                    {/* <CardFooter className={classes.cardFooter}>
+                    <Button color="black" size="lg" href="/signup-page">
+                      Submit
+                    </Button>
+                  </CardFooter> */}
                   </GridContainer>
                 </form>
               </Card>
+              {/* </GridItem> */}
             </GridItem>
             <GridItem xs={12} sm={12} md={5}>
               {/* <GridItem xs={12} sm={12} md={12}> */}

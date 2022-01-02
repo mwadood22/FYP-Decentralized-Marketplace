@@ -43,7 +43,7 @@ export default function GuideView() {
             <CustomTabs
               plainTabs
               centered
-              headerColor="gray"
+              headerColor="green"
               tabs={[
                 {
                   tabName: "Sign-Up",
@@ -86,13 +86,13 @@ export default function GuideView() {
                   ),
                 },
                 {
-                  tabName: "Find Worker",
+                  tabName: "Register as a worker",
                   tabContent: (
                     <GridContainer className={classes.container}>
                       <GridItem xs={12} sm={12} md={8}>
                         <Card className={classes.card}>
                           <CardHeader>
-                            <h2>Find Worker</h2>
+                            <h2>Register as a worker</h2>
                           </CardHeader>
                           <CardBody>
                             <List dense={dense}>
@@ -101,7 +101,7 @@ export default function GuideView() {
                                   <CheckCircleOutlineOutlinedIcon />
                                 </ListItemIcon>
                                 <ListItemText
-                                  primary="Use filters to search any services."
+                                  primary="Register yourself as a worker."
                                   secondary={
                                     secondary ? "Secondary text" : null
                                   }
@@ -112,7 +112,7 @@ export default function GuideView() {
                                   <CheckCircleOutlineOutlinedIcon />
                                 </ListItemIcon>
                                 <ListItemText
-                                  primary="Explore the profiles of workers and find your desired worker."
+                                  primary="Provide necessary details for the clients to know such as your introduction, skills etc."
                                   secondary={
                                     secondary ? "Secondary text" : null
                                   }
@@ -123,18 +123,7 @@ export default function GuideView() {
                                   <CheckCircleOutlineOutlinedIcon />
                                 </ListItemIcon>
                                 <ListItemText
-                                  primary="Post your custom jobs by providing required details about your task and let the workers contact you."
-                                  secondary={
-                                    secondary ? "Secondary text" : null
-                                  }
-                                />
-                              </ListItem>
-                              <ListItem>
-                                <ListItemIcon>
-                                  <CheckCircleOutlineOutlinedIcon />
-                                </ListItemIcon>
-                                <ListItemText
-                                  primary="Let the workers bid for your jobs."
+                                  primary="Submit the details and you are good to go!"
                                   secondary={
                                     secondary ? "Secondary text" : null
                                   }
@@ -148,13 +137,13 @@ export default function GuideView() {
                   ),
                 },
                 {
-                  tabName: "Hire Worker",
+                  tabName: "Create Gigs",
                   tabContent: (
                     <GridContainer className={classes.container}>
                       <GridItem xs={12} sm={12} md={8}>
                         <Card className={classes.card}>
                           <CardHeader>
-                            <h2>Hire Worker</h2>
+                            <h2>Create Gigs</h2>
                           </CardHeader>
                           <CardBody>
                             <List dense={dense}>
@@ -163,7 +152,7 @@ export default function GuideView() {
                                   <CheckCircleOutlineOutlinedIcon />
                                 </ListItemIcon>
                                 <ListItemText
-                                  primary="Compare the bids and select the most suitable worker."
+                                  primary="From your dashboard, go to the gigs page."
                                   secondary={
                                     secondary ? "Secondary text" : null
                                   }
@@ -174,7 +163,7 @@ export default function GuideView() {
                                   <CheckCircleOutlineOutlinedIcon />
                                 </ListItemIcon>
                                 <ListItemText
-                                  primary=" Check out worker's profile. Compare reviews/ratings and decide."
+                                  primary="Click on the create a new gig option."
                                   secondary={
                                     secondary ? "Secondary text" : null
                                   }
@@ -185,7 +174,7 @@ export default function GuideView() {
                                   <CheckCircleOutlineOutlinedIcon />
                                 </ListItemIcon>
                                 <ListItemText
-                                  primary="Contact the worker and finalize the job."
+                                  primary="Create your gigs by providing required details about your gig such as gig detail, your budget etc "
                                   secondary={
                                     secondary ? "Secondary text" : null
                                   }
@@ -196,7 +185,18 @@ export default function GuideView() {
                                   <CheckCircleOutlineOutlinedIcon />
                                 </ListItemIcon>
                                 <ListItemText
-                                  primary="Hire the worker and get your task done. "
+                                  primary="You can create more than one gigs. "
+                                  secondary={
+                                    secondary ? "Secondary text" : null
+                                  }
+                                />
+                              </ListItem>
+                              <ListItem>
+                                <ListItemIcon>
+                                  <CheckCircleOutlineOutlinedIcon />
+                                </ListItemIcon>
+                                <ListItemText
+                                  primary="Now wait for the clients to contact you. "
                                   secondary={
                                     secondary ? "Secondary text" : null
                                   }
@@ -211,13 +211,13 @@ export default function GuideView() {
                 },
 
                 {
-                  tabName: "Make Payment ",
+                  tabName: "Find Jobs ",
                   tabContent: (
                     <GridContainer className={classes.container}>
                       <GridItem xs={12} sm={12} md={8}>
                         <Card className={classes.card}>
                           <CardHeader>
-                            <h2>Make Payment</h2>
+                            <h2>Find Jobs</h2>
                           </CardHeader>
                           <CardBody>
                             <List dense={dense}>
@@ -226,7 +226,19 @@ export default function GuideView() {
                                   <CheckCircleOutlineOutlinedIcon />
                                 </ListItemIcon>
                                 <ListItemText
-                                  primary="Once your task is complete, pay the custmer using our any of our payment channels."
+                                  primary="You can find custom jobs posted by the clients on the Find Jobs page."
+                                  secondary={
+                                    secondary ? "Secondary text" : null
+                                  }
+                                />
+                              </ListItem>
+
+                              <ListItem>
+                                <ListItemIcon>
+                                  <CheckCircleOutlineOutlinedIcon />
+                                </ListItemIcon>
+                                <ListItemText
+                                  primary="Checkout the jobs and bid for the one you like."
                                   secondary={
                                     secondary ? "Secondary text" : null
                                   }
@@ -237,32 +249,7 @@ export default function GuideView() {
                                   <CheckCircleOutlineOutlinedIcon />
                                 </ListItemIcon>
                                 <ListItemText
-                                  primary=" We provide the following payments channels:
-                                  1- Cash on Delivery.
-                                  2- Bank Payments.
-                                  3- Crypto Tokens."
-                                  secondary={
-                                    secondary ? "Secondary text" : null
-                                  }
-                                />
-                              </ListItem>
-                              <ListItem>
-                                <ListItemIcon>
-                                  <CheckCircleOutlineOutlinedIcon />
-                                </ListItemIcon>
-                                <ListItemText
-                                  primary="Contact the worker and finalize the job."
-                                  secondary={
-                                    secondary ? "Secondary text" : null
-                                  }
-                                />
-                              </ListItem>
-                              <ListItem>
-                                <ListItemIcon>
-                                  <CheckCircleOutlineOutlinedIcon />
-                                </ListItemIcon>
-                                <ListItemText
-                                  primary="Verify your payment and you're done!  "
+                                  primary="Now wait for the client to select your bid and contact you.  "
                                   secondary={
                                     secondary ? "Secondary text" : null
                                   }
