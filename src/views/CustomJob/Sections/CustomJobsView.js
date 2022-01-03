@@ -6,27 +6,35 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import Button from "components/CustomButtons/Button.js";
 
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-
 import Card from "components/Card/Card.js";
 // import CardBody from "components/Card/CardBody.js";
 // import Divider from "@mui/material/Divider";
-import ListItemText from "@mui/material/ListItemText";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
 // import ListItemButton from "@mui/material/ListItemButton";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 
 import styles from "assets/jss/material-kit-react/views/customJobs.js";
+
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
-import IconButton from "@material-ui/core/IconButton";
-import Close from "@material-ui/icons/Close";
+//import IconButton from "@material-ui/core/IconButton";
+//import Close from "@material-ui/icons/Close";
 import Slide from "@material-ui/core/Slide";
+import GridContainer from "components/Grid/GridContainer.js";
+import GridItem from "components/Grid/GridItem.js";
 // import { ListItemSecondaryAction } from "@material-ui/core";
+//import Box from "@mui/material/Box";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+//import ListItemIcon from "@mui/material/ListItemIcon";
+//import Divider from "@mui/material/Divider";
+//import InboxIcon from "@mui/icons-material/Inbox";
+//import DraftsIcon from "@mui/icons-material/Drafts";
 
 // import SearchBar from "";
 
@@ -106,11 +114,11 @@ export default function FindJobs() {
                     aria-describedby="classic-modal-slide-description"
                   >
                     <DialogTitle
-                      id="classic-modal-slide-title"
-                      disableTypography
-                      className={classes.modalHeader}
+                    //id="classic-modal-slide-title"
+                    //disableTypography
+                    //className={classes.modalHeader}
                     >
-                      <IconButton
+                      {/*<IconButton
                         className={classes.modalCloseButton}
                         key="close"
                         aria-label="Close"
@@ -119,56 +127,158 @@ export default function FindJobs() {
                       >
                         <Close className={classes.modalClose} />
                       </IconButton>
-                      <h4 className={classes.modalTitle}>Bids</h4>
+                      <h4 className={classes.modalTitle}>Bids for the job</h4>*/}
                     </DialogTitle>
                     <DialogContent
                       id="classic-modal-slide-description"
                       className={classes.modalBody}
                     >
-                      <p>
-                        small river named Duden flows by their place and
-                        supplies it with the necessary regelialia. It is a \
-                      </p>
+                      {/*<Box
+                        sx={{
+                          width: "100%",
+                          maxWidth: 360,
+                          bgcolor: "background.paper",
+                        }}
+                      >*/}
+
+                      <List
+                        sx={{
+                          width: "100%",
+                          maxWidth: 500,
+                          bgcolor: "background.paper",
+                          position: "relative",
+                          overflow: "auto",
+                          maxHeight: 400,
+                          "& ul": { padding: 0 },
+                        }}
+                      >
+                        <GridContainer>
+                          <ListItem disablePadding>
+                            <GridItem xs={12} sm={12} md={8}>
+                              <ListItemButton>
+                                <ListItemAvatar>
+                                  <Avatar alt="Remy Sharp" src={team1} />
+                                </ListItemAvatar>
+                                <ListItemText
+                                  //className={classes.bidlist}
+                                  primary="Ali Ahmad"
+                                />
+                              </ListItemButton>
+                            </GridItem>
+
+                            <GridItem xs={12} sm={12} md={4}>
+                              <ListItemText primary="Bid: 45$" />
+                            </GridItem>
+                          </ListItem>
+
+                          <ListItem disablePadding>
+                            <GridItem xs={12} sm={12} md={8}>
+                              <ListItemButton>
+                                <ListItemAvatar>
+                                  <Avatar alt="Remy Sharp" src={team2} />
+                                </ListItemAvatar>
+                                <ListItemText
+                                  //className={classes.bidlist}
+                                  primary="Musa Bhatti"
+                                />
+                              </ListItemButton>
+                            </GridItem>
+
+                            <GridItem xs={12} sm={12} md={4}>
+                              <ListItemText primary="Bid: 40$" />
+                            </GridItem>
+                          </ListItem>
+
+                          <ListItem disablePadding>
+                            <GridItem xs={12} sm={12} md={8}>
+                              <ListItemButton>
+                                <ListItemAvatar>
+                                  <Avatar alt="Remy Sharp" src={team3} />
+                                </ListItemAvatar>
+                                <ListItemText
+                                  //className={classes.bidlist}
+                                  primary="Aamna Sikandar"
+                                />
+                              </ListItemButton>
+                            </GridItem>
+
+                            <GridItem xs={12} sm={12} md={4}>
+                              <ListItemText primary="Bid: 40$" />
+                            </GridItem>
+                          </ListItem>
+
+                          <ListItem disablePadding>
+                            <GridItem xs={12} sm={12} md={8}>
+                              <ListItemButton>
+                                <ListItemAvatar>
+                                  <Avatar alt="Remy Sharp" src={team1} />
+                                </ListItemAvatar>
+                                <ListItemText
+                                  className={classes.bidlist}
+                                  primary="Wadood ul Haq"
+                                />
+                              </ListItemButton>
+                            </GridItem>
+
+                            <GridItem xs={12} sm={12} md={4}>
+                              <ListItemText primary="Bid: 30$" />
+                            </GridItem>
+                          </ListItem>
+
+                          <ListItem disablePadding>
+                            <GridItem xs={12} sm={12} md={8}>
+                              <ListItemButton>
+                                <ListItemAvatar>
+                                  <Avatar alt="Remy Sharp" src={team2} />
+                                </ListItemAvatar>
+                                <ListItemText
+                                  className={classes.bidlist}
+                                  primary="AbdulRehman Huzaifa"
+                                />
+                              </ListItemButton>
+                            </GridItem>
+
+                            <GridItem xs={12} sm={12} md={4}>
+                              <ListItemText primary="Bid: 50$" />
+                            </GridItem>
+                          </ListItem>
+
+                          <ListItem disablePadding>
+                            <GridItem xs={12} sm={12} md={8}>
+                              <ListItemButton>
+                                <ListItemAvatar>
+                                  <Avatar alt="Remy Sharp" src={team3} />
+                                </ListItemAvatar>
+                                <ListItemText
+                                  className={classes.bidlist}
+                                  primary="Arooj Sikandar"
+                                />
+                              </ListItemButton>
+                            </GridItem>
+
+                            <GridItem xs={12} sm={12} md={4}>
+                              <ListItemText primary="Bid: 55$" />
+                            </GridItem>
+                          </ListItem>
+                        </GridContainer>
+                      </List>
+
+                      {/*</Box>*/}
                     </DialogContent>
                     <DialogActions className={classes.modalFooter}>
-                      <Button color="transparent" simple>
-                        Nice Button
-                      </Button>
                       <Button
                         onClick={() => setClassicModal(false)}
-                        color="danger"
-                        simple
+                        color="black"
+                        size="small"
                       >
                         Close
                       </Button>
                     </DialogActions>
                   </Dialog>
-                  <Button
-                    color="green"
-                    size="md"
-                    href="/signup-page"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={classes.jobBtn}
-                  >
-                    <i className="fas fa-eye" />
-                    Start Job
-                  </Button>
                 </React.Fragment>
               }
             />
           </Card>
-          {/* <Button
-                    color="black"
-                    size="md"
-                    href="/signup-page"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={classes.searchBtn}
-                  >
-                    <i className="fas fa-check" />
-                    Bid
-                  </Button> */}
         </ListItem>
 
         {/* </div> */}
@@ -190,31 +300,29 @@ export default function FindJobs() {
                   <Typography className={classes.heading} color="text.primary">
                     to Scott, Alex, Jennifer
                   </Typography>
-                  {" — Wish I could come, but I'm out of town this…"}
+                  Ill be in your neighborhood doing errands this… Ill be in your
+                  neighborhood doing errands this… Ill be in your neighborhood
+                  doing errands this… Ill be in your neighborhood doing errands
+                  this… Ill be in your neighborhood doing errands this… Ill be
+                  in your neighborhood doing errands this… Ill be in your
+                  neighborhood doing errands this… Ill be in your neighborhood
+                  doing errands this… Ill be in your neighborhood doing errands
+                  this… Ill be in your neighborhood doing errands this… Ill be
+                  in your Ill be in your neighborhood doing errands this… Ill be
+                  in your neighborhood doing errands this… Ill be in your
+                  neighborhood doing errands this… Ill be in your.
                   <br /> <br />
                   <strong>Max bid: $45</strong>
                   <hr />
                   <Button
                     color="green"
                     size="md"
-                    href="/signup-page"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    //rel="noopener noreferrer"
+                    onClick={() => setClassicModal(true)}
                     className={classes.jobBtn}
                   >
                     <i className="fas fa-dollar-sign" />
-                    Bid
-                  </Button>
-                  <Button
-                    color="green"
-                    size="md"
-                    href="/signup-page"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={classes.jobBtn}
-                  >
-                    <i className="fas fa-eye" />
-                    View Job
+                    View Bids
                   </Button>
                 </React.Fragment>
               }
@@ -240,31 +348,29 @@ export default function FindJobs() {
                   <Typography className={classes.heading} color="text.primary">
                     Sandra Adams
                   </Typography>
-                  {" — Do you have Paris recommendations? Have you ever…"}
+                  Ill be in your neighborhood doing errands this… Ill be in your
+                  neighborhood doing errands this… Ill be in your neighborhood
+                  doing errands this… Ill be in your neighborhood doing errands
+                  this… Ill be in your neighborhood doing errands this… Ill be
+                  in your neighborhood doing errands this… Ill be in your
+                  neighborhood doing errands this… Ill be in your neighborhood
+                  doing errands this… Ill be in your neighborhood doing errands
+                  this… Ill be in your neighborhood doing errands this… Ill be
+                  in your Ill be in your neighborhood doing errands this… Ill be
+                  in your neighborhood doing errands this… Ill be in your
+                  neighborhood doing errands this… Ill be in your.
                   <br /> <br />
                   <strong>Max bid: $45</strong>
                   <hr />
                   <Button
                     color="green"
                     size="md"
-                    href="/signup-page"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    //rel="noopener noreferrer"
+                    onClick={() => setClassicModal(true)}
                     className={classes.jobBtn}
                   >
                     <i className="fas fa-dollar-sign" />
-                    Bid
-                  </Button>
-                  <Button
-                    color="green"
-                    size="md"
-                    href="/signup-page"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={classes.jobBtn}
-                  >
-                    <i className="fas fa-eye" />
-                    View Job
+                    View Bids
                   </Button>
                 </React.Fragment>
               }
@@ -290,31 +396,29 @@ export default function FindJobs() {
                   <Typography className={classes.heading} color="text.primary">
                     Ali Connors
                   </Typography>
-                  {"I'll be in your neighborhood doing errands this…"}
+                  Ill be in your neighborhood doing errands this… Ill be in your
+                  neighborhood doing errands this… Ill be in your neighborhood
+                  doing errands this… Ill be in your neighborhood doing errands
+                  this… Ill be in your neighborhood doing errands this… Ill be
+                  in your neighborhood doing errands this… Ill be in your
+                  neighborhood doing errands this… Ill be in your neighborhood
+                  doing errands this… Ill be in your neighborhood doing errands
+                  this… Ill be in your neighborhood doing errands this… Ill be
+                  in your Ill be in your neighborhood doing errands this… Ill be
+                  in your neighborhood doing errands this… Ill be in your
+                  neighborhood doing errands this… Ill be in your.
                   <br /> <br />
                   <strong>Max bid: $45</strong>
                   <hr />
                   <Button
                     color="green"
                     size="md"
-                    href="/signup-page"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    //rel="noopener noreferrer"
+                    onClick={() => setClassicModal(true)}
                     className={classes.jobBtn}
                   >
                     <i className="fas fa-dollar-sign" />
-                    Bid
-                  </Button>
-                  <Button
-                    color="green"
-                    size="md"
-                    href="/signup-page"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={classes.jobBtn}
-                  >
-                    <i className="fas fa-eye" />
-                    View Job
+                    View Bids
                   </Button>
                 </React.Fragment>
               }
@@ -340,92 +444,29 @@ export default function FindJobs() {
                   <Typography className={classes.heading} color="text.primary">
                     to Scott, Alex, Jennifer
                   </Typography>
-                  {" — Wish I could come, but I'm out of town this…"}
+                  Ill be in your neighborhood doing errands this… Ill be in your
+                  neighborhood doing errands this… Ill be in your neighborhood
+                  doing errands this… Ill be in your neighborhood doing errands
+                  this… Ill be in your neighborhood doing errands this… Ill be
+                  in your neighborhood doing errands this… Ill be in your
+                  neighborhood doing errands this… Ill be in your neighborhood
+                  doing errands this… Ill be in your neighborhood doing errands
+                  this… Ill be in your neighborhood doing errands this… Ill be
+                  in your Ill be in your neighborhood doing errands this… Ill be
+                  in your neighborhood doing errands this… Ill be in your
+                  neighborhood doing errands this… Ill be in your.
                   <br /> <br />
                   <strong>Max bid: $45</strong>
                   <hr />
                   <Button
                     color="green"
                     size="md"
-                    href="/signup-page"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={classes.jobBtn}
+                    //rel="noopener noreferrer"
                     onClick={() => setClassicModal(true)}
+                    className={classes.jobBtn}
                   >
                     <i className="fas fa-dollar-sign" />
                     View Bids
-                  </Button>
-                  <Dialog
-                    classes={{
-                      root: classes.center,
-                      paper: classes.modal,
-                    }}
-                    open={classicModal}
-                    TransitionComponent={Transition}
-                    keepMounted
-                    onClose={() => setClassicModal(false)}
-                    aria-labelledby="classic-modal-slide-title"
-                    aria-describedby="classic-modal-slide-description"
-                  >
-                    <DialogTitle
-                      id="classic-modal-slide-title"
-                      disableTypography
-                      className={classes.modalHeader}
-                    >
-                      <IconButton
-                        className={classes.modalCloseButton}
-                        key="close"
-                        aria-label="Close"
-                        color="inherit"
-                        onClick={() => setClassicModal(false)}
-                      >
-                        <Close className={classes.modalClose} />
-                      </IconButton>
-                      <h4 className={classes.modalTitle}>Modal title</h4>
-                    </DialogTitle>
-                    <DialogContent
-                      id="classic-modal-slide-description"
-                      className={classes.modalBody}
-                    >
-                      <p>
-                        Far far away, behind the word mountains, far from the
-                        countries Vokalia and Consonantia, there live the blind
-                        texts. Separated they live in Bookmarksgrove right at
-                        the coast of the Semantics, a large language ocean. A
-                        small river named Duden flows by their place and
-                        supplies it with the necessary regelialia. It is a
-                        paradisematic country, in which roasted parts of
-                        sentences fly into your mouth. Even the all-powerful
-                        Pointing has no control about the blind texts it is an
-                        almost unorthographic life One day however a small line
-                        of blind text by the name of Lorem Ipsum decided to
-                        leave for the far World of Grammar.
-                      </p>
-                    </DialogContent>
-                    <DialogActions className={classes.modalFooter}>
-                      <Button color="transparent" simple>
-                        Nice Button
-                      </Button>
-                      <Button
-                        onClick={() => setClassicModal(false)}
-                        color="danger"
-                        simple
-                      >
-                        Close
-                      </Button>
-                    </DialogActions>
-                  </Dialog>
-                  <Button
-                    color="green"
-                    size="md"
-                    href="/signup-page"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={classes.jobBtn}
-                  >
-                    <i className="fas fa-eye" />
-                    View Job
                   </Button>
                 </React.Fragment>
               }
@@ -451,31 +492,29 @@ export default function FindJobs() {
                   <Typography className={classes.heading} color="text.primary">
                     Sandra Adams
                   </Typography>
-                  {" — Do you have Paris recommendations? Have you ever…"}
+                  Ill be in your neighborhood doing errands this… Ill be in your
+                  neighborhood doing errands this… Ill be in your neighborhood
+                  doing errands this… Ill be in your neighborhood doing errands
+                  this… Ill be in your neighborhood doing errands this… Ill be
+                  in your neighborhood doing errands this… Ill be in your
+                  neighborhood doing errands this… Ill be in your neighborhood
+                  doing errands this… Ill be in your neighborhood doing errands
+                  this… Ill be in your neighborhood doing errands this… Ill be
+                  in your Ill be in your neighborhood doing errands this… Ill be
+                  in your neighborhood doing errands this… Ill be in your
+                  neighborhood doing errands this… Ill be in your.
                   <br /> <br />
                   <strong>Max bid: $45</strong>
                   <hr />
                   <Button
                     color="green"
                     size="md"
-                    href="/signup-page"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    //rel="noopener noreferrer"
+                    onClick={() => setClassicModal(true)}
                     className={classes.jobBtn}
                   >
                     <i className="fas fa-dollar-sign" />
-                    Bid
-                  </Button>
-                  <Button
-                    color="green"
-                    size="md"
-                    href="/signup-page"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={classes.jobBtn}
-                  >
-                    <i className="fas fa-eye" />
-                    View Job
+                    View Bids
                   </Button>
                 </React.Fragment>
               }

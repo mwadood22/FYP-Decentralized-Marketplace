@@ -8,7 +8,10 @@ import TextField from "@mui/material/TextField";
 // @material-ui/icons
 //import Email from "@material-ui/icons/Email";
 //import People from "@material-ui/icons/People";
-import Lock from "@material-ui/icons/Lock";
+
+import Lock from "@mui/icons-material/LockTwoTone";
+import Name from "@mui/icons-material/PeopleAltTwoTone";
+
 //import Question from "@material-ui/icons/Whatshot";
 //import Zip from "@material-ui/icons/AirplanemodeInactive";
 
@@ -24,12 +27,13 @@ import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
 //import FormControl from "@material-ui/core/FormControl";
-import Datetime from "react-datetime";
+//import Datetime from "react-datetime";
 //import CustomInput from "components/CustomInput/CustomInput.js";
 import Box from "@mui/material/Box";
+import DatePicker from "@mui/lab/DatePicker";
 //import DateRangePicker from "@mui//DateRangePicker";
-//import AdapterDateFns from "@mui/lab/AdapterDateFns";
-//import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
 //import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
@@ -38,7 +42,7 @@ import styles from "assets/jss/material-kit-react/views/loginPage.js";
 const useStyles = makeStyles(styles);
 
 export default function LoginPage(props) {
-  //const [value, setValue] = React.useState([null, null]);
+  const [value, setValue] = React.useState([null, null]);
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
   setTimeout(function () {
     setCardAnimation("");
@@ -80,7 +84,7 @@ export default function LoginPage(props) {
                     <Box
                       component="form"
                       sx={{
-                        "& .MuiTextField-root": { m: 1, width: "35ch" },
+                        "& .MuiTextField-root": { m: 1, width: "34ch" },
                       }}
                       noValidate
                       autoComplete="off"
@@ -91,7 +95,7 @@ export default function LoginPage(props) {
                         label="Card Number"
                         id="outlined-size-small"
                         //defaultValue="Small"
-                        size="small"
+                        size="lg"
                         InputProps={{
                           type: "text",
                           endAdornment: (
@@ -103,12 +107,38 @@ export default function LoginPage(props) {
                       />
                     </Box>
 
+                    <Box
+                      component="form"
+                      sx={{
+                        "& .MuiTextField-root": { m: 1, width: "34ch" },
+                      }}
+                      noValidate
+                      autoComplete="off"
+                    >
+                      <TextField
+                        required
+                        fullWidth
+                        label="Name on card"
+                        id="outlined-size-small"
+                        //defaultValue="Small"
+                        size="lg"
+                        InputProps={{
+                          type: "text",
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <Name className={classes.inputIconsColor} />
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                    </Box>
+
                     <GridContainer>
-                      <GridItem>
+                      <GridItem xs={6} sm={6} md={5}>
                         <Box
                           component="form"
                           sx={{
-                            "& .MuiTextField-root": { m: 1, width: "15ch" },
+                            "& .MuiTextField-root": { m: 1, width: "17ch" },
                           }}
                           noValidate
                           autoComplete="off"
@@ -123,11 +153,12 @@ export default function LoginPage(props) {
                           />
                         </Box>
                       </GridItem>
-                      <GridItem>
+
+                      <GridItem xs={6} sm={6} md={7}>
                         <Box
                           component="form"
                           sx={{
-                            "& .MuiTextField-root": { m: 1, width: "15ch" },
+                            "& .MuiTextField-root": { m: 1, width: "17ch" },
                           }}
                           noValidate
                           autoComplete="off"
@@ -146,21 +177,23 @@ export default function LoginPage(props) {
                     <Box
                       component="form"
                       sx={{
-                        "& .MuiTextField-root": { m: 1, width: "15ch" },
+                        "& .MuiTextField-root": { m: 1, width: "34ch" },
                       }}
                       noValidate
                       autoComplete="off"
                     >
-                      <TextField
-                        required
-                        fullWidth
-                        label="Expiry Date"
-                        id="outlined-size-small"
-                        //defaultValue="Small"
-                        size="small"
-                      />
-                      <Datetime inputProps={{ placeholder: "start" }} />
+                      <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <DatePicker
+                          label="Expiry Date "
+                          value={value}
+                          onChange={(newValue) => {
+                            setValue(newValue);
+                          }}
+                          renderInput={(params) => <TextField {...params} />}
+                        />
+                      </LocalizationProvider>
                     </Box>
+
                     {/*<LocalizationProvider dateAdapter={AdapterDateFns}>
                       <DesktopDatePicker
                         label="From"
@@ -174,7 +207,7 @@ export default function LoginPage(props) {
                       </LocalizationProvider>*/}
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Button color="black"> Make Payment</Button>
+                    <Button color="black"> Continue</Button>
                   </CardFooter>
                 </form>
               </Card>

@@ -21,6 +21,9 @@ const workerPageStyle = {
     color: "black",
     marginLeft: "15px",
   },
+  bidlist: {
+    marginRight: "60px",
+  },
   title: {
     ...title,
     marginBottom: "1rem",
