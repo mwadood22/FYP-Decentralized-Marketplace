@@ -44,6 +44,7 @@ const landingPageStyle = {
     background: "#FFFFFF",
     position: "relative",
     zIndex: "3",
+    paddingBottom: "70px",
   },
   mainRaised: {
     margin: "-60px 30px 0px",

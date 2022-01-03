@@ -12,11 +12,15 @@ import Header from "components/Header/Header.js";
 import Footer from "components/Footer/Footer.js";
 //import GridContainer from "components/Grid/GridContainer.js";
 //import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
+// import Button from "components/CustomButtons/Button.js";
 // import Search from "@material-ui/icons/Search";
-import CustomInput from "components/CustomInput/CustomInput.js";
+// import CustomInput from "components/CustomInput/CustomInput.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 //import Parallax from "components/Parallax/Parallax.js";
+import InputBase from "@mui/material/InputBase";
+import IconButton from "@mui/material/IconButton";
+import SearchIcon from "@mui/icons-material/Search";
+import Paper from "@mui/material/Paper";
 
 //import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 //import Search from "@material-ui/icons/Search";
@@ -68,7 +72,25 @@ export default function LandingPage(props) {
           </h4>
         </h1>
         <br />
-        <CustomInput
+        <Paper
+          component="form"
+          sx={{
+            p: "2px 4px",
+            display: "flex",
+            alignItems: "center",
+            width: 450,
+          }}
+        >
+          <InputBase
+            sx={{ ml: 1, flex: 1 }}
+            placeholder="Search for services of your choice..."
+            inputProps={{ "aria-label": "search google maps" }}
+          />
+          <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
+            <SearchIcon />
+          </IconButton>
+        </Paper>
+        {/* <CustomInput
           black
           inputProps={{
             placeholder: "Search for services of your choice...",
@@ -78,12 +100,12 @@ export default function LandingPage(props) {
               underline: "false",
             },
           }}
-        />
+        /> */}
         {/* <Button justIcon round color="white" className={classes.searchBtn}>
           <Search className={classes.searchIcon} />
         </Button> */}
 
-        <Button
+        {/* <Button
           color="green"
           size="md"
           href="/signup-page"
@@ -93,7 +115,7 @@ export default function LandingPage(props) {
         >
           <i className="fas fa-check" />
           Search
-        </Button>
+        </Button> */}
       </div>
       <div className={classes.carouselBack}>
         <HeaderCarousel />

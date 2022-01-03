@@ -19,10 +19,17 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 // import ListItemButton from "@mui/material/ListItemButton";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
 
 import styles from "assets/jss/material-kit-react/views/findJobsPage.js";
 // import { ListItemSecondaryAction } from "@material-ui/core";
-import CustomInput from "components/CustomInput/CustomInput.js";
+// import CustomInput from "components/CustomInput/CustomInput.js";
+import InputBase from "@mui/material/InputBase";
+import IconButton from "@mui/material/IconButton";
+import SearchIcon from "@mui/icons-material/Search";
+import Paper from "@mui/material/Paper";
+import TextField from "@mui/material/TextField";
+
 // import SearchBar from "";
 
 // import image from "assets/img/bg7.jpg";
@@ -30,19 +37,36 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import team1 from "assets/img/faces/test1.jpg";
 import team2 from "assets/img/faces/christian.jpg";
 import team3 from "assets/img/faces/test3.jpg";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 
 const useStyles = makeStyles(styles);
-
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 export default function FindJobs(props) {
   //   const [currency, setCurrency] = React.useState("None");
 
   //   const handleChange = (event) => {
   //     setCurrency(event.target.value);
   //   };
-
+  const [open, setOpen] = React.useState(false);
+  const [disable, setDisable] = React.useState(false);
   const classes = useStyles();
   const { ...rest } = props;
+  const handleClick = () => {
+    // prop.setDisable(true);
+    setDisable(true);
+    setOpen(true);
+  };
 
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
   return (
     <div>
       <Header
@@ -60,7 +84,25 @@ export default function FindJobs(props) {
             bids to get selected.
           </h3>
           <div className={classes.new}>
-            <CustomInput
+            <Paper
+              component="form"
+              sx={{
+                p: "2px 4px",
+                display: "flex",
+                alignItems: "center",
+                width: 700,
+              }}
+            >
+              <InputBase
+                sx={{ ml: 1, flex: 1 }}
+                placeholder="Search for desired jobs..."
+                inputProps={{ "aria-label": "search google maps" }}
+              />
+              <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
+                <SearchIcon />
+              </IconButton>
+            </Paper>
+            {/* <CustomInput
               black
               inputProps={{
                 placeholder: "Search",
@@ -75,7 +117,7 @@ export default function FindJobs(props) {
             <Button color="green" className={classes.searchBtn}>
               <i className="fas fa-search" />
               Search
-            </Button>
+            </Button> */}
           </div>
           {/* <SearchBar
             onChange={() => console.log("onChange")}
@@ -119,18 +161,45 @@ export default function FindJobs(props) {
                       neighborhood doing errands this… Ill be in your
                       <br /> <br />
                       <strong>Max bid: $45</strong>
-                      <hr />
+                      <Divider
+                        sx={{ width: 1000, m: 0.5 }}
+                        orientation="horizontal"
+                      />
+                      <TextField
+                        defaultValue="45"
+                        InputProps={{ inputProps: { min: 0 } }}
+                        variant="standard"
+                        type="number"
+                        id="bid"
+                        label=" "
+                        sx={{ width: 60 }}
+                      />
                       <Button
                         color="green"
                         size="md"
-                        href="/signup-page"
-                        target="_blank"
+                        // href="/signup-page"
+                        // target="_blank"
+                        disabled={disable}
                         rel="noopener noreferrer"
                         className={classes.jobBtn}
+                        onClick={handleClick}
                       >
                         <i className="fas fa-dollar-sign" />
                         Bid
                       </Button>
+                      <Snackbar
+                        open={open}
+                        autoHideDuration={6000}
+                        onClose={handleClose}
+                      >
+                        <Alert
+                          onClose={handleClose}
+                          severity="success"
+                          sx={{ width: "100%" }}
+                        >
+                          Bid placed successfully!
+                        </Alert>
+                      </Snackbar>
                       <Button
                         color="green"
                         size="md"
@@ -184,18 +253,45 @@ export default function FindJobs(props) {
                       {" — Wish I could come, but I'm out of town this…"}
                       <br /> <br />
                       <strong>Max bid: $45</strong>
-                      <hr />
+                      <Divider
+                        sx={{ width: 1000, m: 0.5 }}
+                        orientation="horizontal"
+                      />
+                      <TextField
+                        defaultValue="45"
+                        InputProps={{ inputProps: { min: 0 } }}
+                        variant="standard"
+                        type="number"
+                        id="bid"
+                        label=" "
+                        sx={{ width: 60 }}
+                      />
                       <Button
                         color="green"
                         size="md"
-                        href="/signup-page"
-                        target="_blank"
+                        // href="/signup-page"
+                        // target="_blank"
+                        // disabled={disable}
                         rel="noopener noreferrer"
                         className={classes.jobBtn}
+                        onClick={handleClick}
                       >
                         <i className="fas fa-dollar-sign" />
                         Bid
                       </Button>
+                      {/* <Snackbar
+                        open={open}
+                        autoHideDuration={6000}
+                        onClose={handleClose}
+                      >
+                        <Alert
+                          onClose={handleClose}
+                          severity="success"
+                          sx={{ width: "100%" }}
+                        >
+                          Bid placed successfully!
+                        </Alert>
+                      </Snackbar> */}
                       <Button
                         color="green"
                         size="md"
@@ -237,18 +333,45 @@ export default function FindJobs(props) {
                       {" — Do you have Paris recommendations? Have you ever…"}
                       <br /> <br />
                       <strong>Max bid: $45</strong>
-                      <hr />
+                      <Divider
+                        sx={{ width: 1000, m: 0.5 }}
+                        orientation="horizontal"
+                      />
+                      <TextField
+                        defaultValue="45"
+                        InputProps={{ inputProps: { min: 0 } }}
+                        variant="standard"
+                        type="number"
+                        id="bid"
+                        label=" "
+                        sx={{ width: 60 }}
+                      />
                       <Button
                         color="green"
                         size="md"
-                        href="/signup-page"
-                        target="_blank"
+                        // href="/signup-page"
+                        // target="_blank"
+                        // disabled={disable}
                         rel="noopener noreferrer"
                         className={classes.jobBtn}
+                        onClick={handleClick}
                       >
                         <i className="fas fa-dollar-sign" />
                         Bid
                       </Button>
+                      {/* <Snackbar
+                        open={open}
+                        autoHideDuration={6000}
+                        onClose={handleClose}
+                      >
+                        <Alert
+                          onClose={handleClose}
+                          severity="success"
+                          sx={{ width: "100%" }}
+                        >
+                          Bid placed successfully!
+                        </Alert>
+                      </Snackbar> */}
                       <Button
                         color="green"
                         size="md"
@@ -290,18 +413,45 @@ export default function FindJobs(props) {
                       {"I'll be in your neighborhood doing errands this…"}
                       <br /> <br />
                       <strong>Max bid: $45</strong>
-                      <hr />
+                      <Divider
+                        sx={{ width: 1000, m: 0.5 }}
+                        orientation="horizontal"
+                      />
+                      <TextField
+                        defaultValue="45"
+                        InputProps={{ inputProps: { min: 0 } }}
+                        variant="standard"
+                        type="number"
+                        id="bid"
+                        label=" "
+                        sx={{ width: 60 }}
+                      />
                       <Button
                         color="green"
                         size="md"
-                        href="/signup-page"
-                        target="_blank"
+                        // href="/signup-page"
+                        // target="_blank"
+                        // disabled={disable}
                         rel="noopener noreferrer"
                         className={classes.jobBtn}
+                        onClick={handleClick}
                       >
                         <i className="fas fa-dollar-sign" />
                         Bid
                       </Button>
+                      {/* <Snackbar
+                        open={open}
+                        autoHideDuration={6000}
+                        onClose={handleClose}
+                      >
+                        <Alert
+                          onClose={handleClose}
+                          severity="success"
+                          sx={{ width: "100%" }}
+                        >
+                          Bid placed successfully!
+                        </Alert>
+                      </Snackbar> */}
                       <Button
                         color="green"
                         size="md"
@@ -343,18 +493,45 @@ export default function FindJobs(props) {
                       {" — Wish I could come, but I'm out of town this…"}
                       <br /> <br />
                       <strong>Max bid: $45</strong>
-                      <hr />
+                      <Divider
+                        sx={{ width: 1000, m: 0.5 }}
+                        orientation="horizontal"
+                      />
+                      <TextField
+                        defaultValue="45"
+                        InputProps={{ inputProps: { min: 0 } }}
+                        variant="standard"
+                        type="number"
+                        id="bid"
+                        label=" "
+                        sx={{ width: 60 }}
+                      />
                       <Button
                         color="green"
                         size="md"
-                        href="/signup-page"
-                        target="_blank"
+                        // href="/signup-page"
+                        // target="_blank"
+                        // disabled={disable}
                         rel="noopener noreferrer"
                         className={classes.jobBtn}
+                        onClick={handleClick}
                       >
                         <i className="fas fa-dollar-sign" />
                         Bid
                       </Button>
+                      {/* <Snackbar
+                        open={open}
+                        autoHideDuration={6000}
+                        onClose={handleClose}
+                      >
+                        <Alert
+                          onClose={handleClose}
+                          severity="success"
+                          sx={{ width: "100%" }}
+                        >
+                          Bid placed successfully!
+                        </Alert>
+                      </Snackbar> */}
                       <Button
                         color="green"
                         size="md"
@@ -396,18 +573,45 @@ export default function FindJobs(props) {
                       {" — Do you have Paris recommendations? Have you ever…"}
                       <br /> <br />
                       <strong>Max bid: $45</strong>
-                      <hr />
+                      <Divider
+                        sx={{ width: 1000, m: 0.5 }}
+                        orientation="horizontal"
+                      />
+                      <TextField
+                        defaultValue="45"
+                        InputProps={{ inputProps: { min: 0 } }}
+                        variant="standard"
+                        type="number"
+                        id="bid"
+                        label=" "
+                        sx={{ width: 60 }}
+                      />
                       <Button
                         color="green"
                         size="md"
-                        href="/signup-page"
-                        target="_blank"
+                        // href="/signup-page"
+                        // target="_blank"
+                        // disabled={disable}
                         rel="noopener noreferrer"
                         className={classes.jobBtn}
+                        onClick={handleClick}
                       >
                         <i className="fas fa-dollar-sign" />
                         Bid
                       </Button>
+                      {/* <Snackbar
+                        open={open}
+                        autoHideDuration={6000}
+                        onClose={handleClose}
+                      >
+                        <Alert
+                          onClose={handleClose}
+                          severity="success"
+                          sx={{ width: "100%" }}
+                        >
+                          Bid placed successfully!
+                        </Alert>
+                      </Snackbar> */}
                       <Button
                         color="green"
                         size="md"
