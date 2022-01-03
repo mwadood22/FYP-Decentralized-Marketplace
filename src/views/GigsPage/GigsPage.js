@@ -15,6 +15,8 @@ import GridItem from "components/Grid/GridItem.js";
 //import Button from "components/CustomButtons/Button.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
+import Button from "components/CustomButtons/Button.js";
+
 //import CustomInput from "components/CustomInput/CustomInput.js";
 //import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 //import Search from "@material-ui/icons/Search";
@@ -52,12 +54,23 @@ export default function LandingPage(props) {
       <Parallax className={classes.background}>
         <div className={classes.container}>
           <GridContainer>
-            <GridItem xs={12} sm={12} md={7}>
+            <GridItem xs={12} sm={12} md={8}>
               <h1 className={classes.title}>Create your gigs</h1>
               <h4>
                 Let your customers know about your services. Attract more
                 clients and earn more money.
               </h4>
+              <Button
+                color="black"
+                size="md"
+                href="/createjob-page"
+                //target="_blank"
+                rel="noopener noreferrer"
+                className={classes.button}
+                //block
+              >
+                Create a new gig
+              </Button>
               {/* <Button
                 color="danger"
                 size="lg"

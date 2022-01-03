@@ -16,7 +16,7 @@ import GridItem from "components/Grid/GridItem.js";
 //import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
-import Button from "components/CustomButtons/Button.js";
+//import Button from "components/CustomButtons/Button.js";
 //import CardFooter from "components/Card/CardFooter.js";
 //import Paginations from "components/Pagination/Pagination.js";
 
@@ -157,20 +157,6 @@ export default function GigView() {
               <p className={classes.description}>I can do plumbing well!</p>
             </CardBody>
           </Card>
-        </GridItem>
-      </GridContainer>
-      <GridContainer>
-        <GridItem xs={12} sm={12} md={6} lg={2}>
-          <Button
-            href="/creategig-page"
-            justify="center"
-            color="black"
-            block
-            //onClick={() => setClassicModal(true)}
-            className={classes.btn}
-          >
-            Create a new gig
-          </Button>
         </GridItem>
       </GridContainer>
 
