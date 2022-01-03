@@ -23,6 +23,7 @@ import WorkerDashboard from "views/WorkerDashboard/WorkerDashboard.js";
 import CreateGig from "views/GigsPage/Sections/CreateGig.js";
 import CreateJob from "views/CustomJob/Sections/CreateJob.js";
 import MakePayment from "views/MakePayment/MakePayment.js";
+import Gig from "views/GigsPage/Sections/Gig.js";
 
 var hist = createBrowserHistory();
 
@@ -45,6 +46,7 @@ ReactDOM.render(
       <Route path="/creategig-page" component={CreateGig} />
       <Route path="/createjob-page" component={CreateJob} />
       <Route path="/payment-page" component={MakePayment} />
+      <Route path="/gig" component={Gig} />
       <Route path="/" component={LandingPage} />
     </Switch>
   </Router>,
