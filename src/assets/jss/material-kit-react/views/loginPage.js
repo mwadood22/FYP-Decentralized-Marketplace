@@ -64,6 +64,15 @@ const signupPageStyle = {
     padding: "20px 0",
     marginBottom: "15px",
   },
+  endings: {
+    display: "flex",
+    justifyContent: "center",
+  },
+  new: {
+    margin: "auto 0 auto 0",
+    // marginTop: "auto",
+    // marginBottom: "auto",
+  },
   socialIcons: {
     maxWidth: "24px",
     marginTop: "0",

@@ -94,14 +94,18 @@ const workerPageStyle = {
 
   title: {
     ...title,
-    marginBottom: "1rem",
+    marginBottom: "2rem",
     marginTop: "1px",
     minHeight: "32px",
     textDecoration: "none",
     fontFamily: '"Macan","Helvetica Neue","Helvetica","Arial",sans-serif',
     fontWeight: "700",
     fontSize: "35px",
-    //textAlign: "center",
+    textAlign: "center",
+    background: "linear-gradient(#f5f7fa, #f5f7fa)",
+    borderRadius: "6px",
+    boxShadow:
+      "0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)",
   },
 
   imgClass: {

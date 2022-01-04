@@ -144,10 +144,14 @@ export default function LoginPage(props) {
                   <CardFooter className={classes.cardFooter}>
                     <Button color="black"> Get started</Button>
                   </CardFooter>
-                  Not a member?
-                  <Button simple color="primary" size="lg" href="/signup-page">
-                    Signup now
-                  </Button>
+                  <div className={classes.endings}>
+                    <h4 className={classes.new}>Not a member?</h4>
+                    {/* <h4> */}
+                    <Button simple color="green" size="lg" href="/signup-page">
+                      Signup now
+                    </Button>
+                    {/* </h4> */}
+                  </div>
                 </form>
               </Card>
             </GridItem>

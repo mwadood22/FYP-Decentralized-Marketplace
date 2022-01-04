@@ -221,6 +221,11 @@ const buttonStyle = {
         color: primaryColor,
       },
     },
+    "&$green": {
+      "&,&:focus,&:hover,&:visited": {
+        color: greenColor,
+      },
+    },
     "&$info": {
       "&,&:focus,&:hover,&:visited": {
         color: infoColor,

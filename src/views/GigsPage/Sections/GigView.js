@@ -4,6 +4,7 @@ import classNames from "classnames";
 //import Carousel from "react-slick";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
 
 //import Slider from "react-slick";
 //import Parallax from "components/Parallax/Parallax.js";
@@ -20,7 +21,7 @@ import CardBody from "components/Card/CardBody.js";
 //import CardFooter from "components/Card/CardFooter.js";
 //import Paginations from "components/Pagination/Pagination.js";
 
-import styles from "assets/jss/material-kit-react/views/landingPageSections/teamStyle.js";
+import styles from "assets/jss/material-kit-react/views/landingPageSections/gigViewStyle.js";
 import GridContainer from "components/Grid/GridContainer";
 
 //import team1 from "assets/img/faces/avatar.jpg";
@@ -96,66 +97,80 @@ export default function GigView() {
 
       <GridContainer>
         <GridItem xs={12} sm={12} md={3}>
-          <Card>
-            <img src={gig1} alt="..." className={imageClasses} />
-            <CardBody>
-              <h4 className={classes.cardTitle}>M.Wadood</h4>
-              <p className={classes.description}>I can do plumbing well!</p>
-            </CardBody>
+          <Card className={classes.card}>
+            <Link to="gig">
+              <img src={gig1} alt="..." className={imageClasses} />
+              <CardBody>
+                <h4 className={classes.cardTitle}>M.Wadood</h4>
+                <p className={classes.description}>I can do plumbing well!</p>
+              </CardBody>
+            </Link>
           </Card>
         </GridItem>
         <GridItem xs={12} sm={12} md={3}>
-          <Card carousel>
-            <img src={gig6} alt="..." className={imageClasses} />
-            <CardBody>
-              <h4 className={classes.cardTitle}>M.Wadood</h4>
-              <p className={classes.description}>I can do plumbing well!</p>
-            </CardBody>
+          <Card className={classes.card} carousel>
+            <Link to="gig">
+              <img src={gig6} alt="..." className={imageClasses} />
+              <CardBody>
+                <h4 className={classes.cardTitle}>M.Wadood</h4>
+                <p className={classes.description}>I can do plumbing well!</p>
+              </CardBody>
+            </Link>
           </Card>
         </GridItem>
         <GridItem xs={12} sm={12} md={3}>
-          <Card carousel>
-            <img src={gig3} alt="..." className={imageClasses} />
-            <CardBody>
-              <h4 className={classes.cardTitle}>M.Wadood</h4>
-              <p className={classes.description}>I can do plumbing well!</p>
-            </CardBody>
+          <Card className={classes.card} carousel>
+            <Link to="gig">
+              <img src={gig3} alt="..." className={imageClasses} />
+              <CardBody>
+                <h4 className={classes.cardTitle}>M.Wadood</h4>
+                <p className={classes.description}>I can do plumbing well!</p>
+              </CardBody>
+            </Link>
           </Card>
         </GridItem>
         <GridItem xs={12} sm={12} md={3}>
-          <Card carousel>
-            <img src={gig1} alt="..." className={imageClasses} />
-            <CardBody>
-              <h4 className={classes.cardTitle}>M.Wadood</h4>
-              <p className={classes.description}>I can do plumbing well!</p>
-            </CardBody>
+          <Card className={classes.card} carousel>
+            <Link to="gig">
+              <img src={gig1} alt="..." className={imageClasses} />
+              <CardBody>
+                <h4 className={classes.cardTitle}>M.Wadood</h4>
+                <p className={classes.description}>I can do plumbing well!</p>
+              </CardBody>
+            </Link>
           </Card>
         </GridItem>
         <GridItem xs={12} sm={12} md={3}>
-          <Card carousel>
-            <img src={gig3} alt="..." className={imageClasses} />
-            <CardBody>
-              <h4 className={classes.cardTitle}>M.Wadood</h4>
-              <p className={classes.description}>I can do plumbing well!</p>
-            </CardBody>
+          <Card className={classes.card} carousel>
+            <Link to="gig">
+              <img src={gig3} alt="..." className={imageClasses} />
+              <CardBody>
+                <h4 className={classes.cardTitle}>M.Wadood</h4>
+                <p className={classes.description}>I can do plumbing well!</p>
+              </CardBody>
+            </Link>
           </Card>
         </GridItem>
         <GridItem xs={12} sm={12} md={3}>
-          <Card carousel>
-            <img src={gig6} alt="..." className={imageClasses} />
-            <CardBody>
-              <h4 className={classes.cardTitle}>M.Wadood</h4>
-              <p className={classes.description}>I can do plumbing well!</p>
-            </CardBody>
+          <Card className={classes.card} carousel>
+            <Link to="gig">
+              <img src={gig6} alt="..." className={imageClasses} />
+              <CardBody>
+                <h4 className={classes.cardTitle}>M.Wadood</h4>
+                <p className={classes.description}>I can do plumbing well!</p>
+              </CardBody>
+            </Link>
           </Card>
         </GridItem>
         <GridItem xs={12} sm={12} md={3}>
-          <Card carousel>
-            <img src={gig1} alt="..." className={imageClasses} />
-            <CardBody>
-              <h4 className={classes.cardTitle}>M.Wadood</h4>
-              <p className={classes.description}>I can do plumbing well!</p>
-            </CardBody>
+          <Card className={classes.card} carousel>
+            <Link to="gig">
+              <img src={gig1} alt="..." className={imageClasses} />
+              <CardBody>
+                <h4 className={classes.cardTitle}>M.Wadood</h4>
+                <p className={classes.description}>I can do plumbing well!</p>
+              </CardBody>
+            </Link>
           </Card>
         </GridItem>
       </GridContainer>

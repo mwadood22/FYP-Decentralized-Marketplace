@@ -144,10 +144,14 @@ export default function SignupPage(props) {
                       Get started
                     </Button>
                   </CardFooter>
-                  <p className={classes.divider}>Already have an account?</p>
-                  <Button simple color="primary" size="lg" href="/login-page">
-                    Login
-                  </Button>
+                  <div className={classes.endings}>
+                    <h4 className={classes.new}>Already have an account?</h4>
+                    {/* <h4> */}
+                    <Button simple color="green" size="lg" href="/signup-page">
+                      Login
+                    </Button>
+                    {/* </h4> */}
+                  </div>
                 </form>
               </Card>
             </GridItem>

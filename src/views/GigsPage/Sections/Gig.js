@@ -16,6 +16,8 @@ import HeaderLinks from "components/Header/HeaderLinks.js";
 import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
+import Divider from "@mui/material/Divider";
+
 // import Avatar from "@mui/material/Avatar";
 // import Image from "@mui/material/Image";
 import team2 from "assets/img/faces/christian.jpg";
@@ -43,6 +45,13 @@ import Slider from "react-slick";
 // import TextField from "@mui/material/TextField";
 // import MenuItem from "@mui/material/MenuItem";
 // import Paper from "@mui/material/Paper";
+import gig1 from "assets/img/gigs/gig1.jpg";
+import gig3 from "assets/img/gigs/gig3.jpg";
+import gig6 from "assets/img/gigs/gig6.jpg";
+import Button from "components/CustomButtons/Button.js";
+
+// import Card from "components/Card/Card.js";
+import CardBody from "components/Card/CardBody.js";
 
 import styles from "assets/jss/material-kit-react/views/gig.js";
 
@@ -75,6 +84,8 @@ export default function Gig(props) {
   }, 700);
   const classes = useStyles();
   const { ...rest } = props;
+  const imageClasses1 = classNames(classes.imgCard);
+
   const imageClasses = classNames(
     classes.imgRaised,
     classes.imgRoundedCircle,
@@ -104,7 +115,7 @@ export default function Gig(props) {
       <div className={classes.pageHeader}>
         <div className={classes.container}>
           {/* <Paper elevation={3} style={styles.paperContainer}> */}
-          <GridContainer xs={12} sm={12} md={8}>
+          <GridContainer xs={12} sm={12} md={12}>
             <GridItem xs={12} sm={12} md={12}>
               <Card className={(classes[cardAnimaton], classes.card)}>
                 <form className={classes.form}>
@@ -113,11 +124,9 @@ export default function Gig(props) {
                   </CardHeader> */}
                   {/* <p className={classes.divider}></p> */}
                   <GridContainer>
-                    <GridItem>
-                      <h2>
-                        <strong>Title:</strong> Plumbing
-                      </h2>
-                    </GridItem>
+                    {/* <GridItem>
+                      <h2 className={classes.title}>Title: Plumbing</h2>
+                    </GridItem> */}
 
                     <GridItem md={6}>
                       {/* <div className={classes.content}> */}
@@ -135,7 +144,7 @@ export default function Gig(props) {
                     <GridItem md={6}>
                       <h1>Wadood </h1>
                       <h4>
-                        <i className="fas fa-map-marker">
+                        <i className="fas fa-map-marker-alt">
                           <span className={classes.data}>Lahore</span>
                         </i>
                       </h4>
@@ -151,9 +160,14 @@ export default function Gig(props) {
                           </span>
                         </i>
                       </h4>
+                      <h4>
+                        {" "}
+                        <Button color="black"> Contact ME!</Button>
+                      </h4>
                     </GridItem>
 
                     <GridItem xs={6} sm={6} md={12}>
+                      <h2>Title: Plumbing</h2>
                       <h2>Gig Description</h2>
                       <p>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -171,6 +185,10 @@ export default function Gig(props) {
                         arcu, ac consectetur metus. Nulla blandit eros in
                         aliquet laoreet.
                       </p>
+                      <Divider
+                        sx={{ width: 1020, m: 0.5 }}
+                        orientation="horizontal"
+                      />
                       <h2>About Worker</h2>
                       <p>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -227,6 +245,51 @@ export default function Gig(props) {
                           </div>
                         </div>
                       </Slider>
+                      <h2>Other gigs by this worker</h2>
+                    </GridItem>
+                    <GridItem xs={12} sm={12} md={4}>
+                      <Card carousel>
+                        <img src={gig1} alt="..." className={imageClasses1} />
+                        <CardBody>
+                          <h4 className={classes.cardTitle}>M.Wadood</h4>
+                          <p className={classes.description}>
+                            I can do plumbing well!
+                          </p>
+                        </CardBody>
+                      </Card>
+                    </GridItem>
+                    <GridItem xs={12} sm={12} md={4}>
+                      <Card carousel>
+                        <img src={gig3} alt="..." className={imageClasses1} />
+                        <CardBody>
+                          <h4 className={classes.cardTitle}>M.Wadood</h4>
+                          <p className={classes.description}>
+                            I can do plumbing well!
+                          </p>
+                        </CardBody>
+                      </Card>
+                    </GridItem>
+                    <GridItem xs={12} sm={12} md={4}>
+                      <Card carousel>
+                        <img src={gig6} alt="..." className={imageClasses1} />
+                        <CardBody>
+                          <h4 className={classes.cardTitle}>M.Wadood</h4>
+                          <p className={classes.description}>
+                            I can do plumbing well!
+                          </p>
+                        </CardBody>
+                      </Card>
+                    </GridItem>
+                    <GridItem xs={12} sm={12} md={4}>
+                      <Card carousel>
+                        <img src={gig1} alt="..." className={imageClasses1} />
+                        <CardBody>
+                          <h4 className={classes.cardTitle}>M.Wadood</h4>
+                          <p className={classes.description}>
+                            I can do plumbing well!
+                          </p>
+                        </CardBody>
+                      </Card>
                     </GridItem>
                   </GridContainer>
                 </form>
