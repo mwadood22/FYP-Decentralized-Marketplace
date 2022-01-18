@@ -7,6 +7,7 @@ const profilePageStyle = {
     backgroundColor: "#5E8C5D",
     border: "1px solid #5E8C5D",
     borderRadius: "5px",
+    marginBottom: "20px",
   },
   desc: {
     padding: "5px",

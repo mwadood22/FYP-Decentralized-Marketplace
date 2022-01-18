@@ -116,7 +116,7 @@ const teamStyle = {
     color: "#6c757d",
   },
   description: {
-    marginTop: "20px",
+    marginTop: "0px",
     color: "#999",
     textAlign: "left",
   },

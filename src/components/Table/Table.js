@@ -13,19 +13,20 @@ const columns = [
   { id: "code", label: "Seller", minWidth: 100 },
   { id: "made", label: "Payment Made", minWidth: 170 },
   { id: "received", label: "Paymemnt Received", minWidth: 100 },
+  { id: "status", label: "Status", minWidth: 100 },
 ];
 
-function createData(name, code, made, received) {
+function createData(name, code, made, received, status) {
   //const density = population / size;
-  return { name, code, made, received };
+  return { name, code, made, received, status };
 }
 
 const rows = [
-  createData("Aropj", "Wadood", "12345", "245656"),
-  createData("Arooj", "Wadood", "12345", "245656"),
-  createData("Arooj", "Wadood", "12345", "245656"),
-  createData("Arooj", "Wadood", "12345", "245656"),
-  createData("Arooj", "Wadood", "12345", "245656"),
+  createData("Arooj", "Wadood", "12345", "245656", "processing"),
+  createData("Huzaifa", "Wadood", "12345", "245656", "complete"),
+  createData("Musa", "Huzaifa", "12345", "245656", "cancelled"),
+  createData("Arooj", "Musa", "12345", "245656", "complete"),
+  createData("Wadood", "Huzaifa", "12345", "245656", "complete"),
 ];
 
 export default function StickyHeadTable() {

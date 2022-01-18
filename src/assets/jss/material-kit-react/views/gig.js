@@ -73,15 +73,22 @@ const workerPageStyle = {
   },
   ...imagesStyles,
   name: {
-    marginLeft: "80px",
-    fontSize: "20px",
+    //marginLeft: "80px",
+    fontSize: "50px",
+    fontFamily: '"Macan","Helvetica Neue","Helvetica","Arial",sans-serif',
+    fontWeight: "500",
+    //fontSize: "30px",
     // marginTop: "100px",
   },
   content: {
     display: "flex",
   },
+  head: {
+    paddingTop: "30px",
+  },
   card: {
-    background: "radial-gradient(ellipse at center,#bbdbbe 0,#deebdd 100%)",
+    //background: "radial-gradient(ellipse at center,#bbdbbe 0,#deebdd 100%)",
+    backgroundColor: "#f7f9fd",
 
     padding: "20px",
   },
@@ -125,7 +132,7 @@ const workerPageStyle = {
     ...container,
     zIndex: "2",
     position: "relative",
-    paddingTop: "20vh",
+    paddingTop: "15vh",
     color: "#FFFFFF",
     paddingBottom: "100px",
   },

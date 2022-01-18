@@ -70,6 +70,8 @@ const signupPageStyle = {
   },
   new: {
     margin: "auto 0 auto 0",
+    fontSize: "15px",
+
     // marginTop: "auto",
     // marginBottom: "auto",
   },

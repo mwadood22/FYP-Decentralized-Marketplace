@@ -48,6 +48,9 @@ import People from "@material-ui/icons/People";
 import Schedule from "@material-ui/icons/Schedule";
 import Edit from "@material-ui/icons/Edit";
 import Person from "@material-ui/icons/Person";
+import HomeOutlined from "@material-ui/icons/Home";
+import City from "@material-ui/icons/LocationCity";
+
 // import BuildIcon from "@mui/icons-material/Build";
 // import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
 // import Payment from "@material-ui/icons/Payment";
@@ -110,13 +113,17 @@ export default function ProfilePage(props) {
                   }}
                   tabs={[
                     {
-                      tabButton: "Profile",
+                      tabButton: "Details",
                       tabIcon: Person,
                       tabContent: (
                         <div className={classes.profilePill}>
                           <i className="fas fa-envelope"></i>
                           <b className={classes.desc}>Email</b>
                           <p>wadood@gmail.com</p>
+                          <hr className={classes.hr} />
+                          <i className="fas fa-lock"></i>
+                          <b className={classes.desc}>Password</b>
+                          <p>1234567$abc</p>
                           <hr className={classes.hr} />
                           <i className="fas fa-home"></i>
                           <b className={classes.desc}>Address</b>
@@ -127,12 +134,15 @@ export default function ProfilePage(props) {
                           <p>Islamabad</p>
                           <hr className={classes.hr} />
                           <i className="fas fa-file-alt"></i>
-                          <b className={classes.desc}>Description</b>
+                          <b className={classes.desc}>About Me</b>
                           <p>
-                            ckjhwkvwhevhwejkve cewjchewucv jewcbejkbcjnwejc
-                            kjcnwjkne ckjhwkvwhevhwejkve cewjchewucv
-                            jewcbejkbcjnwejc kjcnwjkne ckjhwkvwhevhwejkve
-                            cewjchewucv jewcbejkbcjnwejc kjcnwjkne
+                            I am in between work and I have numerous viable
+                            skills that I believe can be utilized in the open
+                            market place. I am a go getter and one who is not
+                            shy to work. If you are looking for someone who
+                            enjoys helping others than I am your man. I am in
+                            between work and I have numerous viable skills that
+                            I believe can be utilized in the open market place.
                           </p>
                           <hr className={classes.hr} />
                         </div>
@@ -211,6 +221,63 @@ export default function ProfilePage(props) {
                                       <Icon className={classes.inputIconsColor}>
                                         lock_outline
                                       </Icon>
+                                    </InputAdornment>
+                                  ),
+                                  autoComplete: "on",
+                                }}
+                              />
+
+                              <CustomInput
+                                labelText="Edit Address"
+                                id="password"
+                                formControlProps={{
+                                  fullWidth: true,
+                                }}
+                                inputProps={{
+                                  type: "password",
+                                  endAdornment: (
+                                    <InputAdornment position="end">
+                                      <HomeOutlined
+                                        className={classes.inputIconsColor}
+                                      />
+                                    </InputAdornment>
+                                  ),
+                                  autoComplete: "on",
+                                }}
+                              />
+
+                              <CustomInput
+                                labelText="Edit City"
+                                id="password"
+                                formControlProps={{
+                                  fullWidth: true,
+                                }}
+                                inputProps={{
+                                  type: "password",
+                                  endAdornment: (
+                                    <InputAdornment position="end">
+                                      <City
+                                        className={classes.inputIconsColor}
+                                      />
+                                    </InputAdornment>
+                                  ),
+                                  autoComplete: "on",
+                                }}
+                              />
+
+                              <CustomInput
+                                labelText="Edit About Me"
+                                id="password"
+                                formControlProps={{
+                                  fullWidth: true,
+                                }}
+                                inputProps={{
+                                  type: "password",
+                                  endAdornment: (
+                                    <InputAdornment position="end">
+                                      <People
+                                        className={classes.inputIconsColor}
+                                      />
                                     </InputAdornment>
                                   ),
                                   autoComplete: "on",

@@ -13,6 +13,7 @@ import Carousel from "react-slick";
 import image1 from "assets/img/TopCarousel/car1.jpg";
 import image2 from "assets/img/TopCarousel/car2.jpg";
 import image3 from "assets/img/TopCarousel/car3.jpg";
+
 //import image2 from "assets/img/bg2.jpg";
 //import image3 from "assets/img/bg3.jpg";
 

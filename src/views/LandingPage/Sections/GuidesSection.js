@@ -24,7 +24,7 @@ import styles from "assets/jss/material-kit-react/views/landingPageSections/guid
 import GridContainer from "components/Grid/GridContainer";
 
 //import team1 from "assets/img/faces/avatar.jpg";
-import guide1 from "assets/img/guide1.jpg";
+import guide1 from "assets/img/gig1.jpg";
 import guide2 from "assets/img/guide2.jpg";
 //import { Link } from "react-router-dom";
 //import team3 from "assets/img/faces/kendall.jpg";

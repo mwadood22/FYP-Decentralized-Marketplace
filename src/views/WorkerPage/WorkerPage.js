@@ -212,7 +212,7 @@ export default function WorkerPage(props) {
                     </GridItem>
 
                     <GridItem>
-                      <Button color="black" href="/dashboard-page">
+                      <Button color="black" href="/landing-page">
                         Get started
                       </Button>
                     </GridItem>

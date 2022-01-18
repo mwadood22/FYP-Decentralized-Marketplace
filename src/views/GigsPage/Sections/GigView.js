@@ -102,7 +102,9 @@ export default function GigView() {
               <img src={gig1} alt="..." className={imageClasses} />
               <CardBody>
                 <h4 className={classes.cardTitle}>M.Wadood</h4>
-                <p className={classes.description}>I can do plumbing well!</p>
+                <p className={classes.description}>
+                  I am your ultimate handyman when it comes to home repairs.
+                </p>
               </CardBody>
             </Link>
           </Card>
@@ -112,8 +114,40 @@ export default function GigView() {
             <Link to="gig">
               <img src={gig6} alt="..." className={imageClasses} />
               <CardBody>
-                <h4 className={classes.cardTitle}>M.Wadood</h4>
-                <p className={classes.description}>I can do plumbing well!</p>
+                <h4 className={classes.cardTitle}>AbdulRehman Huzaifa</h4>
+                <p className={classes.description}>
+                  I can do brakes, oil change, tune up love what I do.I can do
+                  oil change.
+                </p>
+              </CardBody>
+            </Link>
+          </Card>
+        </GridItem>
+        <GridItem xs={12} sm={12} md={3}>
+          <Card className={classes.card} carousel>
+            <Link to="gig">
+              <img src={gig3} alt="..." className={imageClasses} />
+              <CardBody>
+                <h4 className={classes.cardTitle}>M.Musa</h4>
+                <p className={classes.description}>
+                  {" "}
+                  I paint, can help a full renovation, and installing devices is
+                  a breeze.
+                </p>
+              </CardBody>
+            </Link>
+          </Card>
+        </GridItem>
+        <GridItem xs={12} sm={12} md={3}>
+          <Card className={classes.card} carousel>
+            <Link to="gig">
+              <img src={gig1} alt="..." className={imageClasses} />
+              <CardBody>
+                <h4 className={classes.cardTitle}>AbdulRehman Huzaifa</h4>
+                <p className={classes.description}>
+                  I can do brakes, oil change, tune up love what I do.I can do
+                  oil change.
+                </p>
               </CardBody>
             </Link>
           </Card>
@@ -124,29 +158,9 @@ export default function GigView() {
               <img src={gig3} alt="..." className={imageClasses} />
               <CardBody>
                 <h4 className={classes.cardTitle}>M.Wadood</h4>
-                <p className={classes.description}>I can do plumbing well!</p>
-              </CardBody>
-            </Link>
-          </Card>
-        </GridItem>
-        <GridItem xs={12} sm={12} md={3}>
-          <Card className={classes.card} carousel>
-            <Link to="gig">
-              <img src={gig1} alt="..." className={imageClasses} />
-              <CardBody>
-                <h4 className={classes.cardTitle}>M.Wadood</h4>
-                <p className={classes.description}>I can do plumbing well!</p>
-              </CardBody>
-            </Link>
-          </Card>
-        </GridItem>
-        <GridItem xs={12} sm={12} md={3}>
-          <Card className={classes.card} carousel>
-            <Link to="gig">
-              <img src={gig3} alt="..." className={imageClasses} />
-              <CardBody>
-                <h4 className={classes.cardTitle}>M.Wadood</h4>
-                <p className={classes.description}>I can do plumbing well!</p>
+                <p className={classes.description}>
+                  I am your ultimate handyman when it comes to home repairs.
+                </p>
               </CardBody>
             </Link>
           </Card>
@@ -157,7 +171,10 @@ export default function GigView() {
               <img src={gig6} alt="..." className={imageClasses} />
               <CardBody>
                 <h4 className={classes.cardTitle}>M.Wadood</h4>
-                <p className={classes.description}>I can do plumbing well!</p>
+                <p className={classes.description}>
+                  I paint, can help a full renovation, and installing devices is
+                  a breeze.
+                </p>
               </CardBody>
             </Link>
           </Card>
@@ -167,8 +184,12 @@ export default function GigView() {
             <Link to="gig">
               <img src={gig1} alt="..." className={imageClasses} />
               <CardBody>
-                <h4 className={classes.cardTitle}>M.Wadood</h4>
-                <p className={classes.description}>I can do plumbing well!</p>
+                <h4 className={classes.cardTitle}>M.Musa</h4>
+                <p className={classes.description}>
+                  {" "}
+                  I paint, can help a full renovation, and installing devices is
+                  a breeze.
+                </p>
               </CardBody>
             </Link>
           </Card>

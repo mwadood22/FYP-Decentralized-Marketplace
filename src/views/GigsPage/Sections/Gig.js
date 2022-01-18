@@ -20,7 +20,8 @@ import Divider from "@mui/material/Divider";
 
 // import Avatar from "@mui/material/Avatar";
 // import Image from "@mui/material/Image";
-import team2 from "assets/img/faces/christian.jpg";
+import team2 from "assets/img/faces/face5.jpg";
+import team3 from "assets/img/faces/face6.jpg";
 
 // import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
@@ -142,7 +143,7 @@ export default function Gig(props) {
                       {/* </div> */}
                     </GridItem>
                     <GridItem md={6}>
-                      <h1>Wadood </h1>
+                      <h1 className={classes.name}>M.Wadood </h1>
                       <h4>
                         <i className="fas fa-map-marker-alt">
                           <span className={classes.data}>Lahore</span>
@@ -162,51 +163,61 @@ export default function Gig(props) {
                       </h4>
                       <h4>
                         {" "}
-                        <Button color="black"> Contact ME!</Button>
+                        <Button color="green"> Contact ME!</Button>
+                        {"  "}
+                        <Button color="green" href="/payment-page">
+                          {" "}
+                          Make Payment
+                        </Button>
                       </h4>
                     </GridItem>
 
                     <GridItem xs={6} sm={6} md={12}>
-                      <h2>Title: Plumbing</h2>
-                      <h2>Gig Description</h2>
+                      {/*<h3>
+                        <strong>Title: Plumbing</strong>
+                      </h3>*/}
+                      <h3 className={classes.head}>
+                        <strong>Gig Description</strong>
+                      </h3>
                       <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Donec suscipit porta ante. Phasellus porttitor, massa
-                        volutpat ullamcorper finibus, magna est aliquam erat,
-                        quis commodo eros odio in mi. Cras malesuada mollis
-                        interdum. Donec eget est neque. Nullam mattis laoreet
-                        tincidunt. Etiam non arcu et quam imperdiet rutrum. In
-                        dignissim efficitur ante et viverra. Fusce ac nisl id
-                        massa fringilla porta. Aenean fermentum tortor a
-                        vehicula pretium. Integer bibendum enim sed diam
-                        facilisis suscipit. Maecenas finibus augue at lorem
-                        pellentesque fermentum. Maecenas at varius diam. Duis
-                        rhoncus lorem quis tincidunt vulputate. Sed eu elementum
-                        arcu, ac consectetur metus. Nulla blandit eros in
-                        aliquet laoreet.
+                        I have 1.5 years apprenticeship experience in Low volt.
+                        I paint, can help a full renovation, and installing
+                        devices is a breeze. 2 hour minimum. Anything over 30
+                        min will be $15 invoice for gas. Same Day price subject
+                        to change.I have 1.5 years apprenticeship experience in
+                        Low volt. I paint, can help a full renovation, and
+                        installing devices is a breeze. 2 hour minimum. Anything
+                        over 30 min will be $15 invoice for gas. Same Day price
+                        subject to change.I have 1.5 years apprenticeship
+                        experience in Low volt. I paint, can help a full
+                        renovation, and installing devices is a breeze. 2 hour
+                        minimum. Anything over 30 min will be $15 invoice for
+                        gas. Same Day price subject to change.
                       </p>
                       <Divider
                         sx={{ width: 1020, m: 0.5 }}
                         orientation="horizontal"
                       />
-                      <h2>About Worker</h2>
+                      <h3 className={classes.head}>
+                        <strong>About Worker</strong>
+                      </h3>
                       <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Donec suscipit porta ante. Phasellus porttitor, massa
-                        volutpat ullamcorper finibus, magna est aliquam erat,
-                        quis commodo eros odio in mi. Cras malesuada mollis
-                        interdum. Donec eget est neque. Nullam mattis laoreet
-                        tincidunt. Etiam non arcu et quam imperdiet rutrum. In
-                        dignissim efficitur ante et viverra. Fusce ac nisl id
-                        massa fringilla porta. Aenean fermentum tortor a
-                        vehicula pretium. Integer bibendum enim sed diam
-                        facilisis suscipit. Maecenas finibus augue at lorem
-                        pellentesque fermentum. Maecenas at varius diam. Duis
-                        rhoncus lorem quis tincidunt vulputate. Sed eu elementum
-                        arcu, ac consectetur metus. Nulla blandit eros in
-                        aliquet laoreet.
+                        I enjoy solving problem and finishing what I start. I
+                        approach every task with enthusiasm and and look to
+                        exceed client expectationsI enjoy solving problem and
+                        finishing what I start. I approach every task with
+                        enthusiasm and and look to exceed client expectations.I
+                        enjoy solving problem and finishing what I start. I
+                        approach every task with enthusiasm and and look to
+                        exceed client expectations.I approach every task with
+                        enthusiasm and and look to exceed client expectations.I
+                        enjoy solving problem and finishing what I start.
                       </p>
-                      <h3>Worker reviews</h3>
+
+                      <h3 className={classes.head}>
+                        <strong>Worker Reviews </strong>
+                      </h3>
+                      <br></br>
                       <Slider className={classes.reviews} {...settings}>
                         <div className={classes.sliderContent}>
                           <div className={classes.sliderImg}>
@@ -218,10 +229,10 @@ export default function Gig(props) {
                           </div>
                           <div className={classes.sliderText}>
                             <p className={classes.p}>
-                              Lorem ipsum dolor sit amet, consectetur adipiscing
-                              elit. Donec suscipit porta ante. Phasellus
-                              porttitor, massa volutpat ullamcorper finibus,
-                              magna est aliquam erat, quis commodo eros odio in.
+                              “Very professional. Made sure the job was
+                              completed, even though it went well over my
+                              estimate. Also made suggestions to make things
+                              easier down the line. Would recommend highly.”
                             </p>
                             <p className={classes.p1}>M.Wadood</p>
                           </div>
@@ -230,22 +241,23 @@ export default function Gig(props) {
                           <div className={classes.sliderImg}>
                             <img
                               alt="Travis Howard"
-                              src={team2}
+                              src={team3}
                               className={classes.imgFluid}
                             />
                           </div>
                           <div className={classes.sliderText}>
                             <p className={classes.p}>
-                              Lorem ipsum dolor sit amet, consectetur adipiscing
-                              elit. Donec suscipit porta ante. Phasellus
-                              porttitor, massa volutpat ullamcorper finibus,
-                              magna est aliquam erat, quis commodo eros odio in.
+                              “Had the best experience possible. Did anything to
+                              get the job done and can’t thank him enough.”
                             </p>
                             <p className={classes.p1}>M.Wadood</p>
                           </div>
                         </div>
                       </Slider>
-                      <h2>Other gigs by this worker</h2>
+                      <br></br>
+                      <h3 className={classes.head}>
+                        <strong>Other gigs by this worker</strong>
+                      </h3>
                     </GridItem>
                     <GridItem xs={12} sm={12} md={4}>
                       <Card carousel>
@@ -253,7 +265,8 @@ export default function Gig(props) {
                         <CardBody>
                           <h4 className={classes.cardTitle}>M.Wadood</h4>
                           <p className={classes.description}>
-                            I can do plumbing well!
+                            I can bend pipes pretty well, running wire and
+                            installing devices is a breeze.
                           </p>
                         </CardBody>
                       </Card>
@@ -264,7 +277,8 @@ export default function Gig(props) {
                         <CardBody>
                           <h4 className={classes.cardTitle}>M.Wadood</h4>
                           <p className={classes.description}>
-                            I can do plumbing well!
+                            I Will get the truck and all moving supplies added
+                            on the invoice.
                           </p>
                         </CardBody>
                       </Card>
@@ -275,18 +289,20 @@ export default function Gig(props) {
                         <CardBody>
                           <h4 className={classes.cardTitle}>M.Wadood</h4>
                           <p className={classes.description}>
-                            I can do plumbing well!
+                            I have experience in low volt electrical and home
+                            renovations.
                           </p>
                         </CardBody>
                       </Card>
                     </GridItem>
                     <GridItem xs={12} sm={12} md={4}>
                       <Card carousel>
-                        <img src={gig1} alt="..." className={imageClasses1} />
+                        <img src={gig3} alt="..." className={imageClasses1} />
                         <CardBody>
                           <h4 className={classes.cardTitle}>M.Wadood</h4>
                           <p className={classes.description}>
-                            I can do plumbing well!
+                            I Will get the truck and all moving supplies added
+                            on the invoice.
                           </p>
                         </CardBody>
                       </Card>
@@ -298,7 +314,7 @@ export default function Gig(props) {
           </GridContainer>
           {/* </Paper> */}
         </div>
-        <Footer whiteFont />
+        <Footer />
       </div>
     </div>
   );

@@ -185,7 +185,7 @@ export default function FindJobs(props) {
                         onClick={handleClick}
                       >
                         <i className="fas fa-dollar-sign" />
-                        Bid
+                        Make Bid
                       </Button>
                       <Snackbar
                         open={open}
@@ -200,17 +200,6 @@ export default function FindJobs(props) {
                           Bid placed successfully!
                         </Alert>
                       </Snackbar>
-                      <Button
-                        color="green"
-                        size="md"
-                        href="/signup-page"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={classes.jobBtn}
-                      >
-                        <i className="fas fa-eye" />
-                        View Job
-                      </Button>
                     </React.Fragment>
                   }
                 />
@@ -248,9 +237,18 @@ export default function FindJobs(props) {
                         className={classes.heading}
                         color="text.primary"
                       >
-                        to Scott, Alex, Jennifer
+                        Ali Connors
                       </Typography>
-                      {" — Wish I could come, but I'm out of town this…"}
+                      Ill be in your neighborhood doing errands this… Ill be in
+                      your neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
                       <br /> <br />
                       <strong>Max bid: $45</strong>
                       <Divider
@@ -277,7 +275,7 @@ export default function FindJobs(props) {
                         onClick={handleClick}
                       >
                         <i className="fas fa-dollar-sign" />
-                        Bid
+                        Make Bid
                       </Button>
                       {/* <Snackbar
                         open={open}
@@ -292,17 +290,6 @@ export default function FindJobs(props) {
                           Bid placed successfully!
                         </Alert>
                       </Snackbar> */}
-                      <Button
-                        color="green"
-                        size="md"
-                        href="/signup-page"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={classes.jobBtn}
-                      >
-                        <i className="fas fa-eye" />
-                        View Job
-                      </Button>
                     </React.Fragment>
                   }
                 />
@@ -328,9 +315,18 @@ export default function FindJobs(props) {
                         className={classes.heading}
                         color="text.primary"
                       >
-                        Sandra Adams
+                        Ali Connors
                       </Typography>
-                      {" — Do you have Paris recommendations? Have you ever…"}
+                      Ill be in your neighborhood doing errands this… Ill be in
+                      your neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
                       <br /> <br />
                       <strong>Max bid: $45</strong>
                       <Divider
@@ -357,7 +353,7 @@ export default function FindJobs(props) {
                         onClick={handleClick}
                       >
                         <i className="fas fa-dollar-sign" />
-                        Bid
+                        Make Bid
                       </Button>
                       {/* <Snackbar
                         open={open}
@@ -372,17 +368,6 @@ export default function FindJobs(props) {
                           Bid placed successfully!
                         </Alert>
                       </Snackbar> */}
-                      <Button
-                        color="green"
-                        size="md"
-                        href="/signup-page"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={classes.jobBtn}
-                      >
-                        <i className="fas fa-eye" />
-                        View Job
-                      </Button>
                     </React.Fragment>
                   }
                 />
@@ -410,7 +395,16 @@ export default function FindJobs(props) {
                       >
                         Ali Connors
                       </Typography>
-                      {"I'll be in your neighborhood doing errands this…"}
+                      Ill be in your neighborhood doing errands this… Ill be in
+                      your neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
                       <br /> <br />
                       <strong>Max bid: $45</strong>
                       <Divider
@@ -437,7 +431,7 @@ export default function FindJobs(props) {
                         onClick={handleClick}
                       >
                         <i className="fas fa-dollar-sign" />
-                        Bid
+                        Make Bid
                       </Button>
                       {/* <Snackbar
                         open={open}
@@ -452,17 +446,6 @@ export default function FindJobs(props) {
                           Bid placed successfully!
                         </Alert>
                       </Snackbar> */}
-                      <Button
-                        color="green"
-                        size="md"
-                        href="/signup-page"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={classes.jobBtn}
-                      >
-                        <i className="fas fa-eye" />
-                        View Job
-                      </Button>
                     </React.Fragment>
                   }
                 />
@@ -488,9 +471,18 @@ export default function FindJobs(props) {
                         className={classes.heading}
                         color="text.primary"
                       >
-                        to Scott, Alex, Jennifer
+                        Ali Connors
                       </Typography>
-                      {" — Wish I could come, but I'm out of town this…"}
+                      Ill be in your neighborhood doing errands this… Ill be in
+                      your neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
                       <br /> <br />
                       <strong>Max bid: $45</strong>
                       <Divider
@@ -517,7 +509,7 @@ export default function FindJobs(props) {
                         onClick={handleClick}
                       >
                         <i className="fas fa-dollar-sign" />
-                        Bid
+                        Make Bid
                       </Button>
                       {/* <Snackbar
                         open={open}
@@ -532,17 +524,6 @@ export default function FindJobs(props) {
                           Bid placed successfully!
                         </Alert>
                       </Snackbar> */}
-                      <Button
-                        color="green"
-                        size="md"
-                        href="/signup-page"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={classes.jobBtn}
-                      >
-                        <i className="fas fa-eye" />
-                        View Job
-                      </Button>
                     </React.Fragment>
                   }
                 />
@@ -568,9 +549,18 @@ export default function FindJobs(props) {
                         className={classes.heading}
                         color="text.primary"
                       >
-                        Sandra Adams
+                        Ali Connors
                       </Typography>
-                      {" — Do you have Paris recommendations? Have you ever…"}
+                      Ill be in your neighborhood doing errands this… Ill be in
+                      your neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
+                      neighborhood doing errands this… Ill be in your
                       <br /> <br />
                       <strong>Max bid: $45</strong>
                       <Divider
@@ -612,17 +602,6 @@ export default function FindJobs(props) {
                           Bid placed successfully!
                         </Alert>
                       </Snackbar> */}
-                      <Button
-                        color="green"
-                        size="md"
-                        href="/signup-page"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={classes.jobBtn}
-                      >
-                        <i className="fas fa-eye" />
-                        View Job
-                      </Button>
                     </React.Fragment>
                   }
                 />

@@ -91,7 +91,7 @@ export default function SignupPage(props) {
                   <CardBody>
                     <CustomInput
                       //className={classes.inlineBlock}
-                      labelText="First Name"
+                      labelText="User Name"
                       id="first"
                       formControlProps={{
                         fullWidth: true,
@@ -105,6 +105,7 @@ export default function SignupPage(props) {
                         ),
                       }}
                     />
+
                     <CustomInput
                       labelText="Email"
                       id="email"
@@ -147,7 +148,7 @@ export default function SignupPage(props) {
                   <div className={classes.endings}>
                     <h4 className={classes.new}>Already have an account?</h4>
                     {/* <h4> */}
-                    <Button simple color="green" size="lg" href="/signup-page">
+                    <Button simple color="green" size="lg" href="/login-page">
                       Login
                     </Button>
                     {/* </h4> */}
