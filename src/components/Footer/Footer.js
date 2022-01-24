@@ -31,7 +31,7 @@ export default function Footer(props) {
       <div className={classes.container}>
         <div className={classes.left}>
           <List className={classes.list}>
-            <ListItem className={classes.inlineBlock}>
+            {/* <ListItem className={classes.inlineBlock}>
               <a
                 href="https://www.creative-tim.com/?ref=mkr-footer"
                 className={classes.block}
@@ -66,7 +66,7 @@ export default function Footer(props) {
               >
                 Licenses
               </a>
-            </ListItem>
+            </ListItem> */}
             <ListItem className={classes.inlineBlock}>
               <a href="/contact-page" className={classes.block}>
                 Contact us
@@ -74,8 +74,25 @@ export default function Footer(props) {
             </ListItem>
           </List>
         </div>
-        {/* <div className={classes.right}>
-          &copy; {1900 + new Date().getYear()} , made with{" "}
+        <div className={classes.right}>
+          <List className={classes.list}>
+            <ListItem className={classes.inlineBlock}>
+              <div className={classes.block}>
+                <i className="fab fa-facebook" />
+              </div>
+            </ListItem>
+            <ListItem className={classes.inlineBlock}>
+              <div className={classes.block}>
+                <i className="fab fa-instagram" />
+              </div>{" "}
+            </ListItem>
+            <ListItem className={classes.inlineBlock}>
+              <div className={classes.block}>
+                <i className="fab fa-twitter" />
+              </div>{" "}
+            </ListItem>
+          </List>
+          {/* &copy; {1900 + new Date().getYear()} , made with{" "}
           <Favorite className={classes.icon} /> by{" "}
           <a
             href="https://www.creative-tim.com?ref=mkr-footer"
@@ -84,8 +101,8 @@ export default function Footer(props) {
           >
             Creative Tim
           </a>{" "}
-          for a better web.
-        </div> */}
+          for a better web. */}
+        </div>
       </div>
     </footer>
   );
