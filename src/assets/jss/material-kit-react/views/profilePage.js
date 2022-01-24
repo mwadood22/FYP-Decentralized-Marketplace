@@ -17,6 +17,14 @@ const profilePageStyle = {
     margin: "auto",
     marginTop: "60px",
   },
+  jobCard: {
+    display: "inline",
+    // border: "1.5px gray",
+    // borderStyle: "solid",
+    // borderRadius: "3px",
+    // margin: "10px 5px",
+    padding: "20px",
+  },
   contentContainer: {
     width: "700px",
     margin: "auto",

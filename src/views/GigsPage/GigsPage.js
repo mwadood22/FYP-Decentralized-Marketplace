@@ -13,7 +13,7 @@ import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 //import Button from "components/CustomButtons/Button.js";
-import HeaderLinks from "components/Header/HeaderLinks.js";
+import WorkerHeaderLinks from "components/Header/WorkerHeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
 import Button from "components/CustomButtons/Button.js";
 
@@ -43,7 +43,7 @@ export default function LandingPage(props) {
         color="transparent"
         routes={dashboardRoutes}
         brand="MARKAZ"
-        rightLinks={<HeaderLinks />}
+        rightLinks={<WorkerHeaderLinks />}
         fixed
         changeColorOnScroll={{
           height: 100,
@@ -63,7 +63,7 @@ export default function LandingPage(props) {
               <Button
                 color="black"
                 size="md"
-                href="/createjob-page"
+                href="/creategig-page"
                 //target="_blank"
                 rel="noopener noreferrer"
                 className={classes.button}

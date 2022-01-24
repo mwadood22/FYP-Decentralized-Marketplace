@@ -17,6 +17,7 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 //import CardFooter from "components/Card/CardFooter.js";
 import Paginations from "components/Pagination/Pagination.js";
+import { Link } from "react-router-dom";
 
 import styles from "assets/jss/material-kit-react/views/landingPageSections/teamStyle.js";
 import GridContainer from "components/Grid/GridContainer";
@@ -212,29 +213,35 @@ export default function ServicesView() {
       <GridContainer>
         <GridItem xs={12} sm={12} md={3}>
           <Card carousel>
-            <img src={team2} alt="..." className={imageClasses} />
-            <CardBody>
-              <h4 className={classes.cardTitle}>M.Wadood</h4>
-              <p className={classes.description}>I can do plumbing well!</p>
-            </CardBody>
+            <Link to="gig">
+              <img src={team2} alt="..." className={imageClasses} />
+              <CardBody>
+                <h4 className={classes.cardTitle}>M.Wadood</h4>
+                <p className={classes.description}>I can do plumbing well!</p>
+              </CardBody>
+            </Link>
           </Card>
         </GridItem>
         <GridItem xs={12} sm={12} md={3}>
           <Card carousel>
-            <img src={team2} alt="..." className={imageClasses} />
-            <CardBody>
-              <h4 className={classes.cardTitle}>M.Wadood</h4>
-              <p className={classes.description}>I can do plumbing well!</p>
-            </CardBody>
+            <Link to="gig">
+              <img src={team2} alt="..." className={imageClasses} />
+              <CardBody>
+                <h4 className={classes.cardTitle}>M.Wadood</h4>
+                <p className={classes.description}>I can do plumbing well!</p>
+              </CardBody>
+            </Link>
           </Card>
         </GridItem>
         <GridItem xs={12} sm={12} md={3}>
           <Card carousel>
-            <img src={team2} alt="..." className={imageClasses} />
-            <CardBody>
-              <h4 className={classes.cardTitle}>M.Wadood</h4>
-              <p className={classes.description}>I can do plumbing well!</p>
-            </CardBody>
+            <Link to="gig">
+              <img src={team2} alt="..." className={imageClasses} />
+              <CardBody>
+                <h4 className={classes.cardTitle}>M.Wadood</h4>
+                <p className={classes.description}>I can do plumbing well!</p>
+              </CardBody>
+            </Link>
             {/* <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
               <img src={team2} alt="..." className={imageClasses} />
             </GridItem>
@@ -256,29 +263,35 @@ export default function ServicesView() {
         </GridItem>
         <GridItem xs={12} sm={12} md={3}>
           <Card carousel>
-            <img src={team2} alt="..." className={imageClasses} />
-            <CardBody>
-              <h4 className={classes.cardTitle}>M.Wadood</h4>
-              <p className={classes.description}>I can do plumbing well!</p>
-            </CardBody>
+            <Link to="gig">
+              <img src={team2} alt="..." className={imageClasses} />
+              <CardBody>
+                <h4 className={classes.cardTitle}>M.Wadood</h4>
+                <p className={classes.description}>I can do plumbing well!</p>
+              </CardBody>
+            </Link>
           </Card>
         </GridItem>
         <GridItem xs={12} sm={12} md={3}>
           <Card carousel>
-            <img src={team2} alt="..." className={imageClasses} />
-            <CardBody>
-              <h4 className={classes.cardTitle}>M.Wadood</h4>
-              <p className={classes.description}>I can do plumbing well!</p>
-            </CardBody>
+            <Link to="gig">
+              <img src={team2} alt="..." className={imageClasses} />
+              <CardBody>
+                <h4 className={classes.cardTitle}>M.Wadood</h4>
+                <p className={classes.description}>I can do plumbing well!</p>
+              </CardBody>
+            </Link>
           </Card>
         </GridItem>
         <GridItem xs={12} sm={12} md={3}>
           <Card carousel>
-            <img src={team2} alt="..." className={imageClasses} />
-            <CardBody>
-              <h4 className={classes.cardTitle}>M.Wadood</h4>
-              <p className={classes.description}>I can do plumbing well!</p>
-            </CardBody>
+            <Link to="gig">
+              <img src={team2} alt="..." className={imageClasses} />
+              <CardBody>
+                <h4 className={classes.cardTitle}>M.Wadood</h4>
+                <p className={classes.description}>I can do plumbing well!</p>
+              </CardBody>
+            </Link>
           </Card>
         </GridItem>
       </GridContainer>

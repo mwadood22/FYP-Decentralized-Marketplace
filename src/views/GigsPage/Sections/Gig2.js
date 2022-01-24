@@ -285,24 +285,7 @@ export default function Gig(props) {
                       {/*<h3>
                         <strong>Title: Plumbing</strong>
                       </h3>*/}
-                      <h3 className={classes.head}>
-                        <strong>Gig Description</strong>
-                      </h3>
-                      <p>
-                        I have 1.5 years apprenticeship experience in Low volt.
-                        I paint, can help a full renovation, and installing
-                        devices is a breeze. 2 hour minimum. Anything over 30
-                        min will be $15 invoice for gas. Same Day price subject
-                        to change.I have 1.5 years apprenticeship experience in
-                        Low volt. I paint, can help a full renovation, and
-                        installing devices is a breeze. 2 hour minimum. Anything
-                        over 30 min will be $15 invoice for gas. Same Day price
-                        subject to change.I have 1.5 years apprenticeship
-                        experience in Low volt. I paint, can help a full
-                        renovation, and installing devices is a breeze. 2 hour
-                        minimum. Anything over 30 min will be $15 invoice for
-                        gas. Same Day price subject to change.
-                      </p>
+
                       <Divider
                         sx={{ width: 1020, m: 0.5 }}
                         orientation="horizontal"
@@ -320,7 +303,14 @@ export default function Gig(props) {
                         approach every task with enthusiasm and and look to
                         exceed client expectations.I approach every task with
                         enthusiasm and and look to exceed client expectations.I
-                        enjoy solving problem and finishing what I start.
+                        enjoy solving problem and finishing what I start.I
+                        approach every task with enthusiasm and and look to
+                        exceed client expectations.I enjoy solving problem and
+                        finishing what I start. I approach every task with
+                        enthusiasm and and look to exceed client expectations.I
+                        approach every task with enthusiasm and and look to
+                        exceed client expectations.I enjoy solving problem and
+                        finishing what I start.
                       </p>
 
                       <h3 className={classes.head}>
@@ -365,7 +355,7 @@ export default function Gig(props) {
                       </Slider>
                       <br></br>
                       <h3 className={classes.head}>
-                        <strong>Other gigs by this worker</strong>
+                        <strong>Worker Gigs</strong>
                       </h3>
                     </GridItem>
                     <GridItem xs={12} sm={12} md={4}>

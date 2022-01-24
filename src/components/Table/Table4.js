@@ -7,25 +7,53 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
+import Button from "components/CustomButtons/Button.js";
 
 const columns = [
-  { id: "buyer", label: "Buyer", minWidth: 140 },
-  { id: "seller", label: "Seller", minWidth: 140 },
-  { id: "status", label: "Status", minWidth: 140 },
-  { id: "received", label: "Paymemnt Received", minWidth: 140 },
+  { id: "id", label: "ID", minWidth: 120 },
+  { id: "buyer", label: "Buyer", minWidth: 120 },
+  { id: "seller", label: "Seller", minWidth: 120 },
+  { id: "category", label: "Category", minWidth: 120 },
+  { id: "amount", label: "Amount", minWidth: 120 },
+  { id: "status", label: "Status", minWidth: 120 },
 ];
 
-function createData(buyer, seller, status, received) {
+function createData(id, buyer, seller, category, amount, status) {
   //const density = population / size;
-  return { buyer, seller, status, received };
+  return { id, buyer, seller, category, amount, status };
 }
 
 const rows = [
-  createData("Arooj", "Wadood", "complete", "245656"),
-  createData("Huzaifa", "Wadood", "complete", "245656"),
-  createData("Musa", "Wadood", "cancelled", "245656"),
-  createData("Arooj", "Wadood", "complete", "245656"),
-  createData("Musa", "Wadood", "complete", "245656"),
+  createData(
+    "01",
+    "Huzaifa",
+    "Arooj",
+    "Plumber",
+    "245656",
+    <Button size="sm" color="black" href="/payment-page">
+      Finish Job
+    </Button>
+  ),
+  createData(
+    "02",
+    "Huzaifa",
+    "Musa",
+    "Electrician",
+    "245656",
+    <Button size="sm" color="black" href="/payment-page">
+      Finish Job
+    </Button>
+  ),
+  createData(
+    "03",
+    "Huzaifa",
+    "Wadood",
+    "Chef",
+    "245656",
+    <Button size="sm" color="black" href="/payment-page">
+      Finish Job
+    </Button>
+  ),
 ];
 
 export default function StickyHeadTable() {

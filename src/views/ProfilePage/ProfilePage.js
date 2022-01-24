@@ -15,11 +15,12 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import NavPills from "components/NavPills/NavPills.js";
-import Table from "components/Table/Table.js";
+import Table3 from "components/Table/Table3.js";
+import Table4 from "components/Table/Table4.js";
 //import Table2 from "components/Table2/Table2.js";
 import Parallax from "components/Parallax/Parallax.js";
 
-import profile from "assets/img/faces/christian.jpg";
+import profile from "assets/img/faces/face5.jpg";
 
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
@@ -97,9 +98,8 @@ export default function ProfilePage(props) {
                     <img src={profile} alt="..." className={imageClasses} />
                   </div>
                   <div className={classes.name}>
-                    <h3 className={classes.title}>M.Wadood ul Haq</h3>
+                    <h3 className={classes.title}>Abdul Rehman Huzaifa</h3>
                   </div>
-                  <h>Plumber</h>
                 </div>
               </GridItem>
             </GridContainer>
@@ -133,7 +133,7 @@ export default function ProfilePage(props) {
                           <b className={classes.desc}>City</b>
                           <p>Islamabad</p>
                           <hr className={classes.hr} />
-                          <i className="fas fa-file-alt"></i>
+                          {/*} <i className="fas fa-file-alt"></i>
                           <b className={classes.desc}>About Me</b>
                           <p>
                             I am in between work and I have numerous viable
@@ -144,7 +144,7 @@ export default function ProfilePage(props) {
                             between work and I have numerous viable skills that
                             I believe can be utilized in the open market place.
                           </p>
-                          <hr className={classes.hr} />
+                      <hr className={classes.hr} />*/}
                         </div>
                       ),
                     },
@@ -264,25 +264,6 @@ export default function ProfilePage(props) {
                                   autoComplete: "on",
                                 }}
                               />
-
-                              <CustomInput
-                                labelText="Edit About Me"
-                                id="password"
-                                formControlProps={{
-                                  fullWidth: true,
-                                }}
-                                inputProps={{
-                                  type: "password",
-                                  endAdornment: (
-                                    <InputAdornment position="end">
-                                      <People
-                                        className={classes.inputIconsColor}
-                                      />
-                                    </InputAdornment>
-                                  ),
-                                  autoComplete: "on",
-                                }}
-                              />
                             </CardBody>
                             <CardFooter className={classes.cardFooter}>
                               <Button color="black" href="/profile-page">
@@ -300,9 +281,14 @@ export default function ProfilePage(props) {
                     // },
 
                     {
+                      tabButton: "Current Projects",
+                      tabIcon: Schedule,
+                      tabContent: <Table4 />,
+                    },
+                    {
                       tabButton: "Projects History",
                       tabIcon: Schedule,
-                      tabContent: <Table />,
+                      tabContent: <Table3 />,
                     },
                     // {
                     //   tabButton: "About Myself",

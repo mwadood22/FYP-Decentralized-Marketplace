@@ -19,6 +19,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
+
 //import IconButton from "@material-ui/core/IconButton";
 //import Close from "@material-ui/icons/Close";
 import Slide from "@material-ui/core/Slide";
@@ -27,6 +28,7 @@ import GridItem from "components/Grid/GridItem.js";
 // import { ListItemSecondaryAction } from "@material-ui/core";
 //import Box from "@mui/material/Box";
 import List from "@mui/material/List";
+import { Link } from "react-router-dom";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
@@ -153,7 +155,12 @@ export default function FindJobs() {
                         }}
                       >
                         <GridContainer>
-                          <ListItem disablePadding>
+                          <ListItem
+                            button
+                            component={Link}
+                            to="/gig2"
+                            disablePadding
+                          >
                             <GridItem xs={12} sm={12} md={8}>
                               <ListItemButton>
                                 <ListItemAvatar>
@@ -171,7 +178,12 @@ export default function FindJobs() {
                             </GridItem>
                           </ListItem>
 
-                          <ListItem disablePadding>
+                          <ListItem
+                            button
+                            component={Link}
+                            to="/gig2"
+                            disablePadding
+                          >
                             <GridItem xs={12} sm={12} md={8}>
                               <ListItemButton>
                                 <ListItemAvatar>
@@ -189,7 +201,12 @@ export default function FindJobs() {
                             </GridItem>
                           </ListItem>
 
-                          <ListItem disablePadding>
+                          <ListItem
+                            button
+                            component={Link}
+                            to="/gig2"
+                            disablePadding
+                          >
                             <GridItem xs={12} sm={12} md={8}>
                               <ListItemButton>
                                 <ListItemAvatar>
@@ -207,7 +224,12 @@ export default function FindJobs() {
                             </GridItem>
                           </ListItem>
 
-                          <ListItem disablePadding>
+                          <ListItem
+                            button
+                            component={Link}
+                            to="/gig2"
+                            disablePadding
+                          >
                             <GridItem xs={12} sm={12} md={8}>
                               <ListItemButton>
                                 <ListItemAvatar>
@@ -225,7 +247,12 @@ export default function FindJobs() {
                             </GridItem>
                           </ListItem>
 
-                          <ListItem disablePadding>
+                          <ListItem
+                            button
+                            component={Link}
+                            to="/gig2"
+                            disablePadding
+                          >
                             <GridItem xs={12} sm={12} md={8}>
                               <ListItemButton>
                                 <ListItemAvatar>
@@ -243,7 +270,58 @@ export default function FindJobs() {
                             </GridItem>
                           </ListItem>
 
-                          <ListItem disablePadding>
+                          <ListItem
+                            button
+                            component={Link}
+                            to="/gig2"
+                            disablePadding
+                          >
+                            <GridItem xs={12} sm={12} md={8}>
+                              <ListItemButton>
+                                <ListItemAvatar>
+                                  <Avatar alt="Remy Sharp" src={team3} />
+                                </ListItemAvatar>
+                                <ListItemText
+                                  className={classes.bidlist}
+                                  primary="Arooj Sikandar"
+                                />
+                              </ListItemButton>
+                            </GridItem>
+
+                            <GridItem xs={12} sm={12} md={4}>
+                              <ListItemText primary="Bid: 55$" />
+                            </GridItem>
+                          </ListItem>
+
+                          <ListItem
+                            button
+                            component={Link}
+                            to="/gig2"
+                            disablePadding
+                          >
+                            <GridItem xs={12} sm={12} md={8}>
+                              <ListItemButton>
+                                <ListItemAvatar>
+                                  <Avatar alt="Remy Sharp" src={team3} />
+                                </ListItemAvatar>
+                                <ListItemText
+                                  className={classes.bidlist}
+                                  primary="Arooj Sikandar"
+                                />
+                              </ListItemButton>
+                            </GridItem>
+
+                            <GridItem xs={12} sm={12} md={4}>
+                              <ListItemText primary="Bid: 55$" />
+                            </GridItem>
+                          </ListItem>
+
+                          <ListItem
+                            button
+                            component={Link}
+                            to="/gig2"
+                            disablePadding
+                          >
                             <GridItem xs={12} sm={12} md={8}>
                               <ListItemButton>
                                 <ListItemAvatar>

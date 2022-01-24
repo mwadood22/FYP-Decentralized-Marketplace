@@ -6,6 +6,10 @@ const workerPageStyle = {
   card: {
     padding: "20px",
   },
+  card2: {
+    padding: "20px",
+    marginLeft: "250px",
+  },
   textSection: {
     //margin: "auto",
     color: "green",

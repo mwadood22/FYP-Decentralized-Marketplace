@@ -110,7 +110,7 @@ export default function HeaderLinks(props) {
           </Button>
         </Tooltip>
       </ListItem> */}
-      <ListItem className={classes.listItem}>
+      {/*<ListItem className={classes.listItem}>
         <Button
           color="transparent"
           href="/customjobs-page"
@@ -119,19 +119,19 @@ export default function HeaderLinks(props) {
         >
           Post Jobs
         </Button>
-        {/* </Link> */}
-      </ListItem>
-      {/*<ListItem className={classes.listItem}>
+        
+    </ListItem>*/}
+      <ListItem className={classes.listItem}>
         <Button
           color="transparent"
           href="/gigs-page"
           //target="_blank"
           className={classes.navLink}
         >
-          Gigs
+          My Gigs
         </Button>
-    </ListItem>*/}
-      {/*<ListItem className={classes.listItem}>
+      </ListItem>
+      <ListItem className={classes.listItem}>
         <Button
           color="transparent"
           href="/findjobs-page"
@@ -140,15 +140,15 @@ export default function HeaderLinks(props) {
         >
           Find jobs
         </Button>
-  </ListItem>*/}
+      </ListItem>
       <ListItem className={classes.listItem}>
         <Button
           color="transparent"
-          href="/worker-page"
+          href="/landing-page"
           //target="_blank"
           className={classes.navLink}
         >
-          Become a worker
+          Become a client
         </Button>
       </ListItem>
 
@@ -173,7 +173,7 @@ export default function HeaderLinks(props) {
               <Link to="/signup-page" className={classes.dropdownLink}>
                 Sign-Up
               </Link>,
-              <Link to="/profile-page" className={classes.dropdownLink}>
+              <Link to="/worker-dashboard" className={classes.dropdownLink}>
                 Profile
               </Link>,
             ]}

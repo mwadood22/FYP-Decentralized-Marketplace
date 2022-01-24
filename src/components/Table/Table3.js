@@ -9,23 +9,23 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 
 const columns = [
-  { id: "name", label: "Buyer", minWidth: 170 },
-  { id: "code", label: "Seller", minWidth: 100 },
-  { id: "made", label: "Payment Made", minWidth: 170 },
-  { id: "received", label: "Paymemnt Received", minWidth: 100 },
+  { id: "buyer", label: "Buyer", minWidth: 140 },
+  { id: "seller", label: "Seller", minWidth: 140 },
+  { id: "status", label: "Status", minWidth: 140 },
+  { id: "made", label: "Paymemnt Made", minWidth: 140 },
 ];
 
-function createData(name, code, made, received) {
+function createData(buyer, seller, status, made) {
   //const density = population / size;
-  return { name, code, made, received };
+  return { buyer, seller, status, made };
 }
 
 const rows = [
-  createData("Aropj", "Wadood", "12345", "245656"),
-  createData("Arooj", "Wadood", "12345", "245656"),
-  createData("Arooj", "Wadood", "12345", "245656"),
-  createData("Arooj", "Wadood", "12345", "245656"),
-  createData("Arooj", "Wadood", "12345", "245656"),
+  createData("Huzaifa", "Wadood", "complete", "245656"),
+  createData("Huzaifa", "Musa", "complete", "245656"),
+  createData("Huzaifa", "Arooj", "cancelled", "245656"),
+  createData("Huzaifa", "Musa", "complete", "245656"),
+  createData("Huzaifa", "Wadood", "complete", "245656"),
 ];
 
 export default function StickyHeadTable() {

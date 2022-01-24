@@ -24,6 +24,7 @@ import CreateGig from "views/GigsPage/Sections/CreateGig.js";
 import CreateJob from "views/CustomJob/Sections/CreateJob.js";
 import MakePayment from "views/MakePayment/MakePayment.js";
 import Gig from "views/GigsPage/Sections/Gig.js";
+import Gig2 from "views/GigsPage/Sections/Gig2.js";
 // import Chat from "components/Chat/Chat.js";
 
 var hist = createBrowserHistory();
@@ -43,11 +44,12 @@ ReactDOM.render(
       <Route path="/guidesell-page" component={GuideSellPage} />
       <Route path="/worker-page" component={WorkerPage} />
       <Route path="/findjobs-page" component={FindJobs} />
-      <Route path="/dashboard-page" component={WorkerDashboard} />
+      <Route path="/worker-dashboard" component={WorkerDashboard} />
       <Route path="/creategig-page" component={CreateGig} />
       <Route path="/createjob-page" component={CreateJob} />
       <Route path="/payment-page" component={MakePayment} />
       <Route path="/gig" component={Gig} />
+      <Route path="/gig2" component={Gig2} />
       {/* <Route path="/chat" component={Chat} /> */}
       <Route path="/" component={LandingPage} />
     </Switch>

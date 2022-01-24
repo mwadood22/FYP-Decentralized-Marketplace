@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 // core components
 import Header from "components/Header/Header.js";
-import HeaderLinks from "components/Header/HeaderLinks.js";
+import WorkerHeaderLinks from "components/Header/WorkerHeaderLinks.js";
 
 import Button from "components/CustomButtons/Button.js";
 
@@ -73,7 +73,7 @@ export default function FindJobs(props) {
         absolute
         color="black"
         brand="MARKAZ"
-        rightLinks={<HeaderLinks />}
+        rightLinks={<WorkerHeaderLinks />}
         {...rest}
       />
       <div className={classes.pageHeader}>
