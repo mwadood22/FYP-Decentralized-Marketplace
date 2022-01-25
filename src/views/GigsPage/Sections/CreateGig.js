@@ -44,13 +44,19 @@ const useStyles = makeStyles(styles);
 
 const currencies = [
   {
-    value: "Lahore",
+    value: "Plumber",
   },
   {
-    value: "Sukkur",
+    value: "Electrician",
   },
   {
-    value: "Multan",
+    value: "Chef",
+  },
+  {
+    value: "Gardener",
+  },
+  {
+    value: "Others",
   },
 ];
 

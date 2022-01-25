@@ -6,7 +6,7 @@ const teamStyle = {
     position: "relative",
     height: "100%",
     width: "100%",
-    objectFit: "cover",
+    // objectFit: "cover",
   },
   cardLayout: {
     height: "350px",

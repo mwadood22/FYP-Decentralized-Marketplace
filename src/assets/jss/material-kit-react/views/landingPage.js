@@ -5,6 +5,10 @@ const landingPageStyle = {
     height: "570px",
     zIndex: "1",
   },
+  background: {
+    height: "340px",
+    backgroundColor: "#008060",
+  },
   carouselOptions: {
     position: "absolute",
     zIndex: "2",

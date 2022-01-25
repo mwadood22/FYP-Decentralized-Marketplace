@@ -84,11 +84,11 @@ export default function ProfilePage(props) {
   //}, 700);
   const handleClick = () => {
     // prop.setDisable(true);
-    setDisable(true);
+    // setDisable(true);
     setOpen(true);
   };
   const [open, setOpen] = React.useState(false);
-  const [disable, setDisable] = React.useState(false);
+  // const [disable, setDisable] = React.useState(false);
   const classes = useStyles();
   const { ...rest } = props;
   const imageClasses = classNames(
@@ -401,7 +401,7 @@ export default function ProfilePage(props) {
                                       size="sm"
                                       // href="/signup-page"
                                       // target="_blank"
-                                      disabled={disable}
+                                      // disabled={disable}
                                       rel="noopener noreferrer"
                                       className={classes.jobBtn}
                                       onClick={handleClick}
@@ -414,7 +414,7 @@ export default function ProfilePage(props) {
                                       size="sm"
                                       // href="/signup-page"
                                       // target="_blank"
-                                      disabled={disable}
+                                      // disabled={disable}
                                       rel="noopener noreferrer"
                                       className={classes.jobBtn}
                                       //onClick={handleClick}

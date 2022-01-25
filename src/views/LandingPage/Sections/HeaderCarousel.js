@@ -12,7 +12,7 @@ import Carousel from "react-slick";
 
 import image1 from "assets/img/TopCarousel/car1.jpg";
 import image2 from "assets/img/TopCarousel/car2.jpg";
-import image3 from "assets/img/TopCarousel/car3.jpg";
+// import image3 from "assets/img/TopCarousel/car3.jpg";
 
 //import image2 from "assets/img/bg2.jpg";
 //import image3 from "assets/img/bg3.jpg";
@@ -31,7 +31,7 @@ export default function HeaderCarousel() {
   const settings = {
     dots: false,
     infinite: true,
-    speed: 500,
+    speed: 300,
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
@@ -47,9 +47,9 @@ export default function HeaderCarousel() {
           <div>
             <img src={image2} alt="First slide" className="slick-image" />
           </div>
-          <div>
+          {/* <div>
             <img src={image3} alt="First slide" className="slick-image" />
-          </div>
+          </div> */}
         </Carousel>
       </div>
       {/* <div>

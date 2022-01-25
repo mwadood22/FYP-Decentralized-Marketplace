@@ -24,6 +24,11 @@ import GridContainer from "components/Grid/GridContainer";
 
 //import team1 from "assets/img/faces/avatar.jpg";
 import team2 from "assets/img/faces/christian.jpg";
+import team3 from "assets/img/faces/face1.jpg";
+import team4 from "assets/img/faces/face2.jpg";
+import team5 from "assets/img/faces/face3.jpg";
+import team6 from "assets/img/faces/face4.jpg";
+import team7 from "assets/img/faces/face5.jpg";
 //import team3 from "assets/img/faces/kendall.jpg";
 //import { cardTitle } from "assets/jss/material-kit-react";
 
@@ -225,7 +230,7 @@ export default function ServicesView() {
         <GridItem xs={12} sm={12} md={3}>
           <Card carousel>
             <Link to="gig">
-              <img src={team2} alt="..." className={imageClasses} />
+              <img src={team3} alt="..." className={imageClasses} />
               <CardBody>
                 <h4 className={classes.cardTitle}>M.Wadood</h4>
                 <p className={classes.description}>I can do plumbing well!</p>
@@ -236,7 +241,7 @@ export default function ServicesView() {
         <GridItem xs={12} sm={12} md={3}>
           <Card carousel>
             <Link to="gig">
-              <img src={team2} alt="..." className={imageClasses} />
+              <img src={team4} alt="..." className={imageClasses} />
               <CardBody>
                 <h4 className={classes.cardTitle}>M.Wadood</h4>
                 <p className={classes.description}>I can do plumbing well!</p>
@@ -264,7 +269,7 @@ export default function ServicesView() {
         <GridItem xs={12} sm={12} md={3}>
           <Card carousel>
             <Link to="gig">
-              <img src={team2} alt="..." className={imageClasses} />
+              <img src={team5} alt="..." className={imageClasses} />
               <CardBody>
                 <h4 className={classes.cardTitle}>M.Wadood</h4>
                 <p className={classes.description}>I can do plumbing well!</p>
@@ -275,7 +280,7 @@ export default function ServicesView() {
         <GridItem xs={12} sm={12} md={3}>
           <Card carousel>
             <Link to="gig">
-              <img src={team2} alt="..." className={imageClasses} />
+              <img src={team6} alt="..." className={imageClasses} />
               <CardBody>
                 <h4 className={classes.cardTitle}>M.Wadood</h4>
                 <p className={classes.description}>I can do plumbing well!</p>
@@ -286,7 +291,7 @@ export default function ServicesView() {
         <GridItem xs={12} sm={12} md={3}>
           <Card carousel>
             <Link to="gig">
-              <img src={team2} alt="..." className={imageClasses} />
+              <img src={team7} alt="..." className={imageClasses} />
               <CardBody>
                 <h4 className={classes.cardTitle}>M.Wadood</h4>
                 <p className={classes.description}>I can do plumbing well!</p>

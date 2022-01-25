@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 // nodejs library that concatenates classes
 
 import classNames from "classnames";
@@ -12,6 +12,11 @@ import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Divider from "@mui/material/Divider";
+
+import { Widget, addResponseMessage, toggleWidget } from "react-chat-widget";
+
+import "react-chat-widget/lib/styles.css";
+import logo from "assets/img/faces/test1.jpg";
 
 // import Avatar from "@mui/material/Avatar";
 // import Image from "@mui/material/Image";
@@ -60,9 +65,18 @@ const currencies = [
   },
 ];
 export default function Gig(props) {
+  useEffect(() => {
+    addResponseMessage("How may I be of your assistance?");
+  }, []);
   const [currency, setCurrency] = React.useState("None");
   const handleChange = (event) => {
     setCurrency(event.target.value);
+  };
+  const handleNewUserMessage = (newMessage) => {
+    console.log(`New message incoming! ${newMessage}`);
+    // Now send the message throught the backend API
+    // isWidgetOpened(false);
+    toggleWidget();
   };
   //   const [currency, setCurrency] = React.useState("None");
 
@@ -154,19 +168,28 @@ export default function Gig(props) {
                         </i>
                       </h4>
                       <h4>
-                        {" "}
                         <Button
                           color="green"
                           onClick={() => setClassicModal(true)}
                         >
-                          {" "}
                           Send job offer
                         </Button>
-                        {"  "}
+
                         <Button color="green" href="/payment-page">
-                          {" "}
                           Make Payment
                         </Button>
+                        <Button color="green" onClick={() => toggleWidget()}>
+                          Chat <i className="fa fa-comment" />
+                        </Button>
+                        <div className="App">
+                          <Widget
+                            handleNewUserMessage={handleNewUserMessage}
+                            profileAvatar={logo}
+                            // launcher={(handleToggle) => getCustomLauncher(handleToggle)}
+                            title="Chat"
+                            // subtitle="And my cool subtitle"
+                          />
+                        </div>
                         <Dialog
                           classes={{
                             root: classes.center,

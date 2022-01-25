@@ -31,6 +31,8 @@ import Language from "@material-ui/icons/Language";
 import Edit from "@material-ui/icons/Edit";
 import Photo from "@material-ui/icons/Photo";
 
+import logo from "assets/img/logo.png";
+
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 // import Paper from "@mui/material/Paper";
@@ -234,9 +236,7 @@ export default function WorkerPage(props) {
                 }
               /> */}
               <div className={classes.textSection}>
-                <h2>MARKAZ</h2>
-
-                <h3>Your Tasking Partner</h3>
+                <img src={logo} alt="..." />
               </div>
               {/* </GridItem> */}
             </GridItem>

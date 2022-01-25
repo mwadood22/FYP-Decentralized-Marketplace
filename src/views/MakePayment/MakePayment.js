@@ -158,7 +158,7 @@ export default function LoginPage(props) {
                         <Box
                           component="form"
                           sx={{
-                            "& .MuiTextField-root": { m: 1, width: "17ch" },
+                            "& .MuiTextField-root": { m: 1, width: "15ch" },
                           }}
                           noValidate
                           autoComplete="off"

@@ -7,15 +7,15 @@ import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
 
 // core components
-import Search from "@material-ui/icons/Search";
+// import Search from "@material-ui/icons/Search";
 import Header from "components/Header/Header.js";
 import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
+// import Button from "components/CustomButtons/Button.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
+// import CustomInput from "components/CustomInput/CustomInput.js";
 //import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 //import Search from "@material-ui/icons/Search";
 
@@ -49,7 +49,7 @@ export default function LandingPage(props) {
         }}
         {...rest}
       />
-      <Parallax filter image={require("assets/img/land.jpg").default}>
+      <Parallax className={classes.background}>
         <div className={classes.container}>
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>
@@ -69,7 +69,7 @@ export default function LandingPage(props) {
                 Watch video
               </Button> */}
               <div>
-                <CustomInput
+                {/* <CustomInput
                   white
                   inputProps={{
                     placeholder: "Search",
@@ -78,15 +78,15 @@ export default function LandingPage(props) {
                       className: classes.searchInput,
                     },
                   }}
-                />
-                <Button
+                /> */}
+                {/* <Button
                   justIcon
                   round
                   color="white"
                   className={classes.searchBtn}
                 >
                   <Search className={classes.searchIcon} />
-                </Button>
+                </Button> */}
               </div>
             </GridItem>
           </GridContainer>
