@@ -3,6 +3,7 @@
   "version": "1.10.0",
   "description": "Material Kit React. Coded by Creative Tim",
   "private": true,
+  "proxy": "http://localhost:6942",
   "main": "src/index.js",
   "dependencies": {
     "@babel/core": "7.14.0",

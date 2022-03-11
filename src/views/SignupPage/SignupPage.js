@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
+
+// import { useHistory } from "react-router-dom";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
-import Email from "@material-ui/icons/Email";
+// import Email from "@material-ui/icons/Email";
 import People from "@material-ui/icons/People";
 //import ContactPhone from "@material-ui/icons/ContactPhone";
 // core components
@@ -25,8 +27,50 @@ import styles from "assets/jss/material-kit-react/views/loginPage.js";
 //import image from "assets/img/bg7.jpg";
 
 const useStyles = makeStyles(styles);
-
 export default function SignupPage(props) {
+  // const history = useHistory();
+  //getting variables from form
+
+  const [user, setUser] = useState({
+    username: "",
+    password: "",
+    email: "",
+  });
+  let name, value;
+  const handleInputs = (e) => {
+    name = e.target.name;
+    value = e.target.value;
+    console.log(e);
+    setUser({ ...user, [name]: value });
+  };
+  const postData = async (e) => {
+    e.preventDefault();
+
+    const { username, password, email } = user;
+    const res = await fetch("/gig/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username,
+        email,
+        password,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (data.status === 42 || !data) {
+      window.alert("Invalid registeration");
+      console.log("Invalid registeration");
+    } else {
+      // console.log(data);
+      // history.push("/landing-page");
+    }
+  };
+  //
+
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
   setTimeout(function () {
     setCardAnimation("");
@@ -96,6 +140,8 @@ export default function SignupPage(props) {
                       formControlProps={{
                         fullWidth: true,
                       }}
+                      value={user.username}
+                      onChange={handleInputs}
                       inputProps={{
                         type: "text",
                         endAdornment: (
@@ -105,13 +151,25 @@ export default function SignupPage(props) {
                         ),
                       }}
                     />
+                    {/* <CustomInput> */}
+                    <input
+                      type="email"
+                      name="email"
+                      id="email"
+                      value={user.email}
+                      onChange={handleInputs}
+                      placeholder="Enter email"
+                    ></input>
+                    {/* </CustomInput> */}
 
-                    <CustomInput
+                    {/* <CustomInput
                       labelText="Email"
                       id="email"
                       formControlProps={{
                         fullWidth: true,
                       }}
+                      value={user.email}
+                      onChange={handleInputs}
                       inputProps={{
                         type: "email",
                         endAdornment: (
@@ -120,13 +178,24 @@ export default function SignupPage(props) {
                           </InputAdornment>
                         ),
                       }}
-                    />
+                    /> */}
+                    {/* <input
+                        type="email"
+                        name="email"
+                        id="email"
+                        value={user.email}
+                        onChange={handleInputs}
+                        placeholder="Enter email"
+                      ></input> */}
+                    {/* </CustomInput> */}
                     <CustomInput
                       labelText="Password"
                       id="pass"
                       formControlProps={{
                         fullWidth: true,
                       }}
+                      value={user.password}
+                      onChange={handleInputs}
                       inputProps={{
                         type: "password",
                         endAdornment: (
@@ -141,14 +210,18 @@ export default function SignupPage(props) {
                     />
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Button color="black" href="/landing-page">
+                    <Button
+                      color="black"
+                      href="/landing-page"
+                      onClick={postData}
+                    >
                       Get started
                     </Button>
                   </CardFooter>
                   <div className={classes.endings}>
                     <h4 className={classes.new}>Already have an account?</h4>
                     {/* <h4> */}
-                    <Button simple color="green" size="lg" href="/login-page">
+                    <Button simple color="green" size="lg">
                       Login
                     </Button>
                     {/* </h4> */}

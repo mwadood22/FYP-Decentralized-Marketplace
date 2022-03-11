@@ -28,7 +28,7 @@ import chef from "assets/img/services/chef.jpg";
 import driver from "assets/img/services/driver.jpg";
 import electrician from "assets/img/services/electrician.jpg";
 import gardener from "assets/img/services/gardener.jpg";
-import painter from "assets/img/services/painter.jpg";
+//import painter from "assets/img/services/painter.jpg";
 import plumbing from "assets/img/services/plumbing.jpg";
 import helper from "assets/img/services/helper.jpg";
 //import { cardTitle } from "assets/jss/material-kit-react";
@@ -144,7 +144,7 @@ export default function ServicesSection() {
             <GridItem xs={12} sm={12}>
               <Card carousel className={classes.cardLayout}>
                 <img
-                  src={painter}
+                  src={plumbing}
                   alt="..."
                   className={classes.serviceCardImg}
                 />
@@ -173,6 +173,24 @@ export default function ServicesSection() {
             </GridItem>
           </Link>
         </div>
+        <div>
+          <Link to="/service-page">
+            <GridItem xs={12} sm={12}>
+              <Card carousel className={classes.cardLayout}>
+                <img
+                  src={helper}
+                  alt="..."
+                  className={classes.serviceCardImg}
+                />
+                <div className={classes.serviceCardText}>
+                  Make walls stand out
+                </div>
+                <div className={classes.serviceCardHeading}>Painter</div>
+              </Card>
+            </GridItem>
+          </Link>
+        </div>
+
         <div>
           <Link to="/service-page">
             <GridItem xs={12} sm={12}>

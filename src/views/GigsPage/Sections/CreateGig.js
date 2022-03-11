@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // import InputAdornment from "@material-ui/core/InputAdornment";
@@ -61,6 +61,48 @@ const currencies = [
 ];
 
 export default function WorkerPage(props) {
+  //getting variables from form
+
+  const [user, setUser] = useState({
+    username: "",
+    password: "",
+    email: "",
+  });
+  let name, value;
+  const handleInputs = (e) => {
+    name = e.target.name;
+    value = e.target.value;
+    console.log(e);
+    setUser({ ...user, [name]: value });
+  };
+  const postData = async (e) => {
+    e.preventDefault();
+
+    const { username, password, email } = user;
+    const res = await fetch("/gig/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username,
+        email,
+        password,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (data.status === 42 || !data) {
+      window.alert("Invalid registeration");
+      console.log("Invalid registeration");
+    } else {
+      // console.log(data);
+      // history.push("/landing-page");
+    }
+  };
+  //
+
   const [currency, setCurrency] = React.useState("None");
 
   const handleChange = (event) => {
@@ -107,8 +149,10 @@ export default function WorkerPage(props) {
                         margin="normal"
                         required
                         fullWidth
-                        id="title"
-                        label="Gig Title"
+                        value={user.username}
+                        onChange={handleInputs}
+                        id="username"
+                        label="username"
                         InputProps={{
                           type: "text",
                           endAdornment: (
@@ -180,7 +224,11 @@ export default function WorkerPage(props) {
                     </GridItem>
 
                     <GridItem>
-                      <Button color="black" href="/gigs-page">
+                      <Button
+                        color="black"
+                        href="/gigs-page"
+                        onClick={postData}
+                      >
                         Create Gig
                       </Button>
                     </GridItem>
