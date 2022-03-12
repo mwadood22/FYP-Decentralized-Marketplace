@@ -63,31 +63,33 @@ const currencies = [
 export default function WorkerPage(props) {
   //getting variables from form
 
-  const [user, setUser] = useState({
-    username: "",
-    password: "",
-    email: "",
+  const [gig, setGig] = useState({
+    gigTitle: "",
+    budget: "",
+    category: "",
+    gigDescription: "",
   });
   let name, value;
   const handleInputs = (e) => {
     name = e.target.name;
     value = e.target.value;
     console.log(e);
-    setUser({ ...user, [name]: value });
+    setGig({ ...gig, [name]: value });
   };
   const postData = async (e) => {
     e.preventDefault();
 
-    const { username, password, email } = user;
+    const { gigTitle, budget, category, gigDescription } = gig;
     const res = await fetch("/gig/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        username,
-        email,
-        password,
+        gigTitle,
+        budget,
+        category,
+        gigDescription,
       }),
     });
 
@@ -97,17 +99,17 @@ export default function WorkerPage(props) {
       window.alert("Invalid registeration");
       console.log("Invalid registeration");
     } else {
-      // console.log(data);
-      // history.push("/landing-page");
+      console.log(data);
+      history.push("/gigs-page");
     }
   };
   //
 
-  const [currency, setCurrency] = React.useState("None");
+  // const [currency, setCurrency] = React.useState("None");
 
-  const handleChange = (event) => {
-    setCurrency(event.target.value);
-  };
+  // const handleChange = (event) => {
+  //   setCurrency(event.target.value);
+  // };
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
   setTimeout(function () {
     setCardAnimation("");
@@ -149,10 +151,11 @@ export default function WorkerPage(props) {
                         margin="normal"
                         required
                         fullWidth
-                        value={user.username}
+                        name="gigTitle"
+                        value={gig.gigTitle}
                         onChange={handleInputs}
-                        id="username"
-                        label="username"
+                        id="title"
+                        label="Gig Title"
                         InputProps={{
                           type: "text",
                           endAdornment: (
@@ -170,6 +173,9 @@ export default function WorkerPage(props) {
                         margin="normal"
                         required
                         fullWidth
+                        name="budget"
+                        value={gig.budget}
+                        onChange={handleInputs}
                         id="budget"
                         label="Budget"
                         InputProps={{
@@ -191,8 +197,9 @@ export default function WorkerPage(props) {
                         select
                         margin="normal"
                         label=" "
-                        value={currency}
-                        onChange={handleChange}
+                        name="category"
+                        value={gig.category}
+                        onChange={handleInputs}
                         helperText="Category"
                         InputProps={{
                           endAdornment: (
@@ -214,6 +221,9 @@ export default function WorkerPage(props) {
                       <TextField
                         margin="normal"
                         fullWidth
+                        name="gigDescription"
+                        value={gig.gigDescription}
+                        onChange={handleInputs}
                         required
                         multiline
                         rows={8}

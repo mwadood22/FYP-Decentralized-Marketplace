@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
-// import Email from "@material-ui/icons/Email";
+import Email from "@material-ui/icons/Email";
 import People from "@material-ui/icons/People";
 //import ContactPhone from "@material-ui/icons/ContactPhone";
 // core components
@@ -45,7 +45,7 @@ export default function SignupPage(props) {
   };
   const postData = async (e) => {
     e.preventDefault();
-
+    console.log(e.target.value);
     const { username, password, email } = user;
     const res = await fetch("/gig/create", {
       method: "POST",
@@ -137,6 +137,7 @@ export default function SignupPage(props) {
                       //className={classes.inlineBlock}
                       labelText="User Name"
                       id="first"
+                      name="username"
                       formControlProps={{
                         fullWidth: true,
                       }}
@@ -151,20 +152,11 @@ export default function SignupPage(props) {
                         ),
                       }}
                     />
-                    {/* <CustomInput> */}
-                    <input
-                      type="email"
-                      name="email"
-                      id="email"
-                      value={user.email}
-                      onChange={handleInputs}
-                      placeholder="Enter email"
-                    ></input>
-                    {/* </CustomInput> */}
 
-                    {/* <CustomInput
+                    <CustomInput
                       labelText="Email"
                       id="email"
+                      name="email"
                       formControlProps={{
                         fullWidth: true,
                       }}
@@ -178,19 +170,20 @@ export default function SignupPage(props) {
                           </InputAdornment>
                         ),
                       }}
-                    /> */}
+                    />
                     {/* <input
-                        type="email"
-                        name="email"
-                        id="email"
-                        value={user.email}
-                        onChange={handleInputs}
-                        placeholder="Enter email"
-                      ></input> */}
+                      type="email"
+                      name="email"
+                      id="email"
+                      value={user.email}
+                      onChange={handleInputs}
+                      placeholder="Enter email"
+                    ></input> */}
                     {/* </CustomInput> */}
                     <CustomInput
                       labelText="Password"
                       id="pass"
+                      name="password"
                       formControlProps={{
                         fullWidth: true,
                       }}
