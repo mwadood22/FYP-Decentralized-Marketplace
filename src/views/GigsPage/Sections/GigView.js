@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 //import Carousel from "react-slick";
@@ -73,6 +73,45 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 Transition.displayName = "Transition";
 
 export default function GigView() {
+  //fetch dat afrom database
+
+  const [gig, setUserData] = useState({
+    gigTitle: "",
+    budget: "",
+    category: "",
+    gigDescription: "",
+  });
+
+  const callAboutPage = async () => {
+    console.log("Check");
+    try {
+      const res = await fetch("/gig/622c99f4f4fa4ab53c83d359", {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+      console.log(data);
+      setUserData(data);
+
+      if (!res.status === 200) {
+        const error = new Error(res.error);
+        throw error;
+      }
+    } catch (err) {
+      console.log(err);
+      // history.push('/login');
+    }
+  };
+
+  useEffect(() => {
+    callAboutPage();
+  }, []);
+
+  //
+
   //const [currency, setCurrency] = React.useState("None");
 
   //const handleChange = (event) => {
@@ -101,9 +140,16 @@ export default function GigView() {
             <Link to="gig">
               <img src={gig1} alt="..." className={imageClasses} />
               <CardBody>
-                <h4 className={classes.cardTitle}>M.Wadood</h4>
+                <h4 className={classes.cardTitle}>{gig.gigTitle}</h4>
                 <p className={classes.description}>
-                  I am your ultimate handyman when it comes to home repairs.
+                  {/* {console.log(userData, "HELLO!")} */}
+                  <strong>Budget: </strong>${gig.budget}
+                  <br />
+                  <strong>Category: </strong>
+                  {gig.category}
+                  <br />
+                  <strong>Description: </strong>
+                  {gig.gigDescription}
                 </p>
               </CardBody>
             </Link>

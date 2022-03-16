@@ -48,7 +48,7 @@ exports.show = (req, res) => {
       return res.status(400).json({ msg: "Error" });
     }
     //   console.log(gigs);
-    return res.json({ gigs });
+    return res.json(gigs);
   });
   //   return res.json({ gigs });
 };
