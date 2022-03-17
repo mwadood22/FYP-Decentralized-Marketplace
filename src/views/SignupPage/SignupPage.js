@@ -180,13 +180,13 @@ export default function SignupPage(props) {
                       }}
                     /> */}
                     <input
-                      type="email"
-                      name="email"
-                      id="email"
-                      value={user.email}
-                      onChange={handleInputs}
-                      placeholder="Enter email"
-                    ></input>
+                        type="email"
+                        name="email"
+                        id="email"
+                        value={user.email}
+                        onChange={handleInputs}
+                        placeholder="Enter email"
+                      ></input>
                     {/* </CustomInput> */}
                     <CustomInput
                       labelText="Password"
