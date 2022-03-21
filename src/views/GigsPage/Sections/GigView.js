@@ -27,10 +27,10 @@ import GridContainer from "components/Grid/GridContainer";
 //import team1 from "assets/img/faces/avatar.jpg";
 import gig1 from "assets/img/gigs/gig1.jpg";
 // import gig2 from "assets/img/gigs/gig2.jpg";
-import gig3 from "assets/img/gigs/gig3.jpg";
+// import gig3 from "assets/img/gigs/gig3.jpg";
 // import gig4 from "assets/img/gigs/gig4.jpg";
 // import gig5 from "assets/img/gigs/gig5.jpg";
-import gig6 from "assets/img/gigs/gig6.jpg";
+// import gig6 from "assets/img/gigs/gig6.jpg";
 
 //import { Divider } from "@mui/material";
 
@@ -73,19 +73,23 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 Transition.displayName = "Transition";
 
 export default function GigView() {
-  //fetch dat afrom database
+  //fetch data from database
 
   const [gig, setUserData] = useState({
-    title: "",
-    budget: "",
-    category: "",
-    gigDescription: "",
+    gigs: [
+      {
+        gigTitle: "",
+        budget: "",
+        category: "",
+        gigdescription: "",
+      },
+    ],
   });
 
   const callAboutPage = async () => {
     console.log("Check");
     try {
-      const res = await fetch("/gig/6234f18caae658b392732b5e", {
+      const res = await fetch("/gig", {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -93,7 +97,7 @@ export default function GigView() {
         },
       });
       const data = await res.json();
-      console.log(data);
+      // console.log(data);
       setUserData(data);
 
       if (!res.status === 200) {
@@ -135,14 +139,39 @@ export default function GigView() {
       {/* </Slider> */}
 
       <GridContainer>
-        <GridItem xs={12} sm={12} md={3}>
+        {console.log(gig)}
+        {gig.gigs.map((gigs, index) => {
+          return (
+            <GridItem xs={12} sm={12} md={3} key={index}>
+              <Card className={classes.card}>
+                <Link to="gig">
+                  <img src={gig1} alt="..." className={imageClasses} />
+                  <CardBody>
+                    <h4 className={classes.cardTitle}>{gigs.title}</h4>
+                    <p className={classes.description}>
+                      {/* {console.log(userData, "HELLO!")} */}
+                      <strong>Budget: </strong>${gigs.budget}
+                      <br />
+                      <strong>Category: </strong>
+                      {gigs.category}
+                      <br />
+                      <strong>Description: </strong>
+                      {gigs.gigDescription}
+                    </p>
+                  </CardBody>
+                </Link>
+              </Card>
+            </GridItem>
+          );
+        })}
+
+        {/* <GridItem xs={12} sm={12} md={3}>
           <Card className={classes.card}>
             <Link to="gig">
               <img src={gig1} alt="..." className={imageClasses} />
               <CardBody>
                 <h4 className={classes.cardTitle}>{gig.title}</h4>
                 <p className={classes.description}>
-                  {/* {console.log(userData, "HELLO!")} */}
                   <strong>Budget: </strong>${gig.budget}
                   <br />
                   <strong>Category: </strong>
@@ -239,7 +268,7 @@ export default function GigView() {
               </CardBody>
             </Link>
           </Card>
-        </GridItem>
+        </GridItem> */}
       </GridContainer>
 
       {/* </Slider> */}
