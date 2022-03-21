@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -55,6 +55,43 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 Transition.displayName = "Transition";
 
 export default function FindJobs() {
+  const [job, getJobData] = useState({
+    title: "",
+    budget: "",
+    city: "",
+    address: "",
+    category: "",
+    description: "",
+  });
+
+  const ViewData = async () => {
+    console.log("Check");
+    try {
+      const res = await fetch("/job/6236388faf9d6ba0fabd76a3", {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+      console.log(data);
+      getJobData(data);
+
+      if (!res.status === 200) {
+        const error = new Error(res.error);
+        throw error;
+      }
+    } catch (err) {
+      console.log(err);
+      // history.push('/login');
+    }
+  };
+
+  useEffect(() => {
+    ViewData();
+  }, []);
+
   const classes = useStyles();
   const [classicModal, setClassicModal] = React.useState(false);
 
@@ -71,27 +108,20 @@ export default function FindJobs() {
             <ListItemText
               primary={
                 <Typography className={classes.heading}>
-                  <strong>Title: Plumbing</strong>
+                  <strong> {job.title}</strong>
                 </Typography>
               }
               secondary={
                 <React.Fragment>
                   <Typography className={classes.heading} color="text.primary">
+                    {job.address}
+                  </Typography>
+                  <Typography className={classes.heading} color="text.primary">
                     Ali Connors
                   </Typography>
-                  Ill be in your neighborhood doing errands this… Ill be in your
-                  neighborhood doing errands this… Ill be in your neighborhood
-                  doing errands this… Ill be in your neighborhood doing errands
-                  this… Ill be in your neighborhood doing errands this… Ill be
-                  in your neighborhood doing errands this… Ill be in your
-                  neighborhood doing errands this… Ill be in your neighborhood
-                  doing errands this… Ill be in your neighborhood doing errands
-                  this… Ill be in your neighborhood doing errands this… Ill be
-                  in your Ill be in your neighborhood doing errands this… Ill be
-                  in your neighborhood doing errands this… Ill be in your
-                  neighborhood doing errands this… Ill be in your.
+                  {job.description}
                   <br /> <br />
-                  <strong>Max bid: $45</strong>
+                  <strong>Max bid: {job.budget}</strong>
                   <hr />
                   <Button
                     color="green"

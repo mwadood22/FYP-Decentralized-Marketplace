@@ -12,30 +12,30 @@ MongoClient.connect(url, function (err, db) {
 exports.index = async (req, res) => {
   //   console.log("All gigs list");
   dbo
-    .collection("Gigs")
+    .collection("CustomJobs")
     .find()
-    .toArray(function (err, gigs) {
+    .toArray(function (err, jobs) {
       if (err) {
         return res.status(400).json({ msg: "Error" });
       }
       //   console.log(gigs);
-      return res.json({ gigs });
+      return res.json({ jobs });
     });
 };
 
 exports.create = (req, res) => {
   //   console.log("All gigs list");
-  const gig = req.body;
+  const job = req.body;
   //   console.log(gig);
-  dbo.collection("Gigs").insert(gig);
-  return res.json({ gig });
+  dbo.collection("CustomJobs").insert(job);
+  return res.json({ job });
 };
 
 exports.delete = (req, res) => {
   //   console.log("All gigs list");
   const { id } = req.params;
   console.log(id);
-  dbo.collection("Gigs").remove({ _id: ObjectId(id) });
+  dbo.collection("CustomJobs").remove({ _id: ObjectId(id) });
   return res.json({ msg: "deleted" });
 };
 
@@ -43,12 +43,14 @@ exports.show = (req, res) => {
   //   console.log("All gigs list");
   const { id } = req.params;
   console.log(id);
-  dbo.collection("Gigs").findOne({ _id: ObjectId(id) }, function (err, gigs) {
-    if (err) {
-      return res.status(400).json({ msg: "Error" });
-    }
-    //   console.log(gigs);
-    return res.json(gigs);
-  });
+  dbo
+    .collection("CustomJobs")
+    .findOne({ _id: ObjectId(id) }, function (err, jobs) {
+      if (err) {
+        return res.status(400).json({ msg: "Error" });
+      }
+      //   console.log(gigs);
+      return res.json(jobs);
+    });
   //   return res.json({ gigs });
 };

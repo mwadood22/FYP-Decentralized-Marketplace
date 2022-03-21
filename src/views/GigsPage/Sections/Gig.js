@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 // nodejs library that concatenates classes
 
 import classNames from "classnames";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
+//import { Link } from "react-router-dom";
 
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
@@ -13,10 +14,10 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Divider from "@mui/material/Divider";
 
-import { Widget, addResponseMessage, toggleWidget } from "react-chat-widget";
+//import { Widget, addResponseMessage, toggleWidget } from "react-chat-widget";
 
-import "react-chat-widget/lib/styles.css";
-import logo from "assets/img/faces/test1.jpg";
+//import "react-chat-widget/lib/styles.css";
+//import logo from "assets/img/faces/test1.jpg";
 
 // import Avatar from "@mui/material/Avatar";
 // import Image from "@mui/material/Image";
@@ -52,12 +53,12 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
 });
 
-const handleNewUserMessage = (newMessage) => {
-  console.log(`New message incoming! ${newMessage}`);
-  // Now send the message throught the backend API
-  // isWidgetOpened(false);
-  toggleWidget();
-};
+// const handleNewUserMessage = (newMessage) => {
+// console.log(`New message incoming! ${newMessage}`);
+// Now send the message throught the backend API
+// isWidgetOpened(false);
+//toggleWidget();
+// };
 Transition.displayName = "Transition";
 const currencies = [
   {
@@ -72,12 +73,72 @@ const currencies = [
 ];
 export default function Gig(props) {
   useEffect(() => {
-    addResponseMessage("How may I be of your assistance?");
+    //addResponseMessage("How may I be of your assistance?");
   }, []);
   const [currency, setCurrency] = React.useState("None");
   const handleChange = (event) => {
     setCurrency(event.target.value);
   };
+
+  const [gig, setUserData] = useState({
+    title: "",
+    budget: "",
+    category: "",
+    gigDescription: "",
+  });
+  const [worker, setWorkerData] = useState({
+    Name: "",
+    about: "",
+    city: "",
+    email: "",
+    contact: "",
+  });
+
+  const callAboutPage = async () => {
+    console.log("Check");
+    try {
+      const res = await fetch("/gig/622cbfca3ef3211986716f5a", {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+      console.log(data);
+      setUserData(data);
+
+      if (!res.status === 200) {
+        const error = new Error(res.error);
+        throw error;
+      }
+
+      const res2 = await fetch("/worker/6234f89faae658b392732b65", {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data2 = await res2.json();
+      console.log(data2);
+      setWorkerData(data2);
+
+      if (!res2.status === 200) {
+        const error = new Error(res2.error);
+        throw error;
+      }
+    } catch (err) {
+      console.log(err);
+      // history.push('/login');
+    }
+  };
+
+  useEffect(() => {
+    callAboutPage();
+  }, []);
+
   //   const [currency, setCurrency] = React.useState("None");
 
   //   const handleChange = (event) => {
@@ -149,22 +210,20 @@ export default function Gig(props) {
                       {/* </div> */}
                     </GridItem>
                     <GridItem md={6}>
-                      <h1 className={classes.name}>M.Wadood </h1>
+                      <h1 className={classes.name}> {worker.Name} </h1>
                       <h4>
                         <i className="fas fa-map-marker-alt">
-                          <span className={classes.data}>Lahore</span>
+                          <span className={classes.data}>{worker.city}</span>
                         </i>
                       </h4>
                       <h4>
                         <i className="fas fa-mobile-alt">
-                          <span className={classes.data}>0333-6655509</span>
+                          <span className={classes.data}>{worker.contact}</span>
                         </i>
                       </h4>
                       <h4>
                         <i className="fas fa-envelope">
-                          <span className={classes.data}>
-                            muhammadwadoodulhaq@gmail.com
-                          </span>
+                          <span className={classes.data}>{worker.email}</span>
                         </i>
                       </h4>
                       <h4>
@@ -181,18 +240,18 @@ export default function Gig(props) {
                           {" "}
                           Make Payment
                         </Button>
-                        <Button color="green" onClick={() => toggleWidget()}>
+                        {/* <Button color="green" onClick={() => toggleWidget()}> 
                           {" "}
                           Chat <i className="fa fa-comment" />
-                        </Button>
+                        </Button>*/}
                         <div className="App">
-                          <Widget
+                          {/* <Widget 
                             handleNewUserMessage={handleNewUserMessage}
                             profileAvatar={logo}
                             // launcher={(handleToggle) => getCustomLauncher(handleToggle)}
                             title="Chat"
                             // subtitle="And my cool subtitle"
-                          />
+                          />*/}
                         </div>
                         <Dialog
                           classes={{
@@ -314,22 +373,9 @@ export default function Gig(props) {
                       </h3>*/}
                       <h3 className={classes.head}>
                         <strong>Gig Description</strong>
+                        <p> {gig.gigdescription} </p>
                       </h3>
-                      <p>
-                        I have 1.5 years apprenticeship experience in Low volt.
-                        I paint, can help a full renovation, and installing
-                        devices is a breeze. 2 hour minimum. Anything over 30
-                        min will be $15 invoice for gas. Same Day price subject
-                        to change.I have 1.5 years apprenticeship experience in
-                        Low volt. I paint, can help a full renovation, and
-                        installing devices is a breeze. 2 hour minimum. Anything
-                        over 30 min will be $15 invoice for gas. Same Day price
-                        subject to change.I have 1.5 years apprenticeship
-                        experience in Low volt. I paint, can help a full
-                        renovation, and installing devices is a breeze. 2 hour
-                        minimum. Anything over 30 min will be $15 invoice for
-                        gas. Same Day price subject to change.
-                      </p>
+
                       <Divider
                         sx={{ width: 1020, m: 0.5 }}
                         orientation="horizontal"
@@ -337,18 +383,7 @@ export default function Gig(props) {
                       <h3 className={classes.head}>
                         <strong>About Worker</strong>
                       </h3>
-                      <p>
-                        I enjoy solving problem and finishing what I start. I
-                        approach every task with enthusiasm and and look to
-                        exceed client expectationsI enjoy solving problem and
-                        finishing what I start. I approach every task with
-                        enthusiasm and and look to exceed client expectations.I
-                        enjoy solving problem and finishing what I start. I
-                        approach every task with enthusiasm and and look to
-                        exceed client expectations.I approach every task with
-                        enthusiasm and and look to exceed client expectations.I
-                        enjoy solving problem and finishing what I start.
-                      </p>
+                      <p> {worker.about} </p>
 
                       <h3 className={classes.head}>
                         <strong>Worker Reviews </strong>

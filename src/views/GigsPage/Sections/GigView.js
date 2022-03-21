@@ -76,7 +76,7 @@ export default function GigView() {
   //fetch dat afrom database
 
   const [gig, setUserData] = useState({
-    gigTitle: "",
+    title: "",
     budget: "",
     category: "",
     gigDescription: "",
@@ -85,7 +85,7 @@ export default function GigView() {
   const callAboutPage = async () => {
     console.log("Check");
     try {
-      const res = await fetch("/gig/622c99f4f4fa4ab53c83d359", {
+      const res = await fetch("/gig/6234f18caae658b392732b5e", {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -140,7 +140,7 @@ export default function GigView() {
             <Link to="gig">
               <img src={gig1} alt="..." className={imageClasses} />
               <CardBody>
-                <h4 className={classes.cardTitle}>{gig.gigTitle}</h4>
+                <h4 className={classes.cardTitle}>{gig.title}</h4>
                 <p className={classes.description}>
                   {/* {console.log(userData, "HELLO!")} */}
                   <strong>Budget: </strong>${gig.budget}
@@ -149,7 +149,7 @@ export default function GigView() {
                   {gig.category}
                   <br />
                   <strong>Description: </strong>
-                  {gig.gigDescription}
+                  {gig.gigdescription}
                 </p>
               </CardBody>
             </Link>

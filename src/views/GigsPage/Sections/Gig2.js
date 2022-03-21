@@ -13,10 +13,10 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Divider from "@mui/material/Divider";
 
-import { Widget, addResponseMessage, toggleWidget } from "react-chat-widget";
+//import { Widget, addResponseMessage, toggleWidget } from "react-chat-widget";
 
-import "react-chat-widget/lib/styles.css";
-import logo from "assets/img/faces/test1.jpg";
+//import "react-chat-widget/lib/styles.css";
+//import logo from "assets/img/faces/test1.jpg";
 
 // import Avatar from "@mui/material/Avatar";
 // import Image from "@mui/material/Image";
@@ -66,18 +66,18 @@ const currencies = [
 ];
 export default function Gig(props) {
   useEffect(() => {
-    addResponseMessage("How may I be of your assistance?");
+    //addResponseMessage("How may I be of your assistance?");
   }, []);
   const [currency, setCurrency] = React.useState("None");
   const handleChange = (event) => {
     setCurrency(event.target.value);
   };
-  const handleNewUserMessage = (newMessage) => {
-    console.log(`New message incoming! ${newMessage}`);
-    // Now send the message throught the backend API
-    // isWidgetOpened(false);
-    toggleWidget();
-  };
+  // const handleNewUserMessage = (newMessage) => {
+  //console.log(`New message incoming! ${newMessage}`);
+  // Now send the message throught the backend API
+  // isWidgetOpened(false);
+  //toggleWidget();
+  // };
   //   const [currency, setCurrency] = React.useState("None");
 
   //   const handleChange = (event) => {
@@ -178,17 +178,17 @@ export default function Gig(props) {
                         <Button color="green" href="/payment-page">
                           Make Payment
                         </Button>
-                        <Button color="green" onClick={() => toggleWidget()}>
+                        {/* <Button color="green" onClick={() => toggleWidget()}> 
                           Chat <i className="fa fa-comment" />
-                        </Button>
+                        </Button>*/}
                         <div className="App">
-                          <Widget
+                          {/* <Widget
                             handleNewUserMessage={handleNewUserMessage}
                             profileAvatar={logo}
                             // launcher={(handleToggle) => getCustomLauncher(handleToggle)}
                             title="Chat"
                             // subtitle="And my cool subtitle"
-                          />
+                          /> */}
                         </div>
                         <Dialog
                           classes={{
