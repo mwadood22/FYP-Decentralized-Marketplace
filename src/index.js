@@ -49,7 +49,7 @@ ReactDOM.render(
       <Route path="/creategig-page" component={CreateGig} />
       <Route path="/createjob-page" component={CreateJob} />
       <Route path="/payment-page" component={MakePayment} />
-      <Route path="/gig" component={Gig} />
+      <Route path="/gig/:gigId" component={Gig} />
       <Route path="/gig2" component={Gig2} />
       {/* <Route path="/chat" component={Chat} /> */}
 

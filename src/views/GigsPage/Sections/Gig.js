@@ -71,6 +71,7 @@ const currencies = [
     value: "Multan",
   },
 ];
+
 export default function Gig(props) {
   useEffect(() => {
     //addResponseMessage("How may I be of your assistance?");
@@ -93,11 +94,13 @@ export default function Gig(props) {
     email: "",
     contact: "",
   });
-
+  // console.log(props.location.param1);
+  const { ...temp } = props;
+  const gigId = temp.match.params.gigId;
   const callAboutPage = async () => {
     console.log("Check");
     try {
-      const res = await fetch("/gig/622cbfca3ef3211986716f5a", {
+      const res = await fetch("/gig/" + gigId, {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -134,7 +137,6 @@ export default function Gig(props) {
       // history.push('/login');
     }
   };
-
   useEffect(() => {
     callAboutPage();
   }, []);
@@ -152,6 +154,9 @@ export default function Gig(props) {
   }, 700);
   const classes = useStyles();
   const { ...rest } = props;
+
+  console.log(rest.match.params.gigId);
+
   const imageClasses1 = classNames(classes.imgCard);
 
   const imageClasses = classNames(
@@ -373,7 +378,8 @@ export default function Gig(props) {
                       </h3>*/}
                       <h3 className={classes.head}>
                         <strong>Gig Description</strong>
-                        <p> {gig.gigdescription} </p>
+                        <p> {gig.gigDescription} </p>
+                        {console.log(gig.gigDescription)}
                       </h3>
 
                       <Divider
@@ -383,7 +389,7 @@ export default function Gig(props) {
                       <h3 className={classes.head}>
                         <strong>About Worker</strong>
                       </h3>
-                      <p> {worker.about} </p>
+                      {/* <p> {worker.about} </p> */}
 
                       <h3 className={classes.head}>
                         <strong>Worker Reviews </strong>

@@ -71,13 +71,15 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 Transition.displayName = "Transition";
+// var gigid = "";
 
 export default function GigView() {
   //fetch data from database
-
+  // var gigid = "";
   const [gig, setUserData] = useState({
     gigs: [
       {
+        _id: "",
         gigTitle: "",
         budget: "",
         category: "",
@@ -99,6 +101,10 @@ export default function GigView() {
       const data = await res.json();
       // console.log(data);
       setUserData(data);
+      // gigid = {
+      //   pathname: "/gig",
+      //   // param1: gig._id,
+      // };
 
       if (!res.status === 200) {
         const error = new Error(res.error);
@@ -144,7 +150,7 @@ export default function GigView() {
           return (
             <GridItem xs={12} sm={12} md={3} key={index}>
               <Card className={classes.card}>
-                <Link to="gig">
+                <Link to={"gig/" + gigs._id}>
                   <img src={gig1} alt="..." className={imageClasses} />
                   <CardBody>
                     <h4 className={classes.cardTitle}>{gigs.title}</h4>
