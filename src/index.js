@@ -22,6 +22,7 @@ import FindJobs from "views/FindJobs/FindJobs.js";
 import WorkerDashboard from "views/WorkerDashboard/WorkerDashboard.js";
 import CreateGig from "views/GigsPage/Sections/CreateGig.js";
 import CreateJob from "views/CustomJob/Sections/CreateJob.js";
+import UpdateJob from "views/CustomJob/Sections/UpdateJob.js";
 import MakePayment from "views/MakePayment/MakePayment.js";
 import Gig from "views/GigsPage/Sections/Gig.js";
 import Gig2 from "views/GigsPage/Sections/Gig2.js";
@@ -48,6 +49,7 @@ ReactDOM.render(
       <Route path="/worker-dashboard" component={WorkerDashboard} />
       <Route path="/creategig-page" component={CreateGig} />
       <Route path="/createjob-page" component={CreateJob} />
+      <Route path="/updatejob-page" component={UpdateJob} />
       <Route path="/payment-page" component={MakePayment} />
       <Route path="/gig/:gigId" component={Gig} />
       <Route path="/gig2" component={Gig2} />

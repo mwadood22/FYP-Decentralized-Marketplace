@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 // core components
 
 import Button from "components/CustomButtons/Button.js";
+import { Delete, Edit } from "@material-ui/icons";
 
 import Card from "components/Card/Card.js";
 // import CardBody from "components/Card/CardBody.js";
@@ -123,16 +124,38 @@ export default function FindJobs() {
                   <br /> <br />
                   <strong>Max bid: {job.budget}</strong>
                   <hr />
-                  <Button
-                    color="green"
-                    size="md"
-                    //rel="noopener noreferrer"
-                    onClick={() => setClassicModal(true)}
-                    className={classes.jobBtn}
-                  >
-                    <i className="fas fa-dollar-sign" />
-                    View Bids
-                  </Button>
+                  <GridContainer>
+                    <GridItem xs={12} sm={12} md={10}>
+                      <Button
+                        color="green"
+                        size="md"
+                        //rel="noopener noreferrer"
+                        onClick={() => setClassicModal(true)}
+                        className={classes.jobBtn}
+                      >
+                        <i className="fas fa-dollar-sign" />
+                        View Bids
+                      </Button>
+                    </GridItem>
+
+                    <GridItem xs={12} sm={12} md={1}>
+                      <Link
+                        to="/updatejob-page"
+                        className={classes.dropdownLink}
+                      >
+                        <Delete className={classes.inputIconsColor} />
+                      </Link>
+                    </GridItem>
+
+                    <GridItem xs={12} sm={12} md={1}>
+                      <Link
+                        to="/updatejob-page"
+                        className={classes.dropdownLink}
+                      >
+                        <Edit className={classes.inputIconsColor} />
+                      </Link>
+                    </GridItem>
+                  </GridContainer>
                   <Dialog
                     classes={{
                       root: classes.center,
