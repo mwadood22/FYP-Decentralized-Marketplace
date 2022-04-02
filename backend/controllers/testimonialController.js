@@ -13,30 +13,30 @@ MongoClient.connect(url, function (err, db) {
 exports.index = async (req, res) => {
   //   console.log("All gigs list");
   dbo
-    .collection("WorkerData")
+    .collection("Testimonials")
     .find()
-    .toArray(function (err, workers) {
+    .toArray(function (err, testimonials) {
       if (err) {
         return res.status(400).json({ msg: "Error" });
       }
       //   console.log(gigs);
-      return res.json({ workers });
+      return res.json({ testimonials });
     });
 };
 
 exports.create = (req, res) => {
   //   console.log("All gigs list");
-  const worker = req.body;
+  const testimonial = req.body;
   //   console.log(gig);
-  dbo.collection("WorkerData").insert(worker);
-  return res.json({ worker });
+  dbo.collection("Testimonials").insert(testimonial);
+  return res.json({ testimonial });
 };
 
 exports.delete = (req, res) => {
   //   console.log("All gigs list");
   const { id } = req.params;
   console.log(id);
-  dbo.collection("WorkerData").remove({ _id: ObjectId(id) });
+  dbo.collection("Testimonials").remove({ _id: ObjectId(id) });
   return res.json({ msg: "deleted" });
 };
 
@@ -45,13 +45,13 @@ exports.show = (req, res) => {
   const { id } = req.params;
   console.log(id);
   dbo
-    .collection("WorkerData")
-    .findOne({ _id: ObjectId(id) }, function (err, workers) {
+    .collection("Testimonials")
+    .findOne({ _id: ObjectId(id) }, function (err, testimonials) {
       if (err) {
         return res.status(400).json({ msg: "Error" });
       }
       //   console.log(gigs);
-      return res.json(workers);
+      return res.json(testimonials);
     });
   //   return res.json({ gigs });
 };

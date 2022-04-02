@@ -85,7 +85,7 @@ export default function Gig(props) {
     title: "",
     budget: "",
     category: "",
-    gigDescription: "",
+    gigdescription: "",
   });
   const [worker, setWorkerData] = useState({
     Name: "",
@@ -116,7 +116,7 @@ export default function Gig(props) {
         throw error;
       }
 
-      const res2 = await fetch("/worker/6234f89faae658b392732b65", {
+      const res2 = await fetch("/worker/62487593b4a32fa9d942b3c3", {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -378,8 +378,8 @@ export default function Gig(props) {
                       </h3>*/}
                       <h3 className={classes.head}>
                         <strong>Gig Description</strong>
-                        <p> {gig.gigDescription} </p>
-                        {console.log(gig.gigDescription)}
+                        <p> {gig.gigdescription} </p>
+                        {console.log(gig.gigdescription)}
                       </h3>
 
                       <Divider
@@ -388,6 +388,7 @@ export default function Gig(props) {
                       />
                       <h3 className={classes.head}>
                         <strong>About Worker</strong>
+                        <p>{worker.about}</p>
                       </h3>
                       {/* <p> {worker.about} </p> */}
 
@@ -406,10 +407,7 @@ export default function Gig(props) {
                           </div>
                           <div className={classes.sliderText}>
                             <p className={classes.p}>
-                              “Very professional. Made sure the job was
-                              completed, even though it went well over my
-                              estimate. Also made suggestions to make things
-                              easier down the line. Would recommend highly.”
+                              <p>{worker.reviews}</p>
                             </p>
                             <p className={classes.p1}>M.Wadood</p>
                           </div>
@@ -424,8 +422,7 @@ export default function Gig(props) {
                           </div>
                           <div className={classes.sliderText}>
                             <p className={classes.p}>
-                              “Had the best experience possible. Did anything to
-                              get the job done and can’t thank him enough.”
+                              <p>{worker.reviews}</p>
                             </p>
                             <p className={classes.p1}>M.Wadood</p>
                           </div>

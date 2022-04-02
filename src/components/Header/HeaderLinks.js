@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import Tooltip from "@material-ui/core/Tooltip";
+//import Tooltip from "@material-ui/core/Tooltip";
 
 // @material-ui/icons
 import { People, Apps, CloudDownload } from "@material-ui/icons";
@@ -153,32 +153,32 @@ export default function HeaderLinks(props) {
       </ListItem>
 
       <ListItem className={classes.listItem}>
-        <Tooltip
+        {/* <Tooltip
           id="instagram-tooltip"
           title="Follow us on instagram"
           placement={window.innerWidth > 959 ? "top" : "left"}
           classes={{ tooltip: classes.tooltip }}
-        >
-          <CustomDropdown
-            noLiPadding
-            buttonProps={{
-              className: classes.navLink,
-              color: "transparent",
-            }}
-            buttonIcon={People}
-            dropdownList={[
-              <Link to="/login-page" className={classes.dropdownLink}>
-                Login
-              </Link>,
-              <Link to="/signup-page" className={classes.dropdownLink}>
-                Sign-Up
-              </Link>,
-              <Link to="/profile-page" className={classes.dropdownLink}>
-                Profile
-              </Link>,
-            ]}
-          />
-        </Tooltip>
+        > */}
+        <CustomDropdown
+          noLiPadding
+          buttonProps={{
+            className: classes.navLink,
+            color: "transparent",
+          }}
+          buttonIcon={People}
+          dropdownList={[
+            <Link to="/login-page" className={classes.dropdownLink}>
+              Login
+            </Link>,
+            <Link to="/signup-page" className={classes.dropdownLink}>
+              Sign-Up
+            </Link>,
+            <Link to="/profile-page" className={classes.dropdownLink}>
+              Profile
+            </Link>,
+          ]}
+        />
+        {/* </Tooltip> */}
       </ListItem>
     </List>
   );

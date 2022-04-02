@@ -80,7 +80,7 @@ export default function GigView() {
     gigs: [
       {
         _id: "",
-        gigTitle: "",
+        title: "",
         budget: "",
         category: "",
         gigdescription: "",
@@ -162,7 +162,7 @@ export default function GigView() {
                       {gigs.category}
                       <br />
                       <strong>Description: </strong>
-                      {gigs.gigDescription}
+                      {gigs.gigdescription}
                     </p>
                   </CardBody>
                 </Link>

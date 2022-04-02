@@ -1,5 +1,6 @@
 var MongoClient = require("mongodb").MongoClient;
-var url = "mongodb://localhost:27017/";
+var url =
+  "mongodb+srv://Arooj:aroojfyp@markazcluster.qnkzs.mongodb.net/Markaz?retryWrites=true&w=majority";
 var ObjectId = require("mongodb").ObjectId;
 
 var dbo = null;
