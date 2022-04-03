@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // import InputAdornment from "@material-ui/core/InputAdornment";
@@ -57,6 +57,52 @@ const currencies = [
 ];
 
 export default function WorkerPage(props) {
+  const [worker, setWorkerData] = useState({
+    Name: "",
+    picture: "",
+    city: "",
+    contact: "",
+    skills: "",
+    about: "",
+  });
+
+  let name, value;
+  const handleInputs = (e) => {
+    name = e.target.name;
+    value = e.target.value;
+    console.log(e);
+    setWorkerData({ ...worker, [name]: value });
+  };
+  const postData = async (e) => {
+    e.preventDefault();
+    console.log(e.target.value);
+    const { Name, picture, city, contact, skills, about } = worker;
+    const res = await fetch("/worker/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        Name,
+        picture,
+        city,
+        contact,
+        skills,
+        about,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (data.status === 42 || !data) {
+      window.alert("Invalid registeration");
+      console.log("Invalid registeration");
+    } else {
+      // console.log(data);
+      // history.push("/landing-page");
+    }
+  };
+
   const [currency, setCurrency] = React.useState("None");
 
   const handleChange = (event) => {
@@ -103,8 +149,11 @@ export default function WorkerPage(props) {
                         margin="normal"
                         required
                         fullWidth
-                        id="username"
-                        label="Username"
+                        id="Name"
+                        label="Name"
+                        name="Name"
+                        value={worker.Name}
+                        onChange={handleInputs}
                         InputProps={{
                           type: "text",
                           endAdornment: (
@@ -121,8 +170,11 @@ export default function WorkerPage(props) {
                         margin="normal"
                         required
                         fullWidth
-                        id="photo"
-                        label="Photo"
+                        id="picture"
+                        label="picture"
+                        name="picture"
+                        value={worker.picture}
+                        onChange={handleInputs}
                         InputProps={{
                           type: "text",
                           endAdornment: (
@@ -140,8 +192,11 @@ export default function WorkerPage(props) {
                         margin="normal"
                         required
                         fullWidth
-                        id="language"
-                        label="Language"
+                        id="contact"
+                        label="contact"
+                        name="contact"
+                        value={worker.contact}
+                        onChange={handleInputs}
                         InputProps={{
                           type: "text",
                           endAdornment: (
@@ -159,7 +214,10 @@ export default function WorkerPage(props) {
                         required
                         fullWidth
                         id="city"
-                        label="City"
+                        label="city"
+                        name="city"
+                        value={worker.city}
+                        onChange={handleInputs}
                         InputProps={{
                           type: "text",
                           endAdornment: (
@@ -208,13 +266,20 @@ export default function WorkerPage(props) {
                         multiline
                         rows={8}
                         textarea
-                        id="desc"
-                        label="Tell us about yourself"
+                        id="about"
+                        label="tell us about yourself"
+                        name="about"
+                        value={worker.about}
+                        onChange={handleInputs}
                       />
                     </GridItem>
 
                     <GridItem>
-                      <Button color="black" href="/worker-dashboard">
+                      <Button
+                        color="black"
+                        href="/worker-dashboard"
+                        onClick={postData}
+                      >
                         Get started
                       </Button>
                     </GridItem>

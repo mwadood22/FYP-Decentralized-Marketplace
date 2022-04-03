@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+
 // nodejs library that concatenates classes
 //import classNames from "classnames";
 //import Carousel from "react-slick";
@@ -15,6 +16,7 @@ import { Link } from "react-router-dom";
 // core components
 //import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
+import GridContainer from "components/Grid/GridItem.js";
 //import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 //import CardBody from "components/Card/CardBody.js";
@@ -23,19 +25,60 @@ import Card from "components/Card/Card.js";
 import styles from "assets/jss/material-kit-react/views/landingPageSections/teamStyle.js";
 //import GridContainer from "components/Grid/GridContainer";
 
-import carpenter from "assets/img/services/carpenter.jpg";
-import chef from "assets/img/services/chef.jpg";
-import driver from "assets/img/services/driver.jpg";
-import electrician from "assets/img/services/electrician.jpg";
-import gardener from "assets/img/services/gardener.jpg";
+//import carpenter from "assets/img/services/carpenter.jpg";
+//import chef from "assets/img/services/chef.jpg";
+//import driver from "assets/img/services/driver.jpg";
+//import electrician from "assets/img/services/electrician.jpg";
+//import gardener from "assets/img/services/gardener.jpg";
 //import painter from "assets/img/services/painter.jpg";
-import plumbing from "assets/img/services/plumbing.jpg";
+//import plumbing from "assets/img/services/plumbing.jpg";
 import helper from "assets/img/services/helper.jpg";
 //import { cardTitle } from "assets/jss/material-kit-react";
 
 const useStyles = makeStyles(styles);
 
 export default function ServicesSection() {
+  const [category, setUserData] = useState({
+    categories: [
+      {
+        _id: "",
+        Name: "",
+      },
+    ],
+  });
+
+  const callAboutPage = async () => {
+    console.log("Check");
+    try {
+      const res = await fetch("/category", {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+      // console.log(data);
+      setUserData(data);
+      // gigid = {
+      //   pathname: "/gig",
+      //   // param1: gig._id,
+      // };
+
+      if (!res.status === 200) {
+        const error = new Error(res.error);
+        throw error;
+      }
+    } catch (err) {
+      console.log(err);
+      // history.push('/login');
+    }
+  };
+
+  useEffect(() => {
+    callAboutPage();
+  }, []);
+
   const classes = useStyles();
   const settings = {
     dots: false,
@@ -54,18 +97,31 @@ export default function ServicesSection() {
       <Slider {...settings}>
         <div className={classes.marginClass}>
           <Link to="/service-page">
-            <GridItem xs={12} sm={12}>
-              <Card carousel className={classes.cardLayout}>
-                <img
-                  src={helper}
-                  alt="..."
-                  className={classes.serviceCardImg}
-                />
-                <div className={classes.serviceCardText}>Lend a hand</div>
-                <div className={classes.serviceCardHeading}>Helper</div>
-              </Card>
-            </GridItem>
-            {/* <GridItem xs={12} sm={12} className={classes.marginAuto}>
+            <GridContainer>
+              {console.log(category)}
+              {category.categories.map((categories, index) => {
+                return (
+                  <GridItem xs={12} sm={12} key={index}>
+                    <Card carousel className={classes.cardLayout}>
+                      <img
+                        src={helper}
+                        alt="..."
+                        className={classes.serviceCardImg}
+                      />
+                      <div className={classes.serviceCardText}>Lend a hand</div>
+                      <div className={classes.serviceCardHeading}>
+                        {" "}
+                        {categories.Name}
+                      </div>
+                    </Card>
+                  </GridItem>
+                );
+              })}
+            </GridContainer>
+          </Link>
+        </div>
+
+        {/* <GridItem xs={12} sm={12} className={classes.marginAuto}>
             <Card carousel>
               <h4 className={classes.infoCardHeader}>
                 AR Huzaifa
@@ -106,10 +162,8 @@ export default function ServicesSection() {
               </CardFooter>
             </Card>
           </GridItem> */}
-          </Link>
-        </div>
 
-        <div>
+        {/* <div>
           <Link to="/service-page">
             <GridItem xs={12} sm={12}>
               <Card carousel className={classes.cardLayout}>
@@ -233,9 +287,9 @@ export default function ServicesSection() {
               </Card>
             </GridItem>
           </Link>
-        </div>
-      </Slider>
-      {/* <GridItem xs={12} sm={12} md={4}>
+        </div> */}
+
+        {/* <GridItem xs={12} sm={12} md={4}>
           <Card carousel>
             <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
               <img src={team2} alt="..." className={imageClasses} />
@@ -319,7 +373,8 @@ export default function ServicesSection() {
             </CardFooter>
           </Card>
         </GridItem> */}
-      {/* </Slider> */}
+        {/* </Slider> */}
+      </Slider>
     </div>
   );
 }

@@ -80,7 +80,7 @@ export default function GigView() {
     gigs: [
       {
         _id: "",
-        gigTitle: "",
+        title: "",
         budget: "",
         category: "",
         gigdescription: "",
