@@ -162,7 +162,7 @@ export default function GigView() {
                       {gigs.category}
                       <br />
                       <strong>Description: </strong>
-                      {gigs.gigDescription}
+                      {gigs.gigdescription}
                     </p>
                   </CardBody>
                 </Link>

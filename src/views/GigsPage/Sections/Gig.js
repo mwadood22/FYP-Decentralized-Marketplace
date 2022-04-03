@@ -116,7 +116,7 @@ export default function Gig(props) {
         throw error;
       }
 
-      const res2 = await fetch("/worker/6234f89faae658b392732b65", {
+      const res2 = await fetch("/worker/62487593b4a32fa9d942b3c3", {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -378,8 +378,8 @@ export default function Gig(props) {
                       </h3>*/}
                       <h3 className={classes.head}>
                         <strong>Gig Description</strong>
-                        <p> {gig.gigDescription} </p>
-                        {console.log(gig.gigDescription)}
+                        <p> {gig.gigdescription} </p>
+                        {console.log(gig.gigdescription)}
                       </h3>
 
                       <Divider

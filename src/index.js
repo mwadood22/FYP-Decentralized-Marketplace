@@ -21,6 +21,7 @@ import WorkerPage from "views/WorkerPage/WorkerPage.js";
 import FindJobs from "views/FindJobs/FindJobs.js";
 import WorkerDashboard from "views/WorkerDashboard/WorkerDashboard.js";
 import CreateGig from "views/GigsPage/Sections/CreateGig.js";
+import UpdateGig from "views/GigsPage/Sections/UpdateGig.js";
 import CreateJob from "views/CustomJob/Sections/CreateJob.js";
 import UpdateJob from "views/CustomJob/Sections/UpdateJob.js";
 import MakePayment from "views/MakePayment/MakePayment.js";
@@ -48,6 +49,7 @@ ReactDOM.render(
       <Route path="/findjobs-page" component={FindJobs} />
       <Route path="/worker-dashboard" component={WorkerDashboard} />
       <Route path="/creategig-page" component={CreateGig} />
+      <Route path="/updategig-page" component={UpdateGig} />
       <Route path="/createjob-page" component={CreateJob} />
       <Route path="/updatejob-page" component={UpdateJob} />
       <Route path="/payment-page" component={MakePayment} />

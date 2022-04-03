@@ -1,5 +1,6 @@
 var MongoClient = require("mongodb").MongoClient;
-var url = "mongodb://localhost:27017/";
+var url =
+  "mongodb+srv://Arooj:aroojfyp@markazcluster.qnkzs.mongodb.net/Markaz?retryWrites=true&w=majority";
 var ObjectId = require("mongodb").ObjectId;
 
 var dbo = null;
@@ -12,7 +13,7 @@ MongoClient.connect(url, function (err, db) {
 exports.index = async (req, res) => {
   //   console.log("All gigs list");
   dbo
-    .collection("workerData")
+    .collection("WorkerData")
     .find()
     .toArray(function (err, workers) {
       if (err) {
@@ -27,7 +28,7 @@ exports.create = (req, res) => {
   //   console.log("All gigs list");
   const worker = req.body;
   //   console.log(gig);
-  dbo.collection("workerData").insert(worker);
+  dbo.collection("WorkerData").insert(worker);
   return res.json({ worker });
 };
 
@@ -35,7 +36,7 @@ exports.delete = (req, res) => {
   //   console.log("All gigs list");
   const { id } = req.params;
   console.log(id);
-  dbo.collection("workerData").remove({ _id: ObjectId(id) });
+  dbo.collection("WorkerData").remove({ _id: ObjectId(id) });
   return res.json({ msg: "deleted" });
 };
 
@@ -44,7 +45,7 @@ exports.show = (req, res) => {
   const { id } = req.params;
   console.log(id);
   dbo
-    .collection("workerData")
+    .collection("WorkerData")
     .findOne({ _id: ObjectId(id) }, function (err, workers) {
       if (err) {
         return res.status(400).json({ msg: "Error" });
