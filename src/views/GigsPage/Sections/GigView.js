@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
+// import { useHistory } from "react-router-dom";
+
 //import Carousel from "react-slick";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
+// import Button from "components/CustomButtons/Button.js";
 
 //import Slider from "react-slick";
 //import Parallax from "components/Parallax/Parallax.js";
@@ -14,6 +17,9 @@ import { Link } from "react-router-dom";
 // core components
 //import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
+import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
+import { People } from "@material-ui/icons";
+
 //import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
@@ -74,6 +80,7 @@ Transition.displayName = "Transition";
 // var gigid = "";
 
 export default function GigView() {
+  // const history = useHistory();
   //fetch data from database
   // var gigid = "";
   const [gig, setUserData] = useState({
@@ -87,6 +94,36 @@ export default function GigView() {
       },
     ],
   });
+  const DeleteGig = async (id) => {
+    console.log("Check");
+    try {
+      const res = await fetch(`/gig/${id}`, {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      // history.push("/gigs-page");
+      window.location.reload();
+
+      // const data = await res.json();
+      // console.log(data);
+      // setUserData(data);
+      // gigid = {
+      //   pathname: "/gig",
+      //   // param1: gig._id,
+      // };
+      // history.push("/gigs-page");
+
+      if (!res.status === 200) {
+        const error = new Error(res.error);
+        throw error;
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const callAboutPage = async () => {
     console.log("Check");
@@ -166,6 +203,40 @@ export default function GigView() {
                     </p>
                   </CardBody>
                 </Link>
+                <CustomDropdown
+                  noLiPadding
+                  buttonProps={{
+                    className: classes.navLink,
+                    color: "transparent",
+                  }}
+                  buttonIcon={People}
+                  dropdownList={[
+                    <Link
+                      key={index}
+                      to={"updategig-page/" + gigs._id}
+                      className={classes.dropdownLink}
+                    >
+                      Update
+                    </Link>,
+                    <Link
+                      onClick={() => DeleteGig(gigs._id)}
+                      key={index}
+                      // to={"gigs-page/"}
+                      className={classes.dropdownLink}
+                    >
+                      Delete
+                    </Link>,
+                    // <Button
+                    //   key={index}
+                    //   color="black"
+                    //   // href="/gigs-page"
+                    //   // disabled={gig.title === "" || gig.budget === ""}
+                    //   // onClick={DeleteGig(gigs._id)}
+                    // >
+                    //   Delete
+                    // </Button>,
+                  ]}
+                />
               </Card>
             </GridItem>
           );

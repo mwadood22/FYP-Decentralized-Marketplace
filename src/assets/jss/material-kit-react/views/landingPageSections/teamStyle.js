@@ -1,7 +1,12 @@
-import { cardTitle, title } from "assets/jss/material-kit-react.js";
+import { container, cardTitle, title } from "assets/jss/material-kit-react.js";
 import imagesStyle from "assets/jss/material-kit-react/imagesStyles.js";
 
 const teamStyle = {
+  container: {
+    zIndex: "12",
+    color: "#FFFFFF",
+    ...container,
+  },
   serviceCardImg: {
     position: "relative",
     height: "100%",
@@ -141,13 +146,25 @@ const teamStyle = {
     marginLeft: "250px",
     marginRight: "100px",
   },
+  // card: {
+  //   width: "600px",
+  //   height: "400px",
+  //   "&:hover,&:focus": {
+  //     color: "#FFFFFF",
+  //     backgroundColor: "gray",
+  //     opacity: "70%",
+  //     boxShadow:
+  //       "0 14px 26px -12px rgba(153, 153, 153, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(153, 153, 153, 0.2)",
+  //   },
+  // },
   card: {
-    width: "600px",
-    height: "400px",
+    // margin: "auto",
+    color: "black",
+
     "&:hover,&:focus": {
-      color: "#FFFFFF",
-      backgroundColor: "gray",
-      opacity: "70%",
+      color: "black",
+      backgroundColor: "white",
+      opacity: "80%",
       boxShadow:
         "0 14px 26px -12px rgba(153, 153, 153, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(153, 153, 153, 0.2)",
     },

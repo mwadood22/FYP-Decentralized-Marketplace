@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 //import Carousel from "react-slick";
@@ -18,24 +18,41 @@ import CardBody from "components/Card/CardBody.js";
 //import CardFooter from "components/Card/CardFooter.js";
 import Paginations from "components/Pagination/Pagination.js";
 import { Link } from "react-router-dom";
+// import gig1 from "assets/img/gigs/gig1.jpg";
 
 import styles from "assets/jss/material-kit-react/views/landingPageSections/teamStyle.js";
 import GridContainer from "components/Grid/GridContainer";
 
-//import team1 from "assets/img/faces/avatar.jpg";
-import team2 from "assets/img/faces/christian.jpg";
-import team3 from "assets/img/faces/face1.jpg";
-import team4 from "assets/img/faces/face2.jpg";
-import team5 from "assets/img/faces/face3.jpg";
-import team6 from "assets/img/faces/face4.jpg";
-import team7 from "assets/img/faces/face5.jpg";
+import team1 from "assets/img/faces/avatar.jpg";
+// import team2 from "assets/img/faces/christian.jpg";
+// import team3 from "assets/img/faces/face1.jpg";
+// import team4 from "assets/img/faces/face2.jpg";
+// import team5 from "assets/img/faces/face3.jpg";
+// import team6 from "assets/img/faces/face4.jpg";
+// import team7 from "assets/img/faces/face5.jpg";
 //import team3 from "assets/img/faces/kendall.jpg";
 //import { cardTitle } from "assets/jss/material-kit-react";
 
 const useStyles = makeStyles(styles);
 
-export default function ServicesView() {
+export default function ServicesView(props) {
+  const { ...rest } = props;
+  console.log(rest);
+
+  const category = rest.category;
+  console.log(category);
   const classes = useStyles();
+  const [gig, setGigData] = useState({
+    gigs: [
+      {
+        _id: "",
+        title: "",
+        budget: "",
+        category: "",
+        gigdescription: "",
+      },
+    ],
+  });
   //   const settings = {
   //     dots: true,
   //     color: "black",
@@ -45,7 +62,38 @@ export default function ServicesView() {
   //     slidesToScroll: 1,
   //     autoplay: false,
   //   };
+  const callAboutPage = async () => {
+    console.log("Check");
+    try {
+      const res = await fetch(`/gig/category-wise/${category}`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+      // console.log(data);
+      setGigData(data);
+      // gigid = {
+      //   pathname: "/gig",
+      //   // param1: gig._id,
+      // };
+
+      if (!res.status === 200) {
+        const error = new Error(res.error);
+        throw error;
+      }
+    } catch (err) {
+      console.log(err);
+      // history.push('/login');
+    }
+  };
+
   const imageClasses = classNames(classes.imgCard);
+  useEffect(() => {
+    callAboutPage();
+  }, []);
   //const cardClasses = classNames(classes.cardTitle, classes.cardMargin);
   return (
     <div className={classes.section}>
@@ -215,8 +263,33 @@ export default function ServicesView() {
           </Card>
         </GridItem>
       </div> */}
-      <GridContainer>
-        <GridItem xs={12} sm={12} md={3}>
+      <div className={classes.section}>
+        <GridContainer>
+          {gig.gigs.map((gigs, index) => {
+            return (
+              <GridItem xs={12} sm={12} md={3} key={index}>
+                <Card className={classes.card}>
+                  <Link to={"gig/" + gigs._id}>
+                    <img src={team1} alt="..." className={imageClasses} />
+                    <CardBody>
+                      <h4 className={classes.cardTitle}>{gigs.title}</h4>
+                      <p className={classes.description}>
+                        {/* {console.log(userData, "HELLO!")} */}
+                        <strong>Budget: </strong>${gigs.budget}
+                        <br />
+                        <strong>Category: </strong>
+                        {gigs.category}
+                        <br />
+                        <strong>Description: </strong>
+                        {gigs.gigdescription}
+                      </p>
+                    </CardBody>
+                  </Link>
+                </Card>
+              </GridItem>
+            );
+          })}
+          {/* <GridItem xs={12} sm={12} md={3}>
           <Card carousel>
             <Link to="gig">
               <img src={team2} alt="..." className={imageClasses} />
@@ -264,7 +337,7 @@ export default function ServicesView() {
               </p>
             </CardBody>
             <CardFooter className={classes.justifyCenter}></CardFooter> */}
-          </Card>
+          {/* </Card>
         </GridItem>
         <GridItem xs={12} sm={12} md={3}>
           <Card carousel>
@@ -298,8 +371,9 @@ export default function ServicesView() {
               </CardBody>
             </Link>
           </Card>
-        </GridItem>
-      </GridContainer>
+        </GridItem> */}
+        </GridContainer>
+      </div>
       <Paginations
         pages={[
           { text: "PREV" },

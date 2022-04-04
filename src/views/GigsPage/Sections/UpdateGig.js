@@ -69,6 +69,8 @@ export default function WorkerPage(props) {
     category: "",
     gigdescription: "",
   });
+  const { ...temp } = props;
+  const gigId = temp.match.params.gigId;
   const [gig, setGig] = useState({
     _id: "",
     title: "",
@@ -115,7 +117,7 @@ export default function WorkerPage(props) {
   };
   const callAboutPage = async () => {
     try {
-      const res = await fetch("/gig/6246d701797cb14d3a82ff9a", {
+      const res = await fetch(`/gig/${gigId}`, {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -152,6 +154,7 @@ export default function WorkerPage(props) {
   }, 700);
   const classes = useStyles();
   const { ...rest } = props;
+  //   const gigId = rest.match.params.gigId;
   // const styles = {
   //   paperContainer: {
   //     //   backgroundImage: `url(${image})`,
@@ -273,6 +276,7 @@ export default function WorkerPage(props) {
                       <Button
                         color="black"
                         href="/gigs-page"
+                        // disabled={gig.title === "" || gig.budget === ""}
                         onClick={postData}
                       >
                         Update Gig

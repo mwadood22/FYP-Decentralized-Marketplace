@@ -24,6 +24,23 @@ exports.index = async (req, res) => {
     });
 };
 
+exports.filteredgigs = async (req, res) => {
+  //   console.log("All gigs list");
+  // console.log(req.params);
+  dbo
+    .collection("Gigs")
+    .find({
+      $or: [{ category: { $regex: req.params.category } }],
+    })
+    .toArray(function (err, gigs) {
+      if (err) {
+        return res.status(400).json({ msg: "Error" });
+      }
+      //   console.log(gigs);
+      return res.json({ gigs });
+    });
+};
+
 exports.create = (req, res) => {
   //   console.log("All gigs list");
   const gig = req.body;
