@@ -24,7 +24,8 @@ router.get("/job/", jobController.index);
 router.post("/job/create", jobController.create);
 // router.patch("/gig/", gigController.edit);
 router.delete("/job/:id", jobController.delete);
-router.get("/job/:id", jobController.show);
+//router.get("/job/:id", jobController.show);
+router.get("/job/:key", jobController.search);
 
 router.get("/testimonial/", testimonialController.index);
 router.post("/testimonial/create", testimonialController.create);
