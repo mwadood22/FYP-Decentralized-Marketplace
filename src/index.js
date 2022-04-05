@@ -40,7 +40,7 @@ ReactDOM.render(
       <Route path="/login-page" component={LoginPage} />
       <Route path="/signup-page" component={SignupPage} />
       <Route path="/contact-page" component={ContactPage} />
-      <Route path="/service-page" component={ServicePage} />
+      <Route path="/service-page/:category" component={ServicePage} />
       <Route path="/gigs-page" component={GigsPage} />
       <Route path="/customjobs-page" component={CustomJobs} />
       <Route path="/guidebuy-page" component={GuideBuyPage} />
@@ -49,7 +49,7 @@ ReactDOM.render(
       <Route path="/findjobs-page" component={FindJobs} />
       <Route path="/worker-dashboard" component={WorkerDashboard} />
       <Route path="/creategig-page" component={CreateGig} />
-      <Route path="/updategig-page" component={UpdateGig} />
+      <Route path="/updategig-page/:gigId" component={UpdateGig} />
       <Route path="/createjob-page" component={CreateJob} />
       <Route path="/updatejob-page" component={UpdateJob} />
       <Route path="/payment-page" component={MakePayment} />

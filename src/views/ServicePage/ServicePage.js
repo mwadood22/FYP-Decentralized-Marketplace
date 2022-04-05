@@ -35,6 +35,9 @@ const useStyles = makeStyles(styles);
 export default function LandingPage(props) {
   const classes = useStyles();
   const { ...rest } = props;
+  // console.log(rest);
+  const category = rest.match.params.category;
+  // console.log(category);
   return (
     <div>
       <Header
@@ -95,7 +98,7 @@ export default function LandingPage(props) {
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div className={classes.container}>
           {/* <ProductSection /> */}
-          <ServicesView />
+          <ServicesView category={category} />
           {/* <ClientSection /> */}
           {/* <TeamSection /> */}
           {/* <WorkSection /> */}

@@ -13,6 +13,7 @@ router.post("/gig/create", gigController.create);
 router.patch("/gig/", gigController.edit);
 router.delete("/gig/:id", gigController.delete);
 router.get("/gig/:id", gigController.show);
+router.get("/gig/category-wise/:category", gigController.filteredgigs);
 
 router.get("/worker/", workerController.index);
 router.post("/worker/create", workerController.create);

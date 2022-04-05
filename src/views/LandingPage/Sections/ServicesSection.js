@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 // core components
 //import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import GridContainer from "components/Grid/GridItem.js";
+// import GridContainer from "components/Grid/GridContainer";
 //import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 //import CardBody from "components/Card/CardBody.js";
@@ -92,34 +92,37 @@ export default function ServicesSection() {
   //const imageClasses = classNames(classes.imgCardTop);
   //const cardClasses = classNames(classes.cardTitle, classes.cardMargin);
   return (
+    // <div className={classes.container}>
     <div className={classes.section}>
       <h2 className={classes.title}>Explore our Services</h2>
       <Slider {...settings}>
-        <div className={classes.marginClass}>
-          <Link to="/service-page">
-            <GridContainer>
-              {console.log(category)}
-              {category.categories.map((categories, index) => {
-                return (
-                  <GridItem xs={12} sm={12} key={index}>
-                    <Card carousel className={classes.cardLayout}>
-                      <img
-                        src={helper}
-                        alt="..."
-                        className={classes.serviceCardImg}
-                      />
-                      <div className={classes.serviceCardText}>Lend a hand</div>
-                      <div className={classes.serviceCardHeading}>
-                        {" "}
-                        {categories.Name}
-                      </div>
-                    </Card>
-                  </GridItem>
-                );
-              })}
-            </GridContainer>
-          </Link>
-        </div>
+        {/* {console.log(category)} */}
+
+        {/* <GridContainer> */}
+        {category.categories.map((categories, index) => {
+          return (
+            <div className={classes.marginClass} key={index}>
+              <GridItem xs={12} sm={12} md={12} key={index}>
+                <Link to={"/service-page/" + categories.Name}>
+                  <Card carousel className={classes.cardLayout}>
+                    <img
+                      src={helper}
+                      alt="..."
+                      className={classes.serviceCardImg}
+                    />
+                    <div className={classes.serviceCardText}>Lend a hand</div>
+                    <div className={classes.serviceCardHeading}>
+                      {categories.Name}
+                    </div>
+                  </Card>
+                </Link>
+              </GridItem>
+            </div>
+          );
+        })}
+        {/* </GridContainer> */}
+        {/* </Link> */}
+        {/* </div> */}
 
         {/* <GridItem xs={12} sm={12} className={classes.marginAuto}>
             <Card carousel>
@@ -373,8 +376,9 @@ export default function ServicesSection() {
             </CardFooter>
           </Card>
         </GridItem> */}
-        {/* </Slider> */}
       </Slider>
+      {/* </Slider> */}
     </div>
+    //  </div>
   );
 }
