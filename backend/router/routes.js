@@ -1,5 +1,6 @@
 var express = require("express");
 var router = express.Router();
+const multer = require("multer");
 
 const gigController = require("../controllers/gigController");
 const workerController = require("../controllers/workerController");
@@ -7,9 +8,21 @@ const jobController = require("../controllers/jobController");
 const testimonialController = require("../controllers/testimonialController");
 const categoryController = require("../controllers/categoryController");
 
+//multer
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, __dirname);
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + "-" + file.originalname;
+    cb(null, file.fieldname + "-" + uniqueSuffix);
+  },
+});
+const upload = multer({ storage: storage });
+
 // Gig Routes
-router.get("/gig/", gigController.index);
-router.post("/gig/create", gigController.create);
+router.get("/gig/", upload.single("picture"), gigController.index);
+router.post("/gig/create", upload.single("picture"), gigController.create);
 router.patch("/gig/", gigController.edit);
 router.delete("/gig/:id", gigController.delete);
 router.get("/gig/:id", gigController.show);

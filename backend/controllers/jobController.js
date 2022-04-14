@@ -61,7 +61,10 @@ exports.search = async (req, res) => {
   await dbo
     .collection("CustomJobs")
     .find({
-      $or: [{ title: { $regex: req.params.key } }],
+      $or: [
+        { title: { $regex: req.params.key } },
+        // { address: { $regex: req.params.key } }
+      ],
     })
     .toArray(function (err, jobs) {
       if (err) {

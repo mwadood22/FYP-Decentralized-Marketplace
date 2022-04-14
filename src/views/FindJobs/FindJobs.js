@@ -206,7 +206,7 @@ export default function FindJobs(props) {
                             </Typography>
                             {jobs.description}
                             <br /> <br />
-                            <strong> {jobs.budget}</strong>
+                            <strong> Budget: {jobs.budget}</strong>
                             <Divider
                               sx={{ width: 1000, m: 0.5 }}
                               orientation="horizontal"

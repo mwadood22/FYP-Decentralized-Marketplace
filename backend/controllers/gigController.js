@@ -1,3 +1,7 @@
+const { Profiler } = require("react");
+const fs = require("fs");
+var path = require("path");
+
 var MongoClient = require("mongodb").MongoClient;
 var url =
   "mongodb+srv://Arooj:aroojfyp@markazcluster.qnkzs.mongodb.net/Markaz?retryWrites=true&w=majority";
@@ -12,15 +16,20 @@ MongoClient.connect(url, function (err, db) {
 
 exports.index = async (req, res) => {
   //   console.log("All gigs list");
+  //let profile = req.file.path;
+
   dbo
     .collection("Gigs")
     .find()
     .toArray(function (err, gigs) {
+      //gigs.myFile = profile ? profile : gigs.myFile;
       if (err) {
         return res.status(400).json({ msg: "Error" });
       }
       //   console.log(gigs);
-      return res.json({ gigs });
+      //let profile = req.file ? req.file.filename : null;
+
+      return res.json({ gigs: gigs });
     });
 };
 
@@ -43,10 +52,31 @@ exports.filteredgigs = async (req, res) => {
 
 exports.create = (req, res) => {
   //   console.log("All gigs list");
-  const gig = req.body;
+
+  //let profile = req.file ? req.file.filename : null;
+  //getBase64(profile).then((data) => console.log(data));
+  //profile = base64_encode(profile);
+  var profile = fs.readFileSync(req.file.path);
+  var encImg = profile.toString("base64");
+  var picture = new Buffer(encImg, "base64");
+
+  var gigTitle = req.body.gigTitle;
+  var budget = req.body.budget;
+  var category = req.body.category;
+  var gigdescription = req.body.gigdescription;
+
+  //const gig = req.body;
+  //let{gigTitle,budget,category,gigDescription,profile}=req.body;
+
   //   console.log(gig);
-  dbo.collection("Gigs").insert(gig);
-  return res.json({ gig });
+  dbo
+    .collection("Gigs")
+    .insertOne({ gigTitle, budget, category, gigdescription, picture });
+  // if (err) {
+  //   return res.status(400).json({ msg: "Error" });
+  // }
+  //return res.json({ gig });
+  return;
 };
 
 exports.delete = (req, res) => {
