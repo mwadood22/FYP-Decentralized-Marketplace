@@ -7,6 +7,7 @@ const workerController = require("../controllers/workerController");
 const jobController = require("../controllers/jobController");
 const testimonialController = require("../controllers/testimonialController");
 const categoryController = require("../controllers/categoryController");
+const bidsController = require("../controllers/bidsController");
 
 //multer
 const storage = multer.diskStorage({
@@ -27,6 +28,7 @@ router.patch("/gig/", gigController.edit);
 router.delete("/gig/:id", gigController.delete);
 router.get("/gig/:id", gigController.show);
 router.get("/gig/category-wise/:category", gigController.filteredgigs);
+router.get("/check", gigController.check);
 
 router.get("/worker/", workerController.index);
 router.post("/worker/create", workerController.create);
@@ -54,5 +56,8 @@ router.post("/category/create", categoryController.create);
 // router.patch("/gig/", gigController.edit);
 router.delete("/category/:id", categoryController.delete);
 router.get("/categeory/:id", categoryController.show);
+
+router.post("/bids/create", bidsController.create);
+router.get("/bids/:job_id", bidsController.show);
 
 module.exports = router;
