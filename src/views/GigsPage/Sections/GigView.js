@@ -31,7 +31,7 @@ import styles from "assets/jss/material-kit-react/views/landingPageSections/gigV
 import GridContainer from "components/Grid/GridContainer";
 
 //import team1 from "assets/img/faces/avatar.jpg";
-//import gig1 from "assets/img/gigs/gig1.jpg";
+import gig1 from "assets/img/gigs/gig1.jpg";
 // import gig2 from "assets/img/gigs/gig2.jpg";
 // import gig3 from "assets/img/gigs/gig3.jpg";
 // import gig4 from "assets/img/gigs/gig4.jpg";
@@ -83,7 +83,6 @@ export default function GigView() {
   // const history = useHistory();
   //fetch data from database
   // var gigid = "";
-  //var data = null;
   const [gig, setUserData] = useState({
     gigs: [
       {
@@ -92,7 +91,6 @@ export default function GigView() {
         budget: "",
         category: "",
         gigdescription: "",
-        picture: "",
       },
     ],
   });
@@ -211,31 +209,12 @@ export default function GigView() {
 
       <GridContainer>
         {console.log(gig)}
-
         {gig.gigs.map((gigs, index) => {
           return (
             <GridItem xs={12} sm={12} md={3} key={index}>
               <Card className={classes.card}>
                 <Link to={"gig/" + gigs._id}>
-                  {/* {(data = gigs.picture.toString("base64"))} */}
-                  {/* console.log(gigs.picture.toString("base64")) */}
-                  {/* {console.log(data)} */}
-
-                  {/* <img src="" alt="..." className={imageClasses} /> */}
-                  {/* <img
-                    src="data:image/<%=gigs.picture.image/png%>;base64,
-                     <%=gigs.picture.data.toString('base64')%>"
-                    alt="..."
-                    className={imageClasses}
-                  ></img> */}
-                  {/* <img
-                    src='data:image/png;base64,gigs.picture.toString("base64")'
-                    className={imageClasses}
-                  ></img> */}
-                  <img
-                    src={"data:image/png;base64," + gigs.picture}
-                    className={imageClasses}
-                  />
+                  <img src={gig1} alt="..." className={imageClasses} />
                   <CardBody>
                     <h4 className={classes.cardTitle}>{gigs.title}</h4>
                     <p className={classes.description}>

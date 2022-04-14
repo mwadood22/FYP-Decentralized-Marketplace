@@ -8,8 +8,6 @@ import { makeStyles } from "@material-ui/core/styles";
 //import Parallax from "components/Parallax/Parallax.js";
 
 // @material-ui/icons
-import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
-import { People } from "@material-ui/icons";
 
 // core components
 //import GridContainer from "components/Grid/GridContainer.js";
@@ -25,7 +23,7 @@ import { Link } from "react-router-dom";
 import styles from "assets/jss/material-kit-react/views/landingPageSections/teamStyle.js";
 import GridContainer from "components/Grid/GridContainer";
 
-//import team1 from "assets/img/faces/avatar.jpg";
+import team1 from "assets/img/faces/avatar.jpg";
 // import team2 from "assets/img/faces/christian.jpg";
 // import team3 from "assets/img/faces/face1.jpg";
 // import team4 from "assets/img/faces/face2.jpg";
@@ -52,42 +50,9 @@ export default function ServicesView(props) {
         budget: "",
         category: "",
         gigdescription: "",
-        picture: "",
       },
     ],
   });
-
-  const DeleteGig = async (id) => {
-    console.log("Check");
-    try {
-      const res = await fetch(`/gig/${id}`, {
-        method: "DELETE",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
-      // history.push("/gigs-page");
-      window.location.reload();
-
-      // const data = await res.json();
-      // console.log(data);
-      // setUserData(data);
-      // gigid = {
-      //   pathname: "/gig",
-      //   // param1: gig._id,
-      // };
-      // history.push("/gigs-page");
-
-      if (!res.status === 200) {
-        const error = new Error(res.error);
-        throw error;
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   //   const settings = {
   //     dots: true,
   //     color: "black",
@@ -305,25 +270,7 @@ export default function ServicesView(props) {
               <GridItem xs={12} sm={12} md={3} key={index}>
                 <Card className={classes.card}>
                   <Link to={"gig/" + gigs._id}>
-                    {/* {(data = gigs.picture.toString("base64"))} */}
-                    {/* console.log(gigs.picture.toString("base64")) */}
-                    {/* {console.log(data)} */}
-
-                    {/* <img src="" alt="..." className={imageClasses} /> */}
-                    {/* <img
-                    src="data:image/<%=gigs.picture.image/png%>;base64,
-                     <%=gigs.picture.data.toString('base64')%>"
-                    alt="..."
-                    className={imageClasses}
-                  ></img> */}
-                    {/* <img
-                    src='data:image/png;base64,gigs.picture.toString("base64")'
-                    className={imageClasses}
-                  ></img> */}
-                    <img
-                      src={"data:image/png;base64," + gigs.picture}
-                      className={imageClasses}
-                    />
+                    <img src={team1} alt="..." className={imageClasses} />
                     <CardBody>
                       <h4 className={classes.cardTitle}>{gigs.title}</h4>
                       <p className={classes.description}>
@@ -334,44 +281,10 @@ export default function ServicesView(props) {
                         {gigs.category}
                         <br />
                         <strong>Description: </strong>
-                        {gigs.gigDescription}
+                        {gigs.gigdescription}
                       </p>
                     </CardBody>
                   </Link>
-                  <CustomDropdown
-                    noLiPadding
-                    buttonProps={{
-                      className: classes.navLink,
-                      color: "transparent",
-                    }}
-                    buttonIcon={People}
-                    dropdownList={[
-                      <Link
-                        key={index}
-                        to={"updategig-page/" + gigs._id}
-                        className={classes.dropdownLink}
-                      >
-                        Update
-                      </Link>,
-                      <Link
-                        onClick={() => DeleteGig(gigs._id)}
-                        key={index}
-                        // to={"gigs-page/"}
-                        className={classes.dropdownLink}
-                      >
-                        Delete
-                      </Link>,
-                      // <Button
-                      //   key={index}
-                      //   color="black"
-                      //   // href="/gigs-page"
-                      //   // disabled={gig.title === "" || gig.budget === ""}
-                      //   // onClick={DeleteGig(gigs._id)}
-                      // >
-                      //   Delete
-                      // </Button>,
-                    ]}
-                  />
                 </Card>
               </GridItem>
             );

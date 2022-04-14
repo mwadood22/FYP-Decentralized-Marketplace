@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-
-import axios from "axios";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // import InputAdornment from "@material-ui/core/InputAdornment";
@@ -69,8 +67,7 @@ export default function WorkerPage(props) {
     gigTitle: "",
     budget: "",
     category: "",
-    gigdescription: "",
-    picture: "",
+    gigDescription: "",
   });
   let name, value;
   const handleInputs = (e) => {
@@ -79,61 +76,31 @@ export default function WorkerPage(props) {
     console.log(e);
     setGig({ ...gig, [name]: value });
   };
-
-  const imageUpload = (e) => {
-    //console.log(e.target.files[0]);
-    setGig({ ...gig, picture: e.target.files[0] });
-  };
-
   const postData = async (e) => {
     e.preventDefault();
 
-    //const { gigTitle, budget, category, gigDescription } = gig;
+    const { gigTitle, budget, category, gigDescription } = gig;
+    const res = await fetch("/gig/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        gigTitle,
+        budget,
+        category,
+        gigDescription,
+      }),
+    });
 
-    const formdata = new FormData();
+    const data = await res.json();
 
-    //console.log("==", gig.picture, "===", gig.picture.name);
-    console.log("data added");
-    formdata.append("picture", gig.picture, gig.picture.name);
-    formdata.append("gigTitle", gig.gigTitle);
-    formdata.append("budget", gig.budget);
-    formdata.append("category", gig.category);
-    formdata.append("gigdescription", gig.gigdescription);
-    //let url = "/gig/create";
-    try {
-      const res = await axios.post("/gig/create", formdata);
-      // {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({
-      //     gigTitle,
-      //     budget,
-      //     category,
-      //     gigDescription,
-      //   }),
-      // });
-
-      // const data = await res.json();
-
-      // if (data.status === 42 || !data) {
-      //   window.alert("Invalid registeration");
-      //   console.log("Invalid registeration");
-      // } else {
-      //   console.log(data);
-      //   history.push("/gigs-page");
-      // }
-
-      if (res.status === 42) {
-        window.alert("Invalid registeration");
-        console.log("Invalid registeration");
-      } else {
-        console.log(res);
-        history.push("/gigs-page");
-      }
-    } catch (e) {
-      window.alert("catch block ");
+    if (data.status === 42 || !data) {
+      window.alert("Invalid registeration");
+      console.log("Invalid registeration");
+    } else {
+      console.log(data);
+      history.push("/gigs-page");
     }
   };
   //
@@ -254,8 +221,8 @@ export default function WorkerPage(props) {
                       <TextField
                         margin="normal"
                         fullWidth
-                        name="gigdescription"
-                        value={gig.gigdescription}
+                        name="gigDescription"
+                        value={gig.gigDescription}
                         onChange={handleInputs}
                         required
                         multiline
@@ -267,39 +234,9 @@ export default function WorkerPage(props) {
                     </GridItem>
 
                     <GridItem>
-                      {/* <Filefeild
-                        margin="normal"
-                        fullWidth
-                        name="picture"
-                        //value={gig.picture}
-                        onChange={handleInputs}
-                        required
-                        multiline
-                        rows={8}
-                        textarea
-                        id="desc"
-                        label="Picture"
-                      /> */}
-
-                      <Button
-                        variant="contained"
-                        component="label"
-                        name="picture"
-                        color="green"
-                        margin="normal"
-                        //fullWidth
-                        value={gig.picture}
-                        onChange={imageUpload}
-                      >
-                        Upload Picture
-                        <input type="file" hidden />
-                      </Button>
-                    </GridItem>
-
-                    <GridItem>
                       <Button
                         color="black"
-                        //href="/gigs-page"
+                        href="/gigs-page"
                         onClick={postData}
                       >
                         Create Gig

@@ -4,7 +4,6 @@ const cors = require("cors");
 var bodyParser = require("body-parser");
 const port = 6942;
 const router = require("./router/routes");
-//const path = require("path");
 
 var corsOptions = {
   origin: "http://localhost:3000",
@@ -13,7 +12,6 @@ var corsOptions = {
 app.use(bodyParser.json());
 app.use(cors(corsOptions));
 
-app.use(express.static(__dirname + "./public/"));
 app.use(function timeLog(req, res, next) {
   console.log(req.url, " received with following details");
   console.log("method: ", req.method);

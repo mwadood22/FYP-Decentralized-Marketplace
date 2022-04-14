@@ -173,21 +173,6 @@ export default function FindJobs(props) {
 
     setOpen(false);
   };
-
-  const searchHandle = async (event) => {
-    // console.warn();
-    let key = event.target.value;
-    if (key) {
-      let result = await fetch(`/job/${key}`);
-      result = await result.json();
-      if (result) {
-        getJobData(result);
-      }
-    } else {
-      ViewData();
-    }
-  };
-
   return (
     <div>
       <Header
@@ -218,7 +203,6 @@ export default function FindJobs(props) {
                 sx={{ ml: 1, flex: 1 }}
                 placeholder="Search for desired jobs..."
                 inputProps={{ "aria-label": "search google maps" }}
-                onChange={searchHandle}
               />
               <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
                 <SearchIcon />
