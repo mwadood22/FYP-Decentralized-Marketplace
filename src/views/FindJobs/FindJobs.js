@@ -45,20 +45,9 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 export default function FindJobs(props) {
-  const [bid, setBidData] = useState({
-    price: "",
-  });
-  let name, value;
-  const handleInputs = (e) => {
-    name = e.target.name;
-    value = e.target.value;
-    console.log(e);
-    setBidData({ ...bid, [name]: value });
-  };
   const [job, getJobData] = useState({
     jobs: [
       {
-        _id: "",
         title: "",
         budget: "",
         city: "",
@@ -69,107 +58,48 @@ export default function FindJobs(props) {
     ],
   });
 
-  const postBid = async (job_id, id) => {
-    // e.preventDefault();
-    // console.log(e.target.value);
-    // console.log(id + "CHECKING");
-    // const { job_id } = id;
-    // console.log(id);
-    // console.log(job_id);
-    const { price } = bid;
-    const res = await fetch("/bids/create", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        price,
-        job_id,
-      }),
-    });
-    // setDisabledButtons(prevState => [...prevState, id]);
-    setDisable((prevState) => [...prevState, id]);
-    setOpen(true);
-
-    const data = await res.json();
-
-    if (data.status === 42 || !data) {
-      window.alert("Invalid registeration");
-      console.log("Invalid registeration");
-    } else {
+  const ViewData = async () => {
+    console.log("Check");
+    try {
+      const res = await fetch("/job", {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
       console.log(data);
-      // history.push("/landing-page");
+      getJobData(data);
+
+      if (!res.status === 200) {
+        const error = new Error(res.error);
+        throw error;
+      }
+    } catch (err) {
+      console.log(err);
+      // history.push('/login');
     }
   };
 
-  // const ViewJobsData = async () => {
-  //   // console.log("Check");
-  //   try {
-  //     const res = await fetch("/job", {
-  //       method: "GET",
-  //       headers: {
-  //         Accept: "application/json",
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
-  //     const data = await res.json();
-  //     console.log(data);
-  //     getJobData(data);
-
-  //     if (!res.status === 200) {
-  //       const error = new Error(res.error);
-  //       throw error;
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //     // history.push('/login');
-  //   }
-  // };
-
-  const checkFunction = () => {
-    const source = new EventSource(`http://localhost:6942/jobs/check`);
-
-    source.addEventListener("open", () => {
-      console.log("SSE opened!");
-    });
-
-    source.addEventListener("message", (e) => {
-      const data = JSON.parse(e.data);
-      console.log(data);
-      // console.log(e);
-      // console.log("Event called: ", e.data);
-      getJobData(data);
-      // const data = JSON.parse(e.data);
-    });
-
-    // source.addEventListener("error", (e) => {
-    //   console.error("Error: ", e);
-    // });
-
-    return () => {
-      source.close();
-    };
-  };
-
   useEffect(() => {
-    // ViewJobsData();
-    checkFunction();
+    ViewData();
   }, []);
 
   const [open, setOpen] = React.useState(false);
-  const [disable, setDisable] = React.useState([]);
+  const [disable, setDisable] = React.useState(false);
   const classes = useStyles();
   const { ...rest } = props;
-  // const handleClick = () => {
-  //   // prop.setDisable(true);
-  //   setDisable(true);
-  //   setOpen(true);
-  // };
+  const handleClick = () => {
+    // prop.setDisable(true);
+    setDisable(true);
+    setOpen(true);
+  };
 
-  const handleClose = () => {
-    // if (reason === "clickaway") {
-    //   return;
-    // }
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
 
     setOpen(false);
   };
@@ -234,9 +164,8 @@ export default function FindJobs(props) {
             }}
           /> */}
           <List>
-            {/* {console.log(job)} */}
+            {console.log(job)}
             {job.jobs.map((jobs, index) => {
-              const id = `b${index}`;
               return (
                 <ListItem alignItems="flex-start" key={index}>
                   <Card className={classes.jobCard}>
@@ -269,35 +198,36 @@ export default function FindJobs(props) {
                             InputProps={{ inputProps: { min: 0 } }}
                             variant="standard"
                             type="number"
-                            id="price"
-                            label="Bid"
-                            name="price"
-                            value={bid.price}
-                            onChange={handleInputs}
+                            id="bid"
+                            label=" "
                             sx={{ width: 60 }}
                           />
-                          {/* <TextField
-                            type="hidden"
-                            id="job_id"
-                            label="job_id"
-                            name="job_id"
-                            value={jobs._id}
-                          /> */}
-                          {/* {console.log(jobs._id)} */}
                           <Button
                             color="green"
                             size="md"
                             // href="/signup-page"
                             // target="_blank"
-                            disabled={disable.includes(id)}
-                            id={id}
+                            disabled={disable}
                             rel="noopener noreferrer"
                             className={classes.jobBtn}
-                            onClick={() => postBid(jobs._id, id)}
+                            onClick={handleClick}
                           >
                             <i className="fas fa-dollar-sign" />
                             Make Bid
                           </Button>
+                          <Snackbar
+                            open={open}
+                            autoHideDuration={6000}
+                            onClose={handleClose}
+                          >
+                            <Alert
+                              onClose={handleClose}
+                              severity="success"
+                              sx={{ width: "100%" }}
+                            >
+                              Bid placed successfully!
+                            </Alert>
+                          </Snackbar>
                         </React.Fragment>
                       }
                     />
@@ -705,21 +635,6 @@ export default function FindJobs(props) {
                 // {/* </div> */}
               );
             })}
-            <Snackbar
-              open={open}
-              // id={id}
-              autoHideDuration={6000}
-              onClose={handleClose}
-            >
-              <Alert
-                onClose={handleClose}
-                // id={id}
-                severity="success"
-                sx={{ width: "100%" }}
-              >
-                Bid placed successfully!
-              </Alert>
-            </Snackbar>
           </List>
         </div>
       </div>

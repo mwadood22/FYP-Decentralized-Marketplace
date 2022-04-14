@@ -44,8 +44,8 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 // import image from "assets/img/bg7.jpg";
 // import helper from "assets/img/services/helper.jpg";
 import team1 from "assets/img/faces/test1.jpg";
-// import team2 from "assets/img/faces/christian.jpg";
-// import team3 from "assets/img/faces/test3.jpg";
+import team2 from "assets/img/faces/christian.jpg";
+import team3 from "assets/img/faces/test3.jpg";
 
 const useStyles = makeStyles(styles);
 
@@ -56,11 +56,9 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 Transition.displayName = "Transition";
 
 export default function FindJobs() {
-  // var BidValue = null;
   const [job, getJobData] = useState({
     jobs: [
       {
-        _id: "",
         title: "",
         budget: "",
         city: "",
@@ -71,19 +69,10 @@ export default function FindJobs() {
     ],
   });
 
-  const [bid, getBidData] = useState({
-    bids: [
-      {
-        price: "",
-      },
-    ],
-  });
-
-  const viewBids = async (id) => {
-    // console.log("Check");
-    setClassicModal(true);
+  const ViewData = async () => {
+    console.log("Check");
     try {
-      const res = await fetch(`/bids/${id}`, {
+      const res = await fetch("/job", {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -92,7 +81,7 @@ export default function FindJobs() {
       });
       const data = await res.json();
       console.log(data);
-      getBidData(data);
+      getJobData(data);
 
       if (!res.status === 200) {
         const error = new Error(res.error);
@@ -104,34 +93,8 @@ export default function FindJobs() {
     }
   };
 
-  const checkFunction = () => {
-    const source = new EventSource(`http://localhost:6942/jobs/check`);
-
-    source.addEventListener("open", () => {
-      console.log("SSE opened!");
-    });
-
-    source.addEventListener("message", (e) => {
-      const data = JSON.parse(e.data);
-      console.log(data);
-      // console.log(e);
-      // console.log("Event called: ", e.data);
-      getJobData(data);
-      // const data = JSON.parse(e.data);
-    });
-
-    // source.addEventListener("error", (e) => {
-    //   console.error("Error: ", e);
-    // });
-
-    return () => {
-      source.close();
-    };
-  };
-
   useEffect(() => {
-    // ViewData();
-    checkFunction();
+    ViewData();
   }, []);
 
   const classes = useStyles();
@@ -178,7 +141,7 @@ export default function FindJobs() {
                             color="green"
                             size="md"
                             //rel="noopener noreferrer"
-                            onClick={() => viewBids(jobs._id)}
+                            onClick={() => setClassicModal(true)}
                             className={classes.jobBtn}
                           >
                             <i className="fas fa-dollar-sign" />
@@ -204,6 +167,256 @@ export default function FindJobs() {
                           </Link>
                         </GridItem>
                       </GridContainer>
+                      <Dialog
+                        classes={{
+                          root: classes.center,
+                          paper: classes.modal,
+                        }}
+                        open={classicModal}
+                        TransitionComponent={Transition}
+                        keepMounted
+                        onClose={() => setClassicModal(false)}
+                        aria-labelledby="classic-modal-slide-title"
+                        aria-describedby="classic-modal-slide-description"
+                      >
+                        <DialogTitle
+                        //id="classic-modal-slide-title"
+                        //disableTypography
+                        //className={classes.modalHeader}
+                        >
+                          {/*<IconButton
+                        className={classes.modalCloseButton}
+                        key="close"
+                        aria-label="Close"
+                        color="inherit"
+                        onClick={() => setClassicModal(false)}
+                      >
+                        <Close className={classes.modalClose} />
+                      </IconButton>
+                      <h4 className={classes.modalTitle}>Bids for the job</h4>*/}
+                        </DialogTitle>
+                        <DialogContent
+                          id="classic-modal-slide-description"
+                          className={classes.modalBody}
+                        >
+                          {/*<Box
+                        sx={{
+                          width: "100%",
+                          maxWidth: 360,
+                          bgcolor: "background.paper",
+                        }}
+                      >*/}
+
+                          <List
+                            sx={{
+                              width: "100%",
+                              maxWidth: 500,
+                              bgcolor: "background.paper",
+                              position: "relative",
+                              overflow: "auto",
+                              maxHeight: 400,
+                              "& ul": { padding: 0 },
+                            }}
+                          >
+                            <GridContainer>
+                              <ListItem
+                                button
+                                component={Link}
+                                to="/gig2"
+                                disablePadding
+                              >
+                                <GridItem xs={12} sm={12} md={8}>
+                                  <ListItemButton>
+                                    <ListItemAvatar>
+                                      <Avatar alt="Remy Sharp" src={team1} />
+                                    </ListItemAvatar>
+                                    <ListItemText
+                                      //className={classes.bidlist}
+                                      primary="Ali Ahmad"
+                                    />
+                                  </ListItemButton>
+                                </GridItem>
+
+                                <GridItem xs={12} sm={12} md={4}>
+                                  <ListItemText primary="Bid: 45$" />
+                                </GridItem>
+                              </ListItem>
+
+                              <ListItem
+                                button
+                                component={Link}
+                                to="/gig2"
+                                disablePadding
+                              >
+                                <GridItem xs={12} sm={12} md={8}>
+                                  <ListItemButton>
+                                    <ListItemAvatar>
+                                      <Avatar alt="Remy Sharp" src={team2} />
+                                    </ListItemAvatar>
+                                    <ListItemText
+                                      //className={classes.bidlist}
+                                      primary="Musa Bhatti"
+                                    />
+                                  </ListItemButton>
+                                </GridItem>
+
+                                <GridItem xs={12} sm={12} md={4}>
+                                  <ListItemText primary="Bid: 40$" />
+                                </GridItem>
+                              </ListItem>
+
+                              <ListItem
+                                button
+                                component={Link}
+                                to="/gig2"
+                                disablePadding
+                              >
+                                <GridItem xs={12} sm={12} md={8}>
+                                  <ListItemButton>
+                                    <ListItemAvatar>
+                                      <Avatar alt="Remy Sharp" src={team3} />
+                                    </ListItemAvatar>
+                                    <ListItemText
+                                      //className={classes.bidlist}
+                                      primary="Aamna Sikandar"
+                                    />
+                                  </ListItemButton>
+                                </GridItem>
+
+                                <GridItem xs={12} sm={12} md={4}>
+                                  <ListItemText primary="Bid: 40$" />
+                                </GridItem>
+                              </ListItem>
+
+                              <ListItem
+                                button
+                                component={Link}
+                                to="/gig2"
+                                disablePadding
+                              >
+                                <GridItem xs={12} sm={12} md={8}>
+                                  <ListItemButton>
+                                    <ListItemAvatar>
+                                      <Avatar alt="Remy Sharp" src={team1} />
+                                    </ListItemAvatar>
+                                    <ListItemText
+                                      className={classes.bidlist}
+                                      primary="Wadood ul Haq"
+                                    />
+                                  </ListItemButton>
+                                </GridItem>
+
+                                <GridItem xs={12} sm={12} md={4}>
+                                  <ListItemText primary="Bid: 30$" />
+                                </GridItem>
+                              </ListItem>
+
+                              <ListItem
+                                button
+                                component={Link}
+                                to="/gig2"
+                                disablePadding
+                              >
+                                <GridItem xs={12} sm={12} md={8}>
+                                  <ListItemButton>
+                                    <ListItemAvatar>
+                                      <Avatar alt="Remy Sharp" src={team2} />
+                                    </ListItemAvatar>
+                                    <ListItemText
+                                      className={classes.bidlist}
+                                      primary="AbdulRehman Huzaifa"
+                                    />
+                                  </ListItemButton>
+                                </GridItem>
+
+                                <GridItem xs={12} sm={12} md={4}>
+                                  <ListItemText primary="Bid: 50$" />
+                                </GridItem>
+                              </ListItem>
+
+                              <ListItem
+                                button
+                                component={Link}
+                                to="/gig2"
+                                disablePadding
+                              >
+                                <GridItem xs={12} sm={12} md={8}>
+                                  <ListItemButton>
+                                    <ListItemAvatar>
+                                      <Avatar alt="Remy Sharp" src={team3} />
+                                    </ListItemAvatar>
+                                    <ListItemText
+                                      className={classes.bidlist}
+                                      primary="Arooj Sikandar"
+                                    />
+                                  </ListItemButton>
+                                </GridItem>
+
+                                <GridItem xs={12} sm={12} md={4}>
+                                  <ListItemText primary="Bid: 55$" />
+                                </GridItem>
+                              </ListItem>
+
+                              <ListItem
+                                button
+                                component={Link}
+                                to="/gig2"
+                                disablePadding
+                              >
+                                <GridItem xs={12} sm={12} md={8}>
+                                  <ListItemButton>
+                                    <ListItemAvatar>
+                                      <Avatar alt="Remy Sharp" src={team3} />
+                                    </ListItemAvatar>
+                                    <ListItemText
+                                      className={classes.bidlist}
+                                      primary="Arooj Sikandar"
+                                    />
+                                  </ListItemButton>
+                                </GridItem>
+
+                                <GridItem xs={12} sm={12} md={4}>
+                                  <ListItemText primary="Bid: 55$" />
+                                </GridItem>
+                              </ListItem>
+
+                              <ListItem
+                                button
+                                component={Link}
+                                to="/gig2"
+                                disablePadding
+                              >
+                                <GridItem xs={12} sm={12} md={8}>
+                                  <ListItemButton>
+                                    <ListItemAvatar>
+                                      <Avatar alt="Remy Sharp" src={team3} />
+                                    </ListItemAvatar>
+                                    <ListItemText
+                                      className={classes.bidlist}
+                                      primary="Arooj Sikandar"
+                                    />
+                                  </ListItemButton>
+                                </GridItem>
+
+                                <GridItem xs={12} sm={12} md={4}>
+                                  <ListItemText primary="Bid: 55$" />
+                                </GridItem>
+                              </ListItem>
+                            </GridContainer>
+                          </List>
+
+                          {/*</Box>*/}
+                        </DialogContent>
+                        <DialogActions className={classes.modalFooter}>
+                          <Button
+                            onClick={() => setClassicModal(false)}
+                            color="black"
+                            size="small"
+                          >
+                            Close
+                          </Button>
+                        </DialogActions>
+                      </Dialog>
                     </React.Fragment>
                   }
                 />
@@ -452,221 +665,6 @@ export default function FindJobs() {
             // </ListItem>
           );
         })}
-        <Dialog
-          classes={{
-            root: classes.center,
-            paper: classes.modal,
-          }}
-          open={classicModal}
-          TransitionComponent={Transition}
-          keepMounted
-          onClose={() => setClassicModal(false)}
-          aria-labelledby="classic-modal-slide-title"
-          aria-describedby="classic-modal-slide-description"
-        >
-          <DialogTitle
-          //id="classic-modal-slide-title"
-          //disableTypography
-          //className={classes.modalHeader}
-          >
-            {/*<IconButton
-                        className={classes.modalCloseButton}
-                        key="close"
-                        aria-label="Close"
-                        color="inherit"
-                        onClick={() => setClassicModal(false)}
-                      >
-                        <Close className={classes.modalClose} />
-                      </IconButton>
-                      <h4 className={classes.modalTitle}>Bids for the job</h4>*/}
-          </DialogTitle>
-          <DialogContent
-            id="classic-modal-slide-description"
-            className={classes.modalBody}
-          >
-            {/*<Box
-                        sx={{
-                          width: "100%",
-                          maxWidth: 360,
-                          bgcolor: "background.paper",
-                        }}
-                      >*/}
-
-            <List
-              sx={{
-                width: "100%",
-                maxWidth: 500,
-                bgcolor: "background.paper",
-                position: "relative",
-                overflow: "auto",
-                maxHeight: 400,
-                "& ul": { padding: 0 },
-              }}
-            >
-              {bid.bids.map((bids, index) => {
-                return (
-                  <GridContainer key={index}>
-                    <ListItem button component={Link} to="/gig2" disablePadding>
-                      <GridItem xs={12} sm={12} md={8}>
-                        <ListItemButton>
-                          <ListItemAvatar>
-                            <Avatar alt="Remy Sharp" src={team1} />
-                          </ListItemAvatar>
-                          <ListItemText
-                            //className={classes.bidlist}
-                            primary="Ali Ahmad"
-                          />
-                        </ListItemButton>
-                      </GridItem>
-                      {/* {(BidValue = "Bid: $" + bids.price)} */}
-                      <GridItem xs={12} sm={12} md={4}>
-                        <ListItemText>Bid: ${bids.price}</ListItemText>
-                        {/* <h5>{BidValue}</h5> */}
-                      </GridItem>
-                    </ListItem>
-
-                    {/* <ListItem button component={Link} to="/gig2" disablePadding>
-                      <GridItem xs={12} sm={12} md={8}>
-                        <ListItemButton>
-                          <ListItemAvatar>
-                            <Avatar alt="Remy Sharp" src={team2} />
-                          </ListItemAvatar>
-                          <ListItemText
-                            //className={classes.bidlist}
-                            primary="Musa Bhatti"
-                          />
-                        </ListItemButton>
-                      </GridItem>
-
-                      <GridItem xs={12} sm={12} md={4}>
-                        <ListItemText primary="Bid: 40$" />
-                      </GridItem>
-                    </ListItem>
-
-                    <ListItem button component={Link} to="/gig2" disablePadding>
-                      <GridItem xs={12} sm={12} md={8}>
-                        <ListItemButton>
-                          <ListItemAvatar>
-                            <Avatar alt="Remy Sharp" src={team3} />
-                          </ListItemAvatar>
-                          <ListItemText
-                            //className={classes.bidlist}
-                            primary="Aamna Sikandar"
-                          />
-                        </ListItemButton>
-                      </GridItem>
-
-                      <GridItem xs={12} sm={12} md={4}>
-                        <ListItemText primary="Bid: 40$" />
-                      </GridItem>
-                    </ListItem>
-
-                    <ListItem button component={Link} to="/gig2" disablePadding>
-                      <GridItem xs={12} sm={12} md={8}>
-                        <ListItemButton>
-                          <ListItemAvatar>
-                            <Avatar alt="Remy Sharp" src={team1} />
-                          </ListItemAvatar>
-                          <ListItemText
-                            className={classes.bidlist}
-                            primary="Wadood ul Haq"
-                          />
-                        </ListItemButton>
-                      </GridItem>
-
-                      <GridItem xs={12} sm={12} md={4}>
-                        <ListItemText primary="Bid: 30$" />
-                      </GridItem>
-                    </ListItem>
-
-                    <ListItem button component={Link} to="/gig2" disablePadding>
-                      <GridItem xs={12} sm={12} md={8}>
-                        <ListItemButton>
-                          <ListItemAvatar>
-                            <Avatar alt="Remy Sharp" src={team2} />
-                          </ListItemAvatar>
-                          <ListItemText
-                            className={classes.bidlist}
-                            primary="AbdulRehman Huzaifa"
-                          />
-                        </ListItemButton>
-                      </GridItem>
-
-                      <GridItem xs={12} sm={12} md={4}>
-                        <ListItemText primary="Bid: 50$" />
-                      </GridItem>
-                    </ListItem>
-
-                    <ListItem button component={Link} to="/gig2" disablePadding>
-                      <GridItem xs={12} sm={12} md={8}>
-                        <ListItemButton>
-                          <ListItemAvatar>
-                            <Avatar alt="Remy Sharp" src={team3} />
-                          </ListItemAvatar>
-                          <ListItemText
-                            className={classes.bidlist}
-                            primary="Arooj Sikandar"
-                          />
-                        </ListItemButton>
-                      </GridItem>
-
-                      <GridItem xs={12} sm={12} md={4}>
-                        <ListItemText primary="Bid: 55$" />
-                      </GridItem>
-                    </ListItem>
-
-                    <ListItem button component={Link} to="/gig2" disablePadding>
-                      <GridItem xs={12} sm={12} md={8}>
-                        <ListItemButton>
-                          <ListItemAvatar>
-                            <Avatar alt="Remy Sharp" src={team3} />
-                          </ListItemAvatar>
-                          <ListItemText
-                            className={classes.bidlist}
-                            primary="Arooj Sikandar"
-                          />
-                        </ListItemButton>
-                      </GridItem>
-
-                      <GridItem xs={12} sm={12} md={4}>
-                        <ListItemText primary="Bid: 55$" />
-                      </GridItem>
-                    </ListItem>
-
-                    <ListItem button component={Link} to="/gig2" disablePadding>
-                      <GridItem xs={12} sm={12} md={8}>
-                        <ListItemButton>
-                          <ListItemAvatar>
-                            <Avatar alt="Remy Sharp" src={team3} />
-                          </ListItemAvatar>
-                          <ListItemText
-                            className={classes.bidlist}
-                            primary="Arooj Sikandar"
-                          />
-                        </ListItemButton>
-                      </GridItem>
-
-                      <GridItem xs={12} sm={12} md={4}>
-                        <ListItemText primary="Bid: 55$" />
-                      </GridItem>
-                    </ListItem> */}
-                  </GridContainer>
-                );
-              })}
-            </List>
-
-            {/*</Box>*/}
-          </DialogContent>
-          <DialogActions className={classes.modalFooter}>
-            <Button
-              onClick={() => setClassicModal(false)}
-              color="black"
-              size="small"
-            >
-              Close
-            </Button>
-          </DialogActions>
-        </Dialog>
       </List>
     </div>
   );
