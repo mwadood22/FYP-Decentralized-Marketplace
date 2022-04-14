@@ -55,3 +55,32 @@ exports.show = (req, res) => {
     });
   //   return res.json({ gigs });
 };
+
+exports.search = async (req, res) => {
+  //   console.log("All gigs list");
+  await dbo
+    .collection("CustomJobs")
+    .find({
+      $or: [
+        { title: { $regex: req.params.key } },
+        // { address: { $regex: req.params.key } }
+      ],
+    })
+    .toArray(function (err, jobs) {
+      if (err) {
+        return res.status(400).json({ msg: "Error" });
+      }
+      //   console.log(gigs);
+      return res.json({ jobs });
+    });
+  // console.log(req.params.key);
+
+  // .toArray(function (err, jobs) {  //   if (err) {
+  //     return res.status(400).json({ msg: "Error" });
+  //   }
+  //   //   console.log(gigs);
+  //   return res.json({ jobs });
+  // });
+  // console.log(result);
+  // res.send(result);
+};
