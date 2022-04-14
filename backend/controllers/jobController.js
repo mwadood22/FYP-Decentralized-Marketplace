@@ -5,6 +5,83 @@ var ObjectId = require("mongodb").ObjectId;
 
 var dbo = null;
 
+var jobsData = {
+  jobs: [],
+};
+
+const writeEvent = async (res) => {
+  try {
+    dbo
+      .collection("CustomJobs")
+      .find()
+      .toArray(function (err, jobs) {
+        // if (err) {
+        //   return res.status(400).json({ msg: "Error" });
+        // }
+        //   console.log(gigs);
+
+        // res.setHeader("content-type", "text/event-stream");
+
+        // console.log("Loop");
+        // return res.json({ gigs });
+        jobsData.jobs = jobs;
+        return res.write(`data: ${JSON.stringify(jobsData)}\n\n`);
+        // res.end();
+      });
+  } catch (err) {
+    const errData = {
+      jobs: [],
+    };
+    return res.write(`data: ${JSON.stringify(errData)}\n\n`);
+  }
+  // res.write(`id: ${sseId}\n`);
+};
+
+const sendEvent = (_req, res) => {
+  res.writeHead(200, {
+    "Cache-Control": "no-cache",
+    Connection: "keep-alive",
+    "Content-Type": "text/event-stream",
+  });
+
+  var collection = null;
+  try {
+    collection = dbo.collection("CustomJobs");
+  } catch (err) {
+    return writeEvent(res);
+  }
+  const changeStream = collection.watch();
+  changeStream.on("change", (next) => {
+    writeEvent(res);
+    // if (req.headers.accept === "text/event-stream") {
+    //   console.log("Gigs have changed");
+    //   // if (req.headers.accept === "text/event-stream") {
+    //   return sendEvent(req, res);
+    // } else {
+    //   return res.json("ok");
+    // }
+    // }
+  });
+  // res.writeHead(200, {
+  //   "Cache-Control": "no-cache",
+  //   Connection: "keep-alive",
+  //   "Content-Type": "text/event-stream",
+  // });
+
+  const sseId = new Date().toDateString();
+
+  return writeEvent(res);
+  res.end();
+};
+
+exports.check = async (req, res) => {
+  if (req.headers.accept === "text/event-stream") {
+    sendEvent(req, res);
+  } else {
+    res.json({ message: "Ok" });
+  }
+};
+
 MongoClient.connect(url, function (err, db) {
   if (err) throw err;
   dbo = db.db("Markaz");
