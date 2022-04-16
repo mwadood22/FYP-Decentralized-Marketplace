@@ -45,9 +45,20 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 export default function FindJobs(props) {
+  const [bid, setBidData] = useState({
+    price: "",
+  });
+  let name, value;
+  const handleInputs = (e) => {
+    name = e.target.name;
+    value = e.target.value;
+    console.log(e);
+    setBidData({ ...bid, [name]: value });
+  };
   const [job, getJobData] = useState({
     jobs: [
       {
+        _id: "",
         title: "",
         budget: "",
         city: "",
@@ -58,48 +69,107 @@ export default function FindJobs(props) {
     ],
   });
 
-  const ViewData = async () => {
-    console.log("Check");
-    try {
-      const res = await fetch("/job", {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await res.json();
-      console.log(data);
-      getJobData(data);
+  const postBid = async (job_id, id) => {
+    // e.preventDefault();
+    // console.log(e.target.value);
+    // console.log(id + "CHECKING");
+    // const { job_id } = id;
+    // console.log(id);
+    // console.log(job_id);
+    const { price } = bid;
+    const res = await fetch("/bids/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        price,
+        job_id,
+      }),
+    });
+    // setDisabledButtons(prevState => [...prevState, id]);
+    setDisable((prevState) => [...prevState, id]);
+    setOpen(true);
 
-      if (!res.status === 200) {
-        const error = new Error(res.error);
-        throw error;
-      }
-    } catch (err) {
-      console.log(err);
-      // history.push('/login');
+    const data = await res.json();
+
+    if (data.status === 42 || !data) {
+      window.alert("Invalid registeration");
+      console.log("Invalid registeration");
+    } else {
+      console.log(data);
+      // history.push("/landing-page");
     }
+  };
+
+  // const ViewJobsData = async () => {
+  //   // console.log("Check");
+  //   try {
+  //     const res = await fetch("/job", {
+  //       method: "GET",
+  //       headers: {
+  //         Accept: "application/json",
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
+  //     const data = await res.json();
+  //     console.log(data);
+  //     getJobData(data);
+
+  //     if (!res.status === 200) {
+  //       const error = new Error(res.error);
+  //       throw error;
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //     // history.push('/login');
+  //   }
+  // };
+
+  const checkFunction = () => {
+    const source = new EventSource(`http://localhost:6942/jobs/check`);
+
+    source.addEventListener("open", () => {
+      console.log("SSE opened!");
+    });
+
+    source.addEventListener("message", (e) => {
+      const data = JSON.parse(e.data);
+      console.log(data);
+      // console.log(e);
+      // console.log("Event called: ", e.data);
+      getJobData(data);
+      // const data = JSON.parse(e.data);
+    });
+
+    // source.addEventListener("error", (e) => {
+    //   console.error("Error: ", e);
+    // });
+
+    return () => {
+      source.close();
+    };
   };
 
   useEffect(() => {
-    ViewData();
+    // ViewJobsData();
+    checkFunction();
   }, []);
 
   const [open, setOpen] = React.useState(false);
-  const [disable, setDisable] = React.useState(false);
+  const [disable, setDisable] = React.useState([]);
   const classes = useStyles();
   const { ...rest } = props;
-  const handleClick = () => {
-    // prop.setDisable(true);
-    setDisable(true);
-    setOpen(true);
-  };
+  // const handleClick = () => {
+  //   // prop.setDisable(true);
+  //   setDisable(true);
+  //   setOpen(true);
+  // };
 
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
+  const handleClose = () => {
+    // if (reason === "clickaway") {
+    //   return;
+    // }
 
     setOpen(false);
   };
@@ -180,77 +250,75 @@ export default function FindJobs(props) {
             }}
           /> */}
           <List>
-            {console.log(job.jobs.length)}
-
-            {job.jobs.length > 0 ? (
-              job.jobs.map((jobs, index) => {
-                return (
-                  <ListItem alignItems="flex-start" key={index}>
-                    <Card className={classes.jobCard}>
-                      <ListItemAvatar>
-                        <Avatar alt="Remy Sharp" src={team1} />
-                      </ListItemAvatar>
-                      <ListItemText
-                        primary={
-                          <Typography className={classes.heading}>
-                            <strong> {jobs.title}</strong>
+            {/* {console.log(job)} */}
+            {job.jobs.map((jobs, index) => {
+              const id = `b${index}`;
+              return (
+                <ListItem alignItems="flex-start" key={index}>
+                  <Card className={classes.jobCard}>
+                    <ListItemAvatar>
+                      <Avatar alt="Remy Sharp" src={team1} />
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={
+                        <Typography className={classes.heading}>
+                          <strong> {jobs.title}</strong>
+                        </Typography>
+                      }
+                      secondary={
+                        <React.Fragment>
+                          <Typography
+                            className={classes.heading}
+                            color="text.primary"
+                          >
+                            Ali Connors
                           </Typography>
-                        }
-                        secondary={
-                          <React.Fragment>
-                            <Typography
-                              className={classes.heading}
-                              color="text.primary"
-                            >
-                              Ali Connors
-                            </Typography>
-                            {jobs.description}
-                            <br /> <br />
-                            <strong> Budget: {jobs.budget}</strong>
-                            <Divider
-                              sx={{ width: 1000, m: 0.5 }}
-                              orientation="horizontal"
-                            />
-                            <TextField
-                              defaultValue="45"
-                              InputProps={{ inputProps: { min: 0 } }}
-                              variant="standard"
-                              type="number"
-                              id="bid"
-                              label=" "
-                              sx={{ width: 60 }}
-                            />
-                            <Button
-                              color="green"
-                              size="md"
-                              // href="/signup-page"
-                              // target="_blank"
-                              disabled={disable}
-                              rel="noopener noreferrer"
-                              className={classes.jobBtn}
-                              onClick={handleClick}
-                            >
-                              <i className="fas fa-dollar-sign" />
-                              Make Bid
-                            </Button>
-                            <Snackbar
-                              open={open}
-                              autoHideDuration={6000}
-                              onClose={handleClose}
-                            >
-                              <Alert
-                                onClose={handleClose}
-                                severity="success"
-                                sx={{ width: "100%" }}
-                              >
-                                Bid placed successfully!
-                              </Alert>
-                            </Snackbar>
-                          </React.Fragment>
-                        }
-                      />
-                    </Card>
-                    {/* <Button
+                          {jobs.description}
+                          <br /> <br />
+                          <strong> {jobs.budget}</strong>
+                          <Divider
+                            sx={{ width: 1000, m: 0.5 }}
+                            orientation="horizontal"
+                          />
+                          <TextField
+                            defaultValue="45"
+                            InputProps={{ inputProps: { min: 0 } }}
+                            variant="standard"
+                            type="number"
+                            id="price"
+                            label="Bid"
+                            name="price"
+                            value={bid.price}
+                            onChange={handleInputs}
+                            sx={{ width: 60 }}
+                          />
+                          {/* <TextField
+                            type="hidden"
+                            id="job_id"
+                            label="job_id"
+                            name="job_id"
+                            value={jobs._id}
+                          /> */}
+                          {/* {console.log(jobs._id)} */}
+                          <Button
+                            color="green"
+                            size="md"
+                            // href="/signup-page"
+                            // target="_blank"
+                            disabled={disable.includes(id)}
+                            id={id}
+                            rel="noopener noreferrer"
+                            className={classes.jobBtn}
+                            onClick={() => postBid(jobs._id, id)}
+                          >
+                            <i className="fas fa-dollar-sign" />
+                            Make Bid
+                          </Button>
+                        </React.Fragment>
+                      }
+                    />
+                  </Card>
+                  {/* <Button
                     color="black"
                     size="md"
                     href="/signup-page"
@@ -261,409 +329,413 @@ export default function FindJobs(props) {
                     <i className="fas fa-check" />
                     Bid
                   </Button> */}
-                  </ListItem>
+                </ListItem>
 
-                  // <ListItem alignItems="flex-start">
-                  //   <Card className={classes.jobCard}>
-                  //     <ListItemAvatar>
-                  //       <Avatar alt="Travis Howard" src={team2} />
-                  //     </ListItemAvatar>
-                  //     <ListItemText
-                  //       primary={
-                  //         <Typography className={classes.heading}>
-                  //           <strong>Title: Plumbing</strong>
-                  //         </Typography>
-                  //       }
-                  //       secondary={
-                  //         <React.Fragment>
-                  //           <Typography
-                  //             className={classes.heading}
-                  //             color="text.primary"
-                  //           >
-                  //             Ali Connors
-                  //           </Typography>
-                  //           Ill be in your neighborhood doing errands this… Ill be in
-                  //           your neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           <br /> <br />
-                  //           <strong>Max bid: $45</strong>
-                  //           <Divider
-                  //             sx={{ width: 1000, m: 0.5 }}
-                  //             orientation="horizontal"
-                  //           />
-                  //           <TextField
-                  //             defaultValue="45"
-                  //             InputProps={{ inputProps: { min: 0 } }}
-                  //             variant="standard"
-                  //             type="number"
-                  //             id="bid"
-                  //             label=" "
-                  //             sx={{ width: 60 }}
-                  //           />
-                  //           <Button
-                  //             color="green"
-                  //             size="md"
-                  //             // href="/signup-page"
-                  //             // target="_blank"
-                  //             // disabled={disable}
-                  //             rel="noopener noreferrer"
-                  //             className={classes.jobBtn}
-                  //             onClick={handleClick}
-                  //           >
-                  //             <i className="fas fa-dollar-sign" />
-                  //             Make Bid
-                  //           </Button>
-                  //           {/* <Snackbar
-                  //             open={open}
-                  //             autoHideDuration={6000}
-                  //             onClose={handleClose}
-                  //           >
-                  //             <Alert
-                  //               onClose={handleClose}
-                  //               severity="success"
-                  //               sx={{ width: "100%" }}
-                  //             >
-                  //               Bid placed successfully!
-                  //             </Alert>
-                  //           </Snackbar> */}
-                  //         </React.Fragment>
-                  //       }
-                  //     />
-                  //   </Card>
-                  // </ListItem>
-                  // {/* <Divider variant="inset" component="li" /> */}
-                  // {/* </div> */}
-                  // {/* <div className={classes.newClass}> */}
-                  // <ListItem alignItems="flex-start">
-                  //   <Card className={classes.jobCard}>
-                  //     <ListItemAvatar>
-                  //       <Avatar alt="Cindy Baker" src={team3} />
-                  //     </ListItemAvatar>
-                  //     <ListItemText
-                  //       primary={
-                  //         <Typography className={classes.heading}>
-                  //           <strong>Title: Plumbing</strong>
-                  //         </Typography>
-                  //       }
-                  //       secondary={
-                  //         <React.Fragment>
-                  //           <Typography
-                  //             className={classes.heading}
-                  //             color="text.primary"
-                  //           >
-                  //             Ali Connors
-                  //           </Typography>
-                  //           Ill be in your neighborhood doing errands this… Ill be in
-                  //           your neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           <br /> <br />
-                  //           <strong>Max bid: $45</strong>
-                  //           <Divider
-                  //             sx={{ width: 1000, m: 0.5 }}
-                  //             orientation="horizontal"
-                  //           />
-                  //           <TextField
-                  //             defaultValue="45"
-                  //             InputProps={{ inputProps: { min: 0 } }}
-                  //             variant="standard"
-                  //             type="number"
-                  //             id="bid"
-                  //             label=" "
-                  //             sx={{ width: 60 }}
-                  //           />
-                  //           <Button
-                  //             color="green"
-                  //             size="md"
-                  //             // href="/signup-page"
-                  //             // target="_blank"
-                  //             // disabled={disable}
-                  //             rel="noopener noreferrer"
-                  //             className={classes.jobBtn}
-                  //             onClick={handleClick}
-                  //           >
-                  //             <i className="fas fa-dollar-sign" />
-                  //             Make Bid
-                  //           </Button>
-                  //           {/* <Snackbar
-                  //             open={open}
-                  //             autoHideDuration={6000}
-                  //             onClose={handleClose}
-                  //           >
-                  //             <Alert
-                  //               onClose={handleClose}
-                  //               severity="success"
-                  //               sx={{ width: "100%" }}
-                  //             >
-                  //               Bid placed successfully!
-                  //             </Alert>
-                  //           </Snackbar> */}
-                  //         </React.Fragment>
-                  //       }
-                  //     />
-                  //   </Card>
-                  // </ListItem>
-                  // {/* <Divider variant="inset" component="li" /> */}
-                  // {/* </div> */}
-                  // {/* <div className={classes.newClass}> */}
-                  // <ListItem alignItems="flex-start">
-                  //   <Card className={classes.jobCard}>
-                  //     <ListItemAvatar>
-                  //       <Avatar alt="Remy Sharp" src={team1} />
-                  //     </ListItemAvatar>
-                  //     <ListItemText
-                  //       primary={
-                  //         <Typography className={classes.heading}>
-                  //           <strong>Title: Plumbing</strong>
-                  //         </Typography>
-                  //       }
-                  //       secondary={
-                  //         <React.Fragment>
-                  //           <Typography
-                  //             className={classes.heading}
-                  //             color="text.primary"
-                  //           >
-                  //             Ali Connors
-                  //           </Typography>
-                  //           Ill be in your neighborhood doing errands this… Ill be in
-                  //           your neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           <br /> <br />
-                  //           <strong>Max bid: $45</strong>
-                  //           <Divider
-                  //             sx={{ width: 1000, m: 0.5 }}
-                  //             orientation="horizontal"
-                  //           />
-                  //           <TextField
-                  //             defaultValue="45"
-                  //             InputProps={{ inputProps: { min: 0 } }}
-                  //             variant="standard"
-                  //             type="number"
-                  //             id="bid"
-                  //             label=" "
-                  //             sx={{ width: 60 }}
-                  //           />
-                  //           <Button
-                  //             color="green"
-                  //             size="md"
-                  //             // href="/signup-page"
-                  //             // target="_blank"
-                  //             // disabled={disable}
-                  //             rel="noopener noreferrer"
-                  //             className={classes.jobBtn}
-                  //             onClick={handleClick}
-                  //           >
-                  //             <i className="fas fa-dollar-sign" />
-                  //             Make Bid
-                  //           </Button>
-                  //           {/* <Snackbar
-                  //             open={open}
-                  //             autoHideDuration={6000}
-                  //             onClose={handleClose}
-                  //           >
-                  //             <Alert
-                  //               onClose={handleClose}
-                  //               severity="success"
-                  //               sx={{ width: "100%" }}
-                  //             >
-                  //               Bid placed successfully!
-                  //             </Alert>
-                  //           </Snackbar> */}
-                  //         </React.Fragment>
-                  //       }
-                  //     />
-                  //   </Card>
-                  // </ListItem>
-                  // {/* <Divider variant="inset" component="li" /> */}
-                  // {/* </div> */}
-                  // {/* <div className={classes.newClass}> */}
-                  // <ListItem alignItems="flex-start">
-                  //   <Card className={classes.jobCard}>
-                  //     <ListItemAvatar>
-                  //       <Avatar alt="Travis Howard" src={team2} />
-                  //     </ListItemAvatar>
-                  //     <ListItemText
-                  //       primary={
-                  //         <Typography className={classes.heading}>
-                  //           <strong>Title: Plumbing</strong>
-                  //         </Typography>
-                  //       }
-                  //       secondary={
-                  //         <React.Fragment>
-                  //           <Typography
-                  //             className={classes.heading}
-                  //             color="text.primary"
-                  //           >
-                  //             Ali Connors
-                  //           </Typography>
-                  //           Ill be in your neighborhood doing errands this… Ill be in
-                  //           your neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           <br /> <br />
-                  //           <strong>Max bid: $45</strong>
-                  //           <Divider
-                  //             sx={{ width: 1000, m: 0.5 }}
-                  //             orientation="horizontal"
-                  //           />
-                  //           <TextField
-                  //             defaultValue="45"
-                  //             InputProps={{ inputProps: { min: 0 } }}
-                  //             variant="standard"
-                  //             type="number"
-                  //             id="bid"
-                  //             label=" "
-                  //             sx={{ width: 60 }}
-                  //           />
-                  //           <Button
-                  //             color="green"
-                  //             size="md"
-                  //             // href="/signup-page"
-                  //             // target="_blank"
-                  //             // disabled={disable}
-                  //             rel="noopener noreferrer"
-                  //             className={classes.jobBtn}
-                  //             onClick={handleClick}
-                  //           >
-                  //             <i className="fas fa-dollar-sign" />
-                  //             Make Bid
-                  //           </Button>
-                  //           {/* <Snackbar
-                  //             open={open}
-                  //             autoHideDuration={6000}
-                  //             onClose={handleClose}
-                  //           >
-                  //             <Alert
-                  //               onClose={handleClose}
-                  //               severity="success"
-                  //               sx={{ width: "100%" }}
-                  //             >
-                  //               Bid placed successfully!
-                  //             </Alert>
-                  //           </Snackbar> */}
-                  //         </React.Fragment>
-                  //       }
-                  //     />
-                  //   </Card>
-                  // </ListItem>
-                  // {/* <Divider variant="inset" component="li" /> */}
-                  // {/* </div> */}
-                  // {/* <div className={classes.newClass}> */}
-                  // <ListItem alignItems="flex-start">
-                  //   <Card className={classes.jobCard}>
-                  //     <ListItemAvatar>
-                  //       <Avatar alt="Cindy Baker" src={team3} />
-                  //     </ListItemAvatar>
-                  //     <ListItemText
-                  //       primary={
-                  //         <Typography className={classes.heading}>
-                  //           <strong>Title: Plumbing</strong>
-                  //         </Typography>
-                  //       }
-                  //       secondary={
-                  //         <React.Fragment>
-                  //           <Typography
-                  //             className={classes.heading}
-                  //             color="text.primary"
-                  //           >
-                  //             Ali Connors
-                  //           </Typography>
-                  //           Ill be in your neighborhood doing errands this… Ill be in
-                  //           your neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           neighborhood doing errands this… Ill be in your
-                  //           <br /> <br />
-                  //           <strong>Max bid: $45</strong>
-                  //           <Divider
-                  //             sx={{ width: 1000, m: 0.5 }}
-                  //             orientation="horizontal"
-                  //           />
-                  //           <TextField
-                  //             defaultValue="45"
-                  //             InputProps={{ inputProps: { min: 0 } }}
-                  //             variant="standard"
-                  //             type="number"
-                  //             id="bid"
-                  //             label=" "
-                  //             sx={{ width: 60 }}
-                  //           />
-                  //           <Button
-                  //             color="green"
-                  //             size="md"
-                  //             // href="/signup-page"
-                  //             // target="_blank"
-                  //             // disabled={disable}
-                  //             rel="noopener noreferrer"
-                  //             className={classes.jobBtn}
-                  //             onClick={handleClick}
-                  //           >
-                  //             <i className="fas fa-dollar-sign" />
-                  //             Bid
-                  //           </Button>
-                  //           {/* <Snackbar
-                  //             open={open}
-                  //             autoHideDuration={6000}
-                  //             onClose={handleClose}
-                  //           >
-                  //             <Alert
-                  //               onClose={handleClose}
-                  //               severity="success"
-                  //               sx={{ width: "100%" }}
-                  //             >
-                  //               Bid placed successfully!
-                  //             </Alert>
-                  //           </Snackbar> */}
-                  //         </React.Fragment>
-                  //       }
-                  //     />
-                  //   </Card>
-                  // </ListItem>
-                  // {/* </div> */}
-                );
-              })
-            ) : (
-              // <h1> No record found</h1>
-              // alert("No record found")
+                // <ListItem alignItems="flex-start">
+                //   <Card className={classes.jobCard}>
+                //     <ListItemAvatar>
+                //       <Avatar alt="Travis Howard" src={team2} />
+                //     </ListItemAvatar>
+                //     <ListItemText
+                //       primary={
+                //         <Typography className={classes.heading}>
+                //           <strong>Title: Plumbing</strong>
+                //         </Typography>
+                //       }
+                //       secondary={
+                //         <React.Fragment>
+                //           <Typography
+                //             className={classes.heading}
+                //             color="text.primary"
+                //           >
+                //             Ali Connors
+                //           </Typography>
+                //           Ill be in your neighborhood doing errands this… Ill be in
+                //           your neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           <br /> <br />
+                //           <strong>Max bid: $45</strong>
+                //           <Divider
+                //             sx={{ width: 1000, m: 0.5 }}
+                //             orientation="horizontal"
+                //           />
+                //           <TextField
+                //             defaultValue="45"
+                //             InputProps={{ inputProps: { min: 0 } }}
+                //             variant="standard"
+                //             type="number"
+                //             id="bid"
+                //             label=" "
+                //             sx={{ width: 60 }}
+                //           />
+                //           <Button
+                //             color="green"
+                //             size="md"
+                //             // href="/signup-page"
+                //             // target="_blank"
+                //             // disabled={disable}
+                //             rel="noopener noreferrer"
+                //             className={classes.jobBtn}
+                //             onClick={handleClick}
+                //           >
+                //             <i className="fas fa-dollar-sign" />
+                //             Make Bid
+                //           </Button>
+                //           {/* <Snackbar
+                //             open={open}
+                //             autoHideDuration={6000}
+                //             onClose={handleClose}
+                //           >
+                //             <Alert
+                //               onClose={handleClose}
+                //               severity="success"
+                //               sx={{ width: "100%" }}
+                //             >
+                //               Bid placed successfully!
+                //             </Alert>
+                //           </Snackbar> */}
+                //         </React.Fragment>
+                //       }
+                //     />
+                //   </Card>
+                // </ListItem>
+                // {/* <Divider variant="inset" component="li" /> */}
+                // {/* </div> */}
+                // {/* <div className={classes.newClass}> */}
+                // <ListItem alignItems="flex-start">
+                //   <Card className={classes.jobCard}>
+                //     <ListItemAvatar>
+                //       <Avatar alt="Cindy Baker" src={team3} />
+                //     </ListItemAvatar>
+                //     <ListItemText
+                //       primary={
+                //         <Typography className={classes.heading}>
+                //           <strong>Title: Plumbing</strong>
+                //         </Typography>
+                //       }
+                //       secondary={
+                //         <React.Fragment>
+                //           <Typography
+                //             className={classes.heading}
+                //             color="text.primary"
+                //           >
+                //             Ali Connors
+                //           </Typography>
+                //           Ill be in your neighborhood doing errands this… Ill be in
+                //           your neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           <br /> <br />
+                //           <strong>Max bid: $45</strong>
+                //           <Divider
+                //             sx={{ width: 1000, m: 0.5 }}
+                //             orientation="horizontal"
+                //           />
+                //           <TextField
+                //             defaultValue="45"
+                //             InputProps={{ inputProps: { min: 0 } }}
+                //             variant="standard"
+                //             type="number"
+                //             id="bid"
+                //             label=" "
+                //             sx={{ width: 60 }}
+                //           />
+                //           <Button
+                //             color="green"
+                //             size="md"
+                //             // href="/signup-page"
+                //             // target="_blank"
+                //             // disabled={disable}
+                //             rel="noopener noreferrer"
+                //             className={classes.jobBtn}
+                //             onClick={handleClick}
+                //           >
+                //             <i className="fas fa-dollar-sign" />
+                //             Make Bid
+                //           </Button>
+                //           {/* <Snackbar
+                //             open={open}
+                //             autoHideDuration={6000}
+                //             onClose={handleClose}
+                //           >
+                //             <Alert
+                //               onClose={handleClose}
+                //               severity="success"
+                //               sx={{ width: "100%" }}
+                //             >
+                //               Bid placed successfully!
+                //             </Alert>
+                //           </Snackbar> */}
+                //         </React.Fragment>
+                //       }
+                //     />
+                //   </Card>
+                // </ListItem>
+                // {/* <Divider variant="inset" component="li" /> */}
+                // {/* </div> */}
+                // {/* <div className={classes.newClass}> */}
+                // <ListItem alignItems="flex-start">
+                //   <Card className={classes.jobCard}>
+                //     <ListItemAvatar>
+                //       <Avatar alt="Remy Sharp" src={team1} />
+                //     </ListItemAvatar>
+                //     <ListItemText
+                //       primary={
+                //         <Typography className={classes.heading}>
+                //           <strong>Title: Plumbing</strong>
+                //         </Typography>
+                //       }
+                //       secondary={
+                //         <React.Fragment>
+                //           <Typography
+                //             className={classes.heading}
+                //             color="text.primary"
+                //           >
+                //             Ali Connors
+                //           </Typography>
+                //           Ill be in your neighborhood doing errands this… Ill be in
+                //           your neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           <br /> <br />
+                //           <strong>Max bid: $45</strong>
+                //           <Divider
+                //             sx={{ width: 1000, m: 0.5 }}
+                //             orientation="horizontal"
+                //           />
+                //           <TextField
+                //             defaultValue="45"
+                //             InputProps={{ inputProps: { min: 0 } }}
+                //             variant="standard"
+                //             type="number"
+                //             id="bid"
+                //             label=" "
+                //             sx={{ width: 60 }}
+                //           />
+                //           <Button
+                //             color="green"
+                //             size="md"
+                //             // href="/signup-page"
+                //             // target="_blank"
+                //             // disabled={disable}
+                //             rel="noopener noreferrer"
+                //             className={classes.jobBtn}
+                //             onClick={handleClick}
+                //           >
+                //             <i className="fas fa-dollar-sign" />
+                //             Make Bid
+                //           </Button>
+                //           {/* <Snackbar
+                //             open={open}
+                //             autoHideDuration={6000}
+                //             onClose={handleClose}
+                //           >
+                //             <Alert
+                //               onClose={handleClose}
+                //               severity="success"
+                //               sx={{ width: "100%" }}
+                //             >
+                //               Bid placed successfully!
+                //             </Alert>
+                //           </Snackbar> */}
+                //         </React.Fragment>
+                //       }
+                //     />
+                //   </Card>
+                // </ListItem>
+                // {/* <Divider variant="inset" component="li" /> */}
+                // {/* </div> */}
+                // {/* <div className={classes.newClass}> */}
+                // <ListItem alignItems="flex-start">
+                //   <Card className={classes.jobCard}>
+                //     <ListItemAvatar>
+                //       <Avatar alt="Travis Howard" src={team2} />
+                //     </ListItemAvatar>
+                //     <ListItemText
+                //       primary={
+                //         <Typography className={classes.heading}>
+                //           <strong>Title: Plumbing</strong>
+                //         </Typography>
+                //       }
+                //       secondary={
+                //         <React.Fragment>
+                //           <Typography
+                //             className={classes.heading}
+                //             color="text.primary"
+                //           >
+                //             Ali Connors
+                //           </Typography>
+                //           Ill be in your neighborhood doing errands this… Ill be in
+                //           your neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           <br /> <br />
+                //           <strong>Max bid: $45</strong>
+                //           <Divider
+                //             sx={{ width: 1000, m: 0.5 }}
+                //             orientation="horizontal"
+                //           />
+                //           <TextField
+                //             defaultValue="45"
+                //             InputProps={{ inputProps: { min: 0 } }}
+                //             variant="standard"
+                //             type="number"
+                //             id="bid"
+                //             label=" "
+                //             sx={{ width: 60 }}
+                //           />
+                //           <Button
+                //             color="green"
+                //             size="md"
+                //             // href="/signup-page"
+                //             // target="_blank"
+                //             // disabled={disable}
+                //             rel="noopener noreferrer"
+                //             className={classes.jobBtn}
+                //             onClick={handleClick}
+                //           >
+                //             <i className="fas fa-dollar-sign" />
+                //             Make Bid
+                //           </Button>
+                //           {/* <Snackbar
+                //             open={open}
+                //             autoHideDuration={6000}
+                //             onClose={handleClose}
+                //           >
+                //             <Alert
+                //               onClose={handleClose}
+                //               severity="success"
+                //               sx={{ width: "100%" }}
+                //             >
+                //               Bid placed successfully!
+                //             </Alert>
+                //           </Snackbar> */}
+                //         </React.Fragment>
+                //       }
+                //     />
+                //   </Card>
+                // </ListItem>
+                // {/* <Divider variant="inset" component="li" /> */}
+                // {/* </div> */}
+                // {/* <div className={classes.newClass}> */}
+                // <ListItem alignItems="flex-start">
+                //   <Card className={classes.jobCard}>
+                //     <ListItemAvatar>
+                //       <Avatar alt="Cindy Baker" src={team3} />
+                //     </ListItemAvatar>
+                //     <ListItemText
+                //       primary={
+                //         <Typography className={classes.heading}>
+                //           <strong>Title: Plumbing</strong>
+                //         </Typography>
+                //       }
+                //       secondary={
+                //         <React.Fragment>
+                //           <Typography
+                //             className={classes.heading}
+                //             color="text.primary"
+                //           >
+                //             Ali Connors
+                //           </Typography>
+                //           Ill be in your neighborhood doing errands this… Ill be in
+                //           your neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           neighborhood doing errands this… Ill be in your
+                //           <br /> <br />
+                //           <strong>Max bid: $45</strong>
+                //           <Divider
+                //             sx={{ width: 1000, m: 0.5 }}
+                //             orientation="horizontal"
+                //           />
+                //           <TextField
+                //             defaultValue="45"
+                //             InputProps={{ inputProps: { min: 0 } }}
+                //             variant="standard"
+                //             type="number"
+                //             id="bid"
+                //             label=" "
+                //             sx={{ width: 60 }}
+                //           />
+                //           <Button
+                //             color="green"
+                //             size="md"
+                //             // href="/signup-page"
+                //             // target="_blank"
+                //             // disabled={disable}
+                //             rel="noopener noreferrer"
+                //             className={classes.jobBtn}
+                //             onClick={handleClick}
+                //           >
+                //             <i className="fas fa-dollar-sign" />
+                //             Bid
+                //           </Button>
+                //           {/* <Snackbar
+                //             open={open}
+                //             autoHideDuration={6000}
+                //             onClose={handleClose}
+                //           >
+                //             <Alert
+                //               onClose={handleClose}
+                //               severity="success"
+                //               sx={{ width: "100%" }}
+                //             >
+                //               Bid placed successfully!
+                //             </Alert>
+                //           </Snackbar> */}
+                //         </React.Fragment>
+                //       }
+                //     />
+                //   </Card>
+                // </ListItem>
+                // {/* </div> */}
+              );
+            })}
+            <Snackbar
+              open={open}
+              // id={id}
+              autoHideDuration={6000}
+              onClose={handleClose}
+            >
               <Alert
                 onClose={handleClose}
+                // id={id}
                 severity="success"
                 sx={{ width: "100%" }}
               >
-                No record found !
+                Bid placed successfully!
               </Alert>
-            )}
+            </Snackbar>
           </List>
         </div>
       </div>

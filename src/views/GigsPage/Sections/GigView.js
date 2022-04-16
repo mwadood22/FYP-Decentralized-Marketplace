@@ -97,7 +97,7 @@ export default function GigView() {
     ],
   });
   const DeleteGig = async (id) => {
-    console.log("Check");
+    // console.log("Check");
     try {
       const res = await fetch(`/gig/${id}`, {
         method: "DELETE",
@@ -107,7 +107,7 @@ export default function GigView() {
         },
       });
       // history.push("/gigs-page");
-      window.location.reload();
+      // window.location.reload();
 
       // const data = await res.json();
       // console.log(data);
@@ -127,36 +127,62 @@ export default function GigView() {
     }
   };
 
-  const callAboutPage = async () => {
-    console.log("Check");
-    try {
-      const res = await fetch("/gig", {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await res.json();
-      // console.log(data);
-      setUserData(data);
-      // gigid = {
-      //   pathname: "/gig",
-      //   // param1: gig._id,
-      // };
+  // const callAboutPage = async () => {
+  //   console.log("Check");
+  //   try {
+  //     const res = await fetch("/gig", {
+  //       method: "GET",
+  //       // headers: {
+  //       //   Accept: "text/plain",
+  //       //   "Content-Type": "text/plain",
+  //       // },
+  //     });
+  //     const data = await res.json();
+  //     // console.log(data);
+  //     setUserData(data);
+  //     // gigid = {
+  //     //   pathname: "/gig",
+  //     //   // param1: gig._id,
+  //     // };
 
-      if (!res.status === 200) {
-        const error = new Error(res.error);
-        throw error;
-      }
-    } catch (err) {
-      console.log(err);
-      // history.push('/login');
-    }
+  //     if (!res.status === 200) {
+  //       const error = new Error(res.error);
+  //       throw error;
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //     // history.push('/login');
+  //   }
+  // };
+
+  const checkFunction = () => {
+    const source = new EventSource(`http://localhost:6942/check`);
+
+    source.addEventListener("open", () => {
+      console.log("SSE opened!");
+    });
+
+    source.addEventListener("message", (e) => {
+      const data = JSON.parse(e.data);
+      console.log(data);
+      // console.log(e);
+      // console.log("Event called: ", e.data);
+      setUserData(data);
+      // const data = JSON.parse(e.data);
+    });
+
+    // source.addEventListener("error", (e) => {
+    //   console.error("Error: ", e);
+    // });
+
+    return () => {
+      source.close();
+    };
   };
 
   useEffect(() => {
-    callAboutPage();
+    // callAboutPage();
+    checkFunction();
   }, []);
 
   //
