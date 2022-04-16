@@ -28,12 +28,18 @@ router.delete("/gig/:id", gigController.delete);
 router.get("/gig/:id", gigController.show);
 router.get("/gig/category-wise/:category", gigController.filteredgigs);
 
+//worker routes
 router.get("/worker/", workerController.index);
-router.post("/worker/create", workerController.create);
+router.post(
+  "/worker/create",
+  upload.single("picture"),
+  workerController.create
+);
 // router.patch("/gig/", gigController.edit);
 router.delete("/worker/:id", workerController.delete);
-router.get("/worker/:id", workerController.show);
+router.get("/worker/:id", upload.single("picture"), workerController.show);
 
+//job routes
 router.get("/job/", jobController.index);
 router.post("/job/create", jobController.create);
 // router.patch("/gig/", gigController.edit);
@@ -41,12 +47,14 @@ router.delete("/job/:id", jobController.delete);
 //router.get("/job/:id", jobController.show);
 router.get("/job/:key", jobController.search);
 
+//testimonial routes
 router.get("/testimonial/", testimonialController.index);
 router.post("/testimonial/create", testimonialController.create);
 // router.patch("/gig/", gigController.edit);
 router.delete("/testimonial/:id", testimonialController.delete);
 router.get("/testimonial/:id", testimonialController.show);
 
+//categories routes
 router.get("/category/", categoryController.index);
 router.post("/category/create", categoryController.create);
 // router.patch("/gig/", gigController.edit);

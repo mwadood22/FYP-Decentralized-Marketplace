@@ -68,7 +68,54 @@ export default function WorkerPage(props) {
     city: "",
     address: "",
     description: "",
+    category: "",
   });
+
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
+
+  const validate = (values) => {
+    const errors = {};
+    //const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    if (!values.title) {
+      errors.title = "Title is required!";
+    } else if (values.title.length > 70) {
+      errors.title = "Title cannot exceed more than 70 characters";
+    }
+    if (!values.budget) {
+      errors.budget = "Budget is required!";
+    }
+    //  else if (!isNaN(values.budget)) {
+    //   errors.budget = "Please enter numeric value!";
+    // }
+    // else if (!regex.test(values.email)) {
+    //   errors.email = "This is not a valid email format!";
+    // }
+    if (!values.city) {
+      errors.city = "City is required";
+    }
+    // else if (values.city != Text) {
+    //   errors.city = "Invalid city";
+    // }
+    if (!values.address) {
+      errors.address = "Address is required";
+    }
+    // else if (values.password.length < 4) {
+    //   errors.password = "Password must be more than 4 characters";
+    // }
+
+    if (!values.description) {
+      errors.description = "Description is required";
+    } else if (values.description.length > 150) {
+      errors.description = "Description cannot exceed more than 150 characters";
+    }
+
+    if (!currency) {
+      errors.category = "category is required";
+    }
+
+    return errors;
+  };
 
   let name, value;
   const handleInputs = (e) => {
@@ -77,32 +124,40 @@ export default function WorkerPage(props) {
     console.log(e);
     setJobData({ ...job, [name]: value });
   };
+
   const postData = async (e) => {
     e.preventDefault();
-    console.log(e.target.value);
-    const { title, budget, city, address, description } = job;
-    const res = await fetch("/job/create", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title,
-        budget,
-        city,
-        address,
-        description,
-      }),
-    });
+    setFormErrors(validate(job));
+    setIsSubmit(true);
 
-    const data = await res.json();
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+      console.log(e.target.value);
+      console.log("form valid");
+      const { title, budget, city, address, description, category } = job;
+      const res = await fetch("/job/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title,
+          budget,
+          city,
+          address,
+          description,
+          category,
+        }),
+      });
 
-    if (data.status === 42 || !data) {
-      window.alert("Invalid registeration");
-      console.log("Invalid registeration");
-    } else {
-      // console.log(data);
-      // history.push("/landing-page");
+      const data = await res.json();
+
+      if (data.status === 42 || !data) {
+        window.alert("Invalid registeration");
+        console.log("Invalid registeration");
+      } else {
+        // console.log(data);
+        // history.push("/landing-page");
+      }
     }
   };
   const [currency, setCurrency] = React.useState("None");
@@ -166,6 +221,8 @@ export default function WorkerPage(props) {
                         }}
                         variant="standard"
                       />
+
+                      <span style={{ color: "red" }}>{formErrors.title}</span>
                     </GridItem>
 
                     <GridItem xs={6} sm={6} md={6}>
@@ -188,6 +245,8 @@ export default function WorkerPage(props) {
                         }}
                         variant="standard"
                       />
+
+                      <span style={{ color: "red" }}>{formErrors.budget}</span>
                     </GridItem>
                     <GridItem xs={6} sm={6} md={6}>
                       <TextField
@@ -211,6 +270,7 @@ export default function WorkerPage(props) {
                         }}
                         variant="standard"
                       />
+                      <span style={{ color: "red" }}>{formErrors.city}</span>
                     </GridItem>
 
                     <GridItem xs={6} sm={6} md={12}>
@@ -233,7 +293,9 @@ export default function WorkerPage(props) {
                         }}
                         variant="standard"
                       />
+                      <span style={{ color: "red" }}>{formErrors.address}</span>
                     </GridItem>
+
                     <GridItem xs={6} sm={6} md={12}>
                       <TextField
                         required
@@ -242,6 +304,7 @@ export default function WorkerPage(props) {
                         select
                         margin="normal"
                         label=" "
+                        name="category"
                         value={currency}
                         helperText="Category"
                         onChange={handleChange}
@@ -260,6 +323,9 @@ export default function WorkerPage(props) {
                           </MenuItem>
                         ))}
                       </TextField>
+                      <span style={{ color: "red" }}>
+                        {formErrors.category}
+                      </span>
                     </GridItem>
 
                     <GridItem>
@@ -276,6 +342,9 @@ export default function WorkerPage(props) {
                         value={job.description}
                         onChange={handleInputs}
                       />
+                      <span style={{ color: "red" }}>
+                        {formErrors.description}
+                      </span>
                     </GridItem>
 
                     <GridItem>

@@ -93,10 +93,12 @@ export default function Gig(props) {
     city: "",
     email: "",
     contact: "",
+    picture: "",
   });
   // console.log(props.location.param1);
   const { ...temp } = props;
   const gigId = temp.match.params.gigId;
+
   const callAboutPage = async () => {
     console.log("Check");
     try {
@@ -116,7 +118,7 @@ export default function Gig(props) {
         throw error;
       }
 
-      const res2 = await fetch("/worker/62487593b4a32fa9d942b3c3", {
+      const res2 = await fetch("/worker/625b1d37f7bdd572cdd82ed7", {
         method: "GET",
         headers: {
           Accept: "application/json",

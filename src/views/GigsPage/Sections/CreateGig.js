@@ -72,6 +72,34 @@ export default function WorkerPage(props) {
     gigdescription: "",
     picture: "",
   });
+
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
+
+  const validate = (values) => {
+    const errors = {};
+    //const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    if (!values.gigTitle) {
+      errors.gigTitle = "Title is required!";
+    } else if (values.gigTitle.length > 40) {
+      errors.gigTitle = "Title cannot exceed more than 40 characters";
+    }
+    if (!values.budget) {
+      errors.budget = "Budget is required!";
+    }
+
+    if (!values.gigdescription) {
+      errors.gigdescription = "Description is required";
+    } else if (values.gigdescription.length > 150) {
+      errors.gigdescription =
+        "Description cannot exceed more than 150 characters";
+    }
+    if (!values.picture) {
+      errors.picture = "Picture is required";
+    }
+    return errors;
+  };
+
   let name, value;
   const handleInputs = (e) => {
     name = e.target.name;
@@ -87,53 +115,59 @@ export default function WorkerPage(props) {
 
   const postData = async (e) => {
     e.preventDefault();
+    setFormErrors(validate(gig));
+    setIsSubmit(true);
 
-    //const { gigTitle, budget, category, gigDescription } = gig;
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+      //const { gigTitle, budget, category, gigDescription } = gig;
 
-    const formdata = new FormData();
+      console.log(e.target.value);
+      console.log("form valid");
+      const formdata = new FormData();
 
-    //console.log("==", gig.picture, "===", gig.picture.name);
-    console.log("data added");
-    formdata.append("picture", gig.picture, gig.picture.name);
-    formdata.append("gigTitle", gig.gigTitle);
-    formdata.append("budget", gig.budget);
-    formdata.append("category", gig.category);
-    formdata.append("gigdescription", gig.gigdescription);
-    //let url = "/gig/create";
-    try {
-      const res = await axios.post("/gig/create", formdata);
-      // {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({
-      //     gigTitle,
-      //     budget,
-      //     category,
-      //     gigDescription,
-      //   }),
-      // });
+      //console.log("==", gig.picture, "===", gig.picture.name);
+      console.log("data added");
+      formdata.append("picture", gig.picture, gig.picture.name);
+      formdata.append("gigTitle", gig.gigTitle);
+      formdata.append("budget", gig.budget);
+      formdata.append("category", gig.category);
+      formdata.append("gigdescription", gig.gigdescription);
+      //let url = "/gig/create";
+      try {
+        const res = await axios.post("/gig/create", formdata);
+        // {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   body: JSON.stringify({
+        //     gigTitle,
+        //     budget,
+        //     category,
+        //     gigDescription,
+        //   }),
+        // });
 
-      // const data = await res.json();
+        // const data = await res.json();
 
-      // if (data.status === 42 || !data) {
-      //   window.alert("Invalid registeration");
-      //   console.log("Invalid registeration");
-      // } else {
-      //   console.log(data);
-      //   history.push("/gigs-page");
-      // }
+        // if (data.status === 42 || !data) {
+        //   window.alert("Invalid registeration");
+        //   console.log("Invalid registeration");
+        // } else {
+        //   console.log(data);
+        //   history.push("/gigs-page");
+        // }
 
-      if (res.status === 42) {
-        window.alert("Invalid registeration");
-        console.log("Invalid registeration");
-      } else {
-        console.log(res);
-        history.push("/gigs-page");
+        if (res.status === 42) {
+          window.alert("Invalid registeration");
+          console.log("Invalid registeration");
+        } else {
+          console.log(res);
+          history.push("/gigs-page");
+        }
+      } catch (e) {
+        window.alert("catch block ");
       }
-    } catch (e) {
-      window.alert("catch block ");
     }
   };
   //
@@ -199,6 +233,9 @@ export default function WorkerPage(props) {
                         }}
                         variant="standard"
                       />
+                      <span style={{ color: "red" }}>
+                        {formErrors.gigTitle}
+                      </span>
                     </GridItem>
 
                     <GridItem xs={6} sm={6} md={6}>
@@ -221,6 +258,7 @@ export default function WorkerPage(props) {
                         }}
                         variant="standard"
                       />
+                      <span style={{ color: "red" }}>{formErrors.budget}</span>
                     </GridItem>
                     <GridItem xs={6} sm={6} md={6}>
                       <TextField
@@ -264,23 +302,12 @@ export default function WorkerPage(props) {
                         id="desc"
                         label="Gig Description"
                       />
+                      <span style={{ color: "red" }}>
+                        {formErrors.gigdescription}
+                      </span>
                     </GridItem>
 
                     <GridItem>
-                      {/* <Filefeild
-                        margin="normal"
-                        fullWidth
-                        name="picture"
-                        //value={gig.picture}
-                        onChange={handleInputs}
-                        required
-                        multiline
-                        rows={8}
-                        textarea
-                        id="desc"
-                        label="Picture"
-                      /> */}
-
                       <Button
                         variant="contained"
                         component="label"
@@ -294,6 +321,7 @@ export default function WorkerPage(props) {
                         Upload Picture
                         <input type="file" hidden />
                       </Button>
+                      <span style={{ color: "red" }}>{formErrors.picture}</span>
                     </GridItem>
 
                     <GridItem>
