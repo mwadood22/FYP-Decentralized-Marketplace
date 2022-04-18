@@ -55,3 +55,35 @@ exports.show = (req, res) => {
     });
   //   return res.json({ gigs });
 };
+
+exports.showAgainstUserId = (req, res) => {
+  //   console.log("All gigs list");
+  // const user_id = req.params.userId;
+  // console.log(id);
+  dbo
+    .collection("WorkerData")
+    .findOne({ user_id: req.params.user_id }, function (err, workers) {
+      if (err) {
+        return res.status(400).json({ msg: "Error" });
+      }
+      //   console.log(gigs);
+      return res.json(workers);
+    });
+  //   return res.json({ gigs });
+};
+
+exports.showAgainstGig = (req, res) => {
+  //   console.log("All gigs list");
+  const id = req.params.workerId;
+  console.log(id);
+  dbo
+    .collection("WorkerData")
+    .findOne({ user_id: req.params.workerId }, function (err, workers) {
+      if (err) {
+        return res.status(400).json({ msg: "Error" });
+      }
+      //   console.log(gigs);
+      return res.json(workers);
+    });
+  //   return res.json({ gigs });
+};

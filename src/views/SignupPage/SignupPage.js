@@ -25,50 +25,55 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 
 //import image from "assets/img/bg7.jpg";
-
+// /Blockchain code
+// import {Container,Heading} from '@chakra-ui/layout';
+import { useMoralis, useMoralisCloudFunction } from "react-moralis";
+// import { useState } from "react";
+import { ErrorBox } from "components/errorbox/Error";
+////
 const useStyles = makeStyles(styles);
 export default function SignupPage(props) {
   // const history = useHistory();
   //getting variables from form
 
-  const [user, setUser] = useState({
-    username: "",
-    password: "",
-    email: "",
-  });
-  let name, value;
-  const handleInputs = (e) => {
-    name = e.target.name;
-    value = e.target.value;
-    console.log(e);
-    setUser({ ...user, [name]: value });
-  };
-  const postData = async (e) => {
-    e.preventDefault();
-    console.log(e.target.value);
-    const { username, password, email } = user;
-    const res = await fetch("/gig/create", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username,
-        email,
-        password,
-      }),
-    });
+  // const [user, setUser] = useState({
+  //   username: "",
+  //   password: "",
+  //   email: "",
+  // });
+  // let name, value;
+  // const handleInputs = (e) => {
+  //   name = e.target.name;
+  //   value = e.target.value;
+  //   console.log(e);
+  //   setUser({ ...user, [name]: value });
+  // };
+  // const postData = async (e) => {
+  //   e.preventDefault();
+  //   console.log(e.target.value);
+  //   const { username, password, email } = user;
+  //   const res = await fetch("/gig/create", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       username,
+  //       email,
+  //       password,
+  //     }),
+  //   });
 
-    const data = await res.json();
+  //   const data = await res.json();
 
-    if (data.status === 42 || !data) {
-      window.alert("Invalid registeration");
-      console.log("Invalid registeration");
-    } else {
-      // console.log(data);
-      // history.push("/landing-page");
-    }
-  };
+  //   if (data.status === 42 || !data) {
+  //     window.alert("Invalid registeration");
+  //     console.log("Invalid registeration");
+  //   } else {
+  //     // console.log(data);
+  //     // history.push("/landing-page");
+  //   }
+  // };
   //
 
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
@@ -77,6 +82,28 @@ export default function SignupPage(props) {
   }, 700);
   const classes = useStyles();
   const { ...rest } = props;
+  ////blockchain
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
+  const [email, setEmail] = useState();
+  const { authenticate, isAuthenticating, authError, signup, Moralis } =
+    useMoralis();
+  // cloud function
+
+  const { fetch: callEmailCloudFunction } = useMoralisCloudFunction(
+    "sendWelcomeEmail",
+    {
+      email: email,
+      name: username,
+    },
+    { autoFetch: false }
+  );
+  //Send welcome email to user
+  const sendWelcomeEmail = async () => {
+    //pick the user email from state
+    await Moralis.User.requestEmailVerification(email);
+    callEmailCloudFunction();
+  };
   return (
     <div>
       <Header
@@ -132,6 +159,19 @@ export default function SignupPage(props) {
                     </div>
                   </CardHeader>
                   <p className={classes.divider}></p>
+                  {authError && (
+                    <ErrorBox
+                      title="Authentication has failed!"
+                      message={authError.message}
+                    />
+                  )}
+                  <Button
+                    isLoading={isAuthenticating}
+                    onClick={() => authenticate()}
+                  >
+                    Authentication with MetaMask
+                  </Button>
+                  <p className={classes.divider}></p>
                   <CardBody>
                     <CustomInput
                       //className={classes.inlineBlock}
@@ -141,8 +181,10 @@ export default function SignupPage(props) {
                       formControlProps={{
                         fullWidth: true,
                       }}
-                      value={user.username}
-                      onChange={handleInputs}
+                      value={username}
+                      onChange={(event) =>
+                        setUsername(event.currentTarget.value)
+                      }
                       inputProps={{
                         type: "text",
                         endAdornment: (
@@ -160,8 +202,8 @@ export default function SignupPage(props) {
                       formControlProps={{
                         fullWidth: true,
                       }}
-                      value={user.email}
-                      onChange={handleInputs}
+                      value={email}
+                      onChange={(event) => setEmail(event.currentTarget.value)}
                       inputProps={{
                         type: "email",
                         endAdornment: (
@@ -187,8 +229,10 @@ export default function SignupPage(props) {
                       formControlProps={{
                         fullWidth: true,
                       }}
-                      value={user.password}
-                      onChange={handleInputs}
+                      value={password}
+                      onChange={(event) =>
+                        setPassword(event.currentTarget.value)
+                      }
                       inputProps={{
                         type: "password",
                         endAdornment: (
@@ -205,10 +249,17 @@ export default function SignupPage(props) {
                   <CardFooter className={classes.cardFooter}>
                     <Button
                       color="black"
-                      href="/landing-page"
-                      onClick={postData}
+                      //href="/landing-page"
+                      onClick={() => signup(username, password, email)}
                     >
                       Get started
+                    </Button>
+                    <Button
+                      color="black"
+                      //href="/landing-page"
+                      onClick={() => sendWelcomeEmail()}
+                    >
+                      Send Welcome Email!
                     </Button>
                   </CardFooter>
                   <div className={classes.endings}>

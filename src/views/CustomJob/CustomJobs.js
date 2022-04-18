@@ -36,6 +36,7 @@ const useStyles = makeStyles(styles);
 export default function CustomJobs(props) {
   const classes = useStyles();
   const { ...rest } = props;
+  // console.log(props);
   return (
     <div>
       <Header
@@ -78,7 +79,7 @@ export default function CustomJobs(props) {
 
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div className={classes.container}>
-          <CustomJobsView />
+          <CustomJobsView userId={rest.match.params.userId} />
           {/* <ProductSection /> */}
 
           {/* <ClientSection /> */}

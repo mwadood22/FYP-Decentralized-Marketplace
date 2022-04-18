@@ -39,12 +39,18 @@ import team1 from "assets/img/faces/test1.jpg";
 //import team3 from "assets/img/faces/test3.jpg";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import { useMoralis } from "react-moralis";
 
 const useStyles = makeStyles(styles);
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 export default function FindJobs(props) {
+  const { isAuthenticated, user } = useMoralis();
+  var idd;
+  if (isAuthenticated) {
+    idd = user.id;
+  }
   const [bid, setBidData] = useState({
     price: "",
   });
@@ -77,6 +83,7 @@ export default function FindJobs(props) {
     // console.log(id);
     // console.log(job_id);
     const { price } = bid;
+    const workerId = idd;
     const res = await fetch("/bids/create", {
       method: "POST",
       headers: {
@@ -85,6 +92,7 @@ export default function FindJobs(props) {
       body: JSON.stringify({
         price,
         job_id,
+        workerId,
       }),
     });
     // setDisabledButtons(prevState => [...prevState, id]);
@@ -97,37 +105,36 @@ export default function FindJobs(props) {
       window.alert("Invalid registeration");
       console.log("Invalid registeration");
     } else {
-      console.log(data);
       // history.push("/landing-page");
     }
   };
 
-  // const ViewJobsData = async () => {
-  //   // console.log("Check");
-  //   try {
-  //     const res = await fetch("/job", {
-  //       method: "GET",
-  //       headers: {
-  //         Accept: "application/json",
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
-  //     const data = await res.json();
-  //     console.log(data);
-  //     getJobData(data);
+  const ViewJobsData = async () => {
+    // console.log("Check");
+    try {
+      const res = await fetch("/job", {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+      console.log(data);
+      getJobData(data);
 
-  //     if (!res.status === 200) {
-  //       const error = new Error(res.error);
-  //       throw error;
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //     // history.push('/login');
-  //   }
-  // };
+      if (!res.status === 200) {
+        const error = new Error(res.error);
+        throw error;
+      }
+    } catch (err) {
+      console.log(err);
+      // history.push('/login');
+    }
+  };
 
   const checkFunction = () => {
-    const source = new EventSource(`http://localhost:6942/jobs/check`);
+    const source = new EventSource(`http://localhost:6942/jobs/getAll`);
 
     source.addEventListener("open", () => {
       console.log("SSE opened!");
@@ -184,7 +191,7 @@ export default function FindJobs(props) {
         getJobData(result);
       }
     } else {
-      ViewData();
+      ViewJobsData();
     }
   };
 

@@ -35,6 +35,8 @@ import logo from "assets/img/logo.png";
 
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
+import { useMoralis } from "react-moralis";
+
 // import Paper from "@mui/material/Paper";
 
 import styles from "assets/jss/material-kit-react/views/workerpage.js";
@@ -57,6 +59,11 @@ const currencies = [
 ];
 
 export default function WorkerPage(props) {
+  const { isAuthenticated, user } = useMoralis();
+  var id;
+  if (isAuthenticated) {
+    id = user.id;
+  }
   const [worker, setWorkerData] = useState({
     Name: "",
     picture: "",
@@ -77,6 +84,11 @@ export default function WorkerPage(props) {
     e.preventDefault();
     console.log(e.target.value);
     const { Name, picture, city, contact, skills, about } = worker;
+    const user_id = id;
+    console.log(id);
+
+    console.log(user_id);
+
     const res = await fetch("/worker/create", {
       method: "POST",
       headers: {
@@ -89,6 +101,7 @@ export default function WorkerPage(props) {
         contact,
         skills,
         about,
+        user_id,
       }),
     });
 

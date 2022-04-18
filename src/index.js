@@ -30,36 +30,46 @@ import Gig2 from "views/GigsPage/Sections/Gig2.js";
 import App from "views/LandingPage/Sections/stripe.js";
 // import Chat from "components/Chat/Chat.js";
 
+///blockchain
+import { MoralisProvider } from "react-moralis";
+///
+
 var hist = createBrowserHistory();
 
 ReactDOM.render(
-  <Router history={hist}>
-    <Switch>
-      <Route path="/landing-page" component={LandingPage} />
-      <Route path="/profile-page" component={ProfilePage} />
-      <Route path="/login-page" component={LoginPage} />
-      <Route path="/signup-page" component={SignupPage} />
-      <Route path="/contact-page" component={ContactPage} />
-      <Route path="/service-page/:category" component={ServicePage} />
-      <Route path="/gigs-page" component={GigsPage} />
-      <Route path="/customjobs-page" component={CustomJobs} />
-      <Route path="/guidebuy-page" component={GuideBuyPage} />
-      <Route path="/guidesell-page" component={GuideSellPage} />
-      <Route path="/worker-page" component={WorkerPage} />
-      <Route path="/findjobs-page" component={FindJobs} />
-      <Route path="/worker-dashboard" component={WorkerDashboard} />
-      <Route path="/creategig-page" component={CreateGig} />
-      <Route path="/updategig-page/:gigId" component={UpdateGig} />
-      <Route path="/createjob-page" component={CreateJob} />
-      <Route path="/updatejob-page" component={UpdateJob} />
-      <Route path="/payment-page" component={MakePayment} />
-      <Route path="/gig/:gigId" component={Gig} />
-      <Route path="/gig2" component={Gig2} />
-      {/* <Route path="/chat" component={Chat} /> */}
+  <MoralisProvider
+    appId="Qku4rdTm1q0ze5p0Qo2VdxozwwSLaB5Ol2PYqRL8"
+    serverUrl="https://kcsrnv48vhum.usemoralis.com:2053/server"
+  >
+    <Router history={hist}>
+      <Switch>
+        <Route path="/landing-page" component={LandingPage} />
+        <Route path="/profile-page" component={ProfilePage} />
+        <Route path="/login-page" component={LoginPage} />
+        <Route path="/signup-page" component={SignupPage} />
+        <Route path="/contact-page" component={ContactPage} />
+        <Route path="/service-page/:category" component={ServicePage} />
+        <Route path="/gigs-page" component={GigsPage} />
+        <Route path="/customjobs-page/:userId" component={CustomJobs} />
+        <Route path="/guidebuy-page" component={GuideBuyPage} />
+        <Route path="/guidesell-page" component={GuideSellPage} />
+        <Route path="/worker-page" component={WorkerPage} />
+        <Route path="/findjobs-page" component={FindJobs} />
+        <Route path="/worker-dashboard" component={WorkerDashboard} />
+        <Route path="/creategig-page" component={CreateGig} />
+        <Route path="/updategig-page/:gigId" component={UpdateGig} />
+        <Route path="/createjob-page" component={CreateJob} />
+        <Route path="/updatejob-page" component={UpdateJob} />
+        <Route path="/payment-page" component={MakePayment} />
+        <Route path="/gig/:gigId" component={Gig} />
+        <Route path="/gig2" component={Gig2} />
+        {/* <Route path="/chat" component={Chat} /> */}
 
-      <Route path="/stripe" component={App} />
-      <Route path="/" component={LandingPage} />
-    </Switch>
-  </Router>,
+        <Route path="/stripe" component={App} />
+        <Route path="/" component={LandingPage} />
+      </Switch>
+    </Router>
+    ,
+  </MoralisProvider>,
   document.getElementById("root")
 );

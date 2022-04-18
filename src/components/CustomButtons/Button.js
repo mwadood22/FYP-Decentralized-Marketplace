@@ -27,6 +27,7 @@ const RegularButton = React.forwardRef((props, ref) => {
     size,
     block,
     link,
+    onClick,
     justIcon,
     className,
     ...rest
@@ -48,7 +49,7 @@ const RegularButton = React.forwardRef((props, ref) => {
     [className]: className,
   });
   return (
-    <Button {...rest} ref={ref} className={btnClasses}>
+    <Button onClick={onClick} {...rest} ref={ref} className={btnClasses}>
       {children}
     </Button>
   );
@@ -74,6 +75,7 @@ RegularButton.propTypes = {
   simple: PropTypes.bool,
   round: PropTypes.bool,
   fullWidth: PropTypes.bool,
+  onClick: PropTypes.func,
   disabled: PropTypes.bool,
   block: PropTypes.bool,
   link: PropTypes.bool,

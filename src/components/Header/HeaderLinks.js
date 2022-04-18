@@ -4,6 +4,7 @@ import React from "react";
 //import IconButton from "@material-ui/core/IconButton";
 // react components for routing our app without refresh
 import { Link } from "react-router-dom";
+import { useMoralis } from "react-moralis";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -19,10 +20,162 @@ import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 import Button from "components/CustomButtons/Button.js";
 
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
+import { useState, useEffect } from "react";
 const useStyles = makeStyles(styles);
 
 export default function HeaderLinks(props) {
   const classes = useStyles();
+
+  const { isAuthenticated, logout, user } = useMoralis();
+  var logoutButton, logoutButton1, signInButtons, postJobsReference;
+  const [reference, setReference] = useState();
+
+  const getWorker = async () => {
+    try {
+      // const id = await user.id;
+      console.log(user.id);
+      const res = await fetch(`/worker/moralis/${user.id}`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+      console.log(data);
+      if (data) {
+        // console.log("WE HEREEE");
+        setReference("/worker-dashboard");
+        // reference = "/worker-dashboard";
+      } else {
+        setReference("/worker-page");
+        // reference = "/worker-page";
+      }
+
+      if (!res.status === 200) {
+        const error = new Error(res.error);
+        throw error;
+      }
+    } catch (err) {
+      console.log(err);
+      // history.push('/login');
+    }
+  };
+
+  // console.log(user.attributes.username);
+  if (isAuthenticated) {
+    // console.log(user.attributes.username);
+    // name = <p>{user.attributes.username}</p>;
+    // getWorker(user.id);
+    // const res = fetch(`/worker/moralis/${user.id}`, {
+    //   method: "GET",
+    //   headers: {
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json",
+    //   },
+    // });
+    // const data = res;
+    // console.log(data);
+    // if (data) {
+    //   reference = "/worker-dashboard";
+    // } else {
+    //   reference = "/worker-page";
+    // }
+    //     becomeWorker = (
+    //       <ListItem className={classes.listItem}>
+    //         <Button
+    //           color="transparent"
+    //           href="/worker-dashboard"
+    //           //target="_blank"
+    //           className={classes.navLink}
+    //         >
+    //           Become a worker
+    //         </Button>
+    //       </ListItem>
+    //     );
+    //   } else {
+    //     becomeWorker = (
+    //       <ListItem className={classes.listItem}>
+    //         <Button
+    //           color="transparent"
+    //           href="/worker-page"
+    //           //target="_blank"
+    //           className={classes.navLink}
+    //         >
+    //           Become a worker
+    //         </Button>
+    //       </ListItem>
+    //     );
+    //   }
+    //   // getBidData(data);
+
+    //   if (!res.status === 200) {
+    //     const error = new Error(res.error);
+    //     throw error;
+    //   }
+    // } catch (err) {
+    //   console.log(err);
+    //   // history.push('/login');
+    // }
+    signInButtons = (
+      <>
+        <ListItem className={classes.listItem}>
+          <Link to={"/customjobs-page/" + user.id}>
+            <Button
+              color="transparent"
+              // href="/customjobs-page"
+              //target="_blank"
+              className={classes.navLink}
+            >
+              Post Jobs
+            </Button>
+          </Link>
+        </ListItem>
+        {/* {becomeWorker} */}
+        <ListItem className={classes.listItem}>
+          <Button
+            color="transparent"
+            href={reference}
+            //target="_blank"
+            onClick={getWorker()}
+            className={classes.navLink}
+          >
+            Become a worker
+          </Button>
+        </ListItem>
+      </>
+    );
+    logoutButton = (
+      <Link to="/profile-page" className={classes.dropdownLink}>
+        Profile
+      </Link>
+    );
+    logoutButton1 = (
+      <Link
+        to="/landing-page"
+        onClick={logout}
+        className={classes.dropdownLink}
+      >
+        Logout
+      </Link>
+    );
+  } else {
+    logoutButton = (
+      <Link to="/login-page" className={classes.dropdownLink}>
+        Login
+      </Link>
+    );
+    logoutButton1 = (
+      <Link to="/signup-page" className={classes.dropdownLink}>
+        Sign-Up
+      </Link>
+    );
+  }
+  useEffect(() => {
+    if (isAuthenticated) {
+      getWorker();
+    }
+  }, []);
   return (
     <List className={classes.list}>
       {/*<ListItem className={classes.listItem}>
@@ -110,7 +263,10 @@ export default function HeaderLinks(props) {
           </Button>
         </Tooltip>
       </ListItem> */}
-      <ListItem className={classes.listItem}>
+      {signInButtons}
+      {/* {console.log(becomeWorker)} */}
+      {/* {becomeWorker} */}
+      {/* <ListItem className={classes.listItem}>
         <Button
           color="transparent"
           href="/customjobs-page"
@@ -119,8 +275,7 @@ export default function HeaderLinks(props) {
         >
           Post Jobs
         </Button>
-        {/* </Link> */}
-      </ListItem>
+      </ListItem> */}
       {/*<ListItem className={classes.listItem}>
         <Button
           color="transparent"
@@ -141,7 +296,7 @@ export default function HeaderLinks(props) {
           Find jobs
         </Button>
   </ListItem>*/}
-      <ListItem className={classes.listItem}>
+      {/* <ListItem className={classes.listItem}>
         <Button
           color="transparent"
           href="/worker-page"
@@ -150,7 +305,7 @@ export default function HeaderLinks(props) {
         >
           Become a worker
         </Button>
-      </ListItem>
+      </ListItem> */}
 
       <ListItem className={classes.listItem}>
         {/* <Tooltip
@@ -167,15 +322,17 @@ export default function HeaderLinks(props) {
           }}
           buttonIcon={People}
           dropdownList={[
-            <Link to="/login-page" className={classes.dropdownLink}>
-              Login
-            </Link>,
-            <Link to="/signup-page" className={classes.dropdownLink}>
-              Sign-Up
-            </Link>,
-            <Link to="/profile-page" className={classes.dropdownLink}>
-              Profile
-            </Link>,
+            // <Link to="/login-page" className={classes.dropdownLink}>
+            //   Login
+            // </Link>,
+            // <Link to="/signup-page" className={classes.dropdownLink}>
+            //   Sign-Up
+            // </Link>,
+            // <Link to="/profile-page" className={classes.dropdownLink}>
+            //   Profile
+            // </Link>,
+            logoutButton,
+            logoutButton1,
           ]}
         />
         {/* </Tooltip> */}

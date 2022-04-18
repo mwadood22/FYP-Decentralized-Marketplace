@@ -20,6 +20,11 @@ import CardFooter from "components/Card/CardFooter.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
+//Blockchain code
+import { useMoralis } from "react-moralis";
+import { useState } from "react";
+import { ErrorBox } from "components/errorbox/Error";
+import { useHistory } from "react-router-dom"; // version 5.2.0
 
 //import image from "assets/img/bg7.jpg";
 const useStyles = makeStyles(styles);
@@ -31,6 +36,35 @@ export default function LoginPage(props) {
   }, 700);
   const classes = useStyles();
   const { ...rest } = props;
+  ////blockchain
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const { authenticate, isAuthenticating, authError, login, Moralis } =
+    useMoralis();
+  const history = useHistory();
+
+  ///reset password
+  const loginFunction = async (email, password) => {
+    await login(email, password);
+    history.push("/landing-page");
+  };
+  const resetPassword = () => {
+    //getting email from email input
+    if (email) {
+      Moralis.User.requestPasswordReset(email)
+        .then(() => {
+          alert("Successfully Password Email Sent");
+          // Password reset request was sent successfully
+        })
+        .catch((error) => {
+          // Show the error message somewhere
+          alert("Error: " + error.code + " " + error.message);
+        });
+    } else {
+      alert("Enter email first");
+    }
+  };
+
   return (
     <div>
       <Header
@@ -91,6 +125,19 @@ export default function LoginPage(props) {
                     </div>
                   </CardHeader>
                   <p className={classes.divider}></p>
+                  {authError && (
+                    <ErrorBox
+                      alert="Invalid Credentials"
+                      message={authError.message}
+                    />
+                  )}
+                  <Button
+                    isLoading={isAuthenticating}
+                    onClick={() => authenticate()}
+                  >
+                    Authentication with MetaMask
+                  </Button>
+                  <p className={classes.divider}></p>
                   <CardBody>
                     <CustomInput
                       labelText="Email..."
@@ -98,6 +145,8 @@ export default function LoginPage(props) {
                       formControlProps={{
                         fullWidth: true,
                       }}
+                      value={email}
+                      onChange={(event) => setEmail(event.currentTarget.value)}
                       inputProps={{
                         type: "email",
                         endAdornment: (
@@ -113,6 +162,10 @@ export default function LoginPage(props) {
                       formControlProps={{
                         fullWidth: true,
                       }}
+                      value={password}
+                      onChange={(event) =>
+                        setPassword(event.currentTarget.value)
+                      }
                       inputProps={{
                         type: "password",
                         endAdornment: (
@@ -127,13 +180,28 @@ export default function LoginPage(props) {
                     />
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Button color="black"> Get started</Button>
+                    <Button
+                      color="black"
+                      href=""
+                      onClick={() => loginFunction(email, password)}
+                    >
+                      Get started
+                    </Button>
                   </CardFooter>
                   <div className={classes.endings}>
                     <h4 className={classes.new}>Not a member?</h4>
                     {/* <h4> */}
                     <Button simple color="green" size="lg" href="/signup-page">
                       Signup now
+                    </Button>
+                    <Button
+                      simple
+                      color="green"
+                      size="lg"
+                      onClick={resetPassword}
+                    >
+                      Request Password change for{" "}
+                      {email ? email : "[Please enter email in field]"}
                     </Button>
                     {/* </h4> */}
                   </div>

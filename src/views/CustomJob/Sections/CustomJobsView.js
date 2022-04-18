@@ -44,6 +44,8 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 // import image from "assets/img/bg7.jpg";
 // import helper from "assets/img/services/helper.jpg";
 import team1 from "assets/img/faces/test1.jpg";
+// import { useMoralis } from "react-moralis";
+
 // import team2 from "assets/img/faces/christian.jpg";
 // import team3 from "assets/img/faces/test3.jpg";
 
@@ -55,8 +57,37 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 Transition.displayName = "Transition";
 
-export default function FindJobs() {
-  // var BidValue = null;
+export default function CustomJobsView(props) {
+  const { ...rest } = props;
+  const userId = rest.userId;
+  // console.log(userId);
+  // const userId = temp.match.params.userId;
+  // const { isAuthenticated, user } = useMoralis();
+  // var clientId;
+  const checkFunction = async (id) => {
+    try {
+      const res = await fetch(`/jobs/check/${id}`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+      console.log(data);
+      getJobData(data);
+
+      if (!res.status === 200) {
+        const error = new Error(res.error);
+        throw error;
+      }
+    } catch (err) {
+      console.log(err);
+      // history.push('/login');
+    }
+    return;
+  };
+
   const [job, getJobData] = useState({
     jobs: [
       {
@@ -80,58 +111,81 @@ export default function FindJobs() {
   });
 
   const viewBids = async (id) => {
-    // console.log("Check");
+    // console.log("VIEW BIDS CALLED");
+    // console.log(source);
+
+    // // source = null;
+    // console.log(source);
     setClassicModal(true);
-    try {
-      const res = await fetch(`/bids/${id}`, {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await res.json();
-      console.log(data);
-      getBidData(data);
-
-      if (!res.status === 200) {
-        const error = new Error(res.error);
-        throw error;
-      }
-    } catch (err) {
-      console.log(err);
-      // history.push('/login');
-    }
-  };
-
-  const checkFunction = () => {
-    const source = new EventSource(`http://localhost:6942/jobs/check`);
+    // source.close();
+    const source = new EventSource(`http://localhost:6942/bids/${id}`);
 
     source.addEventListener("open", () => {
-      console.log("SSE opened!");
+      console.log("SSE for Bids opened!");
+      console.log(source);
     });
 
     source.addEventListener("message", (e) => {
+      console.log("WE HERE");
       const data = JSON.parse(e.data);
       console.log(data);
       // console.log(e);
       // console.log("Event called: ", e.data);
-      getJobData(data);
+      getBidData(data);
       // const data = JSON.parse(e.data);
     });
 
-    // source.addEventListener("error", (e) => {
-    //   console.error("Error: ", e);
-    // });
+    source.addEventListener("error", (e) => {
+      console.error("Error: ", e);
+    });
 
     return () => {
       source.close();
     };
+    // console.log(id);
+    // try {
+    //   const res = await fetch(`/bids/${id}`, {
+    //     method: "GET",
+    //     headers: {
+    //       Accept: "application/json",
+    //       "Content-Type": "application/json",
+    //     },
+    //   });
+    //   const data = await res.json();
+    //   console.log(data);
+    //   getBidData(data);
+
+    //   if (!res.status === 200) {
+    //     const error = new Error(res.error);
+    //     throw error;
+    //   }
+    // } catch (err) {
+    //   console.log(err);
+    //   // history.push('/login');
+    // }
   };
+
+  // if (isAuthenticated) {
+  //   console.log("IVE BEEN CALLED");
+  //   clientId = user.id;
+  //   // checkFunction(clientId);
+
+  //   console.log(clientId);
+  // }
 
   useEffect(() => {
     // ViewData();
-    checkFunction();
+    // clientId.map((data) => {
+    checkFunction(userId);
+    // });
+    // console.log("USE EFFECT CALLED");
+    // console.log("CLIENID: ", clientId);
+    // var clientId;
+
+    // console.log(clientId);
+
+    //   console.log(clientId);
+    // }
   }, []);
 
   const classes = useStyles();

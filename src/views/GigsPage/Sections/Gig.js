@@ -29,8 +29,8 @@ import Card from "components/Card/Card.js";
 import Slider from "react-slick";
 
 import gig1 from "assets/img/gigs/gig1.jpg";
-import gig3 from "assets/img/gigs/gig3.jpg";
-import gig6 from "assets/img/gigs/gig6.jpg";
+// import gig3 from "assets/img/gigs/gig3.jpg";
+// import gig6 from "assets/img/gigs/gig6.jpg";
 import Button from "components/CustomButtons/Button.js";
 
 // import Card from "components/Card/Card.js";
@@ -74,18 +74,19 @@ const currencies = [
 
 export default function Gig(props) {
   useEffect(() => {
-    //addResponseMessage("How may I be of your assistance?");
+    // addResponseMessage("How may I be of your assistance?");
   }, []);
   const [currency, setCurrency] = React.useState("None");
   const handleChange = (event) => {
     setCurrency(event.target.value);
   };
 
-  const [gig, setUserData] = useState({
+  const [gig, setGigData] = useState({
     title: "",
     budget: "",
     category: "",
     gigdescription: "",
+    workerId: "",
   });
   const [worker, setWorkerData] = useState({
     Name: "",
@@ -94,12 +95,26 @@ export default function Gig(props) {
     email: "",
     contact: "",
   });
+  const [otherGigs, setOtherGigsData] = useState({
+    gigs: [
+      {
+        _id: "",
+        title: "",
+        budget: "",
+        category: "",
+        gigdescription: "",
+        picture: "",
+      },
+    ],
+  });
   // console.log(props.location.param1);
   const { ...temp } = props;
   const gigId = temp.match.params.gigId;
   const callAboutPage = async () => {
     console.log("Check");
     try {
+      // fetching gig data
+
       const res = await fetch("/gig/" + gigId, {
         method: "GET",
         headers: {
@@ -109,14 +124,16 @@ export default function Gig(props) {
       });
       const data = await res.json();
       console.log(data);
-      setUserData(data);
+      setGigData(data);
 
       if (!res.status === 200) {
         const error = new Error(res.error);
         throw error;
       }
 
-      const res2 = await fetch("/worker/62487593b4a32fa9d942b3c3", {
+      // fetching Worker data
+
+      const res2 = await fetch(`/worker/gig/${data.workerId}`, {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -132,13 +149,33 @@ export default function Gig(props) {
         const error = new Error(res2.error);
         throw error;
       }
+
+      // fetching 'other gigs by this worker'
+
+      const res3 = await fetch(`/gig/worker/${data.workerId}`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data3 = await res3.json();
+      console.log(data3);
+      setOtherGigsData(data3);
+
+      if (!res3.status === 200) {
+        const error = new Error(res3.error);
+        throw error;
+      }
     } catch (err) {
       console.log(err);
       // history.push('/login');
     }
   };
-  useEffect(() => {
-    callAboutPage();
+
+  useEffect(async () => {
+    await callAboutPage();
   }, []);
 
   //   const [currency, setCurrency] = React.useState("None");
@@ -379,7 +416,7 @@ export default function Gig(props) {
                       <h3 className={classes.head}>
                         <strong>Gig Description</strong>
                         <p> {gig.gigdescription} </p>
-                        {console.log(gig.gigdescription)}
+                        {/* {console.log(gig.workerId)} */}
                       </h3>
 
                       <Divider
@@ -433,19 +470,35 @@ export default function Gig(props) {
                         <strong>Other gigs by this worker</strong>
                       </h3>
                     </GridItem>
-                    <GridItem xs={12} sm={12} md={4}>
-                      <Card carousel>
-                        <img src={gig1} alt="..." className={imageClasses1} />
-                        <CardBody>
-                          <h4 className={classes.cardTitle}>M.Wadood</h4>
-                          <p className={classes.description}>
-                            I can bend pipes pretty well, running wire and
-                            installing devices is a breeze.
-                          </p>
-                        </CardBody>
-                      </Card>
-                    </GridItem>
-                    <GridItem xs={12} sm={12} md={4}>
+                    {otherGigs.gigs.map((gigs, index) => {
+                      return (
+                        <GridItem xs={12} sm={12} md={4} key={index}>
+                          <Card carousel>
+                            <img
+                              src={gig1}
+                              alt="..."
+                              className={imageClasses1}
+                            />
+                            <CardBody>
+                              <h4 className={classes.cardTitle}>
+                                {gigs.title}
+                              </h4>
+
+                              <p className={classes.description}>
+                                <strong>Budget: </strong>${gigs.budget}
+                                <br />
+                                <strong>Category: </strong>
+                                {gigs.category}
+                                <br />
+                                <strong>Description: </strong>
+                                {gigs.gigdescription}
+                              </p>
+                            </CardBody>
+                          </Card>
+                        </GridItem>
+                      );
+                    })}
+                    {/* <GridItem xs={12} sm={12} md={4}>
                       <Card carousel>
                         <img src={gig3} alt="..." className={imageClasses1} />
                         <CardBody>
@@ -480,7 +533,7 @@ export default function Gig(props) {
                           </p>
                         </CardBody>
                       </Card>
-                    </GridItem>
+                    </GridItem> */}
                   </GridContainer>
                 </form>
               </Card>

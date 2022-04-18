@@ -137,6 +137,21 @@ exports.filteredgigs = async (req, res) => {
     });
 };
 
+exports.gigAgainstWorkerId = async (req, res) => {
+  dbo
+    .collection("Gigs")
+    .find({
+      $or: [{ workerId: { $regex: req.params.workerId } }],
+    })
+    .toArray(function (err, gigs) {
+      if (err) {
+        return res.status(400).json({ msg: "Error" });
+      }
+      //   console.log(gigs);
+      return res.json({ gigs });
+    });
+};
+
 exports.create = (req, res) => {
   //   console.log("All gigs list");
 
@@ -151,14 +166,20 @@ exports.create = (req, res) => {
   var budget = req.body.budget;
   var category = req.body.category;
   var gigdescription = req.body.gigdescription;
+  var workerId = req.body.workerId;
 
   //const gig = req.body;
   //let{gigTitle,budget,category,gigDescription,profile}=req.body;
 
   //   console.log(gig);
-  dbo
-    .collection("Gigs")
-    .insertOne({ gigTitle, budget, category, gigdescription, picture });
+  dbo.collection("Gigs").insertOne({
+    gigTitle,
+    budget,
+    category,
+    gigdescription,
+    workerId,
+    picture,
+  });
   // if (err) {
   //   return res.status(400).json({ msg: "Error" });
   // }

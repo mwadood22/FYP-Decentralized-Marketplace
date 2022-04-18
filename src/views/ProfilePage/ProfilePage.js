@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -57,7 +57,10 @@ import City from "@material-ui/icons/LocationCity";
 // import Payment from "@material-ui/icons/Payment";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
-
+//////BCK
+import { useMoralis } from "react-moralis";
+// import { useState } from "react";
+import { ErrorBox } from "components/errorbox/Error";
 const useStyles = makeStyles(styles);
 
 export default function ProfilePage(props) {
@@ -73,7 +76,22 @@ export default function ProfilePage(props) {
     classes.imgFluid
   );
   //const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
-
+  const { user, userError, setUserData } = useMoralis();
+  const [username, setUsername] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  useEffect(() => {
+    if (!user) return null;
+    setUsername(user.get("username"));
+    setEmail(user.get("email"));
+  }, [user]);
+  const handleSave = () => {
+    setUserData({
+      username,
+      email,
+      password: password === "" ? undefined : password,
+    });
+  };
   return (
     <div>
       <Header
@@ -98,7 +116,7 @@ export default function ProfilePage(props) {
                     <img src={profile} alt="..." className={imageClasses} />
                   </div>
                   <div className={classes.name}>
-                    <h3 className={classes.title}>Abdul Rehman Huzaifa</h3>
+                    <h3 className={classes.title}>{username}</h3>
                   </div>
                 </div>
               </GridItem>
@@ -119,7 +137,7 @@ export default function ProfilePage(props) {
                         <div className={classes.profilePill}>
                           <i className="fas fa-envelope"></i>
                           <b className={classes.desc}>Email</b>
-                          <p>wadood@gmail.com</p>
+                          <p>{email}</p>
                           <hr className={classes.hr} />
                           <i className="fas fa-lock"></i>
                           <b className={classes.desc}>Password</b>
@@ -162,6 +180,10 @@ export default function ProfilePage(props) {
                                 formControlProps={{
                                   fullWidth: true,
                                 }}
+                                value={username}
+                                onChange={(event) =>
+                                  setUsername(event.currentTarget.value)
+                                }
                                 inputProps={{
                                   type: "text",
                                   endAdornment: (
@@ -179,6 +201,10 @@ export default function ProfilePage(props) {
                                 formControlProps={{
                                   fullWidth: true,
                                 }}
+                                value={email}
+                                onChange={(event) =>
+                                  setEmail(event.currentTarget.value)
+                                }
                                 inputProps={{
                                   type: "email",
                                   endAdornment: (
@@ -214,6 +240,10 @@ export default function ProfilePage(props) {
                                 formControlProps={{
                                   fullWidth: true,
                                 }}
+                                value={password}
+                                onChange={(event) =>
+                                  setPassword(event.currentTarget.value)
+                                }
                                 inputProps={{
                                   type: "password",
                                   endAdornment: (
@@ -265,9 +295,18 @@ export default function ProfilePage(props) {
                                 }}
                               />
                             </CardBody>
+                            {userError && (
+                              <ErrorBox
+                                title="User updation has Failed!"
+                                message={userError.message}
+                              />
+                            )}
                             <CardFooter className={classes.cardFooter}>
-                              <Button color="black" href="/profile-page">
-                                Submit
+                              <Button
+                                color="black"
+                                onClick={() => handleSave()}
+                              >
+                                Update
                               </Button>
                             </CardFooter>
                           </form>

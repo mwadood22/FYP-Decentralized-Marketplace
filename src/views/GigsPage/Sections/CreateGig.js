@@ -35,6 +35,8 @@ import Budget from "@material-ui/icons/Money";
 
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
+import { useMoralis } from "react-moralis";
+
 // import Paper from "@mui/material/Paper";
 
 import styles from "assets/jss/material-kit-react/views/workerpage.js";
@@ -64,7 +66,11 @@ const currencies = [
 
 export default function WorkerPage(props) {
   //getting variables from form
-
+  const { isAuthenticated, user } = useMoralis();
+  var id;
+  if (isAuthenticated) {
+    id = user.id;
+  }
   const [gig, setGig] = useState({
     gigTitle: "",
     budget: "",
@@ -99,6 +105,8 @@ export default function WorkerPage(props) {
     formdata.append("budget", gig.budget);
     formdata.append("category", gig.category);
     formdata.append("gigdescription", gig.gigdescription);
+    formdata.append("workerId", id);
+    console.log(id);
     //let url = "/gig/create";
     try {
       const res = await axios.post("/gig/create", formdata);
