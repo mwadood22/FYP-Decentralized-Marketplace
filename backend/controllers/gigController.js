@@ -9,6 +9,7 @@ var ObjectId = require("mongodb").ObjectId;
 
 var dbo = null;
 
+const { check, validationResult } = require("express-validator");
 // const dbo = require("./connections");
 
 var gigsData = {
@@ -138,11 +139,6 @@ exports.filteredgigs = async (req, res) => {
 };
 
 exports.create = (req, res) => {
-  //   console.log("All gigs list");
-
-  //let profile = req.file ? req.file.filename : null;
-  //getBase64(profile).then((data) => console.log(data));
-  //profile = base64_encode(profile);
   var profile = fs.readFileSync(req.file.path);
   var encImg = profile.toString("base64");
   var picture = new Buffer(encImg, "base64");
@@ -152,18 +148,22 @@ exports.create = (req, res) => {
   var category = req.body.category;
   var gigdescription = req.body.gigdescription;
 
-  //const gig = req.body;
-  //let{gigTitle,budget,category,gigDescription,profile}=req.body;
+  // [check("gigTitle").not().isEmpty().withMessage("Title is required")];
 
-  //   console.log(gig);
+  // var errors = validationResult(req).array();
+  // if (errors) {
+  //   console.log("error block");
+  //   req.session.errors = errors;
+  //   req.session.success = false;
+  // } else {
+  console.log("fine block");
   dbo
     .collection("Gigs")
     .insertOne({ gigTitle, budget, category, gigdescription, picture });
-  // if (err) {
-  //   return res.status(400).json({ msg: "Error" });
-  // }
-  //return res.json({ gig });
-  return;
+  // return res.status(200).json({
+  //   success: true,
+  //   message: "Login successful",
+  // });
 };
 
 exports.delete = (req, res) => {

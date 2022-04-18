@@ -8,7 +8,7 @@ const jobController = require("../controllers/jobController");
 const testimonialController = require("../controllers/testimonialController");
 const categoryController = require("../controllers/categoryController");
 const bidsController = require("../controllers/bidsController");
-
+//const { check } = require("express-validator");
 //multer
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -44,12 +44,13 @@ router.get("/worker/:id", upload.single("picture"), workerController.show);
 //job routes
 router.get("/job/", jobController.index);
 router.post("/job/create", jobController.create);
-// router.patch("/gig/", gigController.edit);
+router.patch("/job/", jobController.edit);
 router.delete("/job/:id", jobController.delete);
-router.get("/job/:id", jobController.show);
+// router.get("/job/:id", jobController.show);
 router.get("/jobs/check", jobController.check);
-//router.get("/job/:id", jobController.show);
+router.get("/job/:id", jobController.show);
 router.get("/job/:key", jobController.search);
+router.delete("/job/:id", jobController.delete);
 
 //testimonial routes
 router.get("/testimonial/", testimonialController.index);

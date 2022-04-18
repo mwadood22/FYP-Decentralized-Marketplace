@@ -104,6 +104,25 @@ export default function FindJobs() {
     }
   };
 
+  const DeleteJob = async (id) => {
+    // console.log("Check");
+    try {
+      const res = await fetch(`/job/${id}`, {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      if (!res.status === 200) {
+        const error = new Error(res.error);
+        throw error;
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const checkFunction = () => {
     const source = new EventSource(`http://localhost:6942/jobs/check`);
 
@@ -188,7 +207,9 @@ export default function FindJobs() {
 
                         <GridItem xs={12} sm={12} md={1}>
                           <Link
-                            to="/updatejob-page"
+                            onClick={() => DeleteJob(jobs._id)}
+                            key={index}
+                            // to={"gigs-page/"}
                             className={classes.dropdownLink}
                           >
                             <Delete className={classes.inputIconsColor} />
@@ -197,7 +218,7 @@ export default function FindJobs() {
 
                         <GridItem xs={12} sm={12} md={1}>
                           <Link
-                            to="/updatejob-page"
+                            to={"/updatejob-page/" + jobs._id}
                             className={classes.dropdownLink}
                           >
                             <Edit className={classes.inputIconsColor} />

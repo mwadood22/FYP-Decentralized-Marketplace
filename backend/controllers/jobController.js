@@ -104,6 +104,19 @@ exports.index = async (req, res) => {
 exports.create = (req, res) => {
   //   console.log("All gigs list");
   const job = req.body;
+
+  // body("gigTitle").isLength({
+  //   min: 6,
+  // });
+  // const errors = validationResult(req);
+
+  // if (!errors.isEmpty()) {
+  //   console.log("Form check");
+  //   return res.status(400).json({
+  //     success: false,
+  //     errors: errors.array(),
+  //   });
+  // } else {
   //   console.log(gig);
   dbo.collection("CustomJobs").insert(job);
   return res.json({ job });
@@ -160,4 +173,40 @@ exports.search = async (req, res) => {
   // });
   // console.log(result);
   // res.send(result);
+};
+
+exports.delete = (req, res) => {
+  //   console.log("All gigs list");
+  const { id } = req.params;
+  console.log(id);
+  dbo.collection("CustomJobs").remove({ _id: ObjectId(id) });
+  return res.json({ msg: "deleted" });
+};
+
+exports.edit = async (req, res) => {
+  // const gig = req.body;
+  const job = req.body;
+  console.log(job);
+  await dbo
+    .collection("CustomJobs")
+    .findOne({ _id: ObjectId(job._id) }, function (err, jobs) {
+      if (err) {
+        return res.status(400).json({ msg: "Error" });
+      }
+      // console.log(gigs);
+      // return res.json(gigs);
+      dbo.collection("CustomJobs").update(
+        { _id: ObjectId(job._id) },
+        {
+          $set: {
+            title: job.title,
+            budget: job.budget,
+            category: job.category,
+            description: job.gigdescription,
+            city: job.city,
+            address: job.address,
+          },
+        }
+      );
+    });
 };

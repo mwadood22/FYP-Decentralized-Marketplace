@@ -184,7 +184,7 @@ export default function FindJobs(props) {
         getJobData(result);
       }
     } else {
-      ViewData();
+      checkFunction();
     }
   };
 

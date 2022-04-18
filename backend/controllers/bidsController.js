@@ -24,6 +24,7 @@ exports.create = (req, res) => {
 
 exports.show = (req, res) => {
   //   console.log("All gigs list");
+
   dbo
     .collection("Bids")
     .find({
@@ -34,6 +35,7 @@ exports.show = (req, res) => {
         return res.status(400).json({ msg: "Error" });
       }
       //   console.log(gigs);
+
       return res.json({ bids });
     });
   //   return res.json({ gigs });

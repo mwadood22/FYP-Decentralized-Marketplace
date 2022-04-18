@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // import InputAdornment from "@material-ui/core/InputAdornment";
@@ -62,36 +62,53 @@ const currencies = [
 ];
 
 export default function WorkerPage(props) {
-  const [job, setJobData] = useState({
+  //getting variables from form
+  const [jobs, setUserData] = useState({
+    _id: "",
     title: "",
     budget: "",
     city: "",
     address: "",
     description: "",
+    category: "",
   });
-
+  const { ...temp } = props;
+  const jobId = temp.match.params.jobId;
+  const [job, setJob] = useState({
+    _id: "",
+    title: "",
+    budget: "",
+    city: "",
+    address: "",
+    description: "",
+    category: "",
+  });
   let name, value;
   const handleInputs = (e) => {
     name = e.target.name;
     value = e.target.value;
     console.log(e);
-    setJobData({ ...job, [name]: value });
+    setJob({ ...job, [name]: value });
   };
+
   const postData = async (e) => {
     e.preventDefault();
-    console.log(e.target.value);
-    const { title, budget, city, address, description } = job;
-    const res = await fetch("/job/create", {
-      method: "POST",
+    const { title, budget, city, address, description, category } = job;
+    const _id = jobs._id;
+    console.log(_id);
+    const res = await fetch("/job/", {
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        _id,
         title,
         budget,
         city,
         address,
         description,
+        category,
       }),
     });
 
@@ -101,21 +118,50 @@ export default function WorkerPage(props) {
       window.alert("Invalid registeration");
       console.log("Invalid registeration");
     } else {
-      // console.log(data);
-      // history.push("/landing-page");
+      console.log(data);
+      history.push("/customjobs-page");
     }
   };
-  const [currency, setCurrency] = React.useState("None");
+  const callAboutPage = async () => {
+    try {
+      const res = await fetch(`/job/${jobId}`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+      console.log(data);
+      setUserData(data);
+      setJob(data);
 
-  const handleChange = (event) => {
-    setCurrency(event.target.value);
+      if (!res.status === 200) {
+        const error = new Error(res.error);
+        throw error;
+      }
+    } catch (err) {
+      console.log(err);
+      // history.push('/login');
+    }
   };
+  useEffect(() => {
+    callAboutPage();
+  }, []);
+  //
+
+  // const [currency, setCurrency] = React.useState("None");
+
+  // const handleChange = (event) => {
+  //   setCurrency(event.target.value);
+  // };
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
   setTimeout(function () {
     setCardAnimation("");
   }, 700);
   const classes = useStyles();
   const { ...rest } = props;
+  //   const gigId = rest.match.params.gigId;
   // const styles = {
   //   paperContainer: {
   //     //   backgroundImage: `url(${image})`,
@@ -142,7 +188,7 @@ export default function WorkerPage(props) {
               <Card className={(classes[cardAnimaton], classes.card2)}>
                 <form className={classes.form}>
                   <CardHeader color="green" className={classes.cardHeader}>
-                    <h4> Update your job !</h4>
+                    <h4>Create a new Job today !</h4>
                   </CardHeader>
                   <p className={classes.divider}></p>
                   <GridContainer>
@@ -151,11 +197,11 @@ export default function WorkerPage(props) {
                         margin="normal"
                         required
                         fullWidth
-                        id="title"
-                        label="title"
                         name="title"
                         value={job.title}
                         onChange={handleInputs}
+                        id="title"
+                        label="Job Title"
                         InputProps={{
                           type: "text",
                           endAdornment: (
@@ -173,11 +219,11 @@ export default function WorkerPage(props) {
                         margin="normal"
                         required
                         fullWidth
-                        id="budget"
-                        label="Budget"
                         name="budget"
                         value={job.budget}
                         onChange={handleInputs}
+                        id="budget"
+                        label="Budget"
                         InputProps={{
                           type: "text",
                           endAdornment: (
@@ -191,60 +237,16 @@ export default function WorkerPage(props) {
                     </GridItem>
                     <GridItem xs={6} sm={6} md={6}>
                       <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="city"
-                        label="City"
-                        name="city"
-                        value={job.city}
-                        onChange={handleInputs}
-                        InputProps={{
-                          type: "text",
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <LocationCity
-                                className={classes.inputIconsColor}
-                              />
-                            </InputAdornment>
-                          ),
-                        }}
-                        variant="standard"
-                      />
-                    </GridItem>
-
-                    <GridItem xs={6} sm={6} md={12}>
-                      <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="address"
-                        label="Address"
-                        name="address"
-                        value={job.address}
-                        onChange={handleInputs}
-                        InputProps={{
-                          type: "text",
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <Language className={classes.inputIconsColor} />
-                            </InputAdornment>
-                          ),
-                        }}
-                        variant="standard"
-                      />
-                    </GridItem>
-                    <GridItem xs={6} sm={6} md={12}>
-                      <TextField
                         required
                         fullWidth
                         id="outlined-select-currency"
                         select
                         margin="normal"
                         label=" "
-                        value={currency}
-                        helperText="Category"
-                        onChange={handleChange}
+                        name="categeory"
+                        value={job.category}
+                        onChange={handleInputs}
+                        helperText="category"
                         InputProps={{
                           endAdornment: (
                             <InputAdornment position="start">
@@ -261,20 +263,65 @@ export default function WorkerPage(props) {
                         ))}
                       </TextField>
                     </GridItem>
+                    <GridItem>
+                      <TextField
+                        margin="normal"
+                        fullWidth
+                        name="city"
+                        value={job.city}
+                        onChange={handleInputs}
+                        required
+                        textarea
+                        id="desc"
+                        label="City"
+                        InputProps={{
+                          type: "text",
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <LocationCity
+                                className={classes.inputIconsColor}
+                              />
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                    </GridItem>
 
                     <GridItem>
                       <TextField
                         margin="normal"
                         fullWidth
+                        name="address"
+                        value={job.address}
+                        onChange={handleInputs}
+                        required
+                        textarea
+                        id="desc"
+                        label="Address"
+                        InputProps={{
+                          type: "text",
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <Language className={classes.inputIconsColor} />
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                    </GridItem>
+
+                    <GridItem>
+                      <TextField
+                        margin="normal"
+                        fullWidth
+                        name="description"
+                        value={job.description}
+                        onChange={handleInputs}
                         required
                         multiline
                         rows={8}
                         textarea
-                        id="description"
+                        id="desc"
                         label="Job Description"
-                        name="description"
-                        value={job.description}
-                        onChange={handleInputs}
                       />
                     </GridItem>
 
@@ -282,9 +329,10 @@ export default function WorkerPage(props) {
                       <Button
                         color="black"
                         href="/customjobs-page"
+                        // disabled={gig.title === "" || gig.budget === ""}
                         onClick={postData}
                       >
-                        Update job
+                        Update Job
                       </Button>
                     </GridItem>
                   </GridContainer>
