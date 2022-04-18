@@ -120,27 +120,27 @@ export default function WorkerPage(props) {
   const postData = async (e) => {
     e.preventDefault();
     console.log(e.target.value);
-    const { Name, picture, city, contact, skills, about } = worker;
+    //const { Name, picture, city, contact, skills, about } = worker;
     const user_id = id;
     console.log(id);
 
     console.log(user_id);
 
-    const res = await fetch("/worker/create", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        Name,
-        picture,
-        city,
-        contact,
-        skills,
-        about,
-        user_id,
-      }),
-    });
+    // const res = await fetch("/worker/create", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     Name,
+    //     picture,
+    //     city,
+    //     contact,
+    //     skills,
+    //     about,
+    //     user_id,
+    //   }),
+    // });
 
     setFormErrors(validate(worker));
     setIsSubmit(true);
