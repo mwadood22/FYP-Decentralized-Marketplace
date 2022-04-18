@@ -76,6 +76,7 @@ export default function WorkerPage(props) {
     address: "",
     description: "",
     category: "",
+    clientId: "",
   });
 
   const [formErrors, setFormErrors] = useState({});
@@ -135,28 +136,29 @@ export default function WorkerPage(props) {
   const postData = async (e) => {
     e.preventDefault();
     console.log(e.target.value);
-    const { title, budget, city, address, description } = job;
-    const clientId = id;
-    const res = await fetch("/job/create", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title,
-        budget,
-        city,
-        address,
-        description,
-        clientId,
-      }),
-    });
+    //const { title, budget, city, address, description } = job;
+    // const clientId = id;
+    // const res = await fetch("/job/create", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     title,
+    //     budget,
+    //     city,
+    //     address,
+    //     description,
+    //     clientId,
+    //   }),
+    // });
     setFormErrors(validate(job));
     setIsSubmit(true);
 
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       console.log(e.target.value);
       console.log("form valid");
+      const clientId = id;
       const { title, budget, city, address, description, category } = job;
       const res = await fetch("/job/create", {
         method: "POST",
@@ -170,6 +172,7 @@ export default function WorkerPage(props) {
           address,
           description,
           category,
+          clientId,
         }),
       });
 

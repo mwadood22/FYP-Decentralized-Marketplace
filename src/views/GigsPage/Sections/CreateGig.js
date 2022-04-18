@@ -131,30 +131,30 @@ export default function WorkerPage(props) {
       console.log("form valid");
       const formdata = new FormData();
 
-    //console.log("==", gig.picture, "===", gig.picture.name);
-    console.log("data added");
-    formdata.append("picture", gig.picture, gig.picture.name);
-    formdata.append("gigTitle", gig.gigTitle);
-    formdata.append("budget", gig.budget);
-    formdata.append("category", gig.category);
-    formdata.append("gigdescription", gig.gigdescription);
-    formdata.append("workerId", id);
-    console.log(id);
-    //let url = "/gig/create";
-    try {
-      const res = await axios.post("/gig/create", formdata);
-      // {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({
-      //     gigTitle,
-      //     budget,
-      //     category,
-      //     gigDescription,
-      //   }),
-      // });
+      //console.log("==", gig.picture, "===", gig.picture.name);
+      console.log("data added");
+      formdata.append("picture", gig.picture, gig.picture.name);
+      formdata.append("gigTitle", gig.gigTitle);
+      formdata.append("budget", gig.budget);
+      formdata.append("category", gig.category);
+      formdata.append("gigdescription", gig.gigdescription);
+      formdata.append("workerId", id);
+      console.log(id);
+      //let url = "/gig/create";
+      try {
+        const res = await axios.post("/gig/create", formdata);
+        // {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   body: JSON.stringify({
+        //     gigTitle,
+        //     budget,
+        //     category,
+        //     gigDescription,
+        //   }),
+        // });
 
         // const data = await res.json();
 
