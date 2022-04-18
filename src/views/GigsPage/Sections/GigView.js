@@ -250,6 +250,7 @@ export default function GigView() {
                     </p>
                   </CardBody>
                 </Link>
+                {/* {console.log(gigs._id)} */}
                 <CustomDropdown
                   noLiPadding
                   buttonProps={{

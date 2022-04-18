@@ -109,29 +109,29 @@ export default function FindJobs(props) {
     }
   };
 
-  const ViewJobsData = async () => {
-    // console.log("Check");
-    try {
-      const res = await fetch("/job", {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await res.json();
-      console.log(data);
-      getJobData(data);
+  // const ViewJobsData = async () => {
+  //   // console.log("Check");
+  //   try {
+  //     const res = await fetch("/job", {
+  //       method: "GET",
+  //       headers: {
+  //         Accept: "application/json",
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
+  //     const data = await res.json();
+  //     console.log(data);
+  //     getJobData(data);
 
-      if (!res.status === 200) {
-        const error = new Error(res.error);
-        throw error;
-      }
-    } catch (err) {
-      console.log(err);
-      // history.push('/login');
-    }
-  };
+  //     if (!res.status === 200) {
+  //       const error = new Error(res.error);
+  //       throw error;
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //     // history.push('/login');
+  //   }
+  // };
 
   const checkFunction = () => {
     const source = new EventSource(`http://localhost:6942/jobs/getAll`);
@@ -191,7 +191,7 @@ export default function FindJobs(props) {
         getJobData(result);
       }
     } else {
-      ViewJobsData();
+      checkFunction();
     }
   };
 

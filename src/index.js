@@ -59,7 +59,7 @@ ReactDOM.render(
         <Route path="/creategig-page" component={CreateGig} />
         <Route path="/updategig-page/:gigId" component={UpdateGig} />
         <Route path="/createjob-page" component={CreateJob} />
-        <Route path="/updatejob-page" component={UpdateJob} />
+        <Route path="/updatejob-page/:jobId" component={UpdateJob} />
         <Route path="/payment-page" component={MakePayment} />
         <Route path="/gig/:gigId" component={Gig} />
         <Route path="/gig2" component={Gig2} />

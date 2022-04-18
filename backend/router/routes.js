@@ -8,7 +8,7 @@ const jobController = require("../controllers/jobController");
 const testimonialController = require("../controllers/testimonialController");
 const categoryController = require("../controllers/categoryController");
 const bidsController = require("../controllers/bidsController");
-
+//const { check } = require("express-validator");
 //multer
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -31,30 +31,39 @@ router.get("/gig/category-wise/:category", gigController.filteredgigs);
 router.get("/check", gigController.check);
 router.get("/gig/worker/:workerId", gigController.gigAgainstWorkerId);
 
+//worker routes
 router.get("/worker/", workerController.index);
-router.post("/worker/create", workerController.create);
+router.post(
+  "/worker/create",
+  upload.single("picture"),
+  workerController.create
+);
 // router.patch("/gig/", gigController.edit);
 router.delete("/worker/:id", workerController.delete);
-router.get("/worker/:id", workerController.show);
+router.get("/worker/:id", upload.single("picture"), workerController.show);
 router.get("/worker/gig/:workerId", workerController.showAgainstGig);
 router.get("/worker/moralis/:user_id", workerController.showAgainstUserId); //getting worker against moralis user_id
 
+//job routes
 router.get("/job/", jobController.index);
 router.post("/job/create", jobController.create);
-// router.patch("/gig/", gigController.edit);
+router.patch("/job/", jobController.edit);
 router.delete("/job/:id", jobController.delete);
 // router.get("/job/:id", jobController.show);
 router.get("/jobs/check/:id", jobController.check);
 // router.get("/job/:id", jobController.show);
 router.get("/job/:key", jobController.search);
 router.get("/jobs/getAll", jobController.getAllJobs);
+router.delete("/job/:id", jobController.delete);
 
+//testimonial routes
 router.get("/testimonial/", testimonialController.index);
 router.post("/testimonial/create", testimonialController.create);
 // router.patch("/gig/", gigController.edit);
 router.delete("/testimonial/:id", testimonialController.delete);
 router.get("/testimonial/:id", testimonialController.show);
 
+//categories routes
 router.get("/category/", categoryController.index);
 router.post("/category/create", categoryController.create);
 // router.patch("/gig/", gigController.edit);

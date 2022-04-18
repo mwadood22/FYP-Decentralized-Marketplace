@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
+import axios from "axios";
 // import InputAdornment from "@material-ui/core/InputAdornment";
 // import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
@@ -29,7 +30,7 @@ import People from "@material-ui/icons/People";
 import LocationCity from "@material-ui/icons/LocationCity";
 import Language from "@material-ui/icons/Language";
 import Edit from "@material-ui/icons/Edit";
-import Photo from "@material-ui/icons/Photo";
+//import Photo from "@material-ui/icons/Photo";
 
 import logo from "assets/img/logo.png";
 
@@ -73,6 +74,37 @@ export default function WorkerPage(props) {
     about: "",
   });
 
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
+
+  const validate = (values) => {
+    const errors = {};
+    //const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    if (!values.Name) {
+      errors.Name = "Name is required!";
+    }
+
+    if (!values.picture) {
+      errors.picture = "Picture is required!";
+    }
+
+    if (!values.city) {
+      errors.city = "City is required";
+    }
+
+    if (!values.contact) {
+      errors.contact = "Contact is required";
+    }
+
+    if (!values.about) {
+      errors.about = "About is required";
+    } else if (values.about.length > 150) {
+      errors.about = "About cannot exceed more than 150 characters";
+    }
+
+    return errors;
+  };
+
   let name, value;
   const handleInputs = (e) => {
     name = e.target.name;
@@ -80,6 +112,11 @@ export default function WorkerPage(props) {
     console.log(e);
     setWorkerData({ ...worker, [name]: value });
   };
+  const imageUpload = (e) => {
+    //console.log(e.target.files[0]);
+    setWorkerData({ ...worker, picture: e.target.files[0] });
+  };
+
   const postData = async (e) => {
     e.preventDefault();
     console.log(e.target.value);
@@ -105,14 +142,57 @@ export default function WorkerPage(props) {
       }),
     });
 
-    const data = await res.json();
+    setFormErrors(validate(worker));
+    setIsSubmit(true);
 
-    if (data.status === 42 || !data) {
-      window.alert("Invalid registeration");
-      console.log("Invalid registeration");
-    } else {
-      // console.log(data);
-      // history.push("/landing-page");
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+      console.log(e.target.value);
+      const formdata = new FormData();
+
+      //console.log("==", gig.picture, "===", gig.picture.name);
+      console.log("data added");
+      formdata.append("picture", worker.picture, worker.picture.name);
+      formdata.append("Name", worker.Name);
+      formdata.append("city", worker.city);
+      formdata.append("contact", worker.contact);
+      formdata.append("skills", worker.skills);
+      formdata.append("about", worker.about);
+      //let url = "/gig/create";
+      try {
+        const res = await axios.post("/worker/create", formdata);
+        // {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   body: JSON.stringify({
+        //     gigTitle,
+        //     budget,
+        //     category,
+        //     gigDescription,
+        //   }),
+        // });
+
+        // const data = await res.json();
+
+        // if (data.status === 42 || !data) {
+        //   window.alert("Invalid registeration");
+        //   console.log("Invalid registeration");
+        // } else {
+        //   console.log(data);
+        //   history.push("/gigs-page");
+        // }
+
+        if (res.status === 42) {
+          window.alert("Invalid registeration");
+          console.log("Invalid registeration");
+        } else {
+          console.log(res);
+          history.push("/worker-page");
+        }
+      } catch (e) {
+        window.alert("catch block ");
+      }
     }
   };
 
@@ -177,8 +257,9 @@ export default function WorkerPage(props) {
                         }}
                         variant="standard"
                       />
+                      <span style={{ color: "red" }}>{formErrors.Name}</span>
                     </GridItem>
-                    <GridItem xs={6} sm={6} md={6}>
+                    {/* <GridItem xs={6} sm={6} md={6}>
                       <TextField
                         margin="normal"
                         required
@@ -198,7 +279,8 @@ export default function WorkerPage(props) {
                         }}
                         variant="standard"
                       />
-                    </GridItem>
+                      <span style={{ color: "red" }}>{formErrors.picture}</span>
+                    </GridItem> */}
 
                     <GridItem xs={6} sm={6} md={6}>
                       <TextField
@@ -220,6 +302,7 @@ export default function WorkerPage(props) {
                         }}
                         variant="standard"
                       />
+                      <span style={{ color: "red" }}>{formErrors.contact}</span>
                     </GridItem>
                     <GridItem xs={6} sm={6} md={6}>
                       <TextField
@@ -243,6 +326,7 @@ export default function WorkerPage(props) {
                         }}
                         variant="standard"
                       />
+                      <span style={{ color: "red" }}>{formErrors.city}</span>
                     </GridItem>
                     <GridItem xs={6} sm={6} md={12}>
                       <TextField
@@ -285,6 +369,23 @@ export default function WorkerPage(props) {
                         value={worker.about}
                         onChange={handleInputs}
                       />
+                      <span style={{ color: "red" }}>{formErrors.about}</span>
+                    </GridItem>
+                    <GridItem>
+                      <Button
+                        variant="contained"
+                        component="label"
+                        name="picture"
+                        color="green"
+                        margin="normal"
+                        //fullWidth
+                        value={worker.picture}
+                        onChange={imageUpload}
+                      >
+                        Upload Picture
+                        <input type="file" hidden />
+                      </Button>
+                      <span style={{ color: "red" }}>{formErrors.picture}</span>
                     </GridItem>
 
                     <GridItem>

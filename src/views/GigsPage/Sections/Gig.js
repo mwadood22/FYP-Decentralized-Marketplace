@@ -94,6 +94,7 @@ export default function Gig(props) {
     city: "",
     email: "",
     contact: "",
+    picture: "",
   });
   const [otherGigs, setOtherGigsData] = useState({
     gigs: [
@@ -110,6 +111,7 @@ export default function Gig(props) {
   // console.log(props.location.param1);
   const { ...temp } = props;
   const gigId = temp.match.params.gigId;
+
   const callAboutPage = async () => {
     console.log("Check");
     try {
