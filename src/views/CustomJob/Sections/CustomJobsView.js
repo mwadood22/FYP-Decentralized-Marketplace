@@ -597,6 +597,12 @@ export default function CustomJobsView(props) {
                         <ListItemText>Bid: ${bids.price}</ListItemText>
                         {/* <h5>{BidValue}</h5> */}
                       </GridItem>
+                      <GridItem xs={12} sm={12} md={4}>
+                        <Button color="success" onClick={() => postProject()}>
+                          Accept
+                        </Button>
+                        {/* <h5>{BidValue}</h5> */}
+                      </GridItem>
                     </ListItem>
 
                     {/* <ListItem button component={Link} to="/gig2" disablePadding>
