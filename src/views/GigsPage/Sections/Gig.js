@@ -44,6 +44,7 @@ import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 
 import styles from "assets/jss/material-kit-react/views/gig.js";
+import { useMoralis } from "react-moralis";
 
 // import image from "assets/img/bg7.jpg";
 // import helper from "assets/img/services/helper.jpg";
@@ -73,9 +74,16 @@ const currencies = [
 ];
 
 export default function Gig(props) {
-  useEffect(() => {
-    // addResponseMessage("How may I be of your assistance?");
-  }, []);
+  const { isAuthenticated, user } = useMoralis();
+  var id;
+  var clientname;
+  if (isAuthenticated) {
+    id = user.id;
+    clientname = user.attributes.username;
+
+    // console.log("email: ", email);
+  }
+
   const [currency, setCurrency] = React.useState("None");
   const handleChange = (event) => {
     setCurrency(event.target.value);
@@ -96,6 +104,26 @@ export default function Gig(props) {
     contact: "",
     picture: "",
   });
+
+  const [offer, setJobOfferData] = useState({
+    title: "",
+    city: "",
+    budget: "",
+    address: "",
+    description: "",
+    // clientId: "",
+    // clientName: "",
+  });
+
+  let name, value;
+  const handleInputs = (e) => {
+    console.log("Handle inputs block");
+    name = e.target.name;
+    value = e.target.value;
+    console.log(e);
+    setJobOfferData({ ...offer, [name]: value });
+  };
+
   const [otherGigs, setOtherGigsData] = useState({
     gigs: [
       {
@@ -173,6 +201,40 @@ export default function Gig(props) {
     } catch (err) {
       console.log(err);
       // history.push('/login');
+    }
+  };
+
+  const sendJobOffer = async (e) => {
+    e.preventDefault();
+    // console.log(e.target.value);
+
+    const clientId = id;
+    const clientName = clientname;
+    const { title, city, budget, address, description } = offer;
+    const res = await fetch("/offer/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title,
+        budget,
+        city,
+        address,
+        description,
+        clientId,
+        clientName,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (data.status === 42 || !data) {
+      window.alert("Invalid registeration");
+      console.log("Invalid registeration");
+    } else {
+      // console.log(data);
+      // history.push("/landing-page");
     }
   };
 
@@ -326,7 +388,10 @@ export default function Gig(props) {
                                       fullWidth
                                       id="title"
                                       label="Job Title"
+                                      name="title"
                                       variant="standard"
+                                      value={offer.title}
+                                      onChange={handleInputs}
                                     />
                                   </GridItem>
 
@@ -358,9 +423,12 @@ export default function Gig(props) {
                                       margin="normal"
                                       required
                                       fullWidth
-                                      id="bidget"
+                                      id="budget"
                                       label="Your Budget"
+                                      name="budget"
                                       variant="standard"
+                                      value={offer.budget}
+                                      onChange={handleInputs}
                                     />
                                   </GridItem>
 
@@ -371,7 +439,10 @@ export default function Gig(props) {
                                       fullWidth
                                       id="address"
                                       label="Address"
+                                      name="address"
                                       variant="standard"
+                                      value={offer.address}
+                                      onChange={handleInputs}
                                     />
                                   </GridItem>
 
@@ -383,12 +454,19 @@ export default function Gig(props) {
                                       multiline
                                       rows={8}
                                       textarea
-                                      id="detail"
+                                      id="description"
+                                      name="description"
                                       label="Job Details"
+                                      value={offer.description}
+                                      onChange={handleInputs}
                                     />
                                   </GridItem>
                                   <GridItem>
-                                    <Button color="green" href="/gig">
+                                    <Button
+                                      color="green"
+                                      href="/gig"
+                                      onClick={sendJobOffer}
+                                    >
                                       Send job offer
                                     </Button>
                                   </GridItem>

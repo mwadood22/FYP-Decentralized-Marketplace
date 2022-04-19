@@ -9,7 +9,7 @@ var ObjectId = require("mongodb").ObjectId;
 
 var dbo = null;
 
-// const { check, validationResult } = require("express-validator");
+const { check, validationResult } = require("express-validator");
 // const dbo = require("./connections");
 
 var gigsData = {
@@ -138,21 +138,6 @@ exports.filteredgigs = async (req, res) => {
     });
 };
 
-exports.gigAgainstWorkerId = async (req, res) => {
-  dbo
-    .collection("Gigs")
-    .find({
-      $or: [{ workerId: { $regex: req.params.workerId } }],
-    })
-    .toArray(function (err, gigs) {
-      if (err) {
-        return res.status(400).json({ msg: "Error" });
-      }
-      //   console.log(gigs);
-      return res.json({ gigs });
-    });
-};
-
 exports.create = (req, res) => {
   var profile = fs.readFileSync(req.file.path);
   var encImg = profile.toString("base64");
@@ -162,24 +147,23 @@ exports.create = (req, res) => {
   var budget = req.body.budget;
   var category = req.body.category;
   var gigdescription = req.body.gigdescription;
-  var workerId = req.body.workerId;
 
   // [check("gigTitle").not().isEmpty().withMessage("Title is required")];
 
-  //   console.log(gig);
-  dbo.collection("Gigs").insertOne({
-    gigTitle,
-    budget,
-    category,
-    gigdescription,
-    workerId,
-    picture,
-  });
-  // if (err) {
-  //   return res.status(400).json({ msg: "Error" });
-  // }
-  //return res.json({ gig });
-  return;
+  // var errors = validationResult(req).array();
+  // if (errors) {
+  //   console.log("error block");
+  //   req.session.errors = errors;
+  //   req.session.success = false;
+  // } else {
+  console.log("fine block");
+  dbo
+    .collection("Gigs")
+    .insertOne({ gigTitle, budget, category, gigdescription, picture });
+  // return res.status(200).json({
+  //   success: true,
+  //   message: "Login successful",
+  // });
 };
 
 exports.delete = (req, res) => {

@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useMoralis } from "react-moralis";
+
 // nodejs library that concatenates classes
 import classNames from "classnames";
+//import { useMoralis } from "react-moralis";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -8,7 +11,7 @@ import Divider from "@mui/material/Divider";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import team1 from "assets/img/faces/test1.jpg";
-import team2 from "assets/img/faces/christian.jpg";
+//import team2 from "assets/img/faces/christian.jpg";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 
@@ -82,12 +85,21 @@ export default function ProfilePage(props) {
   //setTimeout(function () {
   //  setCardAnimation("");
   //}, 700);
-  const handleClick = () => {
-    // prop.setDisable(true);
-    // setDisable(true);
-    setOpen(true);
-  };
+
+  const { isAuthenticated, user } = useMoralis();
+  var idd;
+  var workername;
+  if (isAuthenticated) {
+    idd = user.id;
+    workername = user.attributes.username;
+  }
+
+  // const handleClick = () => {
+
+  //   setOpen(true);
+  // };
   const [open, setOpen] = React.useState(false);
+
   // const [disable, setDisable] = React.useState(false);
   const classes = useStyles();
   const { ...rest } = props;
@@ -104,6 +116,102 @@ export default function ProfilePage(props) {
     setOpen(false);
   };
   //const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
+
+  // const [projects, getCurrentProjects] = useState({
+  //   workerId: "",
+  //   clientId: "",
+  //   workerName: "",
+  //   clientName: "",
+  //   budget: "",
+  //   description: "",
+  //   status: "",
+  // });
+
+  const [offer, getOfferData] = useState({
+    offers: [
+      {
+        _id: "",
+        title: "",
+        budget: "",
+        city: "",
+        address: "",
+        clientId: "",
+        description: "",
+        clientName: "",
+      },
+    ],
+  });
+
+  const postProjects = async (budget, description, clientId) => {
+    // setOpen(true);
+    // e.preventDefault();
+
+    console.log("form valid");
+    // const clientId = offer.clientId;
+    const workerId = idd;
+    const clientName = "falseClient";
+    const workerName = workername;
+    // const budget = offer.budget;
+    // const description = offer.description;
+    const status = "Ongoing";
+    // const { budget, description } = job;
+    const res = await fetch("/projects/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        workerId,
+        clientId,
+        workerName,
+        clientName,
+        budget,
+        description,
+        status,
+      }),
+    });
+    // setDisable((prevState) => [...prevState, id]);
+    setOpen(true);
+
+    const data = await res.json();
+
+    if (data.status === 42 || !data) {
+      window.alert("Invalid registeration");
+      console.log("Invalid registeration");
+    } else {
+      // console.log(data);
+      // history.push("/landing-page");
+    }
+  };
+
+  const ShowJobOffers = () => {
+    const source = new EventSource(`http://localhost:6942/offers/getAll`);
+
+    source.addEventListener("open", () => {
+      console.log("SSE opened!");
+    });
+
+    source.addEventListener("message", (e) => {
+      const data = JSON.parse(e.data);
+      console.log(data);
+      // console.log(e);
+      // console.log("Event called: ", e.data);
+      getOfferData(data);
+      // const data = JSON.parse(e.data);
+    });
+
+    // source.addEventListener("error", (e) => {
+    //   console.error("Error: ", e);
+    // });
+
+    return () => {
+      source.close();
+    };
+  };
+
+  useEffect(() => {
+    ShowJobOffers();
+  }, []);
 
   return (
     <div>
@@ -363,148 +471,111 @@ export default function ProfilePage(props) {
                       tabIcon: Schedule,
                       tabContent: (
                         <List>
-                          {/* <div className={classes.newClass}> */}
-                          {/* <div className={classes.jobItem}> */}
-                          <ListItem alignItems="flex-start">
-                            <Card className={classes.jobCard}>
-                              <ListItemAvatar>
-                                <Avatar alt="Remy Sharp" src={team1} />
-                              </ListItemAvatar>
-                              <ListItemText
-                                primary={
-                                  <Typography className={classes.heading}>
-                                    <strong>Title: Plumbing</strong>
-                                  </Typography>
-                                }
-                                secondary={
-                                  <React.Fragment>
-                                    <Typography
-                                      className={classes.heading}
-                                      color="text.primary"
-                                    >
-                                      Ali Connors
-                                      <br></br>
-                                    </Typography>
-                                    Ill be in your neighborhood doing errands
-                                    this… Ill be in your neighborhood doing
-                                    errands this… Ill be in your neighborhood
-                                    doing errands this… Ill be in your
-                                    neighborhood doing errands this… Ill be in
-                                    your neighborhood doing errands this…
-                                    <br /> <br />
-                                    <Divider
-                                      sx={{ width: 1000, m: 0.5 }}
-                                      orientation="horizontal"
-                                    />
-                                    <Button
-                                      color="green"
-                                      size="sm"
-                                      // href="/signup-page"
-                                      // target="_blank"
-                                      // disabled={disable}
-                                      rel="noopener noreferrer"
-                                      className={classes.jobBtn}
-                                      onClick={handleClick}
-                                    >
-                                      <i className="fas fa-dollar-sign" />
-                                      Accept
-                                    </Button>
-                                    <Button
-                                      color="danger"
-                                      size="sm"
-                                      // href="/signup-page"
-                                      // target="_blank"
-                                      // disabled={disable}
-                                      rel="noopener noreferrer"
-                                      className={classes.jobBtn}
-                                      //onClick={handleClick}
-                                    >
-                                      <i className="fas fa-dollar-sign" />
-                                      Decline
-                                    </Button>
-                                    <Snackbar
-                                      open={open}
-                                      autoHideDuration={6000}
-                                      onClose={handleClose}
-                                    >
-                                      <Alert
-                                        onClose={handleClose}
-                                        severity="success"
-                                        sx={{ width: "100%" }}
-                                      >
-                                        Job Started Successfully!
-                                      </Alert>
-                                    </Snackbar>
-                                  </React.Fragment>
-                                }
-                              />
-                            </Card>
-                          </ListItem>
+                          {offer.offers.map((offers, index) => {
+                            //const id = `b${index}`;
 
-                          <ListItem alignItems="flex-start">
-                            <Card className={classes.jobCard}>
-                              <ListItemAvatar>
-                                <Avatar alt="Travis Howard" src={team2} />
-                              </ListItemAvatar>
-                              <ListItemText
-                                primary={
-                                  <Typography className={classes.heading}>
-                                    <strong>Title: Plumbing</strong>
-                                  </Typography>
-                                }
-                                secondary={
-                                  <React.Fragment>
-                                    <Typography
-                                      className={classes.heading}
-                                      color="text.primary"
-                                    >
-                                      Ali Connors
-                                      <br></br>
-                                    </Typography>
-                                    Ill be in your neighborhood doing errands
-                                    this… Ill be in your neighborhood doing
-                                    errands this… Ill be in your neighborhood
-                                    doing errands this… Ill be in your
-                                    neighborhood doing errands this… Ill be in
-                                    your neighborhood doing errands this…
-                                    <br /> <br />
-                                    <Divider
-                                      sx={{ width: 1000, m: 0.5 }}
-                                      orientation="horizontal"
-                                    />
-                                    <Button
-                                      color="green"
-                                      size="sm"
-                                      // href="/signup-page"
-                                      // target="_blank"
-                                      // disabled={disable}
-                                      rel="noopener noreferrer"
-                                      className={classes.jobBtn}
-                                      onClick={handleClick}
-                                    >
-                                      <i className="fas fa-dollar-sign" />
-                                      Accept
-                                    </Button>
-                                    <Button
-                                      color="danger"
-                                      size="sm"
-                                      // href="/signup-page"
-                                      // target="_blank"
-                                      // disabled={disable}
-                                      rel="noopener noreferrer"
-                                      className={classes.jobBtn}
-                                      //onClick={handleClick}
-                                    >
-                                      <i className="fas fa-dollar-sign" />
-                                      Decline
-                                    </Button>
-                                  </React.Fragment>
-                                }
-                              />
-                            </Card>
-                          </ListItem>
-
-                          {/* </div> */}
+                            return (
+                              <ListItem alignItems="flex-start" key={index}>
+                                <Card className={classes.jobCard}>
+                                  <ListItemAvatar>
+                                    <Avatar alt="Remy Sharp" src={team1} />
+                                  </ListItemAvatar>
+                                  <ListItemText
+                                    primary={
+                                      <Typography className={classes.heading}>
+                                        <strong> {offers.clientName}</strong>
+                                      </Typography>
+                                    }
+                                    secondary={
+                                      <React.Fragment>
+                                        <br></br>
+                                        <Typography
+                                          className={classes.heading}
+                                          color="text.primary"
+                                        >
+                                          <strong>
+                                            {" "}
+                                            Title: {offers.title}
+                                          </strong>
+                                          {/* Get client name */}
+                                        </Typography>
+                                        <br></br>
+                                        <Typography
+                                          className={classes.heading}
+                                          color="text.primary"
+                                        >
+                                          Address: {offers.address}
+                                        </Typography>
+                                        <Typography
+                                          className={classes.heading}
+                                          color="text.primary"
+                                        >
+                                          Budget: {offers.budget}
+                                        </Typography>
+                                        <Typography
+                                          className={classes.heading}
+                                          color="text.primary"
+                                        >
+                                          Detail: {offers.description}
+                                        </Typography>
+                                        <br /> <br />
+                                        <Divider
+                                          sx={{ width: 1000, m: 0.5 }}
+                                          orientation="horizontal"
+                                        />
+                                        <Button
+                                          color="green"
+                                          size="sm"
+                                          // href="/signup-page"
+                                          // target="_blank"
+                                          // disabled={disable}
+                                          rel="noopener noreferrer"
+                                          className={classes.jobBtn}
+                                          // onClick={handleClick}
+                                          onClick={() =>
+                                            postProjects(
+                                              offers.budget,
+                                              offers.description,
+                                              offers.clientId
+                                            )
+                                          }
+                                        >
+                                          <i className="fas fa-dollar-sign" />
+                                          Accept
+                                        </Button>
+                                        <Button
+                                          color="danger"
+                                          size="sm"
+                                          // href="/signup-page"
+                                          // target="_blank"
+                                          // disabled={disable}
+                                          rel="noopener noreferrer"
+                                          className={classes.jobBtn}
+                                          //onClick={handleClick}
+                                        >
+                                          <i className="fas fa-dollar-sign" />
+                                          Decline
+                                        </Button>
+                                        <Snackbar
+                                          open={open}
+                                          autoHideDuration={6000}
+                                          onClose={handleClose}
+                                        >
+                                          <Alert
+                                            onClose={handleClose}
+                                            severity="success"
+                                            sx={{ width: "100%" }}
+                                          >
+                                            Job Started Successfully!
+                                          </Alert>
+                                        </Snackbar>
+                                      </React.Fragment>
+                                    }
+                                  />
+                                </Card>
+                              </ListItem>
+                            );
+                          })}
                         </List>
                       ),
                     },
