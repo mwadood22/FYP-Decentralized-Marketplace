@@ -342,10 +342,10 @@ export default function Gig(props) {
                           Send job offer
                         </Button>
                         {"  "}
-                        <Button color="green" href="/payment-page">
+                        {/* <Button color="green" href="/payment-page">
                           {" "}
                           Make Payment
-                        </Button>
+                        </Button> */}
                         {/* <Button color="green" onClick={() => toggleWidget()}> 
                           {" "}
                           Chat <i className="fa fa-comment" />

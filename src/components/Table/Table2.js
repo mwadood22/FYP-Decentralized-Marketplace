@@ -9,16 +9,17 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 
 const columns = [
-  { id: "id", label: "ID", minWidth: 130 },
-  { id: "client", label: "Client", minWidth: 130 },
-  { id: "worker", label: "Worker", minWidth: 130 },
-  { id: "budget", label: "Budget", minWidth: 130 },
-  { id: "status", label: "Status", minWidth: 130 },
+  { id: "id", label: "ID", minWidth: 120 },
+  { id: "client", label: "Client", minWidth: 120 },
+  { id: "worker", label: "Worker", minWidth: 120 },
+  { id: "budget", label: "Budget", minWidth: 120 },
+  { id: "status", label: "Status", minWidth: 120 },
+  { id: "finishjob", label: "Finish Job", minWidth: 120 },
 ];
 
-function createData(id, client, worker, budget, status) {
+function createData(id, client, worker, budget, status, finishjob) {
   //const density = population / size;
-  return { id, client, worker, budget, status };
+  return { id, client, worker, budget, status, finishjob };
 }
 
 export default function StickyHeadTable(props) {
@@ -38,7 +39,7 @@ export default function StickyHeadTable(props) {
     // createData("02", "Arooj", "Wadood", "Electrician", "245656"),
     // createData("03", "Huzaifa", "Wadood", "Chef", "245656"),
   ];
-  console.log(rows[0]);
+  // console.log(rows[0]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 

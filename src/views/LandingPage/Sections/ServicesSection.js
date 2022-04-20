@@ -25,19 +25,29 @@ import Card from "components/Card/Card.js";
 import styles from "assets/jss/material-kit-react/views/landingPageSections/teamStyle.js";
 //import GridContainer from "components/Grid/GridContainer";
 
-//import carpenter from "assets/img/services/carpenter.jpg";
-//import chef from "assets/img/services/chef.jpg";
-//import driver from "assets/img/services/driver.jpg";
-//import electrician from "assets/img/services/electrician.jpg";
-//import gardener from "assets/img/services/gardener.jpg";
-//import painter from "assets/img/services/painter.jpg";
-//import plumbing from "assets/img/services/plumbing.jpg";
+import carpenter from "assets/img/services/carpenter.jpg";
+import chef from "assets/img/services/chef.jpg";
+import driver from "assets/img/services/driver.jpg";
+import electrician from "assets/img/services/electrician.jpg";
+import gardener from "assets/img/services/gardener.jpg";
+import painter from "assets/img/services/painter.jpg";
+import plumbing from "assets/img/services/plumbing.jpg";
 import helper from "assets/img/services/helper.jpg";
 //import { cardTitle } from "assets/jss/material-kit-react";
 
 const useStyles = makeStyles(styles);
 
 export default function ServicesSection() {
+  const images = [
+    carpenter,
+    chef,
+    driver,
+    electrician,
+    gardener,
+    painter,
+    plumbing,
+    helper,
+  ];
   const [category, setUserData] = useState({
     categories: [
       {
@@ -106,7 +116,7 @@ export default function ServicesSection() {
                 <Link to={"/service-page/" + categories.Name}>
                   <Card carousel className={classes.cardLayout}>
                     <img
-                      src={helper}
+                      src={images[index]}
                       alt="..."
                       className={classes.serviceCardImg}
                     />

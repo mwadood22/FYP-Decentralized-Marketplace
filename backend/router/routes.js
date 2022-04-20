@@ -45,6 +45,7 @@ router.delete("/worker/:id", workerController.delete);
 router.get("/worker/:id", upload.single("picture"), workerController.show);
 router.get("/worker/gig/:workerId", workerController.showAgainstGig);
 router.get("/worker/moralis/:user_id", workerController.showAgainstUserId); //getting worker against moralis user_id
+router.patch("/worker/", workerController.edit);
 
 //job routes
 router.get("/job/", jobController.index);
@@ -80,6 +81,7 @@ router.get("/bids/id/:id", bidsController.getBid);
 // project routes
 router.post("/projects/create", projectController.create);
 router.get("/projects/:worker_id", projectController.show);
+router.get("/projects/client/:client_id", projectController.showByClient);
 
 //JobOffers routes
 

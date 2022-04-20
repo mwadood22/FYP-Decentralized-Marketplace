@@ -44,13 +44,13 @@ ReactDOM.render(
     <Router history={hist}>
       <Switch>
         <Route path="/landing-page" component={LandingPage} />
-        <Route path="/profile-page" component={ProfilePage} />
+        <Route path="/profile-page/:client_id" component={ProfilePage} />
         <Route path="/login-page" component={LoginPage} />
         <Route path="/signup-page" component={SignupPage} />
         <Route path="/contact-page" component={ContactPage} />
         <Route path="/service-page/:category" component={ServicePage} />
         <Route path="/gigs-page" component={GigsPage} />
-        <Route path="/customjobs-page" component={CustomJobs} />
+        <Route path="/customjobs-page/:userId" component={CustomJobs} />
         <Route path="/guidebuy-page" component={GuideBuyPage} />
         <Route path="/guidesell-page" component={GuideSellPage} />
         <Route path="/worker-page" component={WorkerPage} />

@@ -49,8 +49,8 @@ import People from "@material-ui/icons/People";
 import Schedule from "@material-ui/icons/Schedule";
 import Edit from "@material-ui/icons/Edit";
 import Person from "@material-ui/icons/Person";
-import HomeOutlined from "@material-ui/icons/Home";
-import City from "@material-ui/icons/LocationCity";
+// import HomeOutlined from "@material-ui/icons/Home";
+// import City from "@material-ui/icons/LocationCity";
 
 // import BuildIcon from "@mui/icons-material/Build";
 // import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
@@ -70,17 +70,60 @@ export default function ProfilePage(props) {
   //}, 700);
   const classes = useStyles();
   const { ...rest } = props;
+  const clientID = rest.match.params.client_id;
   const imageClasses = classNames(
     classes.imgRaised,
     classes.imgRoundedCircle,
     classes.imgFluid
   );
+  const [project, setWorkerProject] = useState({
+    clientName: "",
+    workerName: "",
+    bidPrice: "",
+    status: "",
+  });
   //const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
   const { user, userError, setUserData } = useMoralis();
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const getWorkerProjects = async (client_id) => {
+    try {
+      // const id = await user.id;
+      // console.log(user.id);
+
+      const res = await fetch(`/projects/client/${client_id}`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+      console.log(data);
+      setWorkerProject(data);
+      // if (data) {
+      //   // console.log("WE HEREEE");
+      //   setReference("/worker-dashboard");
+      //   // reference = "/worker-dashboard";
+      // } else {
+      //   setReference("/worker-page");
+      //   // reference = "/worker-page";
+      // }
+
+      if (!res.status === 200) {
+        const error = new Error(res.error);
+        throw error;
+      }
+    } catch (err) {
+      console.log(err);
+      // history.push('/login');
+    }
+    // return;
+  };
   useEffect(() => {
+    getWorkerProjects(clientID);
+
     if (!user) return null;
     setUsername(user.get("username"));
     setEmail(user.get("email"));
@@ -135,22 +178,23 @@ export default function ProfilePage(props) {
                       tabIcon: Person,
                       tabContent: (
                         <div className={classes.profilePill}>
+                          <i className="fas fa-map-marker"></i>
+                          <b className={classes.desc}>User Name</b>
+                          <p>{username}</p>
+                          <hr className={classes.hr} />
                           <i className="fas fa-envelope"></i>
                           <b className={classes.desc}>Email</b>
                           <p>{email}</p>
                           <hr className={classes.hr} />
-                          <i className="fas fa-lock"></i>
-                          <b className={classes.desc}>Password</b>
-                          <p>1234567$abc</p>
-                          <hr className={classes.hr} />
-                          <i className="fas fa-home"></i>
+
+                          {/* <i className="fas fa-home"></i>
                           <b className={classes.desc}>Address</b>
                           <p>Street: 24, Housing Colony</p>
                           <hr className={classes.hr} />
                           <i className="fas fa-map-marker"></i>
                           <b className={classes.desc}>City</b>
                           <p>Islamabad</p>
-                          <hr className={classes.hr} />
+                          <hr className={classes.hr} /> */}
                           {/*} <i className="fas fa-file-alt"></i>
                           <b className={classes.desc}>About Me</b>
                           <p>
@@ -257,7 +301,7 @@ export default function ProfilePage(props) {
                                 }}
                               />
 
-                              <CustomInput
+                              {/* <CustomInput
                                 labelText="Edit Address"
                                 id="password"
                                 formControlProps={{
@@ -293,7 +337,7 @@ export default function ProfilePage(props) {
                                   ),
                                   autoComplete: "on",
                                 }}
-                              />
+                              /> */}
                             </CardBody>
                             {userError && (
                               <ErrorBox
@@ -322,7 +366,7 @@ export default function ProfilePage(props) {
                     {
                       tabButton: "Current Projects",
                       tabIcon: Schedule,
-                      tabContent: <Table4 />,
+                      tabContent: <Table4 projects={project} />,
                     },
                     {
                       tabButton: "Projects History",

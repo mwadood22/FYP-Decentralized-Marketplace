@@ -122,3 +122,23 @@ exports.show = async (req, res) => {
       return res.json({ projects });
     });
 };
+
+exports.showByClient = async (req, res) => {
+  //   console.log("All gigs list");
+  console.log(req.params.client_id);
+  await dbo
+    .collection("Projects")
+    .find({
+      $or: [
+        { clientId: { $regex: req.params.client_id } },
+        // { address: { $regex: req.params.key } }
+      ],
+    })
+    .toArray(function (err, projects) {
+      if (err) {
+        return res.status(400).json({ msg: "Error" });
+      }
+      //   console.log(projects);
+      return res.json({ projects });
+    });
+};

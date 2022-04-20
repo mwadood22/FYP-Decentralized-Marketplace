@@ -46,6 +46,10 @@ export default function LoginPage(props) {
   ///reset password
   const loginFunction = async (email, password) => {
     await login(email, password);
+    // const id = Moralis.User.current();
+    // var log = "login";
+    // var user;
+
     history.push("/landing-page");
   };
   const resetPassword = () => {

@@ -48,7 +48,7 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
-import Email from "@material-ui/icons/Email";
+// import Email from "@material-ui/icons/Email";
 import People from "@material-ui/icons/People";
 
 // import studio1 from "assets/img/examples/studio-1.jpg";
@@ -67,7 +67,8 @@ import Edit from "@material-ui/icons/Edit";
 import Person from "@material-ui/icons/Person";
 import HomeOutlined from "@material-ui/icons/Home";
 import City from "@material-ui/icons/LocationCity";
-import Skills from "@material-ui/icons/PanToolSharp";
+import Contact from "@material-ui/icons/Phone";
+// import Skills from "@material-ui/icons/PanToolSharp";
 // import { useMoralis } from "react-moralis";
 
 // import BuildIcon from "@mui/icons-material/Build";
@@ -102,6 +103,7 @@ export default function ProfilePage(props) {
   // console.log(temp);
 
   const [worker, setWorker] = useState({
+    _id: "",
     Name: "",
     city: "",
     contact: "",
@@ -264,6 +266,44 @@ export default function ProfilePage(props) {
     ],
   });
 
+  const postData = async (e) => {
+    e.preventDefault();
+    const { Name, city, contact, skills, about } = worker;
+    const _id = worker._id;
+    console.log(_id);
+    const res = await fetch("/worker/", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        _id,
+        Name,
+        city,
+        contact,
+        skills,
+        about,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (data.status === 42 || !data) {
+      window.alert("Invalid registeration");
+      console.log("Invalid registeration");
+    } else {
+      console.log(data);
+      history.push("/customjobs-page");
+    }
+  };
+  let name, value;
+  const handleInputs = (e) => {
+    name = e.target.name;
+    value = e.target.value;
+    console.log(e);
+    setWorker({ ...worker, [name]: value });
+  };
+
   const postProjects = async (budget, description, clientId) => {
     // setOpen(true);
     // e.preventDefault();
@@ -421,6 +461,9 @@ export default function ProfilePage(props) {
                               <CustomInput
                                 labelText="Edit Name"
                                 id="first"
+                                name="Name"
+                                value={worker.Name}
+                                onChange={handleInputs}
                                 formControlProps={{
                                   fullWidth: true,
                                 }}
@@ -436,16 +479,19 @@ export default function ProfilePage(props) {
                                 }}
                               />
                               <CustomInput
-                                labelText="Edit Email"
-                                id="email"
+                                labelText="Edit City"
+                                id="city"
+                                name="city"
+                                value={worker.city}
+                                onChange={handleInputs}
                                 formControlProps={{
                                   fullWidth: true,
                                 }}
                                 inputProps={{
-                                  type: "email",
+                                  type: "text",
                                   endAdornment: (
                                     <InputAdornment position="end">
-                                      <Email
+                                      <City
                                         className={classes.inputIconsColor}
                                       />
                                     </InputAdornment>
@@ -453,31 +499,39 @@ export default function ProfilePage(props) {
                                 }}
                               />
                               <CustomInput
-                                labelText="Old Password"
-                                id="password"
+                                labelText="Edit Contact"
+                                id="contact"
+                                name="contact"
+                                value={worker.contact}
+                                onChange={handleInputs}
                                 formControlProps={{
                                   fullWidth: true,
                                 }}
                                 inputProps={{
-                                  type: "password",
+                                  type: "text",
                                   endAdornment: (
                                     <InputAdornment position="end">
-                                      <Icon className={classes.inputIconsColor}>
-                                        lock_outline
-                                      </Icon>
+                                      <Contact
+                                        className={classes.inputIconsColor}
+                                      >
+                                        {/* lock_outline */}
+                                      </Contact>
                                     </InputAdornment>
                                   ),
                                   autoComplete: "off",
                                 }}
                               />
                               <CustomInput
-                                labelText="New Password"
-                                id="password"
+                                labelText="Edit Skills"
+                                id="skills"
+                                name="skills"
+                                value={worker.skills}
+                                onChange={handleInputs}
                                 formControlProps={{
                                   fullWidth: true,
                                 }}
                                 inputProps={{
-                                  type: "password",
+                                  type: "text",
                                   endAdornment: (
                                     <InputAdornment position="end">
                                       <Icon className={classes.inputIconsColor}>
@@ -490,13 +544,16 @@ export default function ProfilePage(props) {
                               />
 
                               <CustomInput
-                                labelText="Edit Address"
-                                id="password"
+                                labelText="Edit About"
+                                id="about"
+                                name="about"
+                                value={worker.about}
+                                onChange={handleInputs}
                                 formControlProps={{
                                   fullWidth: true,
                                 }}
                                 inputProps={{
-                                  type: "password",
+                                  type: "text",
                                   endAdornment: (
                                     <InputAdornment position="end">
                                       <HomeOutlined
@@ -507,67 +564,14 @@ export default function ProfilePage(props) {
                                   autoComplete: "on",
                                 }}
                               />
-
-                              <CustomInput
-                                labelText="Edit City"
-                                id="password"
-                                formControlProps={{
-                                  fullWidth: true,
-                                }}
-                                inputProps={{
-                                  type: "password",
-                                  endAdornment: (
-                                    <InputAdornment position="end">
-                                      <City
-                                        className={classes.inputIconsColor}
-                                      />
-                                    </InputAdornment>
-                                  ),
-                                  autoComplete: "on",
-                                }}
-                              />
-
-                              <CustomInput
-                                labelText="Edit Skills"
-                                id="skills"
-                                formControlProps={{
-                                  fullWidth: true,
-                                }}
-                                inputProps={{
-                                  type: "text",
-                                  endAdornment: (
-                                    <InputAdornment position="end">
-                                      <Skills
-                                        className={classes.inputIconsColor}
-                                      />
-                                    </InputAdornment>
-                                  ),
-                                  autoComplete: "on",
-                                }}
-                              />
-
-                              <CustomInput
-                                labelText="Edit About Me"
-                                id="password"
-                                formControlProps={{
-                                  fullWidth: true,
-                                }}
-                                inputProps={{
-                                  type: "password",
-                                  endAdornment: (
-                                    <InputAdornment position="end">
-                                      <People
-                                        className={classes.inputIconsColor}
-                                      />
-                                    </InputAdornment>
-                                  ),
-                                  autoComplete: "on",
-                                }}
-                              />
                             </CardBody>
                             <CardFooter className={classes.cardFooter}>
-                              <Button color="black" href="/profile-page">
-                                Submit
+                              <Button
+                                color="black"
+                                onClick={postData}
+                                href={"/worker-dashboard/" + worker.user_id}
+                              >
+                                Update Profile
                               </Button>
                             </CardFooter>
                           </form>

@@ -45,9 +45,12 @@ const dashboardRoutes = [];
 const useStyles = makeStyles(styles);
 
 export default function LandingPage(props) {
+  // window.location.reload();
+
   const classes = useStyles();
   const { ...rest } = props;
-
+  console.log(rest);
+  // console.log(rest.history.location.state);
   return (
     <div>
       <Header

@@ -17,12 +17,18 @@ import { People, Apps, CloudDownload } from "@material-ui/icons";
 // core components
 import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 import Button from "components/CustomButtons/Button.js";
+import { useMoralis } from "react-moralis";
 
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
 const useStyles = makeStyles(styles);
 
 export default function HeaderLinks(props) {
   const classes = useStyles();
+  const { isAuthenticated, logout, user } = useMoralis();
+  var workerId;
+  if (isAuthenticated) {
+    workerId = user.id;
+  }
   return (
     <List className={classes.list}>
       {/*<ListItem className={classes.listItem}>
@@ -167,14 +173,18 @@ export default function HeaderLinks(props) {
             }}
             buttonIcon={People}
             dropdownList={[
-              <Link to="/login-page" className={classes.dropdownLink}>
-                Login
-              </Link>,
-              <Link to="/signup-page" className={classes.dropdownLink}>
-                Sign-Up
-              </Link>,
-              <Link to="/worker-dashboard" className={classes.dropdownLink}>
+              <Link
+                to={"/worker-dashboard/" + workerId}
+                className={classes.dropdownLink}
+              >
                 Profile
+              </Link>,
+              <Link
+                to="/landing-page"
+                onClick={logout}
+                className={classes.dropdownLink}
+              >
+                Logout
               </Link>,
             ]}
           />

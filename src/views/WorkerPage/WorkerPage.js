@@ -391,7 +391,7 @@ export default function WorkerPage(props) {
                     <GridItem>
                       <Button
                         color="black"
-                        href="/worker-dashboard"
+                        href={"/worker-dashboard/" + id}
                         onClick={postData}
                       >
                         Get started

@@ -59,8 +59,10 @@ Transition.displayName = "Transition";
 
 export default function CustomJobsView(props) {
   const { ...rest } = props;
+  console.log(rest);
   const userId = rest.userId;
-  // console.log(userId);
+
+  console.log(userId);
   // const userId = temp.match.params.userId;
   // const { isAuthenticated, user } = useMoralis();
   // var clientId;
@@ -71,6 +73,7 @@ export default function CustomJobsView(props) {
     clientName = user.attributes.username;
   }
   const checkFunction = async (id) => {
+    // console.log("IM CALLED");
     try {
       const res = await fetch(`/jobs/check/${id}`, {
         method: "GET",
@@ -113,6 +116,7 @@ export default function CustomJobsView(props) {
       {
         _id: "",
         price: "",
+        workerName: "",
       },
     ],
   });
@@ -205,6 +209,7 @@ export default function CustomJobsView(props) {
     });
 
     const projectData = await proejctRes.json();
+    setClassicModal(false);
 
     if (projectData.status === 42 || !projectData) {
       window.alert("Invalid registeration");
@@ -236,6 +241,7 @@ export default function CustomJobsView(props) {
       // console.log(e);
       // console.log("Event called: ", e.data);
       getBidData(data);
+
       // const data = JSON.parse(e.data);
     });
 
@@ -299,127 +305,142 @@ export default function CustomJobsView(props) {
     <div>
       <List>
         {console.log(job)}
-        {job.jobs.map((jobs, index) => {
-          return (
-            <ListItem alignItems="flex-start" key={index}>
-              <Card className={classes.jobCard}>
-                <ListItemAvatar>
-                  <Avatar alt="Remy Sharp" src={team1} />
-                </ListItemAvatar>
-                <ListItemText
-                  primary={
-                    <Typography className={classes.heading}>
-                      <strong> {jobs.title}</strong>
-                    </Typography>
-                  }
-                  secondary={
-                    <React.Fragment>
-                      <Typography
-                        className={classes.heading}
-                        color="text.primary"
-                      >
-                        {jobs.address}
+        {job.jobs.length > 0 ? (
+          job.jobs.map((jobs, index) => {
+            return (
+              <ListItem alignItems="flex-start" key={index}>
+                <Card className={classes.jobCard}>
+                  <ListItemAvatar>
+                    <Avatar alt="Remy Sharp" src={team1} />
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={
+                      <Typography className={classes.heading}>
+                        <strong> {jobs.title}</strong>
                       </Typography>
-                      <Typography
-                        className={classes.heading}
-                        color="text.primary"
-                      >
-                        Ali Connors
-                      </Typography>
-                      {jobs.description}
-                      <br /> <br />
-                      <strong>Max bid: {jobs.budget}</strong>
-                      <hr />
-                      <GridContainer>
-                        <GridItem xs={12} sm={12} md={10}>
-                          <Button
-                            color="green"
-                            size="md"
-                            //rel="noopener noreferrer"
-                            onClick={() => viewBids(jobs._id)}
-                            className={classes.jobBtn}
-                          >
-                            <i className="fas fa-dollar-sign" />
-                            View Bids
-                          </Button>
-                        </GridItem>
+                    }
+                    secondary={
+                      <React.Fragment>
+                        <Typography
+                          className={classes.heading}
+                          color="text.primary"
+                        >
+                          {jobs.address}
+                        </Typography>
+                        <Typography
+                          className={classes.heading}
+                          color="text.primary"
+                        >
+                          Ali Connors
+                        </Typography>
+                        {jobs.description}
+                        <br /> <br />
+                        <strong>Max bid: {jobs.budget}</strong>
+                        <hr />
+                        <GridContainer>
+                          <GridItem xs={12} sm={12} md={10}>
+                            <Button
+                              color="green"
+                              size="md"
+                              //rel="noopener noreferrer"
+                              onClick={() => viewBids(jobs._id)}
+                              className={classes.jobBtn}
+                            >
+                              <i className="fas fa-dollar-sign" />
+                              View Bids
+                            </Button>
+                          </GridItem>
 
-                        <GridItem xs={12} sm={12} md={1}>
-                          <Link
-                            onClick={() => DeleteJob(jobs._id)}
-                            key={index}
-                            // to={"gigs-page/"}
-                            className={classes.dropdownLink}
-                          >
-                            <Delete className={classes.inputIconsColor} />
-                          </Link>
-                        </GridItem>
+                          <GridItem xs={12} sm={12} md={1}>
+                            <Link
+                              onClick={() => DeleteJob(jobs._id)}
+                              key={index}
+                              // to={"gigs-page/"}
+                              className={classes.dropdownLink}
+                            >
+                              <Delete className={classes.inputIconsColor} />
+                            </Link>
+                          </GridItem>
 
-                        <GridItem xs={12} sm={12} md={1}>
-                          <Link
-                            to={"/updatejob-page/" + jobs._id}
-                            className={classes.dropdownLink}
-                          >
-                            <Edit className={classes.inputIconsColor} />
-                          </Link>
-                        </GridItem>
-                      </GridContainer>
-                    </React.Fragment>
-                  }
-                />
-              </Card>
-            </ListItem>
+                          <GridItem xs={12} sm={12} md={1}>
+                            <Link
+                              to={"/updatejob-page/" + jobs._id}
+                              className={classes.dropdownLink}
+                            >
+                              <Edit className={classes.inputIconsColor} />
+                            </Link>
+                          </GridItem>
+                        </GridContainer>
+                      </React.Fragment>
+                    }
+                  />
+                </Card>
+              </ListItem>
 
-            // {/* <Divider variant="inset" component="li" /> */}
-            // {/* </div> */}
-            // {/* <div className={classes.newClass}> */}
-            // <ListItem alignItems="flex-start">
-            //   <Card className={classes.jobCard}>
-            //     <ListItemAvatar>
-            //       <Avatar alt="Cindy Baker" src={team3} />
-            //     </ListItemAvatar>
-            //     <ListItemText
-            //       primary={
-            //         <Typography className={classes.heading}>
-            //           <strong>Title: Plumbing</strong>
-            //         </Typography>
-            //       }
-            //       secondary={
-            //         <React.Fragment>
-            //           <Typography className={classes.heading} color="text.primary">
-            //             Sandra Adams
-            //           </Typography>
-            //           Ill be in your neighborhood doing errands this… Ill be in your
-            //           neighborhood doing errands this… Ill be in your neighborhood
-            //           doing errands this… Ill be in your neighborhood doing errands
-            //           this… Ill be in your neighborhood doing errands this… Ill be
-            //           in your neighborhood doing errands this… Ill be in your
-            //           neighborhood doing errands this… Ill be in your neighborhood
-            //           doing errands this… Ill be in your neighborhood doing errands
-            //           this… Ill be in your neighborhood doing errands this… Ill be
-            //           in your Ill be in your neighborhood doing errands this… Ill be
-            //           in your neighborhood doing errands this… Ill be in your
-            //           neighborhood doing errands this… Ill be in your.
-            //           <br /> <br />
-            //           <strong>Max bid: $45</strong>
-            //           <hr />
-            //           <Button
-            //             color="green"
-            //             size="md"
-            //             //rel="noopener noreferrer"
-            //             onClick={() => setClassicModal(true)}
-            //             className={classes.jobBtn}
-            //           >
-            //             <i className="fas fa-dollar-sign" />
-            //             View Bids
-            //           </Button>
-            //         </React.Fragment>
-            //       }
-            //     />
-            //   </Card>
-            // </ListItem>
-          );
-        })}
+              // {/* <Divider variant="inset" component="li" /> */}
+              // {/* </div> */}
+              // {/* <div className={classes.newClass}> */}
+              // <ListItem alignItems="flex-start">
+              //   <Card className={classes.jobCard}>
+              //     <ListItemAvatar>
+              //       <Avatar alt="Cindy Baker" src={team3} />
+              //     </ListItemAvatar>
+              //     <ListItemText
+              //       primary={
+              //         <Typography className={classes.heading}>
+              //           <strong>Title: Plumbing</strong>
+              //         </Typography>
+              //       }
+              //       secondary={
+              //         <React.Fragment>
+              //           <Typography className={classes.heading} color="text.primary">
+              //             Sandra Adams
+              //           </Typography>
+              //           Ill be in your neighborhood doing errands this… Ill be in your
+              //           neighborhood doing errands this… Ill be in your neighborhood
+              //           doing errands this… Ill be in your neighborhood doing errands
+              //           this… Ill be in your neighborhood doing errands this… Ill be
+              //           in your neighborhood doing errands this… Ill be in your
+              //           neighborhood doing errands this… Ill be in your neighborhood
+              //           doing errands this… Ill be in your neighborhood doing errands
+              //           this… Ill be in your neighborhood doing errands this… Ill be
+              //           in your Ill be in your neighborhood doing errands this… Ill be
+              //           in your neighborhood doing errands this… Ill be in your
+              //           neighborhood doing errands this… Ill be in your.
+              //           <br /> <br />
+              //           <strong>Max bid: $45</strong>
+              //           <hr />
+              //           <Button
+              //             color="green"
+              //             size="md"
+              //             //rel="noopener noreferrer"
+              //             onClick={() => setClassicModal(true)}
+              //             className={classes.jobBtn}
+              //           >
+              //             <i className="fas fa-dollar-sign" />
+              //             View Bids
+              //           </Button>
+              //         </React.Fragment>
+              //       }
+              //     />
+              //   </Card>
+              // </ListItem>
+            );
+          })
+        ) : (
+          <ListItem alignItems="flex-start">
+            <Card className={classes.jobCard}>
+              <ListItemText
+                primary={
+                  <Typography className={classes.heading}>
+                    <strong>No Data Present!</strong>
+                  </Typography>
+                }
+                secondary={<React.Fragment></React.Fragment>}
+              />
+            </Card>
+          </ListItem>
+        )}
         <Dialog
           classes={{
             root: classes.center,
@@ -471,41 +492,43 @@ export default function CustomJobsView(props) {
                 "& ul": { padding: 0 },
               }}
             >
-              {bid.bids.map((bids, index) => {
-                return (
-                  <GridContainer key={index}>
-                    <ListItem
-                      button
-                      /*component={Link} to="/gig2"*/ disablePadding
-                    >
-                      <GridItem xs={12} sm={12} md={8}>
-                        <ListItemButton>
-                          <ListItemAvatar>
-                            <Avatar alt="Remy Sharp" src={team1} />
-                          </ListItemAvatar>
-                          <ListItemText
+              {bid.bids.length > 0 ? (
+                bid.bids.map((bids, index) => {
+                  return (
+                    <GridContainer key={index}>
+                      <ListItem
+                        button
+                        /*component={Link} to="/gig2"*/ disablePadding
+                      >
+                        <GridItem xs={12} sm={12} md={8}>
+                          <ListItemButton>
+                            <ListItemAvatar>
+                              <Avatar alt="Remy Sharp" src={team1} />
+                            </ListItemAvatar>
+                            <ListItemText
                             //className={classes.bidlist}
-                            primary="Ali Ahmad"
-                          />
-                        </ListItemButton>
-                      </GridItem>
-                      {/* {(BidValue = "Bid: $" + bids.price)} */}
-                      <GridItem xs={12} sm={12} md={4}>
-                        <ListItemText>Bid: ${bids.price}</ListItemText>
-                        {/* <h5>{BidValue}</h5> */}
-                      </GridItem>
-                      <GridItem xs={12} sm={12} md={4}>
-                        <Button
-                          color="success"
-                          onClick={() => postProject(bids._id)}
-                        >
-                          Accept
-                        </Button>
-                        {/* <h5>{BidValue}</h5> */}
-                      </GridItem>
-                    </ListItem>
+                            >
+                              {bids.workerName}
+                            </ListItemText>
+                          </ListItemButton>
+                        </GridItem>
+                        {/* {(BidValue = "Bid: $" + bids.price)} */}
+                        <GridItem xs={12} sm={12} md={4}>
+                          <ListItemText>Bid: ${bids.price}</ListItemText>
+                          {/* <h5>{BidValue}</h5> */}
+                        </GridItem>
+                        <GridItem xs={12} sm={12} md={4}>
+                          <Button
+                            color="success"
+                            onClick={() => postProject(bids._id)}
+                          >
+                            Accept
+                          </Button>
+                          {/* <h5>{BidValue}</h5> */}
+                        </GridItem>
+                      </ListItem>
 
-                    {/* <ListItem button component={Link} to="/gig2" disablePadding>
+                      {/* <ListItem button component={Link} to="/gig2" disablePadding>
                       <GridItem xs={12} sm={12} md={8}>
                         <ListItemButton>
                           <ListItemAvatar>
@@ -522,9 +545,28 @@ export default function CustomJobsView(props) {
                         <ListItemText primary="Bid: 55$" />
                       </GridItem>
                     </ListItem>  */}
-                  </GridContainer>
-                );
-              })}
+                    </GridContainer>
+                  );
+                })
+              ) : (
+                <GridContainer>
+                  <ListItem /*component={Link} to="/gig2"*/ disablePadding>
+                    <GridItem xs={12} sm={12} md={12}>
+                      <ListItemButton>
+                        {/* <ListItemText
+                        //className={classes.bidlist}
+                        >
+                          {bids.workerName}
+                        </ListItemText> */}
+                        <ListItemText>
+                          <strong>No Bids Present!</strong>
+                        </ListItemText>
+                      </ListItemButton>
+                    </GridItem>
+                    {/* {(BidValue = "Bid: $" + bids.price)} */}
+                  </ListItem>
+                </GridContainer>
+              )}
             </List>
 
             {/*</Box>*/}

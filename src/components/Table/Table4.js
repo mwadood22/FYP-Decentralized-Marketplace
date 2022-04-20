@@ -11,52 +11,71 @@ import Button from "components/CustomButtons/Button.js";
 
 const columns = [
   { id: "id", label: "ID", minWidth: 120 },
-  { id: "buyer", label: "Buyer", minWidth: 120 },
-  { id: "seller", label: "Seller", minWidth: 120 },
-  { id: "category", label: "Category", minWidth: 120 },
-  { id: "amount", label: "Amount", minWidth: 120 },
+  { id: "client", label: "Client", minWidth: 120 },
+  { id: "worker", label: "Worker", minWidth: 120 },
+  { id: "budget", label: "Budget", minWidth: 120 },
   { id: "status", label: "Status", minWidth: 120 },
+  { id: "finishjob", label: "Finish Job", minWidth: 120 },
 ];
 
-function createData(id, buyer, seller, category, amount, status) {
+function createData(id, client, worker, budget, status, finishjob) {
   //const density = population / size;
-  return { id, buyer, seller, category, amount, status };
+  return { id, client, worker, budget, status, finishjob };
 }
 
-const rows = [
-  createData(
-    "01",
-    "Huzaifa",
-    "Arooj",
-    "Plumber",
-    "245656",
-    <Button size="sm" color="black" href="/payment-page">
-      Finish Job
-    </Button>
-  ),
-  createData(
-    "02",
-    "Huzaifa",
-    "Musa",
-    "Electrician",
-    "245656",
-    <Button size="sm" color="black" href="/payment-page">
-      Finish Job
-    </Button>
-  ),
-  createData(
-    "03",
-    "Huzaifa",
-    "Wadood",
-    "Chef",
-    "245656",
-    <Button size="sm" color="black" href="/payment-page">
-      Finish Job
-    </Button>
-  ),
-];
+// const rows = [
+//   createData(
+//     "01",
+//     "Huzaifa",
+//     "Arooj",
+//     "Plumber",
+//     "245656",
+//     <Button size="sm" color="black" href="/payment-page">
+//       Finish Job
+//     </Button>
+//   ),
+//   createData(
+//     "02",
+//     "Huzaifa",
+//     "Musa",
+//     "Electrician",
+//     "245656",
+//     <Button size="sm" color="black" href="/payment-page">
+//       Finish Job
+//     </Button>
+//   ),
+//   createData(
+//     "03",
+//     "Huzaifa",
+//     "Wadood",
+//     "Chef",
+//     "245656",
+//     <Button size="sm" color="black" href="/payment-page">
+//       Finish Job
+//     </Button>
+//   ),
+// ];
 
-export default function StickyHeadTable() {
+export default function StickyHeadTable(props) {
+  const { ...rest } = props;
+  // console.log(rest.projects);
+  const rows = [
+    rest.projects.projects.map((projects, index) => {
+      return createData(
+        index + 1,
+        projects.clientName,
+        projects.workerName,
+        projects.bidPrice,
+        projects.status,
+        <Button size="sm" color="black" href="">
+          Finish Job
+        </Button>
+      );
+    }),
+    // createData("01", "Musa", "Wadood", "Plumber", "245656"),
+    // createData("02", "Arooj", "Wadood", "Electrician", "245656"),
+    // createData("03", "Huzaifa", "Wadood", "Chef", "245656"),
+  ];
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -100,7 +119,7 @@ export default function StickyHeadTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows
+            {rows[0]
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (

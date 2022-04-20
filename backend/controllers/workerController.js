@@ -101,3 +101,30 @@ exports.showAgainstGig = (req, res) => {
     });
   //   return res.json({ gigs });
 };
+
+exports.edit = async (req, res) => {
+  // const gig = req.body;
+  const worker = req.body;
+  // console.log(job);
+  await dbo
+    .collection("WorkerData")
+    .findOne({ _id: ObjectId(worker._id) }, function (err, jobs) {
+      if (err) {
+        return res.status(400).json({ msg: "Error" });
+      }
+      // console.log(gigs);
+      // return res.json(gigs);
+      dbo.collection("WorkerData").update(
+        { _id: ObjectId(worker._id) },
+        {
+          $set: {
+            Name: worker.Name,
+            city: worker.city,
+            contact: worker.contact,
+            skills: worker.skills,
+            about: worker.about,
+          },
+        }
+      );
+    });
+};

@@ -153,9 +153,15 @@ export default function WorkerPage(props) {
     //   }),
     // });
     setFormErrors(validate(job));
+    console.log("SetFormErrors Called");
     setIsSubmit(true);
-
+    console.log("setIsSubmit Called");
+    console.log(Object.keys(formErrors).length, "This is the length");
+    console.log(isSubmit, "value of isSubmit");
     if (Object.keys(formErrors).length === 0 && isSubmit) {
+      console.log("Record create api called");
+      console.log(Object.keys(formErrors).length, "This is the length");
+      console.log(isSubmit, "value of isSubmit");
       console.log(e.target.value);
       console.log("form valid");
       const clientId = id;

@@ -25,9 +25,11 @@ const useStyles = makeStyles(styles);
 
 export default function HeaderLinks(props) {
   const classes = useStyles();
+  // const { ...rest } = props;
+  // console.log(rest.props.location.state.id);
 
-  const { isAuthenticated, logout, user } = useMoralis();
-  var logoutButton, logoutButton1, signInButtons, postJobsReference;
+  const { isAuthenticated, logout, Moralis, user } = useMoralis();
+  var logoutButton, logoutButton1, signInButtons;
   const [reference, setReference] = useState();
 
   const getWorker = async () => {
@@ -64,63 +66,14 @@ export default function HeaderLinks(props) {
 
   // console.log(user.attributes.username);
   if (isAuthenticated) {
-    // console.log(user.attributes.username);
-    // name = <p>{user.attributes.username}</p>;
-    // getWorker(user.id);
-    // const res = fetch(`/worker/moralis/${user.id}`, {
-    //   method: "GET",
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json",
-    //   },
-    // });
-    // const data = res;
-    // console.log(data);
-    // if (data) {
-    //   reference = "/worker-dashboard";
-    // } else {
-    //   reference = "/worker-page";
-    // }
-    //     becomeWorker = (
-    //       <ListItem className={classes.listItem}>
-    //         <Button
-    //           color="transparent"
-    //           href="/worker-dashboard"
-    //           //target="_blank"
-    //           className={classes.navLink}
-    //         >
-    //           Become a worker
-    //         </Button>
-    //       </ListItem>
-    //     );
-    //   } else {
-    //     becomeWorker = (
-    //       <ListItem className={classes.listItem}>
-    //         <Button
-    //           color="transparent"
-    //           href="/worker-page"
-    //           //target="_blank"
-    //           className={classes.navLink}
-    //         >
-    //           Become a worker
-    //         </Button>
-    //       </ListItem>
-    //     );
-    //   }
-    //   // getBidData(data);
-
-    //   if (!res.status === 200) {
-    //     const error = new Error(res.error);
-    //     throw error;
-    //   }
-    // } catch (err) {
-    //   console.log(err);
-    //   // history.push('/login');
-    // }
+    // const idddd = user.id;
+    // console.log(idddd);
+    const id_of = Moralis.User.current();
+    console.log(id_of.id);
     signInButtons = (
       <>
         <ListItem className={classes.listItem}>
-          <Link to={"/customjobs-page/" + user.id} className={classes.newlink}>
+          <Link to={"/customjobs-page/" + id_of.id} className={classes.newlink}>
             <Button
               color="transparent"
               // href="/customjobs-page"
@@ -146,7 +99,7 @@ export default function HeaderLinks(props) {
       </>
     );
     logoutButton = (
-      <Link to="/profile-page" className={classes.dropdownLink}>
+      <Link to={"/profile-page/" + id_of.id} className={classes.dropdownLink}>
         Profile
       </Link>
     );
