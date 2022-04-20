@@ -8,6 +8,7 @@ const jobController = require("../controllers/jobController");
 const testimonialController = require("../controllers/testimonialController");
 const categoryController = require("../controllers/categoryController");
 const bidsController = require("../controllers/bidsController");
+const jobOfferController = require("../controllers/jobOfferController");
 const projectController = require("../controllers/projectController");
 //const { check } = require("express-validator");
 //multer
@@ -30,7 +31,7 @@ router.delete("/gig/:id", gigController.delete);
 router.get("/gig/:id", gigController.show);
 router.get("/gig/category-wise/:category", gigController.filteredgigs);
 router.get("/check", gigController.check);
-router.get("/gig/worker/:workerId", gigController.gigAgainstWorkerId);
+// router.get("/gig/worker/:workerId", gigController.gigAgainstWorkerId);   (App was crashing bcz of it so commented it)
 
 //worker routes
 router.get("/worker/", workerController.index);
@@ -79,5 +80,13 @@ router.get("/bids/id/:id", bidsController.getBid);
 // project routes
 router.post("/projects/create", projectController.create);
 router.get("/projects/:worker_id", projectController.show);
+
+//JobOffers routes
+
+router.post("/offer/create", jobOfferController.create);
+router.get("/offers/getAll", jobOfferController.getAllOffers);
+
+//current project routes
+router.post("/projects/create", projectController.create);
 
 module.exports = router;
