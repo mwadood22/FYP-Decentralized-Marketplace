@@ -9,7 +9,7 @@ var ObjectId = require("mongodb").ObjectId;
 
 var dbo = null;
 
-const { check, validationResult } = require("express-validator");
+// const { check, validationResult } = require("express-validator");
 // const dbo = require("./connections");
 
 var gigsData = {
