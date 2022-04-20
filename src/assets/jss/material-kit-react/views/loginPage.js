@@ -1,6 +1,14 @@
+// import { autocompleteClasses } from "@mui/material";
 import { container } from "assets/jss/material-kit-react.js";
 
 const signupPageStyle = {
+  metamaskButton: {
+    marginLeft: "45px",
+  },
+  loginbtn: {
+    marginLeft: "10px",
+    marginTop: "0",
+  },
   container: {
     ...container,
     zIndex: "2",

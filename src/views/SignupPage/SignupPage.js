@@ -27,7 +27,7 @@ import styles from "assets/jss/material-kit-react/views/loginPage.js";
 //import image from "assets/img/bg7.jpg";
 // /Blockchain code
 // import {Container,Heading} from '@chakra-ui/layout';
-import { useMoralis, useMoralisCloudFunction } from "react-moralis";
+import { useMoralis } from "react-moralis";
 // import { useState } from "react";
 import { ErrorBox } from "components/errorbox/Error";
 ////
@@ -86,24 +86,23 @@ export default function SignupPage(props) {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [email, setEmail] = useState();
-  const { authenticate, isAuthenticating, authError, signup, Moralis } =
-    useMoralis();
+  const { authenticate, isAuthenticating, authError, signup } = useMoralis();
   // cloud function
 
-  const { fetch: callEmailCloudFunction } = useMoralisCloudFunction(
-    "sendWelcomeEmail",
-    {
-      email: email,
-      name: username,
-    },
-    { autoFetch: false }
-  );
+  // const { fetch: callEmailCloudFunction } = useMoralisCloudFunction(
+  //   "sendWelcomeEmail",
+  //   {
+  //     email: email,
+  //     name: username,
+  //   },
+  //   { autoFetch: false }
+  // );
   //Send welcome email to user
-  const sendWelcomeEmail = async () => {
-    //pick the user email from state
-    await Moralis.User.requestEmailVerification(email);
-    callEmailCloudFunction();
-  };
+  // const sendWelcomeEmail = async () => {
+  //   //pick the user email from state
+  //   await Moralis.User.requestEmailVerification(email);
+  //   callEmailCloudFunction();
+  // };
   return (
     <div>
       <Header
@@ -166,6 +165,7 @@ export default function SignupPage(props) {
                     />
                   )}
                   <Button
+                    className={classes.metamaskButton}
                     isLoading={isAuthenticating}
                     onClick={() => authenticate()}
                   >
@@ -254,13 +254,13 @@ export default function SignupPage(props) {
                     >
                       Get started
                     </Button>
-                    <Button
+                    {/* <Button
                       color="black"
                       //href="/landing-page"
                       onClick={() => sendWelcomeEmail()}
                     >
                       Send Welcome Email!
-                    </Button>
+                    </Button> */}
                   </CardFooter>
                   <div className={classes.endings}>
                     <h4 className={classes.new}>Already have an account?</h4>

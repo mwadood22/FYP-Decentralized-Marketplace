@@ -8,8 +8,8 @@ import { makeStyles } from "@material-ui/core/styles";
 //import Parallax from "components/Parallax/Parallax.js";
 
 // @material-ui/icons
-import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
-import { People } from "@material-ui/icons";
+// import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
+// import { People } from "@material-ui/icons";
 
 // core components
 //import GridContainer from "components/Grid/GridContainer.js";
@@ -18,7 +18,7 @@ import GridItem from "components/Grid/GridItem.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 //import CardFooter from "components/Card/CardFooter.js";
-import Paginations from "components/Pagination/Pagination.js";
+// import Paginations from "components/Pagination/Pagination.js";
 import { Link } from "react-router-dom";
 // import gig1 from "assets/img/gigs/gig1.jpg";
 
@@ -57,36 +57,36 @@ export default function ServicesView(props) {
     ],
   });
 
-  const DeleteGig = async (id) => {
-    console.log("Check");
-    try {
-      const res = await fetch(`/gig/${id}`, {
-        method: "DELETE",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
-      // history.push("/gigs-page");
-      window.location.reload();
+  // const DeleteGig = async (id) => {
+  //   console.log("Check");
+  //   try {
+  //     const res = await fetch(`/gig/${id}`, {
+  //       method: "DELETE",
+  //       headers: {
+  //         Accept: "application/json",
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
+  //     // history.push("/gigs-page");
+  //     window.location.reload();
 
-      // const data = await res.json();
-      // console.log(data);
-      // setUserData(data);
-      // gigid = {
-      //   pathname: "/gig",
-      //   // param1: gig._id,
-      // };
-      // history.push("/gigs-page");
+  //     // const data = await res.json();
+  //     // console.log(data);
+  //     // setUserData(data);
+  //     // gigid = {
+  //     //   pathname: "/gig",
+  //     //   // param1: gig._id,
+  //     // };
+  //     // history.push("/gigs-page");
 
-      if (!res.status === 200) {
-        const error = new Error(res.error);
-        throw error;
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  //     if (!res.status === 200) {
+  //       const error = new Error(res.error);
+  //       throw error;
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   //   const settings = {
   //     dots: true,
@@ -338,7 +338,7 @@ export default function ServicesView(props) {
                       </p>
                     </CardBody>
                   </Link>
-                  <CustomDropdown
+                  {/* <CustomDropdown
                     noLiPadding
                     buttonProps={{
                       className: classes.navLink,
@@ -371,7 +371,7 @@ export default function ServicesView(props) {
                       //   Delete
                       // </Button>,
                     ]}
-                  />
+                  /> */}
                 </Card>
               </GridItem>
             );
@@ -461,7 +461,7 @@ export default function ServicesView(props) {
         </GridItem> */}
         </GridContainer>
       </div>
-      <Paginations
+      {/* <Paginations
         pages={[
           { text: "PREV" },
           { text: 1 },
@@ -472,7 +472,7 @@ export default function ServicesView(props) {
           { text: "NEXT" },
         ]}
         color="info"
-      ></Paginations>
+      ></Paginations> */}
       {/* </Slider> */}
     </div>
   );

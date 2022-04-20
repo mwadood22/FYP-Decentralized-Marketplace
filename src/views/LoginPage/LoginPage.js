@@ -132,6 +132,7 @@ export default function LoginPage(props) {
                     />
                   )}
                   <Button
+                    className={classes.metamaskButton}
                     isLoading={isAuthenticating}
                     onClick={() => authenticate()}
                   >
@@ -179,6 +180,17 @@ export default function LoginPage(props) {
                       }}
                     />
                   </CardBody>
+                  <Button
+                    simple
+                    color="green"
+                    size="sm"
+                    onClick={resetPassword}
+                    className={classes.loginbtn}
+                  >
+                    Forgot Password?
+                    {/* Request Password change for{" "}
+                    {email ? email : "[Please enter email in field]"} */}
+                  </Button>
                   <CardFooter className={classes.cardFooter}>
                     <Button
                       color="black"
@@ -194,15 +206,7 @@ export default function LoginPage(props) {
                     <Button simple color="green" size="lg" href="/signup-page">
                       Signup now
                     </Button>
-                    <Button
-                      simple
-                      color="green"
-                      size="lg"
-                      onClick={resetPassword}
-                    >
-                      Request Password change for{" "}
-                      {email ? email : "[Please enter email in field]"}
-                    </Button>
+
                     {/* </h4> */}
                   </div>
                 </form>

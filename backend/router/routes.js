@@ -8,6 +8,7 @@ const jobController = require("../controllers/jobController");
 const testimonialController = require("../controllers/testimonialController");
 const categoryController = require("../controllers/categoryController");
 const bidsController = require("../controllers/bidsController");
+const projectController = require("../controllers/projectController");
 //const { check } = require("express-validator");
 //multer
 const storage = multer.diskStorage({
@@ -70,7 +71,13 @@ router.post("/category/create", categoryController.create);
 router.delete("/category/:id", categoryController.delete);
 router.get("/categeory/:id", categoryController.show);
 
+// bids routes
 router.post("/bids/create", bidsController.create);
 router.get("/bids/:job_id", bidsController.show);
+router.get("/bids/id/:id", bidsController.getBid);
+
+// project routes
+router.post("/projects/create", projectController.create);
+router.get("/projects/:worker_id", projectController.show);
 
 module.exports = router;

@@ -108,3 +108,17 @@ exports.show = (req, res) => {
   //   });
   // return res.json({ bids });
 };
+
+exports.getBid = (req, res) => {
+  //   console.log("All gigs list");
+  const id = req.params.id;
+  // console.log(id);
+  dbo.collection("Bids").findOne({ _id: ObjectId(id) }, function (err, bids) {
+    if (err) {
+      return res.status(400).json({ msg: "Error" });
+    }
+    // console.log(bids);
+    return res.json(bids);
+  });
+  //   return res.json({ gigs });
+};

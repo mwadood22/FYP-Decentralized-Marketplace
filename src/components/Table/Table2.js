@@ -10,24 +10,35 @@ import TableRow from "@mui/material/TableRow";
 
 const columns = [
   { id: "id", label: "ID", minWidth: 130 },
-  { id: "buyer", label: "Buyer", minWidth: 130 },
-  { id: "seller", label: "Seller", minWidth: 130 },
-  { id: "category", label: "Category", minWidth: 130 },
-  { id: "amount", label: "Amount", minWidth: 130 },
+  { id: "client", label: "Client", minWidth: 130 },
+  { id: "worker", label: "Worker", minWidth: 130 },
+  { id: "budget", label: "Budget", minWidth: 130 },
+  { id: "status", label: "Status", minWidth: 130 },
 ];
 
-function createData(id, buyer, seller, category, amount) {
+function createData(id, client, worker, budget, status) {
   //const density = population / size;
-  return { id, buyer, seller, category, amount };
+  return { id, client, worker, budget, status };
 }
 
-const rows = [
-  createData("01", "Musa", "Wadood", "Plumber", "245656"),
-  createData("02", "Arooj", "Wadood", "Electrician", "245656"),
-  createData("03", "Huzaifa", "Wadood", "Chef", "245656"),
-];
-
-export default function StickyHeadTable() {
+export default function StickyHeadTable(props) {
+  const { ...rest } = props;
+  console.log(rest.projects);
+  const rows = [
+    rest.projects.projects.map((projects, index) => {
+      return createData(
+        index + 1,
+        projects.clientName,
+        projects.workerName,
+        projects.bidPrice,
+        projects.status
+      );
+    }),
+    // createData("01", "Musa", "Wadood", "Plumber", "245656"),
+    // createData("02", "Arooj", "Wadood", "Electrician", "245656"),
+    // createData("03", "Huzaifa", "Wadood", "Chef", "245656"),
+  ];
+  console.log(rows[0]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -71,7 +82,7 @@ export default function StickyHeadTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows
+            {rows[0]
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (

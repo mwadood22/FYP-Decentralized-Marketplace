@@ -47,9 +47,11 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 export default function FindJobs(props) {
   const { isAuthenticated, user } = useMoralis();
-  var idd;
+  var idd, name_worker;
   if (isAuthenticated) {
     idd = user.id;
+    console.log(user);
+    name_worker = user.attributes.username;
   }
   const [bid, setBidData] = useState({
     price: "",
@@ -84,6 +86,7 @@ export default function FindJobs(props) {
     // console.log(job_id);
     const { price } = bid;
     const workerId = idd;
+    const workerName = name_worker;
     const res = await fetch("/bids/create", {
       method: "POST",
       headers: {
@@ -93,6 +96,7 @@ export default function FindJobs(props) {
         price,
         job_id,
         workerId,
+        workerName,
       }),
     });
     // setDisabledButtons(prevState => [...prevState, id]);

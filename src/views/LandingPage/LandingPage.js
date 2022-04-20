@@ -17,10 +17,10 @@ import Footer from "components/Footer/Footer.js";
 // import CustomInput from "components/CustomInput/CustomInput.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 //import Parallax from "components/Parallax/Parallax.js";
-import InputBase from "@mui/material/InputBase";
-import IconButton from "@mui/material/IconButton";
-import SearchIcon from "@mui/icons-material/Search";
-import Paper from "@mui/material/Paper";
+// import InputBase from "@mui/material/InputBase";
+// import IconButton from "@mui/material/IconButton";
+// import SearchIcon from "@mui/icons-material/Search";
+// import Paper from "@mui/material/Paper";
 
 //import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 //import Search from "@material-ui/icons/Search";
@@ -72,7 +72,7 @@ export default function LandingPage(props) {
           </h4>
         </h1>
         <br />
-        <Paper
+        {/* <Paper
           component="form"
           sx={{
             p: "2px 4px",
@@ -89,7 +89,7 @@ export default function LandingPage(props) {
           <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
             <SearchIcon />
           </IconButton>
-        </Paper>
+        </Paper> */}
         {/* <CustomInput
           black
           inputProps={{

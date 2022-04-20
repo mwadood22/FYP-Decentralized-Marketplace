@@ -45,7 +45,7 @@ export default function HeaderLinks(props) {
       console.log(data);
       if (data) {
         // console.log("WE HEREEE");
-        setReference("/worker-dashboard");
+        setReference("/worker-dashboard/" + data.user_id);
         // reference = "/worker-dashboard";
       } else {
         setReference("/worker-page");
@@ -120,7 +120,7 @@ export default function HeaderLinks(props) {
     signInButtons = (
       <>
         <ListItem className={classes.listItem}>
-          <Link to={"/customjobs-page/" + user.id}>
+          <Link to={"/customjobs-page/" + user.id} className={classes.newlink}>
             <Button
               color="transparent"
               // href="/customjobs-page"

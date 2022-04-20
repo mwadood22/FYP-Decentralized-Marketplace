@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -65,12 +65,15 @@ import Person from "@material-ui/icons/Person";
 import HomeOutlined from "@material-ui/icons/Home";
 import City from "@material-ui/icons/LocationCity";
 import Skills from "@material-ui/icons/PanToolSharp";
+// import { useMoralis } from "react-moralis";
 
 // import BuildIcon from "@mui/icons-material/Build";
 // import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
 // import Payment from "@material-ui/icons/Payment";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
+// import { ConstructionOutlined } from "@mui/icons-material";
+// import { getToolbarUtilityClass } from "@mui/material";
 
 const useStyles = makeStyles(styles);
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -78,6 +81,107 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 
 export default function ProfilePage(props) {
+  // const { isAuthenticated, user } = useMoralis();
+  // const [workerId, setWorkerId] = useState();
+  // var workerId;
+  // if (isAuthenticated) {
+  // setWorkerId(user.id);
+  // console.log("Hello!", user.id);
+  // }
+  // if (isAuthenticated) {
+  //   console.log(user.id);
+  // }
+  // const temp = () => {
+  //   setWorkerId(user);
+  //   console.log(workerId);
+  // };
+  // temp();
+  // console.log(temp);
+
+  const [worker, setWorker] = useState({
+    Name: "",
+    city: "",
+    contact: "",
+    skills: "",
+    about: "",
+  });
+
+  const [project, setWorkerProject] = useState({
+    clientName: "",
+    workerName: "",
+    bidPrice: "",
+    status: "",
+  });
+
+  const getWorker = async (worker_id) => {
+    try {
+      // const id = await user.id;
+      // console.log(user.id);
+
+      const res = await fetch(`/worker/moralis/${worker_id}`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+      console.log(data);
+      setWorker(data);
+      // if (data) {
+      //   // console.log("WE HEREEE");
+      //   setReference("/worker-dashboard");
+      //   // reference = "/worker-dashboard";
+      // } else {
+      //   setReference("/worker-page");
+      //   // reference = "/worker-page";
+      // }
+
+      if (!res.status === 200) {
+        const error = new Error(res.error);
+        throw error;
+      }
+    } catch (err) {
+      console.log(err);
+      // history.push('/login');
+    }
+    // return;
+  };
+
+  const getWorkerProjects = async (worker_id) => {
+    try {
+      // const id = await user.id;
+      // console.log(user.id);
+
+      const res = await fetch(`/projects/${worker_id}`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+      console.log(data);
+      setWorkerProject(data);
+      // if (data) {
+      //   // console.log("WE HEREEE");
+      //   setReference("/worker-dashboard");
+      //   // reference = "/worker-dashboard";
+      // } else {
+      //   setReference("/worker-page");
+      //   // reference = "/worker-page";
+      // }
+
+      if (!res.status === 200) {
+        const error = new Error(res.error);
+        throw error;
+      }
+    } catch (err) {
+      console.log(err);
+      // history.push('/login');
+    }
+    // return;
+  };
   //const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
   //setTimeout(function () {
   //  setCardAnimation("");
@@ -91,6 +195,8 @@ export default function ProfilePage(props) {
   // const [disable, setDisable] = React.useState(false);
   const classes = useStyles();
   const { ...rest } = props;
+  const workerID = rest.match.params.worker_id;
+  console.log(rest);
   const imageClasses = classNames(
     classes.imgRaised,
     classes.imgRoundedCircle,
@@ -104,6 +210,22 @@ export default function ProfilePage(props) {
     setOpen(false);
   };
   //const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
+  // const check = () => {
+  //   if (isAuthenticated) {
+  //     // console.log(workerID, "IM CALLED"),
+  //     // id = user.id;
+  //     getWorker(user.id);
+  //     console.log(user.id);
+  //   }
+  // };
+  useEffect(() => {
+    // ViewJobsData();
+    getWorker(workerID);
+    getWorkerProjects(workerID);
+    // var id;
+    // console.log(id);
+    // check();
+  }, []);
 
   return (
     <div>
@@ -129,7 +251,7 @@ export default function ProfilePage(props) {
                     <img src={profile} alt="..." className={imageClasses} />
                   </div>
                   <div className={classes.name}>
-                    <h3 className={classes.title}>M.Wadood ul Haq</h3>
+                    <h3 className={classes.title}>{worker.Name}</h3>
                   </div>
                 </div>
               </GridItem>
@@ -153,37 +275,29 @@ export default function ProfilePage(props) {
                           <p>wadood@gmail.com</p>
                           <hr className={classes.hr} />
 
-                          <i className="fas fa-lock"></i>
+                          {/* <i className="fas fa-lock"></i>
                           <b className={classes.desc}>Password</b>
                           <p>1234567$abc</p>
-                          <hr className={classes.hr} />
+                          <hr className={classes.hr} /> */}
 
                           <i className="fas fa-home"></i>
                           <b className={classes.desc}>Address</b>
-                          <p>Street: 24, Housing Colony</p>
+                          <p>{worker.city}</p>
                           <hr className={classes.hr} />
 
                           <i className="fas fa-map-marker"></i>
                           <b className={classes.desc}>City</b>
-                          <p>Islamabad</p>
+                          <p>{worker.city}</p>
                           <hr className={classes.hr} />
 
                           <i className="fas fa-detail"></i>
                           <b className={classes.desc}>My Skills</b>
-                          <p>Plumber , Carpenter , Electrician</p>
+                          <p>{worker.skills}</p>
                           <hr className={classes.hr} />
 
                           <i className="fas fa-file-alt"></i>
                           <b className={classes.desc}>About Me</b>
-                          <p>
-                            I am in between work and I have numerous viable
-                            skills that I believe can be utilized in the open
-                            market place. I am a go getter and one who is not
-                            shy to work. If you are looking for someone who
-                            enjoys helping others than I am your man. I am in
-                            between work and I have numerous viable skills that
-                            I believe can be utilized in the open market place.
-                          </p>
+                          <p>{worker.about}</p>
                           <hr className={classes.hr} />
                         </div>
                       ),
@@ -511,7 +625,7 @@ export default function ProfilePage(props) {
                     {
                       tabButton: "Current Projects",
                       tabIcon: Schedule,
-                      tabContent: <Table2 />,
+                      tabContent: <Table2 projects={project} />,
                     },
 
                     {
