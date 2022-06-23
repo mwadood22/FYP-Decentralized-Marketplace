@@ -226,26 +226,13 @@ export default function GuideView() {
                                   <CheckCircleOutlineOutlinedIcon />
                                 </ListItemIcon>
                                 <ListItemText
-                                  primary="Once your task is complete, pay the custmer using any of our payment channels."
+                                  primary="Once your task is complete, pay the custmer using cryptocurrency."
                                   secondary={
                                     secondary ? "Secondary text" : null
                                   }
                                 />
                               </ListItem>
-                              <ListItem>
-                                <ListItemIcon>
-                                  <CheckCircleOutlineOutlinedIcon />
-                                </ListItemIcon>
-                                <ListItemText
-                                  primary=" We provide the following payments channels:
-                                  1- Cash on Delivery.
-                                  2- Bank Payments.
-                                  3- Crypto Tokens."
-                                  secondary={
-                                    secondary ? "Secondary text" : null
-                                  }
-                                />
-                              </ListItem>
+
                               <ListItem>
                                 <ListItemIcon>
                                   <CheckCircleOutlineOutlinedIcon />

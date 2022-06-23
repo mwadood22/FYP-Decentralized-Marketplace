@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -31,6 +31,49 @@ export default function LoginPage(props) {
   }, 700);
   const classes = useStyles();
   const { ...rest } = props;
+  const initialValues = { username: "", email: "", message: "" };
+  const [formValues, setFormValues] = useState(initialValues);
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setFormErrors(validate(formValues));
+    setIsSubmit(true);
+  };
+
+  useEffect(() => {
+    console.log(formErrors);
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+      console.log(formValues);
+    }
+  }, [formErrors]);
+  const validate = (values) => {
+    const errors = {};
+    const regex = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/;
+    if (!values.username) {
+      errors.username = "Username is required!";
+    }
+    if (!values.email) {
+      errors.email = "Email is required!";
+    } else if (!regex.test(values.email)) {
+      errors.email = "This is not a valid email format!";
+    }
+    if (!values.message) {
+      errors.message = "Message is required";
+    } else if (values.message.length < 10) {
+      errors.message = "Message must be more than 10 characters";
+    } else if (values.message.length > 120) {
+      errors.message = "Message cannot exceed more than 120 characters";
+    }
+    return errors;
+  };
+
   return (
     <div>
       <Header
@@ -74,9 +117,12 @@ export default function LoginPage(props) {
                     <CustomInput
                       labelText="Your Name"
                       id="first"
+                      name="username"
                       formControlProps={{
                         fullWidth: true,
                       }}
+                      value={formValues.username}
+                      onChange={handleChange}
                       inputProps={{
                         type: "text",
                         endAdornment: (
@@ -86,12 +132,17 @@ export default function LoginPage(props) {
                         ),
                       }}
                     />
+                    <p className={classes.warningPara}>{formErrors.username}</p>
+
                     <CustomInput
                       labelText="Email address"
                       id="email"
+                      name="email"
                       formControlProps={{
                         fullWidth: true,
                       }}
+                      value={formValues.email}
+                      onChange={handleChange}
                       inputProps={{
                         type: "email",
                         endAdornment: (
@@ -101,12 +152,17 @@ export default function LoginPage(props) {
                         ),
                       }}
                     />
+                    <p className={classes.warningPara}>{formErrors.email}</p>
+
                     <CustomInput
                       labelText="Your message"
                       id="message"
+                      name="message"
                       formControlProps={{
                         fullWidth: true,
                       }}
+                      value={formValues.message}
+                      onChange={handleChange}
                       inputProps={{
                         type: "text",
                         endAdornment: (
@@ -119,9 +175,14 @@ export default function LoginPage(props) {
                         autoComplete: "off",
                       }}
                     />
+                    <p className={classes.warningPara}>{formErrors.message}</p>
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Button color="green" href="/contact-page">
+                    <Button
+                      color="green"
+                      href="/contact-page"
+                      onClick={handleSubmit}
+                    >
                       Send Message
                     </Button>
                   </CardFooter>

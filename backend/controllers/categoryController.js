@@ -1,14 +1,20 @@
 var MongoClient = require("mongodb").MongoClient;
 var url =
-  "mongodb+srv://Arooj:aroojfyp@markazcluster.qnkzs.mongodb.net/Markaz?retryWrites=true&w=majority";
+  "mongodb+srv://Arooj:aroojfyp@markazcluster.qnkzs.mongodb.net/?retryWrites=true&w=majority";
 var ObjectId = require("mongodb").ObjectId;
 
 var dbo = null;
+// console.log("Connection trying...");
 
 MongoClient.connect(url, function (err, db) {
+  // console.log("Connection trying...");
   if (err) throw err;
+  // console.log(err);
   dbo = db.db("Markaz");
+  // console.log(dbo);
 });
+
+console.log(dbo);
 
 exports.index = async (req, res) => {
   //   console.log("All gigs list");

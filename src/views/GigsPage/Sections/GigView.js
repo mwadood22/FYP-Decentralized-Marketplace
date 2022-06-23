@@ -7,6 +7,7 @@ import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
+import { Delete, Edit } from "@material-ui/icons";
 // import Button from "components/CustomButtons/Button.js";
 
 //import Slider from "react-slick";
@@ -17,8 +18,8 @@ import { Link } from "react-router-dom";
 // core components
 //import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
-import { People } from "@material-ui/icons";
+//import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
+//import { People } from "@material-ui/icons";
 
 //import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
@@ -236,6 +237,7 @@ export default function GigView() {
                     src={"data:image/png;base64," + gigs.picture}
                     className={imageClasses}
                   />
+
                   <CardBody>
                     <h4 className={classes.cardTitle}>{gigs.title}</h4>
                     <p className={classes.description}>
@@ -250,8 +252,28 @@ export default function GigView() {
                     </p>
                   </CardBody>
                 </Link>
+                <GridContainer>
+                  <GridItem xs={12} sm={12} md={6}>
+                    <Link
+                      onClick={() => DeleteGig(gigs._id)}
+                      // to={"gigs-page/"}
+                      className={classes.dropdownLink}
+                    >
+                      <Delete className={classes.inputIconsColor} />
+                    </Link>
+                  </GridItem>
+
+                  <GridItem xs={12} sm={12} md={6}>
+                    <Link
+                      to={"updategig-page/" + gigs._id}
+                      className={classes.dropdownLink}
+                    >
+                      <Edit className={classes.inputIconsColor} />
+                    </Link>
+                  </GridItem>
+                </GridContainer>
                 {/* {console.log(gigs._id)} */}
-                <CustomDropdown
+                {/* <CustomDropdown
                   noLiPadding
                   buttonProps={{
                     className: classes.navLink,
@@ -284,7 +306,7 @@ export default function GigView() {
                     //   Delete
                     // </Button>,
                   ]}
-                />
+                /> */}
               </Card>
             </GridItem>
           );

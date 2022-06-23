@@ -7,6 +7,10 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
+import Button from "components/CustomButtons/Button.js";
+//////////
+import { ethers } from "ethers";
+// import { useMoralis } from "react-moralis";
 
 const columns = [
   { id: "id", label: "ID", minWidth: 120 },
@@ -22,9 +26,31 @@ function createData(id, client, worker, budget, status, finishjob) {
   return { id, client, worker, budget, status, finishjob };
 }
 
+// var ContractAddress = "";
+// var accountLinked = "";
+// var currentUser = 0;
+// var contract = 0;
+var provider = 0;
+var signer = 0;
+var numberContract = "";
+var ContractAbi = "";
+
 export default function StickyHeadTable(props) {
+  // const { isAuthenticated, user, Moralis } = useMoralis();
   const { ...rest } = props;
-  console.log(rest.projects);
+  console.log(rest);
+
+  const jobDone = async () => {
+    console.log("ImCAlled");
+    var ContractAddress = rest.address;
+    provider = new ethers.providers.Web3Provider(window.ethereum);
+    signer = provider.getSigner();
+    ContractAbi = ["function jobDone() payable public"];
+    numberContract = new ethers.Contract(ContractAddress, ContractAbi, signer);
+    const txResponse = await numberContract.jobDone();
+    await txResponse.wait();
+    console.log(txResponse.hash);
+  };
   const rows = [
     rest.projects.projects.map((projects, index) => {
       return createData(
@@ -32,7 +58,10 @@ export default function StickyHeadTable(props) {
         projects.clientName,
         projects.workerName,
         projects.bidPrice,
-        projects.status
+        projects.status,
+        <Button onClick={jobDone} size="sm" color="black" href="">
+          Finish Job
+        </Button>
       );
     }),
     // createData("01", "Musa", "Wadood", "Plumber", "245656"),

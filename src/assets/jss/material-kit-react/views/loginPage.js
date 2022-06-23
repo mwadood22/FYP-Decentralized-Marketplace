@@ -113,6 +113,9 @@ const signupPageStyle = {
   inputIconsColor: {
     color: "#495057",
   },
+  warningPara: {
+    color: "red",
+  },
 };
 
 export default signupPageStyle;

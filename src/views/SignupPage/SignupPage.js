@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // import { useHistory } from "react-router-dom";
 // @material-ui/core components
@@ -21,6 +21,7 @@ import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
+import { useHistory } from "react-router-dom"; // version 5.2.0
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 
@@ -75,6 +76,12 @@ export default function SignupPage(props) {
   //   }
   // };
   //
+  const history = useHistory();
+  const { isAuthenticated, authError, signup } = useMoralis();
+  if (isAuthenticated) {
+    // const history = useHistory();
+    history.push("/landing-page");
+  }
 
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
   setTimeout(function () {
@@ -83,10 +90,53 @@ export default function SignupPage(props) {
   const classes = useStyles();
   const { ...rest } = props;
   ////blockchain
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
-  const [email, setEmail] = useState();
-  const { authenticate, isAuthenticating, authError, signup } = useMoralis();
+  const userValues = { username: "", email: "", password: "" };
+  const [formValues, setFormValues] = useState(userValues);
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
+  // const [username, setUsername] = useState();
+  // const [password, setPassword] = useState();
+  // const [email, setEmail] = useState();
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    console.log("Hello");
+    e.preventDefault();
+    setFormErrors(validate(formValues));
+    setIsSubmit(true);
+  };
+
+  useEffect(() => {
+    console.log(formErrors);
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+      console.log(formValues);
+    }
+  }, [formErrors]);
+  const validate = (values) => {
+    const errors = {};
+    const regex = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/;
+    // const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    if (!values.username) {
+      errors.username = "Username is required!";
+    }
+    if (!values.email) {
+      errors.email = "Email is required!";
+    } else if (!regex.test(values.email)) {
+      errors.email = "This is not a valid email format!";
+    }
+    if (!values.password) {
+      errors.password = "Password is required";
+    } else if (values.password.length < 4) {
+      errors.password = "Password must be more than 4 characters";
+    } else if (values.password.length > 10) {
+      errors.password = "Password cannot exceed more than 10 characters";
+    }
+    return errors;
+  };
+
   // cloud function
 
   // const { fetch: callEmailCloudFunction } = useMoralisCloudFunction(
@@ -124,7 +174,7 @@ export default function SignupPage(props) {
           <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={4}>
               <Card className={classes[cardAnimaton]}>
-                <form className={classes.form}>
+                <form className={classes.form} onSubmit={handleSubmit}>
                   <CardHeader color="green" className={classes.cardHeader}>
                     <h4>Sign-Up</h4>
                     <div className={classes.socialLine}>
@@ -164,13 +214,13 @@ export default function SignupPage(props) {
                       message={authError.message}
                     />
                   )}
-                  <Button
+                  {/* <Button
                     className={classes.metamaskButton}
                     isLoading={isAuthenticating}
                     onClick={() => authenticate()}
                   >
                     Authentication with MetaMask
-                  </Button>
+                  </Button> */}
                   <p className={classes.divider}></p>
                   <CardBody>
                     <CustomInput
@@ -181,10 +231,12 @@ export default function SignupPage(props) {
                       formControlProps={{
                         fullWidth: true,
                       }}
-                      value={username}
-                      onChange={(event) =>
-                        setUsername(event.currentTarget.value)
-                      }
+                      // value={username}
+                      // onChange={(event) =>
+                      //   setUsername(event.currentTarget.value)
+                      // }
+                      value={formValues.username}
+                      onChange={handleChange}
                       inputProps={{
                         type: "text",
                         endAdornment: (
@@ -194,7 +246,8 @@ export default function SignupPage(props) {
                         ),
                       }}
                     />
-
+                    {console.log(formErrors.email)}
+                    <p className={classes.warningPara}>{formErrors.username}</p>
                     <CustomInput
                       labelText="Email"
                       id="email"
@@ -202,8 +255,10 @@ export default function SignupPage(props) {
                       formControlProps={{
                         fullWidth: true,
                       }}
-                      value={email}
-                      onChange={(event) => setEmail(event.currentTarget.value)}
+                      // value={email}
+                      // onChange={(event) => setEmail(event.currentTarget.value)}
+                      value={formValues.email}
+                      onChange={handleChange}
                       inputProps={{
                         type: "email",
                         endAdornment: (
@@ -213,6 +268,7 @@ export default function SignupPage(props) {
                         ),
                       }}
                     />
+                    <p className={classes.warningPara}>{formErrors.email}</p>
                     {/* <input
                       type="email"
                       name="email"
@@ -229,10 +285,12 @@ export default function SignupPage(props) {
                       formControlProps={{
                         fullWidth: true,
                       }}
-                      value={password}
-                      onChange={(event) =>
-                        setPassword(event.currentTarget.value)
-                      }
+                      // value={password}
+                      // onChange={(event) =>
+                      //   setPassword(event.currentTarget.value)
+                      // }
+                      value={formValues.password}
+                      onChange={handleChange}
                       inputProps={{
                         type: "password",
                         endAdornment: (
@@ -245,12 +303,22 @@ export default function SignupPage(props) {
                         autoComplete: "off",
                       }}
                     />
+                    <p className={classes.warningPara}>{formErrors.password}</p>
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
+                    {Object.keys(formErrors).length === 0 && isSubmit
+                      ? // <div className="ui message success">Signed in successfully</div>
+                        signup(
+                          formValues.username,
+                          formValues.password,
+                          formValues.email
+                        )
+                      : console.log("Error in form!")}
                     <Button
                       color="black"
-                      //href="/landing-page"
-                      onClick={() => signup(username, password, email)}
+                      // href="/landing-page"
+                      onClick={handleSubmit}
+                      // onClick={() => signup(username, password, email)}
                     >
                       Get started
                     </Button>

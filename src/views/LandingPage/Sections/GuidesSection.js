@@ -50,43 +50,45 @@ export default function ServicesView() {
       {/* </Slider> */}
       <h2 className={classes.title2}>Check out our step by step guides</h2>
       {/* <Link to="guidebuy-page"> */}
-      <GridContainer className={classes.sectionguide}>
-        <GridItem xs={12} sm={12} md={6}>
-          <Card className={classes.card}>
-            <Link to="guidebuy-page" className={classes.color}>
-              <img
-                src={guide1}
-                alt="..."
-                className={imageClasses + " " + classes.img}
-              />
-              <CardBody>
-                <h4 className={classes.cardTitle}>Hire a worker</h4>
-                <p className={classes.body}>
-                  Step by step procedure for hiring a worker.
-                </p>
-              </CardBody>
-            </Link>
-          </Card>
-        </GridItem>
-        {/* </Link> */}
-        <GridItem xs={12} sm={12} md={6}>
-          <Card className={classes.card}>
-            <Link to="guidesell-page" className={classes.color}>
-              <img
-                src={guide2}
-                alt="..."
-                className={imageClasses + " " + classes.img}
-              />
-              <CardBody>
-                <h4 className={classes.cardTitle}>Sell your services</h4>
-                <p className={classes.body}>
-                  Step by step procedure for selling services.
-                </p>
-              </CardBody>
-            </Link>
-          </Card>
-        </GridItem>
-      </GridContainer>
+      <div>
+        <GridContainer className={classes.sectionguide}>
+          <GridItem xs={12} sm={12} md={6}>
+            <Card className={classes.card}>
+              <Link to="guidebuy-page" className={classes.color}>
+                <img
+                  src={guide1}
+                  alt="..."
+                  className={imageClasses + " " + classes.img}
+                />
+                <CardBody>
+                  <h4 className={classes.cardTitle}>Hire a worker</h4>
+                  <p className={classes.body}>
+                    Step by step procedure for hiring a worker.
+                  </p>
+                </CardBody>
+              </Link>
+            </Card>
+          </GridItem>
+          {/* </Link> */}
+          <GridItem xs={12} sm={12} md={6}>
+            <Card className={classes.card}>
+              <Link to="guidesell-page" className={classes.color}>
+                <img
+                  src={guide2}
+                  alt="..."
+                  className={imageClasses + " " + classes.img}
+                />
+                <CardBody>
+                  <h4 className={classes.cardTitle}>Sell your services</h4>
+                  <p className={classes.body}>
+                    Step by step procedure for selling services.
+                  </p>
+                </CardBody>
+              </Link>
+            </Card>
+          </GridItem>
+        </GridContainer>
+      </div>
     </div>
   );
 }

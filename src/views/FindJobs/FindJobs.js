@@ -278,12 +278,12 @@ export default function FindJobs(props) {
                       }
                       secondary={
                         <React.Fragment>
-                          <Typography
+                          {/* <Typography
                             className={classes.heading}
                             color="text.primary"
                           >
                             Ali Connors
-                          </Typography>
+                          </Typography> */}
                           {jobs.description}
                           <br /> <br />
                           <strong> {jobs.budget}</strong>

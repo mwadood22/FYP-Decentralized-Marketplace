@@ -19,7 +19,7 @@ MongoClient.connect(url, function (err, db) {
   dbo = db.db("Markaz");
 });
 
-exports.create = (req, res) => {
+exports.create = async (req, res) => {
   var title = req.body.title;
   var budget = req.body.budget;
   var city = req.body.city;
@@ -28,7 +28,7 @@ exports.create = (req, res) => {
   var address = req.body.address;
   var clientName = req.body.clientName;
 
-  dbo.collection("JobOffers").insertOne({
+  const data = await dbo.collection("JobOffers").insertOne({
     title,
     budget,
     city,
@@ -37,7 +37,8 @@ exports.create = (req, res) => {
     address,
     clientName,
   });
-
+  const id = res.json({ data });
+  console.log(id);
   return;
 };
 
@@ -89,4 +90,12 @@ exports.getAllOffers = async (req, res) => {
   } else {
     res.json({ message: "Ok" });
   }
+};
+
+exports.delete = (req, res) => {
+  //   console.log("All gigs list");
+  const { id } = req.params;
+  console.log(id);
+  dbo.collection("JobOffers").remove({ _id: ObjectId(id) });
+  return res.json({ msg: "deleted" });
 };

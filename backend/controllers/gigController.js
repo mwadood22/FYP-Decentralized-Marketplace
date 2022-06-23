@@ -147,6 +147,7 @@ exports.create = (req, res) => {
   var budget = req.body.budget;
   var category = req.body.category;
   var gigdescription = req.body.gigdescription;
+  var workerId = req.body.workerId;
 
   // [check("gigTitle").not().isEmpty().withMessage("Title is required")];
 
@@ -159,7 +160,14 @@ exports.create = (req, res) => {
   console.log("fine block");
   dbo
     .collection("Gigs")
-    .insertOne({ gigTitle, budget, category, gigdescription, picture });
+    .insertOne({
+      gigTitle,
+      budget,
+      category,
+      gigdescription,
+      picture,
+      workerId,
+    });
   // return res.status(200).json({
   //   success: true,
   //   message: "Login successful",

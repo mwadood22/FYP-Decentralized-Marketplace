@@ -24,5 +24,5 @@ app.use(function timeLog(req, res, next) {
 app.use("/", router);
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`Markaz app listening on port ${port}`);
 });

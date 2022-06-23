@@ -79,51 +79,51 @@ export default function WorkerPage(props) {
     clientId: "",
   });
 
-  const [formErrors, setFormErrors] = useState({});
-  const [isSubmit, setIsSubmit] = useState(false);
+  // const [formErrors, setFormErrors] = useState({});
+  // const [isSubmit, setIsSubmit] = useState(false);
 
-  const validate = (values) => {
-    const errors = {};
-    //const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-    if (!values.title) {
-      errors.title = "Title is required!";
-    } else if (values.title.length > 70) {
-      errors.title = "Title cannot exceed more than 70 characters";
-    }
-    if (!values.budget) {
-      errors.budget = "Budget is required!";
-    }
-    //  else if (!isNaN(values.budget)) {
-    //   errors.budget = "Please enter numeric value!";
-    // }
-    // else if (!regex.test(values.email)) {
-    //   errors.email = "This is not a valid email format!";
-    // }
-    if (!values.city) {
-      errors.city = "City is required";
-    }
-    // else if (values.city != Text) {
-    //   errors.city = "Invalid city";
-    // }
-    if (!values.address) {
-      errors.address = "Address is required";
-    }
-    // else if (values.password.length < 4) {
-    //   errors.password = "Password must be more than 4 characters";
-    // }
+  // const validate = (values) => {
+  //   const errors = {};
+  //   //const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+  //   if (!values.title) {
+  //     errors.title = "Title is required!";
+  //   } else if (values.title.length > 70) {
+  //     errors.title = "Title cannot exceed more than 70 characters";
+  //   }
+  //   if (!values.budget) {
+  //     errors.budget = "Budget is required!";
+  //   }
+  //   //  else if (!isNaN(values.budget)) {
+  //   //   errors.budget = "Please enter numeric value!";
+  //   // }
+  //   // else if (!regex.test(values.email)) {
+  //   //   errors.email = "This is not a valid email format!";
+  //   // }
+  //   if (!values.city) {
+  //     errors.city = "City is required";
+  //   }
+  //   // else if (values.city != Text) {
+  //   //   errors.city = "Invalid city";
+  //   // }
+  //   if (!values.address) {
+  //     errors.address = "Address is required";
+  //   }
+  //   // else if (values.password.length < 4) {
+  //   //   errors.password = "Password must be more than 4 characters";
+  //   // }
 
-    if (!values.description) {
-      errors.description = "Description is required";
-    } else if (values.description.length > 150) {
-      errors.description = "Description cannot exceed more than 150 characters";
-    }
+  //   if (!values.description) {
+  //     errors.description = "Description is required";
+  //   } else if (values.description.length > 150) {
+  //     errors.description = "Description cannot exceed more than 150 characters";
+  //   }
 
-    if (!currency) {
-      errors.category = "category is required";
-    }
+  //   if (!currency) {
+  //     errors.category = "category is required";
+  //   }
 
-    return errors;
-  };
+  //   return errors;
+  // };
 
   let name, value;
   const handleInputs = (e) => {
@@ -152,51 +152,55 @@ export default function WorkerPage(props) {
     //     clientId,
     //   }),
     // });
-    setFormErrors(validate(job));
-    console.log("SetFormErrors Called");
-    setIsSubmit(true);
-    console.log("setIsSubmit Called");
-    console.log(Object.keys(formErrors).length, "This is the length");
-    console.log(isSubmit, "value of isSubmit");
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
-      console.log("Record create api called");
-      console.log(Object.keys(formErrors).length, "This is the length");
-      console.log(isSubmit, "value of isSubmit");
-      console.log(e.target.value);
-      console.log("form valid");
-      const clientId = id;
-      const { title, budget, city, address, description, category } = job;
-      const res = await fetch("/job/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          title,
-          budget,
-          city,
-          address,
-          description,
-          category,
-          clientId,
-        }),
-      });
+    // setFormErrors(validate(job));
 
-      const data = await res.json();
+    // setIsSubmit(true);
 
-      if (data.status === 42 || !data) {
-        window.alert("Invalid registeration");
-        console.log("Invalid registeration");
-      } else {
-        // console.log(data);
-        // history.push("/landing-page");
-      }
+    // console.log(Object.keys(formErrors).length, "This is the length");
+    // console.log(isSubmit, "value of isSubmit");
+    // if (Object.keys(formErrors).length === 0 && isSubmit) {
+    // console.log("Record create api called");
+    // console.log(Object.keys(formErrors).length, "This is the length");
+    // console.log(isSubmit, "value of isSubmit");
+    console.log(e.target.value);
+    // console.log("form valid");
+    const clientId = id;
+    const { title, budget, city, address, description, category } = job;
+    const res = await fetch("/job/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title,
+        budget,
+        city,
+        address,
+        description,
+        category,
+        clientId,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (data.status === 42 || !data) {
+      window.alert("Invalid registeration");
+      console.log("Invalid registeration");
+    } else {
+      // console.log(data);
+      // history.push("/landing-page");
     }
+    // }
   };
   const [currency, setCurrency] = React.useState("None");
 
   const handleChange = (event) => {
     setCurrency(event.target.value);
+    name = event.target.name;
+    value = event.target.value;
+    // console.log(e);
+    setJobData({ ...job, [name]: value });
   };
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
   setTimeout(function () {
@@ -255,7 +259,7 @@ export default function WorkerPage(props) {
                         variant="standard"
                       />
 
-                      <span style={{ color: "red" }}>{formErrors.title}</span>
+                      {/* <span style={{ color: "red" }}>{formErrors.title}</span> */}
                     </GridItem>
 
                     <GridItem xs={6} sm={6} md={6}>
@@ -279,7 +283,7 @@ export default function WorkerPage(props) {
                         variant="standard"
                       />
 
-                      <span style={{ color: "red" }}>{formErrors.budget}</span>
+                      {/* <span style={{ color: "red" }}>{formErrors.budget}</span> */}
                     </GridItem>
                     <GridItem xs={6} sm={6} md={6}>
                       <TextField
@@ -303,7 +307,7 @@ export default function WorkerPage(props) {
                         }}
                         variant="standard"
                       />
-                      <span style={{ color: "red" }}>{formErrors.city}</span>
+                      {/* <span style={{ color: "red" }}>{formErrors.city}</span> */}
                     </GridItem>
 
                     <GridItem xs={6} sm={6} md={12}>
@@ -326,7 +330,7 @@ export default function WorkerPage(props) {
                         }}
                         variant="standard"
                       />
-                      <span style={{ color: "red" }}>{formErrors.address}</span>
+                      {/* <span style={{ color: "red" }}>{formErrors.address}</span> */}
                     </GridItem>
 
                     <GridItem xs={6} sm={6} md={12}>
@@ -356,9 +360,9 @@ export default function WorkerPage(props) {
                           </MenuItem>
                         ))}
                       </TextField>
-                      <span style={{ color: "red" }}>
-                        {formErrors.category}
-                      </span>
+                      {/* <span style={{ color: "red" }}> */}
+                      {/* {formErrors.category} */}
+                      {/* </span> */}
                     </GridItem>
 
                     <GridItem>
@@ -375,9 +379,9 @@ export default function WorkerPage(props) {
                         value={job.description}
                         onChange={handleInputs}
                       />
-                      <span style={{ color: "red" }}>
+                      {/* <span style={{ color: "red" }}>
                         {formErrors.description}
-                      </span>
+                      </span> */}
                     </GridItem>
 
                     <GridItem>

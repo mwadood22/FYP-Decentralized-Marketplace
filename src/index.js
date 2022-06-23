@@ -38,8 +38,8 @@ var hist = createBrowserHistory();
 
 ReactDOM.render(
   <MoralisProvider
-    appId="Qku4rdTm1q0ze5p0Qo2VdxozwwSLaB5Ol2PYqRL8"
-    serverUrl="https://kcsrnv48vhum.usemoralis.com:2053/server"
+    appId="07RRGjqln24tYpfWAAfw81tWJC2n4a5kyBAUIGwz"
+    serverUrl="https://etnhoroi3zpj.usemoralis.com:2053/server"
   >
     <Router history={hist}>
       <Switch>
@@ -72,7 +72,6 @@ ReactDOM.render(
         <Route path="/" component={LandingPage} />
       </Switch>
     </Router>
-    ,
   </MoralisProvider>,
   document.getElementById("root")
 );

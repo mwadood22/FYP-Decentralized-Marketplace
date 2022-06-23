@@ -327,12 +327,12 @@ export default function CustomJobsView(props) {
                         >
                           {jobs.address}
                         </Typography>
-                        <Typography
+                        {/* <Typography
                           className={classes.heading}
                           color="text.primary"
                         >
                           Ali Connors
-                        </Typography>
+                        </Typography> */}
                         {jobs.description}
                         <br /> <br />
                         <strong>Max bid: {jobs.budget}</strong>

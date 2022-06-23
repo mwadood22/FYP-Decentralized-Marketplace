@@ -19,12 +19,13 @@ import CardFooter from "components/Card/CardFooter.js";
 import styles from "assets/jss/material-kit-react/views/landingPageSections/teamStyle.js";
 
 import team1 from "assets/img/faces/test1.jpg";
-//import team2 from "assets/img/faces/christian.jpg";
-//import team3 from "assets/img/faces/test3.jpg";
+import team2 from "assets/img/faces/christian.jpg";
+import team3 from "assets/img/faces/test3.jpg";
 
 const useStyles = makeStyles(styles);
 
 export default function ClientSection() {
+  const testImages = [team1, team2, team3];
   const [testimonial, setUserData] = useState({
     testimonials: [
       {
@@ -110,7 +111,11 @@ export default function ClientSection() {
                   </Link>
                 </Card>
                 <div className={classes.profile}>
-                  <img src={team1} alt="..." className={imageClasses} />
+                  <img
+                    src={testImages[index]}
+                    alt="..."
+                    className={imageClasses}
+                  />
                 </div>
               </GridItem>
             );

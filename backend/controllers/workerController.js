@@ -39,9 +39,10 @@ exports.create = (req, res) => {
   var contact = req.body.contact;
   var skills = req.body.skills;
   var about = req.body.about;
+  var user_id = req.body.user_id;
   dbo
     .collection("WorkerData")
-    .insertOne({ Name, city, contact, skills, about, picture });
+    .insertOne({ Name, city, contact, skills, about, picture, user_id });
   //return res.json({ worker });
   return;
 };

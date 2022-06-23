@@ -36,7 +36,7 @@ import Table2 from "components/Table/Table2.js";
 //import Table2 from "components/Table2/Table2.js";
 import Parallax from "components/Parallax/Parallax.js";
 
-import profile from "assets/img/faces/christian.jpg";
+//import profile from "assets/img/faces/christian.jpg";
 
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
@@ -78,6 +78,18 @@ import Contact from "@material-ui/icons/Phone";
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 // import { ConstructionOutlined } from "@mui/icons-material";
 // import { getToolbarUtilityClass } from "@mui/material";
+//crypto integration
+import { ethers } from "ethers";
+// import { abi, bytecode } from "views/Contract/Contract.js";
+
+var ContractAddress = "";
+var accountLinked = "";
+var currentUser = 0;
+// var contract = 0;
+var provider = 0;
+var signer = 0;
+var numberContract = "";
+var ContractAbi = "";
 
 const useStyles = makeStyles(styles);
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -85,6 +97,86 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 
 export default function ProfilePage(props) {
+  const { isAuthenticated, user, Moralis } = useMoralis();
+  //link metaMask
+  const LinkMetaMask = async () => {
+    await Moralis.enableWeb3();
+    currentUser = Moralis.User.current();
+    console.log(currentUser);
+    console.log(window.ethereum.selectedAddress);
+    const add = window.ethereum.selectedAddress;
+    // accountLinked = user.attributes.accounts;
+    // console.log("ACC:",accountLinked);
+    //   add
+    // );
+    window.confirm("Would you like to link this account to your user profile?");
+    accountLinked = await Moralis.link(add);
+    provider = new ethers.providers.Web3Provider(window.ethereum);
+    signer = provider.getSigner();
+
+    console.log("signer", signer);
+    console.log("provi", provider);
+    console.log(user.attributes.ethAddress);
+    // numberContract = new ethers.Contract(ContractAddress, ContractAbi, signer);
+    return accountLinked;
+  };
+  const setSeller = async (id) => {
+    try {
+      // const id = await user.id;
+      // console.log(user.id);
+
+      const res = await fetch(`/contract/${id}`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+      console.log(data);
+      ContractAddress = data.ContractAddress;
+      console.log(ContractAddress);
+
+      // if (data) {
+      //   // console.log("WE HEREEE");
+      //   setReference("/worker-dashboard");
+      //   // reference = "/worker-dashboard";
+      // } else {
+      //   setReference("/worker-page");
+      //   // reference = "/worker-page";
+      // }
+
+      if (!res.status === 200) {
+        const error = new Error(res.error);
+        throw error;
+      }
+    } catch (err) {
+      console.log(err);
+      // history.push('/login');
+    }
+    provider = new ethers.providers.Web3Provider(window.ethereum);
+    signer = provider.getSigner();
+    ContractAbi = [
+      "function setSeller(address payable _seller, uint256 _price) public",
+    ];
+    numberContract = new ethers.Contract(ContractAddress, ContractAbi, signer);
+    const txResponse = await numberContract.setSeller(
+      user.attributes.ethAddress,
+      1
+    );
+
+    await txResponse.wait();
+    console.log(txResponse.hash);
+    return;
+  };
+  const initialize = async () => {
+    ContractAbi = ["function initializeContract() escrowNotStarted public"];
+    numberContract = new ethers.Contract(ContractAddress, ContractAbi, signer);
+    const txResponse = await numberContract.initializeContract();
+    await txResponse.wait();
+    console.log(txResponse.hash);
+  };
+
   // const { isAuthenticated, user } = useMoralis();
   // const [workerId, setWorkerId] = useState();
   // var workerId;
@@ -109,6 +201,7 @@ export default function ProfilePage(props) {
     contact: "",
     skills: "",
     about: "",
+    picture: "",
   });
 
   const [project, setWorkerProject] = useState({
@@ -192,7 +285,7 @@ export default function ProfilePage(props) {
   //  setCardAnimation("");
   //}, 700);
 
-  const { isAuthenticated, user } = useMoralis();
+  // const { isAuthenticated, user } = useMoralis();
   var idd;
   var workername;
   if (isAuthenticated) {
@@ -304,14 +397,40 @@ export default function ProfilePage(props) {
     setWorker({ ...worker, [name]: value });
   };
 
-  const postProjects = async (budget, description, clientId) => {
+  const DeleteOffer = async (id) => {
+    // console.log("Check");
+    try {
+      const res = await fetch(`/offer/${id}`, {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      if (!res.status === 200) {
+        const error = new Error(res.error);
+        throw error;
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const postProjects = async (
+    id,
+    budget,
+    description,
+    clientId,
+    clientName
+  ) => {
+    setSeller(id);
     // setOpen(true);
     // e.preventDefault();
 
     console.log("form valid");
     // const clientId = offer.clientId;
     const workerId = idd;
-    const clientName = "falseClient";
+    //const clientName = clientName;
     const workerName = workername;
     // const budget = offer.budget;
     // const description = offer.description;
@@ -333,7 +452,7 @@ export default function ProfilePage(props) {
       }),
     });
     // setDisable((prevState) => [...prevState, id]);
-    setOpen(true);
+    // setOpen(true);
 
     const data = await res.json();
 
@@ -344,6 +463,7 @@ export default function ProfilePage(props) {
       // console.log(data);
       // history.push("/landing-page");
     }
+    // window.location.reload();
   };
 
   const ShowJobOffers = () => {
@@ -396,7 +516,11 @@ export default function ProfilePage(props) {
               <GridItem xs={12} sm={12} md={6}>
                 <div className={classes.profile}>
                   <div>
-                    <img src={profile} alt="..." className={imageClasses} />
+                    {/* <img src={profile} alt="..." className={imageClasses} /> */}
+                    <img
+                      src={"data:image/png;base64," + worker.picture}
+                      className={imageClasses}
+                    />
                   </div>
                   <div className={classes.name}>
                     <h3 className={classes.title}>{worker.Name}</h3>
@@ -419,8 +543,8 @@ export default function ProfilePage(props) {
                       tabContent: (
                         <div className={classes.profilePill}>
                           <i className="fas fa-envelope"></i>
-                          <b className={classes.desc}>Email</b>
-                          <p>wadood@gmail.com</p>
+                          <b className={classes.desc}>Username</b>
+                          <p>{worker.Name}</p>
                           <hr className={classes.hr} />
 
                           {/* <i className="fas fa-lock"></i>
@@ -447,6 +571,9 @@ export default function ProfilePage(props) {
                           <b className={classes.desc}>About Me</b>
                           <p>{worker.about}</p>
                           <hr className={classes.hr} />
+                          <Button color="black" onClick={LinkMetaMask}>
+                            Connect to Crypto Wallet
+                          </Button>
                         </div>
                       ),
                     },
@@ -652,9 +779,11 @@ export default function ProfilePage(props) {
                                           // onClick={handleClick}
                                           onClick={() =>
                                             postProjects(
+                                              offers._id,
                                               offers.budget,
                                               offers.description,
-                                              offers.clientId
+                                              offers.clientId,
+                                              offers.clientName
                                             )
                                           }
                                         >
@@ -669,10 +798,21 @@ export default function ProfilePage(props) {
                                           // disabled={disable}
                                           rel="noopener noreferrer"
                                           className={classes.jobBtn}
-                                          //onClick={handleClick}
+                                          // onClick={handleClick}
+                                          onClick={() =>
+                                            DeleteOffer(offers._id)
+                                          }
+                                          key={index}
                                         >
                                           <i className="fas fa-dollar-sign" />
                                           Decline
+                                        </Button>
+                                        <Button
+                                          size="sm"
+                                          color="black"
+                                          onClick={initialize}
+                                        >
+                                          Confirmation
                                         </Button>
                                         <Snackbar
                                           open={open}
@@ -694,13 +834,17 @@ export default function ProfilePage(props) {
                               </ListItem>
                             );
                           })}
+                          {/* {console.log(ContractAddress)} */}
                         </List>
                       ),
                     },
+
                     {
                       tabButton: "Current Projects",
                       tabIcon: Schedule,
-                      tabContent: <Table2 projects={project} />,
+                      tabContent: (
+                        <Table2 projects={project} address={ContractAddress} />
+                      ),
                     },
 
                     {

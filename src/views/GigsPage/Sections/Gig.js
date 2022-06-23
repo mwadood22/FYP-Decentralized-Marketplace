@@ -45,6 +45,8 @@ import MenuItem from "@mui/material/MenuItem";
 
 import styles from "assets/jss/material-kit-react/views/gig.js";
 import { useMoralis } from "react-moralis";
+import { ethers } from "ethers";
+import { abi, bytecode } from "views/Contract/Contract.js";
 
 // import image from "assets/img/bg7.jpg";
 // import helper from "assets/img/services/helper.jpg";
@@ -72,9 +74,140 @@ const currencies = [
     value: "Multan",
   },
 ];
+var ContractAddress = "";
+var accountLinked = "";
+var currentUser = 0;
+var contract = 0;
+var provider = 0;
+var signer = 0;
+var numberContract = "";
+var ContractAbi = "";
 
 export default function Gig(props) {
-  const { isAuthenticated, user } = useMoralis();
+  const { isAuthenticated, user, Moralis } = useMoralis();
+  //contract integration
+
+  // SETTING USER METAMASK
+  const LinkMetaMask = async () => {
+    await Moralis.enableWeb3();
+    currentUser = Moralis.User.current();
+    console.log(currentUser);
+    console.log(window.ethereum.selectedAddress);
+    const add = window.ethereum.selectedAddress;
+    // accountLinked = user.attributes.accounts;
+    // console.log("ACC:",accountLinked);
+    //   add
+    // );
+    window.confirm("Would you like to link this account to your user profile?");
+    accountLinked = await Moralis.link(add);
+    provider = new ethers.providers.Web3Provider(window.ethereum);
+    signer = provider.getSigner();
+
+    console.log("signer", signer);
+    console.log("provi", provider);
+    console.log(user.attributes.ethAddress);
+    // numberContract = new ethers.Contract(ContractAddress, ContractAbi, signer);
+    return accountLinked;
+  };
+  const contractDeploy = () => {
+    setClassicModal(true);
+    // console.log("hello")
+    // provider.send("seth_requestAccounts", []);
+
+    // signer = provider.getSigner();
+
+    // console.log("Account address s:", signer.getAddress());
+    // provider = new ethers.providers.Web3Provider(window.ethereum)
+    // signer = provider.getSigner();
+    // Connect to the network
+    // const provider = ethers.getDefaultProvider('ropsten');
+
+    // Load the walconst to deploy the contract with
+    // const privateKey = '0x0123456789012345678901234567890123456789012345678901234567890123';
+    // const walconst = new ethers.Walconst(privateKey, provider);
+
+    // Deployment is asynchronous, so we use an async IIFE
+    (async function () {
+      console.log(bytecode);
+      provider = new ethers.providers.Web3Provider(window.ethereum);
+      signer = provider.getSigner();
+      // Create an instance of a Contract Factory
+      const factory = new ethers.ContractFactory(abi, bytecode, signer);
+
+      // Notice we pass in "Hello World" as the parameter to the constructor
+      contract = await factory.deploy();
+
+      // The address the Contract WILL have once mined
+      // See: https://ropsten.etherscan.io/address/0x2bd9aaa2953f988153c8629926d22a6a5f69b14e
+      ContractAddress = contract.address;
+
+      console.log(ContractAddress);
+      // "0x2bD9aAa2953F988153c8629926D22A6a5F69b14E"
+
+      // The transaction that was sent to the network to deploy the Contract
+      // See: https://ropsten.etherscan.io/tx/0x159b76843662a15bd67e482dcfbee55e8e44efad26c5a614245e12a00d4b1a51
+      console.log(contract.deployTransaction.hash);
+      // "0x159b76843662a15bd67e482dcfbee55e8e44efad26c5a614245e12a00d4b1a51"
+
+      // The contract is NOT deployed yet; we must wait until it is mined
+      await contract.deployed();
+      console.log(ContractAddress);
+
+      // Done! The contract is deployed.
+    })();
+  };
+  const setBuyer = async () => {
+    provider = new ethers.providers.Web3Provider(window.ethereum);
+    signer = provider.getSigner();
+    console.log(ContractAddress);
+    // const txResponse =  await numberContract.getValue();
+    ContractAbi = ["function setBuyer(address _buyer) public"];
+    numberContract = new ethers.Contract(ContractAddress, ContractAbi, signer);
+    const txResponse = await numberContract.setBuyer(
+      user.attributes.ethAddress
+    );
+    await txResponse.wait();
+    console.log(txResponse.hash);
+  };
+  const initialize = async () => {
+    ContractAbi = ["function initializeContract() escrowNotStarted public"];
+    numberContract = new ethers.Contract(ContractAddress, ContractAbi, signer);
+    const txResponse = await numberContract.initializeContract();
+    await txResponse.wait();
+    console.log(txResponse.hash);
+    return;
+  };
+  const Deposit = async () => {
+    // const overrides = {
+    // To convert Ether to Wei:
+    const value = ethers.utils.parseEther("1"); // ether in this case MUST be a string
+
+    // Or you can use Wei directly if you have that:
+    // value: someBigNumber
+    // value: 1234   // Note that using JavaScript numbers requires they are less than Number.MAX_SAFE_INTEGER
+    // value: "1234567890"
+    // value: "0x1234"
+
+    // Or, promises are also supported:
+    // value: provider.getBalance(addr)
+    // };
+    ContractAbi = ["function deposit() onlyBuyer public payable"];
+    numberContract = new ethers.Contract(ContractAddress, ContractAbi, signer);
+    const txResponse = await numberContract.deposit({
+      value: String(value),
+      gasPrice: 20e9,
+    });
+    await txResponse.wait();
+    console.log(txResponse.hash);
+  };
+  const jobDone = async () => {
+    ContractAbi = ["function jobDone() payable public"];
+    numberContract = new ethers.Contract(ContractAddress, ContractAbi, signer);
+    const txResponse = await numberContract.jobDone();
+    await txResponse.wait();
+    console.log(txResponse.hash);
+  };
+  ///////////////
   var id;
   var clientname;
   if (isAuthenticated) {
@@ -205,6 +338,9 @@ export default function Gig(props) {
   };
 
   const sendJobOffer = async (e) => {
+    //contract function call
+    initialize();
+    ////
     e.preventDefault();
     // console.log(e.target.value);
 
@@ -226,9 +362,30 @@ export default function Gig(props) {
         clientName,
       }),
     });
-
+    console.log(res);
     const data = await res.json();
+    console.log(data.data.insertedId);
+    const jobOfferId = data.data.insertedId;
+    const res1 = await fetch("/contract/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ContractAddress,
+        jobOfferId,
+      }),
+    });
 
+    const data1 = await res1.json();
+
+    if (data1.status === 42 || !data1) {
+      window.alert("Invalid registeration");
+      console.log("Invalid registeration");
+    } else {
+      // console.log(data);
+      // history.push("/landing-page");
+    }
     if (data.status === 42 || !data) {
       window.alert("Invalid registeration");
       console.log("Invalid registeration");
@@ -334,14 +491,13 @@ export default function Gig(props) {
                       </h4>
                       <h4>
                         {" "}
-                        <Button
-                          color="green"
-                          onClick={() => setClassicModal(true)}
-                        >
+                        <Button color="green" onClick={contractDeploy}>
                           {" "}
                           Send job offer
                         </Button>
-                        {"  "}
+                        <Button color="black" onClick={LinkMetaMask}>
+                          Connect to Crypto Wallet
+                        </Button>
                         {/* <Button color="green" href="/payment-page">
                           {" "}
                           Make Payment
@@ -464,10 +620,31 @@ export default function Gig(props) {
                                   <GridItem>
                                     <Button
                                       color="green"
-                                      href="/gig"
+                                      href=""
                                       onClick={sendJobOffer}
                                     >
                                       Send job offer
+                                    </Button>
+                                    <Button
+                                      color="green"
+                                      href=""
+                                      onClick={setBuyer}
+                                    >
+                                      Set Buyer
+                                    </Button>
+                                    <Button
+                                      color="green"
+                                      href=""
+                                      onClick={Deposit}
+                                    >
+                                      Deposit
+                                    </Button>
+                                    <Button
+                                      color="green"
+                                      href=""
+                                      onClick={jobDone}
+                                    >
+                                      Job Done
                                     </Button>
                                   </GridItem>
                                 </GridContainer>
