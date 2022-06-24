@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
+import { useMoralis } from "react-moralis";
 //import Icon from "@material-ui/core/Icon";
 
 import TextField from "@mui/material/TextField";
@@ -12,7 +13,13 @@ import TextField from "@mui/material/TextField";
 import Lock from "@mui/icons-material/LockTwoTone";
 import Name from "@mui/icons-material/PeopleAltTwoTone";
 
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogActions from "@material-ui/core/DialogActions";
+import Slide from "@material-ui/core/Slide";
 //import Question from "@material-ui/icons/Whatshot";
+
 //import Zip from "@material-ui/icons/AirplanemodeInactive";
 
 // core components
@@ -40,8 +47,13 @@ import styles from "assets/jss/material-kit-react/views/loginPage.js";
 
 //import image from "assets/img/bg7.jpg";
 const useStyles = makeStyles(styles);
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="down" ref={ref} {...props} />;
+});
+Transition.displayName = "Transition";
 
 export default function LoginPage(props) {
+  const { isAuthenticated, user } = useMoralis();
   const [value, setValue] = React.useState([null, null]);
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
   setTimeout(function () {
@@ -49,6 +61,68 @@ export default function LoginPage(props) {
   }, 700);
   const classes = useStyles();
   const { ...rest } = props;
+  const [classicModal, setClassicModal] = React.useState(false);
+
+  var id;
+  var clientname;
+  if (isAuthenticated) {
+    id = user.id;
+    clientname = user.attributes.username;
+
+    // console.log("email: ", email)
+  }
+
+  const [review, setReview] = useState({
+    description: "",
+    // clientId: "",
+    //worker:"",
+  });
+
+  // const [worker, setWorkerData] = useState({
+  //   Name: "",
+  // });
+
+  const sendReview = () => {
+    setClassicModal(true);
+  };
+
+  let name, val;
+  const handleInputs = (e) => {
+    console.log("Handle inputs block");
+    name = e.target.name;
+    val = e.target.value;
+    console.log(e);
+    setReview({ ...review, [name]: val });
+  };
+
+  const saveReview = async (e) => {
+    //contract function call
+    // initialize();
+    ////
+    e.preventDefault();
+    setClassicModal(false);
+    // console.log(e.target.value);
+
+    // const clientId = id;
+    // const clientName = clientname;
+    const { description } = review;
+    const clientId = id;
+    const clientName = clientname;
+    const res = await fetch("/review/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        description,
+        clientId,
+        clientName,
+      }),
+    });
+    console.log(res);
+    // const data = await res.json();
+  };
+
   return (
     <div>
       <Header
@@ -207,9 +281,69 @@ export default function LoginPage(props) {
                       </LocalizationProvider>*/}
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Button color="black"> Continue</Button>
+                    <Button color="black" onClick={sendReview}>
+                      {" "}
+                      Continue
+                    </Button>
                   </CardFooter>
                 </form>
+
+                <Dialog
+                  classes={{
+                    root: classes.center,
+                    paper: classes.modal,
+                  }}
+                  open={classicModal}
+                  TransitionComponent={Transition}
+                  keepMounted
+                  onClose={() => setClassicModal(false)}
+                  aria-labelledby="classic-modal-slide-title"
+                  aria-describedby="classic-modal-slide-description"
+                >
+                  <DialogTitle>Review Worker</DialogTitle>
+                  <DialogContent
+                    id="classic-modal-slide-description"
+                    className={classes.modalBody}
+                  >
+                    <GridItem xs={12} sm={12} md={12}>
+                      {/* <GridItem xs={12} sm={12} md={12}> */}
+
+                      <form className={classes.form}>
+                        <GridContainer>
+                          <GridItem xs={6} sm={6} md={12}>
+                            <TextField
+                              margin="normal"
+                              required
+                              fullWidth
+                              id="description"
+                              label="Write your comments..."
+                              name="description"
+                              variant="standard"
+                              value={review.description}
+                              onChange={handleInputs}
+                            />
+                          </GridItem>
+                          <GridItem>
+                            <Button color="green" href="" onClick={saveReview}>
+                              Send Review
+                            </Button>
+                          </GridItem>
+                        </GridContainer>
+                      </form>
+
+                      {/* </GridItem> */}
+                    </GridItem>
+                  </DialogContent>
+                  <DialogActions className={classes.modalFooter}>
+                    <Button
+                      onClick={() => setClassicModal(false)}
+                      color="black"
+                      size="small"
+                    >
+                      Close
+                    </Button>
+                  </DialogActions>
+                </Dialog>
               </Card>
             </GridItem>
           </GridContainer>
