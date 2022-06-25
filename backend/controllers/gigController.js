@@ -158,16 +158,14 @@ exports.create = (req, res) => {
   //   req.session.success = false;
   // } else {
   console.log("fine block");
-  dbo
-    .collection("Gigs")
-    .insertOne({
-      gigTitle,
-      budget,
-      category,
-      gigdescription,
-      picture,
-      workerId,
-    });
+  dbo.collection("Gigs").insertOne({
+    gigTitle,
+    budget,
+    category,
+    gigdescription,
+    picture,
+    workerId,
+  });
   // return res.status(200).json({
   //   success: true,
   //   message: "Login successful",

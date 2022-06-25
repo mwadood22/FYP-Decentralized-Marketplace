@@ -22,7 +22,7 @@ import Divider from "@mui/material/Divider";
 // import Avatar from "@mui/material/Avatar";
 // import Image from "@mui/material/Image";
 import team2 from "assets/img/faces/face5.jpg";
-import team3 from "assets/img/faces/face6.jpg";
+// import team3 from "assets/img/faces/face6.jpg";
 
 // import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
@@ -230,6 +230,7 @@ export default function Gig(props) {
     workerId: "",
   });
   const [worker, setWorkerData] = useState({
+    _id: "",
     Name: "",
     about: "",
     city: "",
@@ -269,6 +270,20 @@ export default function Gig(props) {
       },
     ],
   });
+
+  const [reviewdata, setReviewData] = useState({
+    reviews: [
+      {
+        _id: "",
+        description: "",
+        clientName: "",
+        clientId: "",
+        workerId: "",
+        workerName: "",
+      },
+    ],
+  });
+
   // console.log(props.location.param1);
   const { ...temp } = props;
   const gigId = temp.match.params.gigId;
@@ -291,6 +306,22 @@ export default function Gig(props) {
 
       if (!res.status === 200) {
         const error = new Error(res.error);
+        throw error;
+      }
+
+      //gettingReviews
+      const res1 = await fetch(`/review/worker/${data.workerId}`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      const data1 = await res1.json();
+      console.log(data1);
+      setReviewData(data1);
+      if (!res1.status === 200) {
+        const error = new Error(res1.error);
         throw error;
       }
 
@@ -345,6 +376,7 @@ export default function Gig(props) {
     // console.log(e.target.value);
 
     const clientId = id;
+    const worker = gig.workerId;
     const clientName = clientname;
     const { title, city, budget, address, description } = offer;
     const res = await fetch("/offer/create", {
@@ -360,6 +392,7 @@ export default function Gig(props) {
         description,
         clientId,
         clientName,
+        worker,
       }),
     });
     console.log(res);
@@ -394,6 +427,32 @@ export default function Gig(props) {
       // history.push("/landing-page");
     }
   };
+
+  // const getReviewData = async () => {
+  //   console.log("Check");
+  //   try {
+  //     // fetching gig data
+
+  //     const res = await fetch(`/review/worker/${gig.workerId}`, {
+  //       method: "GET",
+  //       headers: {
+  //         Accept: "application/json",
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
+  //     const data = await res.json();
+  //     console.log(data);
+  //     setReviewData(data);
+
+  //     if (!res.status === 200) {
+  //       const error = new Error(res.error);
+  //       throw error;
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //     // history.push('/login');
+  //   }
+  // };
 
   useEffect(async () => {
     await callAboutPage();
@@ -690,39 +749,37 @@ export default function Gig(props) {
                         <strong>Worker Reviews </strong>
                       </h3>
                       <br></br>
-                      <Slider className={classes.reviews} {...settings}>
-                        <div className={classes.sliderContent}>
-                          <div className={classes.sliderImg}>
-                            <img
-                              alt="Travis Howard"
-                              src={team2}
-                              className={classes.imgFluid}
-                            />
-                          </div>
-                          <div className={classes.sliderText}>
-                            <p className={classes.p}>
-                              <p>{worker.reviews}</p>
-                            </p>
-                            <p className={classes.p1}>M.Wadood</p>
-                          </div>
-                        </div>
-                        <div className={classes.sliderContent}>
-                          <div className={classes.sliderImg}>
-                            <img
-                              alt="Travis Howard"
-                              src={team3}
-                              className={classes.imgFluid}
-                            />
-                          </div>
-                          <div className={classes.sliderText}>
-                            <p className={classes.p}>
-                              <p>{worker.reviews}</p>
-                            </p>
-                            <p className={classes.p1}>M.Wadood</p>
-                          </div>
-                        </div>
-                      </Slider>
+                      {reviewdata.reviews.map((reviews, index) => {
+                        return (
+                          // <GridItem xs={12} sm={12} md={12} >
+                          <Slider
+                            key={index}
+                            className={classes.reviews}
+                            {...settings}
+                          >
+                            <div className={classes.sliderContent}>
+                              <div className={classes.sliderImg}>
+                                <img
+                                  alt="Travis Howard"
+                                  src={team2}
+                                  className={classes.imgFluid}
+                                />
+                              </div>
+                              <div className={classes.sliderText}>
+                                <p className={classes.p}>
+                                  <p>{reviews.description}</p>
+                                </p>
+                                <p className={classes.p1}>
+                                  {reviews.clientName}
+                                </p>
+                              </div>
+                            </div>
+                          </Slider>
+                          // </GridItem>
+                        );
+                      })}
                       <br></br>
+
                       <h3 className={classes.head}>
                         <strong>Other gigs by this worker</strong>
                       </h3>

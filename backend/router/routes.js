@@ -84,6 +84,7 @@ router.get("/bids/id/:id", bidsController.getBid);
 // project routes
 router.post("/projects/create", projectController.create);
 router.get("/projects/:worker_id", projectController.show);
+router.get("/projects/:projectId", projectController.showProject);
 router.get("/projects/client/:client_id", projectController.showByClient);
 
 //JobOffers routes
@@ -91,7 +92,10 @@ router.get("/projects/client/:client_id", projectController.showByClient);
 router.post("/offer/create", jobOfferController.create);
 router.get("/offers/getAll", jobOfferController.getAllOffers);
 router.delete("/offer/:id", jobOfferController.delete);
+
+//review routes
 router.post("/review/create", reviewController.create);
+router.get("/review/worker/:workerId", reviewController.show);
 
 //current project routes
 router.post("/projects/create", projectController.create);

@@ -21,12 +21,35 @@ MongoClient.connect(url, function (err, db) {
 
 exports.create = async (req, res) => {
   var description = req.body.description;
-  //   var clientId = req.body.clientId;
-
+  var clientId = req.body.clientId;
+  var clientName = req.body.clientName;
+  var workerId = req.body.workerId;
+  var workerName = req.body.workerName;
   const data = await dbo.collection("Reviews").insertOne({
     description,
+    clientId,
+    clientName,
+    workerName,
+    workerId,
   });
   const id = res.json({ data });
   console.log(id);
   return;
+};
+
+exports.show = async (req, res) => {
+  //   console.log("All gigs list");
+  // console.log(req.params);
+  dbo
+    .collection("Reviews")
+    .find({
+      $or: [{ workerId: { $regex: req.params.workerId } }],
+    })
+    .toArray(function (err, reviews) {
+      if (err) {
+        return res.status(400).json({ msg: "Error" });
+      }
+      //   console.log(gigs);
+      return res.json({ reviews });
+    });
 };

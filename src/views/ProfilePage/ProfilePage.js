@@ -77,10 +77,13 @@ export default function ProfilePage(props) {
     classes.imgFluid
   );
   const [project, setWorkerProject] = useState({
+    _id: "",
     clientName: "",
     workerName: "",
     bidPrice: "",
     status: "",
+    workerId: "",
+    clientID: "",
   });
   //const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
   const { user, userError, setUserData } = useMoralis();

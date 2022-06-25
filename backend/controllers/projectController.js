@@ -123,6 +123,22 @@ exports.show = async (req, res) => {
     });
 };
 
+exports.showProject = (req, res) => {
+  //   console.log("All gigs list");
+  const { id } = req.params;
+  console.log(id);
+  dbo
+    .collection("Projects")
+    .findOne({ _id: ObjectId(id) }, function (err, projects) {
+      if (err) {
+        return res.status(400).json({ msg: "Error" });
+      }
+      console.log(projects);
+      return res.json(projects);
+    });
+  //   return res.json({ gigs });
+};
+
 exports.showByClient = async (req, res) => {
   //   console.log("All gigs list");
   console.log(req.params.client_id);

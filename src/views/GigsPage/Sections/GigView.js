@@ -217,7 +217,7 @@ export default function GigView() {
           return (
             <GridItem xs={12} sm={12} md={3} key={index}>
               <Card className={classes.card}>
-                <Link /*to={"gig/" + gigs._id}*/>
+                <Link to={"gig/" + gigs._id}>
                   {/* {(data = gigs.picture.toString("base64"))} */}
                   {/* console.log(gigs.picture.toString("base64")) */}
                   {/* {console.log(data)} */}
