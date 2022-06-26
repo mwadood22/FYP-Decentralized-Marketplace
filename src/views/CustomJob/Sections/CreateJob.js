@@ -13,6 +13,7 @@ import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 
+import axios from "axios";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 //import CardBody from "components/Card/CardBody.js";
@@ -77,6 +78,7 @@ export default function WorkerPage(props) {
     description: "",
     category: "",
     clientId: "",
+    picture: "",
   });
 
   // const [formErrors, setFormErrors] = useState({});
@@ -132,6 +134,10 @@ export default function WorkerPage(props) {
     console.log(e);
     setJobData({ ...job, [name]: value });
   };
+  const imageUpload = (e) => {
+    //console.log(e.target.files[0]);
+    setJobData({ ...job, picture: e.target.files[0] });
+  };
 
   const postData = async (e) => {
     e.preventDefault();
@@ -164,35 +170,63 @@ export default function WorkerPage(props) {
     // console.log(isSubmit, "value of isSubmit");
     console.log(e.target.value);
     // console.log("form valid");
-    const clientId = id;
-    const { title, budget, city, address, description, category } = job;
-    const res = await fetch("/job/create", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title,
-        budget,
-        city,
-        address,
-        description,
-        category,
-        clientId,
-      }),
-    });
 
-    const data = await res.json();
+    const formdata = new FormData();
 
-    if (data.status === 42 || !data) {
-      window.alert("Invalid registeration");
-      console.log("Invalid registeration");
-    } else {
-      // console.log(data);
-      // history.push("/landing-page");
+    //console.log("==", gig.picture, "===", gig.picture.name);
+    console.log("data added");
+    formdata.append("picture", job.picture, job.picture.name);
+    formdata.append("title", job.title);
+    formdata.append("budget", job.budget);
+    formdata.append("category", job.category);
+    formdata.append("city", job.city);
+    formdata.append("address", job.address);
+    formdata.append("description", job.description);
+    formdata.append("clientId", id);
+
+    try {
+      const res = await axios.post("/job/create", formdata);
+      if (res.status === 42) {
+        window.alert("Invalid registeration");
+        console.log("Invalid registeration");
+      } else {
+        console.log(res);
+      }
+      // history.push("/gigs-page");
+    } catch (e) {
+      window.alert("catch block ");
     }
-    // }
   };
+
+  //   const clientId = id;
+  //   const { title, budget, city, address, description, category } = job;
+  //   const res = await fetch("/job/create", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       title,
+  //       budget,
+  //       city,
+  //       address,
+  //       description,
+  //       category,
+  //       clientId,
+  //     }),
+  //   });
+
+  //   const data = await res.json();
+
+  //   if (data.status === 42 || !data) {
+  //     window.alert("Invalid registeration");
+  //     console.log("Invalid registeration");
+  //   } else {
+  //     // console.log(data);
+  //     // history.push("/landing-page");
+  //   }
+  //   // }
+  // };
   const [currency, setCurrency] = React.useState("None");
 
   const handleChange = (event) => {
@@ -382,6 +416,21 @@ export default function WorkerPage(props) {
                       {/* <span style={{ color: "red" }}>
                         {formErrors.description}
                       </span> */}
+                    </GridItem>
+                    <GridItem>
+                      <Button
+                        variant="contained"
+                        component="label"
+                        name="picture"
+                        color="green"
+                        margin="normal"
+                        //fullWidth
+                        value={job.picture}
+                        onChange={imageUpload}
+                      >
+                        Upload Picture
+                        <input type="file" hidden />
+                      </Button>
                     </GridItem>
 
                     <GridItem>

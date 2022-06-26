@@ -5,6 +5,7 @@ var ObjectId = require("mongodb").ObjectId;
 const fs = require("fs");
 var path = require("path");
 var dbo = null;
+const { body, validationResult } = require("express-validator");
 
 MongoClient.connect(url, function (err, db) {
   if (err) throw err;
@@ -106,10 +107,19 @@ exports.showAgainstGig = (req, res) => {
 exports.edit = async (req, res) => {
   // const gig = req.body;
   const worker = req.body;
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      success: false,
+      errors: errors.array(),
+      message: "update profile not successful",
+    });
+  }
   // console.log(job);
   await dbo
     .collection("WorkerData")
-    .findOne({ _id: ObjectId(worker._id) }, function (err, jobs) {
+    .findOne({ _id: ObjectId(worker._id) }, function (err, worker) {
       if (err) {
         return res.status(400).json({ msg: "Error" });
       }

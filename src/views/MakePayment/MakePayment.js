@@ -142,12 +142,13 @@ export default function LoginPage(props) {
       }),
     });
     console.log(res);
+    console.log(res.message);
     const data = await res.json();
-    // const data = await res.json();
 
-    if (data.status === 42 || !data) {
-      window.alert("Invalid registeration");
-      console.log("Invalid registeration");
+    // if (data.status === 42 || !data)
+    if (data.status == 400 || !data) {
+      window.alert("Invalid review");
+      console.log("Invalid review");
     }
   };
 

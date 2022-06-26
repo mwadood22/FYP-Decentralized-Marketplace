@@ -1,6 +1,12 @@
 const { Profiler } = require("react");
 const fs = require("fs");
 var path = require("path");
+const express = require("express");
+const app = express();
+const bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+const { body, validationResult } = require("express-validator");
 
 var MongoClient = require("mongodb").MongoClient;
 var url =
@@ -25,10 +31,19 @@ exports.create = async (req, res) => {
   var clientName = req.body.clientName;
   var workerId = req.body.workerId;
   var workerName = req.body.workerName;
+
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      success: false,
+      errors: errors.array(),
+      message: "review not successful",
+    });
+  }
   const data = await dbo.collection("Reviews").insertOne({
     description,
     clientId,
-    clientName,
     workerName,
     workerId,
   });

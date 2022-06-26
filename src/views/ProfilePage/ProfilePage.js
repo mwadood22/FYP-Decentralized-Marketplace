@@ -90,6 +90,7 @@ export default function ProfilePage(props) {
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+
   const getWorkerProjects = async (client_id) => {
     try {
       // const id = await user.id;
