@@ -219,16 +219,16 @@ export default function WorkerPage(props) {
     /////////////////////////////////////
     return errors;
   };
-  const [category, setCategory] = React.useState("None");
-  let name, value;
-  const handleCategory = (event) => {
-    setCategory(event.target.value);
-    name = event.target.name;
-    value = event.target.value;
-    // console.log(e);
-    setFormValues({ ...formValues, [name]: value });
-    // setJobData({ ...job, [name]: value });
-  };
+  // const [category, setCategory] = React.useState("None");
+  // let name, value;
+  // const handleCategory = (event) => {
+  //   setCategory(event.target.value);
+  //   name = event.target.name;
+  //   value = event.target.value;
+  //   // console.log(e);
+  //   setFormValues({ ...formValues, [name]: value });
+  //   // setJobData({ ...job, [name]: value });
+  // };
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormErrors(validate(formValues));
@@ -341,8 +341,8 @@ export default function WorkerPage(props) {
                         margin="normal"
                         label=" "
                         name="categeory"
-                        value={category}
-                        onChange={handleCategory}
+                        value={formValues.category}
+                        onChange={handleChange}
                         helperText="category"
                         InputProps={{
                           endAdornment: (
@@ -435,7 +435,7 @@ export default function WorkerPage(props) {
                     <GridItem>
                       <Button
                         color="black"
-                        href="/customjobs-page"
+                        // href="/customjobs-page"
                         // disabled={gig.title === "" || gig.budget === ""}
                         onClick={handleSubmit}
                       >

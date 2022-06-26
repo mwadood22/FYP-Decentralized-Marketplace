@@ -387,7 +387,7 @@ export default function ProfilePage(props) {
       console.log("Invalid registeration");
     } else {
       console.log(data);
-      history.push("/customjobs-page");
+      // history.push("/customjobs-page");
     }
   };
   let name, value;

@@ -116,7 +116,7 @@ router.post(
 router.patch(
   "/job/",
   body("title").not().isEmpty().not().isInt().isLength({
-    min: 40,
+    min: 20,
   }),
   body("description").not().isEmpty().not().isInt().isLength({
     min: 40,
