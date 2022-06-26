@@ -79,10 +79,13 @@ export default function ProfilePage(props) {
     classes.imgFluid
   );
   const [project, setWorkerProject] = useState({
+    _id: "",
     clientName: "",
     workerName: "",
     bidPrice: "",
     status: "",
+    workerId: "",
+    clientID: "",
   });
   //const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
   const { isUnauthenticated, user, userError, setUserData } = useMoralis();
@@ -93,6 +96,7 @@ export default function ProfilePage(props) {
   if (isUnauthenticated) {
     history.push("/signup-page");
   }
+
   const getWorkerProjects = async (client_id) => {
     try {
       // const id = await user.id;

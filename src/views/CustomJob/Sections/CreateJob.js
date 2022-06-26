@@ -13,6 +13,7 @@ import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 
+import axios from "axios";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 //import CardBody from "components/Card/CardBody.js";
@@ -87,6 +88,8 @@ export default function WorkerPage(props) {
     address: "",
     category: "",
     description: "",
+    clientId: "",
+    picture: "",
   };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
@@ -101,36 +104,59 @@ export default function WorkerPage(props) {
   const postData = async () => {
     // e.preventDefault();
     // console.log(e.target.value);
-    console.log("Job is to be posted");
+    // console.log("Job is to be posted");
 
-    const clientId = id;
-    const { title, budget, city, address, description, category } = formValues;
-    const res = await fetch("/job/create", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title,
-        budget,
-        city,
-        address,
-        description,
-        category,
-        clientId,
-      }),
-    });
+    // const clientId = id;
+    // const { title, budget, city, address, description, category } = formValues;
+    // const res = await fetch("/job/create", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     title,
+    //     budget,
+    //     city,
+    //     address,
+    //     description,
+    //     category,
+    //     clientId,
+    //   }),
+    // });
 
-    const data = await res.json();
+    // const data = await res.json();
 
-    if (data.status === 42 || !data) {
-      window.alert("Invalid registeration");
-      console.log("Invalid registeration");
-    } else {
-      // console.log(data);
-      // history.push("/landing-page");
-    }
+    // if (data.status === 42 || !data) {
+    //   window.alert("Invalid registeration");
+    //   console.log("Invalid registeration");
+    // } else {
+    //   // console.log(data);
+    //   // history.push("/landing-page");
     // }
+    // // }
+    const formdata = new FormData();
+
+    console.log("data added");
+    formdata.append("picture", formValues.picture, formValues.picture.name);
+    formdata.append("title", formValues.title);
+    formdata.append("budget", formValues.budget);
+    formdata.append("category", formValues.category);
+    formdata.append("city", formValues.city);
+    formdata.append("address", formValues.address);
+    formdata.append("description", formValues.description);
+    formdata.append("clientId", id);
+
+    try {
+      const res = await axios.post("/job/create", formdata);
+      if (res.status === 42) {
+        window.alert("Invalid registeration");
+        console.log("Invalid registeration");
+      } else {
+        console.log(res);
+      }
+    } catch (e) {
+      window.alert("catch block ");
+    }
   };
   let id_of;
   if (isAuthenticated) {
@@ -189,6 +215,10 @@ export default function WorkerPage(props) {
     if (!values.category) {
       errors.category = "Category is required";
     }
+
+    if (!values.picture) {
+      errors.picture = "Picture is required";
+    }
     /////////////////////////////////////
     return errors;
   };
@@ -246,16 +276,91 @@ export default function WorkerPage(props) {
   //   setJobData({ ...job, [name]: value });
   // };
 
-  const [category, setCategory] = React.useState("None");
-  let name, value;
-  const handleCategory = (event) => {
-    setCategory(event.target.value);
-    name = event.target.name;
-    value = event.target.value;
-    // console.log(e);
-    setFormValues({ ...formValues, [name]: value });
-    // setJobData({ ...job, [name]: value });
+  // const [category, setCategory] = React.useState("None");
+  // let name, value;
+  // const handleCategory = (event) => {
+  //   setCategory(event.target.value);
+  // };
+  // const handleInputs = (e) => {
+  //   name = e.target.name;
+  //   value = e.target.value;
+  //   console.log(e);
+  //   setJobData({ ...job, [name]: value });
+  // };
+  const imageUpload = (e) => {
+    //console.log(e.target.files[0]);
+    setFormValues({ ...formValues, picture: e.target.files[0] });
   };
+
+  // const postData = async (e) => {
+  //   e.preventDefault();
+  //   console.log(e.target.value);
+  //   console.log(e.target.value);
+
+  //   const formdata = new FormData();
+
+  //   console.log("data added");
+  //   formdata.append("picture", job.picture, job.picture.name);
+  //   formdata.append("title", job.title);
+  //   formdata.append("budget", job.budget);
+  //   formdata.append("category", job.category);
+  //   formdata.append("city", job.city);
+  //   formdata.append("address", job.address);
+  //   formdata.append("description", job.description);
+  //   formdata.append("clientId", id);
+
+  //   try {
+  //     const res = await axios.post("/job/create", formdata);
+  //     if (res.status === 42) {
+  //       window.alert("Invalid registeration");
+  //       console.log("Invalid registeration");
+  //     } else {
+  //       console.log(res);
+  //     }
+  //   } catch (e) {
+  //     window.alert("catch block ");
+  //   }
+  // };
+
+  //   const clientId = id;
+  //   const { title, budget, city, address, description, category } = job;
+  //   const res = await fetch("/job/create", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       title,
+  //       budget,
+  //       city,
+  //       address,
+  //       description,
+  //       category,
+  //       clientId,
+  //     }),
+  //   });
+
+  //   const data = await res.json();
+
+  //   if (data.status === 42 || !data) {
+  //     window.alert("Invalid registeration");
+  //     console.log("Invalid registeration");
+  //   } else {
+  //     // console.log(data);
+  //     // history.push("/landing-page");
+  //   }
+  //   // }
+  // };
+  // const [currency, setCurrency] = React.useState("None");
+
+  // const handleChange = (event) => {
+  //   setCurrency(event.target.value);
+  //   name = event.target.name;
+  //   value = event.target.value;
+  //   // console.log(e);
+  //   setFormValues({ ...formValues, [name]: value });
+  //   // setJobData({ ...job, [name]: value });
+  // };
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
   setTimeout(function () {
     setCardAnimation("");
@@ -405,9 +510,9 @@ export default function WorkerPage(props) {
                         margin="normal"
                         label=" "
                         name="category"
-                        value={category}
+                        value={formValues.category}
                         helperText="Category"
-                        onChange={handleCategory}
+                        onChange={handleChange}
                         InputProps={{
                           endAdornment: (
                             <InputAdornment position="start">
@@ -452,7 +557,22 @@ export default function WorkerPage(props) {
                         {formErrors.description}
                       </p>
                     </GridItem>
-
+                    <GridItem>
+                      <Button
+                        variant="contained"
+                        component="label"
+                        name="picture"
+                        color="green"
+                        margin="normal"
+                        //fullWidth
+                        value={formValues.picture}
+                        onChange={imageUpload}
+                      >
+                        Upload Picture
+                        <input type="file" hidden />
+                      </Button>
+                    </GridItem>
+                    <p className={classes.warningPara}>{formErrors.picture}</p>
                     <GridItem>
                       {/* {console.log(Object.keys(formErrors).length)} */}
 

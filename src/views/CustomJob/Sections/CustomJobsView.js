@@ -69,9 +69,12 @@ export default function CustomJobsView(props) {
 
   const { isAuthenticated, user } = useMoralis();
   var clientName;
+  // var picture;
   if (isAuthenticated) {
     clientName = user.attributes.username;
+    // picture = user.attributes.picture;
   }
+
   const checkFunction = async (id) => {
     // console.log("IM CALLED");
     try {
@@ -107,6 +110,7 @@ export default function CustomJobsView(props) {
         address: "",
         category: "",
         description: "",
+        picture: "",
       },
     ],
   });
@@ -311,8 +315,12 @@ export default function CustomJobsView(props) {
               <ListItem alignItems="flex-start" key={index}>
                 <Card className={classes.jobCard}>
                   <ListItemAvatar>
-                    <Avatar alt="Remy Sharp" src={team1} />
+                    <Avatar
+                      alt="Remy Sharp"
+                      src={"data:image/png;base64," + jobs.picture}
+                    />
                   </ListItemAvatar>
+
                   <ListItemText
                     primary={
                       <Typography className={classes.heading}>

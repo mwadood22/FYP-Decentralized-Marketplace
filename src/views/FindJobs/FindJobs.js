@@ -34,7 +34,7 @@ import TextField from "@mui/material/TextField";
 
 // import image from "assets/img/bg7.jpg";
 // import helper from "assets/img/services/helper.jpg";
-import team1 from "assets/img/faces/test1.jpg";
+// import team1 from "assets/img/faces/test1.jpg";
 //import team2 from "assets/img/faces/christian.jpg";
 //import team3 from "assets/img/faces/test3.jpg";
 import Snackbar from "@mui/material/Snackbar";
@@ -73,6 +73,7 @@ export default function FindJobs(props) {
         address: "",
         category: "",
         description: "",
+        picture: "",
       },
     ],
   });
@@ -268,7 +269,10 @@ export default function FindJobs(props) {
                 <ListItem alignItems="flex-start" key={index}>
                   <Card className={classes.jobCard}>
                     <ListItemAvatar>
-                      <Avatar alt="Remy Sharp" src={team1} />
+                      <Avatar
+                        alt="Remy Sharp"
+                        src={"data:image/png;base64," + jobs.picture}
+                      />
                     </ListItemAvatar>
                     <ListItemText
                       primary={

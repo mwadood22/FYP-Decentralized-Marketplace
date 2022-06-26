@@ -7,6 +7,8 @@ var url =
   "mongodb+srv://Arooj:aroojfyp@markazcluster.qnkzs.mongodb.net/Markaz?retryWrites=true&w=majority";
 var ObjectId = require("mongodb").ObjectId;
 
+const { body, validationResult } = require("express-validator");
+
 var dbo = null;
 
 // const { check, validationResult } = require("express-validator");
@@ -21,10 +23,11 @@ const writeEvent = async (res) => {
     dbo
       .collection("Gigs")
       .find()
+
       .toArray(function (err, gigs) {
-        // if (err) {
-        //   return res.status(400).json({ msg: "Error" });
-        // }
+        if (err) {
+          return res.status(400).json({ msg: "Error" });
+        }
         //   console.log(gigs);
 
         // res.setHeader("content-type", "text/event-stream");
@@ -138,10 +141,38 @@ exports.filteredgigs = async (req, res) => {
     });
 };
 
+exports.gigAgainstWorkerId = async (req, res) => {
+  //   console.log("All gigs list");
+  // console.log(req.params);
+  // const { id } = req.params;
+  dbo
+    .collection("Gigs")
+    .find({
+      $or: [{ workerId: { $regex: req.params.workerId } }],
+    })
+    .toArray(function (err, gigs) {
+      if (err) {
+        return res.status(400).json({ msg: "Error" });
+      }
+      //   console.log(gigs);
+      return res.json({ gigs });
+    });
+};
+
 exports.create = (req, res) => {
   var profile = fs.readFileSync(req.file.path);
   var encImg = profile.toString("base64");
   var picture = new Buffer(encImg, "base64");
+
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      success: false,
+      errors: errors.array(),
+      message: "gig creation not successful",
+    });
+  }
 
   var gigTitle = req.body.gigTitle;
   var budget = req.body.budget;
@@ -232,6 +263,17 @@ exports.edit = async (req, res) => {
   // const gig = req.body;
   const gig = req.body;
   console.log(gig);
+
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      success: false,
+      errors: errors.array(),
+      message: "gig updation not successful",
+    });
+  }
+
   await dbo
     .collection("Gigs")
     .findOne({ _id: ObjectId(gig._id) }, function (err, gigs) {

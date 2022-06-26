@@ -60,6 +60,18 @@ const currencies = [
     value: "Gardener",
   },
   {
+    value: "Painter",
+  },
+  {
+    value: "Helper",
+  },
+  {
+    value: "Carpenter",
+  },
+  {
+    value: "Driver",
+  },
+  {
     value: "Others",
   },
 ];

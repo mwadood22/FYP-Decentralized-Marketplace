@@ -64,7 +64,7 @@ export default function WorkerPage(props) {
   //getting variables from form
   const [gigs, setUserData] = useState({
     _id: "",
-    title: "",
+    gigTitle: "",
     budget: "",
     category: "",
     gigdescription: "",
@@ -73,7 +73,7 @@ export default function WorkerPage(props) {
   const gigId = temp.match.params.gigId;
   const [gig, setGig] = useState({
     _id: "",
-    title: "",
+    gigTitle: "",
     budget: "",
     category: "",
     gigdescription: "",
@@ -88,7 +88,7 @@ export default function WorkerPage(props) {
 
   const postData = async (e) => {
     e.preventDefault();
-    const { title, budget, category, gigdescription } = gig;
+    const { gigTitle, budget, category, gigdescription } = gig;
     const _id = gigs._id;
     console.log(_id);
     const res = await fetch("/gig/", {
@@ -98,7 +98,7 @@ export default function WorkerPage(props) {
       },
       body: JSON.stringify({
         _id,
-        title,
+        gigTitle,
         budget,
         category,
         gigdescription,
@@ -190,10 +190,10 @@ export default function WorkerPage(props) {
                         margin="normal"
                         required
                         fullWidth
-                        name="title"
-                        value={gig.title}
+                        name="gigTitle"
+                        value={gig.gigTitle}
                         onChange={handleInputs}
-                        id="title"
+                        id="gigTitle"
                         label="Gig Title"
                         InputProps={{
                           type: "text",

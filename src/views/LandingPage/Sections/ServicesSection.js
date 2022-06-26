@@ -33,26 +33,30 @@ import gardener from "assets/img/services/gardener.jpg";
 import painter from "assets/img/services/painter.jpg";
 import plumbing from "assets/img/services/plumbing.jpg";
 import helper from "assets/img/services/helper.jpg";
+import others from "assets/img/services/others.jpg";
+
 //import { cardTitle } from "assets/jss/material-kit-react";
 
 const useStyles = makeStyles(styles);
 
 export default function ServicesSection() {
   const images = [
+    electrician,
+    plumbing,
+    painter,
     carpenter,
+    gardener,
     chef,
     driver,
-    electrician,
-    gardener,
-    painter,
-    plumbing,
     helper,
+    others,
   ];
   const [category, setUserData] = useState({
     categories: [
       {
         _id: "",
         Name: "",
+        title: "",
       },
     ],
   });
@@ -120,7 +124,9 @@ export default function ServicesSection() {
                       alt="..."
                       className={classes.serviceCardImg}
                     />
-                    <div className={classes.serviceCardText}>Lend a hand</div>
+                    <div className={classes.serviceCardText}>
+                      {categories.title}
+                    </div>
                     <div className={classes.serviceCardHeading}>
                       {categories.Name}
                     </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -68,19 +68,42 @@ export default function LoginPage(props) {
   if (isAuthenticated) {
     id = user.id;
     clientname = user.attributes.username;
-
-    // console.log("email: ", email)
   }
+
+  const { ...temp } = props;
+  const projectId = temp.match.params.projectId;
+  const [projects, setProject] = useState({
+    _id: "",
+    workerId: "",
+    workerName: "",
+  });
+
+  const getProject = async () => {
+    try {
+      const res = await fetch(`/projects/${projectId}`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+      console.log(data);
+      setProject(data);
+
+      if (!res.status === 200) {
+        const error = new Error(res.error);
+        throw error;
+      }
+    } catch (err) {
+      console.log(err);
+      // history.push('/login');
+    }
+  };
 
   const [review, setReview] = useState({
     description: "",
-    // clientId: "",
-    //worker:"",
   });
-
-  // const [worker, setWorkerData] = useState({
-  //   Name: "",
-  // });
 
   const sendReview = () => {
     setClassicModal(true);
@@ -96,18 +119,15 @@ export default function LoginPage(props) {
   };
 
   const saveReview = async (e) => {
-    //contract function call
-    // initialize();
-    ////
     e.preventDefault();
     setClassicModal(false);
     // console.log(e.target.value);
-
-    // const clientId = id;
-    // const clientName = clientname;
     const { description } = review;
     const clientId = id;
     const clientName = clientname;
+    const workerId = projects.workerId;
+    const workerName = projects.workerName;
+
     const res = await fetch("/review/create", {
       method: "POST",
       headers: {
@@ -117,11 +137,24 @@ export default function LoginPage(props) {
         description,
         clientId,
         clientName,
+        workerId,
+        workerName,
       }),
     });
     console.log(res);
-    // const data = await res.json();
+    console.log(res.message);
+    const data = await res.json();
+
+    // if (data.status === 42 || !data)
+    if (data.status == 400 || !data) {
+      window.alert("Invalid review");
+      console.log("Invalid review");
+    }
   };
+
+  useEffect(() => {
+    getProject();
+  }, []);
 
   return (
     <div>

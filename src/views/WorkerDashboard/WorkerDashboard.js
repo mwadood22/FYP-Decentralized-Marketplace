@@ -361,6 +361,7 @@ export default function ProfilePage(props) {
 
   const postData = async (e) => {
     e.preventDefault();
+
     const { Name, city, contact, skills, about } = worker;
     const _id = worker._id;
     console.log(_id);

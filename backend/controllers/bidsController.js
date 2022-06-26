@@ -2,7 +2,7 @@ var MongoClient = require("mongodb").MongoClient;
 var url =
   "mongodb+srv://Arooj:aroojfyp@markazcluster.qnkzs.mongodb.net/Markaz?retryWrites=true&w=majority";
 var ObjectId = require("mongodb").ObjectId;
-
+const { body, validationResult } = require("express-validator");
 var dbo = null;
 
 var BidsData = {
@@ -81,6 +81,15 @@ exports.create = (req, res) => {
   const bid = req.body;
 
   console.log(bid);
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      success: false,
+      errors: errors.array(),
+      message: "bid creation not successful",
+    });
+  }
   dbo.collection("Bids").insert(bid);
   //   res.end();
   //   return;

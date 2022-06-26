@@ -1,7 +1,11 @@
 var MongoClient = require("mongodb").MongoClient;
+const { Profiler } = require("react");
+const fs = require("fs");
+var path = require("path");
 var url =
   "mongodb+srv://Arooj:aroojfyp@markazcluster.qnkzs.mongodb.net/Markaz?retryWrites=true&w=majority";
 var ObjectId = require("mongodb").ObjectId;
+const { body, validationResult } = require("express-validator");
 
 var dbo = null;
 
@@ -223,8 +227,19 @@ exports.index = async (req, res) => {
 
 exports.create = (req, res) => {
   //   console.log("All gigs list");
-  const job = req.body;
+  var profile = fs.readFileSync(req.file.path);
+  var encImg = profile.toString("base64");
+  var picture = new Buffer(encImg, "base64");
+  // const job = req.body;
+  const errors = validationResult(req);
 
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      success: false,
+      errors: errors.array(),
+      message: "job creation not successful",
+    });
+  }
   // body("gigTitle").isLength({
   //   min: 6,
   // });
@@ -238,8 +253,25 @@ exports.create = (req, res) => {
   //   });
   // } else {
   //   console.log(gig);
-  dbo.collection("CustomJobs").insert(job);
-  return res.json({ job });
+
+  var title = req.body.title;
+  var budget = req.body.budget;
+  var category = req.body.category;
+  var description = req.body.description;
+  var clientId = req.body.clientId;
+  var city = req.body.city;
+  var address = req.body.address;
+  console.log("fine block");
+  dbo.collection("CustomJobs").insertOne({
+    title,
+    budget,
+    category,
+    description,
+    picture,
+    clientId,
+    city,
+    address,
+  });
 };
 
 exports.delete = (req, res) => {
@@ -306,6 +338,16 @@ exports.delete = (req, res) => {
 exports.edit = async (req, res) => {
   // const gig = req.body;
   const job = req.body;
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      success: false,
+      errors: errors.array(),
+      message: "job updation not successful",
+    });
+  }
+
   console.log(job);
   await dbo
     .collection("CustomJobs")

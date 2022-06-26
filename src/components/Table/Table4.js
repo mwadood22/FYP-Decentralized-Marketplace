@@ -8,6 +8,7 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Button from "components/CustomButtons/Button.js";
+import { Link } from "react-router-dom";
 
 const columns = [
   { id: "id", label: "ID", minWidth: 120 },
@@ -67,9 +68,12 @@ export default function StickyHeadTable(props) {
         projects.workerName,
         projects.bidPrice,
         projects.status,
-        <Button size="sm" color="black" href="">
-          Finish Job
-        </Button>
+
+        <Link to={"/payment-page/" + projects._id}>
+          <Button size="sm" color="black" href="">
+            Finish Job
+          </Button>
+        </Link>
       );
     }),
     // createData("01", "Musa", "Wadood", "Plumber", "245656"),

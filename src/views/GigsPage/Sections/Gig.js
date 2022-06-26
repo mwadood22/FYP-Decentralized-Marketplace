@@ -21,14 +21,14 @@ import Divider from "@mui/material/Divider";
 
 // import Avatar from "@mui/material/Avatar";
 // import Image from "@mui/material/Image";
-import team2 from "assets/img/faces/face5.jpg";
-import team3 from "assets/img/faces/face6.jpg";
+// import team2 from "assets/img/faces/face5.jpg";
+// import team3 from "assets/img/faces/face6.jpg";
 
 // import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import Slider from "react-slick";
 
-import gig1 from "assets/img/gigs/gig1.jpg";
+// import gig1 from "assets/img/gigs/gig1.jpg";
 // import gig3 from "assets/img/gigs/gig3.jpg";
 // import gig6 from "assets/img/gigs/gig6.jpg";
 import Button from "components/CustomButtons/Button.js";
@@ -68,7 +68,7 @@ const currencies = [
     value: "Lahore",
   },
   {
-    value: "Sukkur",
+    value: "Faisalabad",
   },
   {
     value: "Multan",
@@ -223,13 +223,15 @@ export default function Gig(props) {
   };
 
   const [gig, setGigData] = useState({
-    title: "",
+    gigTitle: "",
     budget: "",
     category: "",
     gigdescription: "",
     workerId: "",
+    picture: "",
   });
   const [worker, setWorkerData] = useState({
+    _id: "",
     Name: "",
     about: "",
     city: "",
@@ -261,7 +263,7 @@ export default function Gig(props) {
     gigs: [
       {
         _id: "",
-        title: "",
+        gigTitle: "",
         budget: "",
         category: "",
         gigdescription: "",
@@ -269,6 +271,20 @@ export default function Gig(props) {
       },
     ],
   });
+
+  const [reviewdata, setReviewData] = useState({
+    reviews: [
+      {
+        _id: "",
+        description: "",
+        clientName: "",
+        clientId: "",
+        workerId: "",
+        workerName: "",
+      },
+    ],
+  });
+
   // console.log(props.location.param1);
   const { ...temp } = props;
   const gigId = temp.match.params.gigId;
@@ -291,6 +307,22 @@ export default function Gig(props) {
 
       if (!res.status === 200) {
         const error = new Error(res.error);
+        throw error;
+      }
+
+      //gettingReviews
+      const res1 = await fetch(`/review/worker/${data.workerId}`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      const data1 = await res1.json();
+      console.log(data1);
+      setReviewData(data1);
+      if (!res1.status === 200) {
+        const error = new Error(res1.error);
         throw error;
       }
 
@@ -345,6 +377,7 @@ export default function Gig(props) {
     // console.log(e.target.value);
 
     const clientId = id;
+    const worker = gig.workerId;
     const clientName = clientname;
     const { title, city, budget, address, description } = offer;
     const res = await fetch("/offer/create", {
@@ -360,6 +393,7 @@ export default function Gig(props) {
         description,
         clientId,
         clientName,
+        worker,
       }),
     });
     console.log(res);
@@ -394,6 +428,32 @@ export default function Gig(props) {
       // history.push("/landing-page");
     }
   };
+
+  // const getReviewData = async () => {
+  //   console.log("Check");
+  //   try {
+  //     // fetching gig data
+
+  //     const res = await fetch(`/review/worker/${gig.workerId}`, {
+  //       method: "GET",
+  //       headers: {
+  //         Accept: "application/json",
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
+  //     const data = await res.json();
+  //     console.log(data);
+  //     setReviewData(data);
+
+  //     if (!res.status === 200) {
+  //       const error = new Error(res.error);
+  //       throw error;
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //     // history.push('/login');
+  //   }
+  // };
 
   useEffect(async () => {
     await callAboutPage();
@@ -462,8 +522,7 @@ export default function Gig(props) {
                     <GridItem md={6}>
                       {/* <div className={classes.content}> */}
                       <img
-                        alt="Travis Howard"
-                        src={team2}
+                        src={"data:image/png;base64," + worker.picture}
                         className={imageClasses}
                       />
                       {/* <h1 className={classes.name}>Wadood </h1>
@@ -484,11 +543,11 @@ export default function Gig(props) {
                           <span className={classes.data}>{worker.contact}</span>
                         </i>
                       </h4>
-                      <h4>
+                      {/* <h4>
                         <i className="fas fa-envelope">
                           <span className={classes.data}>{worker.email}</span>
                         </i>
-                      </h4>
+                      </h4> */}
                       <h4>
                         {" "}
                         <Button color="green" onClick={contractDeploy}>
@@ -675,7 +734,6 @@ export default function Gig(props) {
                         <p> {gig.gigdescription} </p>
                         {/* {console.log(gig.workerId)} */}
                       </h3>
-
                       <Divider
                         sx={{ width: 1020, m: 0.5 }}
                         orientation="horizontal"
@@ -684,44 +742,42 @@ export default function Gig(props) {
                         <strong>About Worker</strong>
                         <p>{worker.about}</p>
                       </h3>
-                      {/* <p> {worker.about} </p> */}
 
                       <h3 className={classes.head}>
                         <strong>Worker Reviews </strong>
                       </h3>
                       <br></br>
-                      <Slider className={classes.reviews} {...settings}>
-                        <div className={classes.sliderContent}>
-                          <div className={classes.sliderImg}>
-                            <img
-                              alt="Travis Howard"
-                              src={team2}
-                              className={classes.imgFluid}
-                            />
-                          </div>
-                          <div className={classes.sliderText}>
-                            <p className={classes.p}>
-                              <p>{worker.reviews}</p>
-                            </p>
-                            <p className={classes.p1}>M.Wadood</p>
-                          </div>
-                        </div>
-                        <div className={classes.sliderContent}>
-                          <div className={classes.sliderImg}>
-                            <img
-                              alt="Travis Howard"
-                              src={team3}
-                              className={classes.imgFluid}
-                            />
-                          </div>
-                          <div className={classes.sliderText}>
-                            <p className={classes.p}>
-                              <p>{worker.reviews}</p>
-                            </p>
-                            <p className={classes.p1}>M.Wadood</p>
-                          </div>
-                        </div>
-                      </Slider>
+
+                      <GridItem xs={12} sm={12} md={12}>
+                        <Slider className={classes.reviews} {...settings}>
+                          {reviewdata.reviews.map((reviews, index) => {
+                            return (
+                              <div
+                                key={index}
+                                className={classes.sliderContent}
+                              >
+                                {/* <div className={classes.sliderImg}>
+                                <img
+                                  alt="Travis Howard"
+                                  src={team2}
+                                  className={classes.imgFluid}
+                                />
+                              </div> */}
+
+                                <div className={classes.sliderText}>
+                                  <h3>
+                                    <strong>{reviews.clientName}</strong>
+                                  </h3>
+
+                                  <p className={classes.p}>
+                                    <p>{reviews.description}</p>
+                                  </p>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </Slider>
+                      </GridItem>
                       <br></br>
                       <h3 className={classes.head}>
                         <strong>Other gigs by this worker</strong>
@@ -732,13 +788,12 @@ export default function Gig(props) {
                         <GridItem xs={12} sm={12} md={4} key={index}>
                           <Card carousel>
                             <img
-                              src={gig1}
-                              alt="..."
+                              src={"data:image/png;base64," + gigs.picture}
                               className={imageClasses1}
                             />
                             <CardBody>
                               <h4 className={classes.cardTitle}>
-                                {gigs.title}
+                                {gigs.gigTitle}
                               </h4>
 
                               <p className={classes.description}>

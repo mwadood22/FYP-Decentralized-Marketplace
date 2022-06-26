@@ -85,7 +85,7 @@ export default function GigView() {
   //fetch data from database
   // var gigid = "";
   //var data = null;
-  const [gig, setGigData] = useState({
+  const [gig, setUserData] = useState({
     gigs: [
       {
         _id: "",
@@ -168,7 +168,7 @@ export default function GigView() {
       console.log(data);
       // console.log(e);
       // console.log("Event called: ", e.data);
-      setGigData(data);
+      setUserData(data);
       // const data = JSON.parse(e.data);
     });
 
@@ -217,42 +217,42 @@ export default function GigView() {
           return (
             <GridItem xs={12} sm={12} md={3} key={index}>
               <Card className={classes.card}>
-                {/* <Link to={"gig/" + gigs._id}> */}
-                {/* {(data = gigs.picture.toString("base64"))} */}
-                {/* console.log(gigs.picture.toString("base64")) */}
-                {/* {console.log(data)} */}
+                <Link to={"gig/" + gigs._id}>
+                  {/* {(data = gigs.picture.toString("base64"))} */}
+                  {/* console.log(gigs.picture.toString("base64")) */}
+                  {/* {console.log(data)} */}
 
-                {/* <img src="" alt="..." className={imageClasses} /> */}
-                {/* <img
+                  {/* <img src="" alt="..." className={imageClasses} /> */}
+                  {/* <img
                     src="data:image/<%=gigs.picture.image/png%>;base64,
                      <%=gigs.picture.data.toString('base64')%>"
                     alt="..."
                     className={imageClasses}
                   ></img> */}
-                {/* <img
+                  {/* <img
                     src='data:image/png;base64,gigs.picture.toString("base64")'
                     className={imageClasses}
                   ></img> */}
-                <img
-                  src={"data:image/png;base64," + gigs.picture}
-                  className={imageClasses}
-                />
+                  <img
+                    src={"data:image/png;base64," + gigs.picture}
+                    className={imageClasses}
+                  />
 
-                <CardBody>
-                  <h4 className={classes.cardTitle}>{gigs.gigTitle}</h4>
-                  <p className={classes.description}>
-                    {/* {console.log(userData, "HELLO!")} */}
-                    {/* <strong>Title: </strong>
+                  <CardBody>
+                    <h4 className={classes.cardTitle}>{gigs.gigTitle}</h4>
+                    <p className={classes.description}>
+                      {/* {console.log(userData, "HELLO!")} */}
+                      {/* <strong>Title: </strong>
                       {gigs.gigTitle}
                       <br /> */}
-                    <strong>Budget: </strong>
-                    {gigs.budget}
-                    <br />
-                    <strong>Description: </strong>
-                    {gigs.gigdescription}
-                  </p>
-                </CardBody>
-                {/* </Link> */}
+                      <strong>Budget: </strong>
+                      {gigs.budget}
+                      <br />
+                      <strong>Description: </strong>
+                      {gigs.gigdescription}
+                    </p>
+                  </CardBody>
+                </Link>
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={6}>
                     <Link
