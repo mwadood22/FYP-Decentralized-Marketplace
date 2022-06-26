@@ -35,6 +35,7 @@ import Budget from "@material-ui/icons/Money";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import { useMoralis } from "react-moralis";
+import { useHistory } from "react-router-dom"; // version 5.2.0
 
 // import Paper from "@mui/material/Paper";
 
@@ -64,21 +65,133 @@ const currencies = [
 ];
 
 export default function WorkerPage(props) {
-  const { isAuthenticated, user } = useMoralis();
+  const { Moralis, isAuthenticated, user } = useMoralis();
   var id;
   if (isAuthenticated) {
     id = user.id;
   }
-  const [job, setJobData] = useState({
+  // const [job, setJobData] = useState({
+  //   title: "",
+  //   budget: "",
+  //   city: "",
+  //   address: "",
+  //   description: "",
+  //   category: "",
+  //   clientId: "",
+  // });
+
+  const initialValues = {
     title: "",
     budget: "",
     city: "",
     address: "",
-    description: "",
     category: "",
-    clientId: "",
-  });
+    description: "",
+  };
+  const [formValues, setFormValues] = useState(initialValues);
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
+  };
+  const history = useHistory();
+
+  const postData = async () => {
+    // e.preventDefault();
+    // console.log(e.target.value);
+    console.log("Job is to be posted");
+
+    const clientId = id;
+    const { title, budget, city, address, description, category } = formValues;
+    const res = await fetch("/job/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title,
+        budget,
+        city,
+        address,
+        description,
+        category,
+        clientId,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (data.status === 42 || !data) {
+      window.alert("Invalid registeration");
+      console.log("Invalid registeration");
+    } else {
+      // console.log(data);
+      // history.push("/landing-page");
+    }
+    // }
+  };
+  let id_of;
+  if (isAuthenticated) {
+    id_of = Moralis.User.current();
+  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setFormErrors(validate(formValues));
+    setIsSubmit(true);
+    console.log(Object.keys(formErrors).length);
+    console.log(isSubmit);
+    // if (Object.keys(formErrors).length === 0 && isSubmit) {
+    //   postData();
+    //   history.push("/customjobs-page/" + id_of.id);
+    // }
+  };
+  function checkData() {
+    console.log("inside Check data");
+    console.log(Object.keys(formErrors).length);
+    console.log(isSubmit);
+    postData();
+    history.push("/customjobs-page/" + id_of.id);
+    // postData();
+  }
+  const validate = (values) => {
+    const errors = {};
+    const regex = /^[a-zA-Z ]*$/;
+
+    ////////////////////////////////////////////////////
+    if (!values.title) {
+      errors.title = "Title is required!";
+    } else if (values.title.length > 20) {
+      errors.title = "Title cannot exceed more than 20 characters";
+    }
+    if (!values.budget) {
+      errors.budget = "Budget is required!";
+    } else if (isNaN(values.budget)) {
+      errors.budget = "Please enter numeric value!";
+    }
+    if (!values.city) {
+      errors.city = "City is required";
+    } else if (!regex.test(values.city)) {
+      errors.city = "Invalid city";
+    }
+
+    if (!values.address) {
+      errors.address = "Address is required";
+    }
+
+    if (!values.description) {
+      errors.description = "Description is required";
+    } else if (values.description.length > 150) {
+      errors.description = "Description cannot exceed more than 150 characters";
+    }
+
+    if (!values.category) {
+      errors.category = "Category is required";
+    }
+    /////////////////////////////////////
+    return errors;
+  };
   // const [formErrors, setFormErrors] = useState({});
   // const [isSubmit, setIsSubmit] = useState(false);
 
@@ -125,82 +238,23 @@ export default function WorkerPage(props) {
   //   return errors;
   // };
 
+  // let name, value;
+  // const handleInputs = (e) => {
+  //   name = e.target.name;
+  //   value = e.target.value;
+  //   console.log(e);
+  //   setJobData({ ...job, [name]: value });
+  // };
+
+  const [category, setCategory] = React.useState("None");
   let name, value;
-  const handleInputs = (e) => {
-    name = e.target.name;
-    value = e.target.value;
-    console.log(e);
-    setJobData({ ...job, [name]: value });
-  };
-
-  const postData = async (e) => {
-    e.preventDefault();
-    console.log(e.target.value);
-    //const { title, budget, city, address, description } = job;
-    // const clientId = id;
-    // const res = await fetch("/job/create", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     title,
-    //     budget,
-    //     city,
-    //     address,
-    //     description,
-    //     clientId,
-    //   }),
-    // });
-    // setFormErrors(validate(job));
-
-    // setIsSubmit(true);
-
-    // console.log(Object.keys(formErrors).length, "This is the length");
-    // console.log(isSubmit, "value of isSubmit");
-    // if (Object.keys(formErrors).length === 0 && isSubmit) {
-    // console.log("Record create api called");
-    // console.log(Object.keys(formErrors).length, "This is the length");
-    // console.log(isSubmit, "value of isSubmit");
-    console.log(e.target.value);
-    // console.log("form valid");
-    const clientId = id;
-    const { title, budget, city, address, description, category } = job;
-    const res = await fetch("/job/create", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title,
-        budget,
-        city,
-        address,
-        description,
-        category,
-        clientId,
-      }),
-    });
-
-    const data = await res.json();
-
-    if (data.status === 42 || !data) {
-      window.alert("Invalid registeration");
-      console.log("Invalid registeration");
-    } else {
-      // console.log(data);
-      // history.push("/landing-page");
-    }
-    // }
-  };
-  const [currency, setCurrency] = React.useState("None");
-
-  const handleChange = (event) => {
-    setCurrency(event.target.value);
+  const handleCategory = (event) => {
+    setCategory(event.target.value);
     name = event.target.name;
     value = event.target.value;
     // console.log(e);
-    setJobData({ ...job, [name]: value });
+    setFormValues({ ...formValues, [name]: value });
+    // setJobData({ ...job, [name]: value });
   };
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
   setTimeout(function () {
@@ -244,10 +298,10 @@ export default function WorkerPage(props) {
                         required
                         fullWidth
                         id="title"
-                        label="title"
+                        label="Title"
                         name="title"
-                        value={job.title}
-                        onChange={handleInputs}
+                        value={formValues.title}
+                        onChange={handleChange}
                         InputProps={{
                           type: "text",
                           endAdornment: (
@@ -258,6 +312,7 @@ export default function WorkerPage(props) {
                         }}
                         variant="standard"
                       />
+                      <p className={classes.warningPara}>{formErrors.title}</p>
 
                       {/* <span style={{ color: "red" }}>{formErrors.title}</span> */}
                     </GridItem>
@@ -270,8 +325,8 @@ export default function WorkerPage(props) {
                         id="budget"
                         label="Budget"
                         name="budget"
-                        value={job.budget}
-                        onChange={handleInputs}
+                        value={formValues.budget}
+                        onChange={handleChange}
                         InputProps={{
                           type: "text",
                           endAdornment: (
@@ -282,9 +337,11 @@ export default function WorkerPage(props) {
                         }}
                         variant="standard"
                       />
+                      <p className={classes.warningPara}>{formErrors.budget}</p>
 
                       {/* <span style={{ color: "red" }}>{formErrors.budget}</span> */}
                     </GridItem>
+
                     <GridItem xs={6} sm={6} md={6}>
                       <TextField
                         margin="normal"
@@ -293,8 +350,8 @@ export default function WorkerPage(props) {
                         id="city"
                         label="City"
                         name="city"
-                        value={job.city}
-                        onChange={handleInputs}
+                        value={formValues.city}
+                        onChange={handleChange}
                         InputProps={{
                           type: "text",
                           endAdornment: (
@@ -307,6 +364,8 @@ export default function WorkerPage(props) {
                         }}
                         variant="standard"
                       />
+                      <p className={classes.warningPara}>{formErrors.city}</p>
+
                       {/* <span style={{ color: "red" }}>{formErrors.city}</span> */}
                     </GridItem>
 
@@ -318,8 +377,8 @@ export default function WorkerPage(props) {
                         id="address"
                         label="Address"
                         name="address"
-                        value={job.address}
-                        onChange={handleInputs}
+                        value={formValues.address}
+                        onChange={handleChange}
                         InputProps={{
                           type: "text",
                           endAdornment: (
@@ -330,6 +389,10 @@ export default function WorkerPage(props) {
                         }}
                         variant="standard"
                       />
+                      <p className={classes.warningPara}>
+                        {formErrors.address}
+                      </p>
+
                       {/* <span style={{ color: "red" }}>{formErrors.address}</span> */}
                     </GridItem>
 
@@ -342,9 +405,9 @@ export default function WorkerPage(props) {
                         margin="normal"
                         label=" "
                         name="category"
-                        value={currency}
+                        value={category}
                         helperText="Category"
-                        onChange={handleChange}
+                        onChange={handleCategory}
                         InputProps={{
                           endAdornment: (
                             <InputAdornment position="start">
@@ -363,6 +426,9 @@ export default function WorkerPage(props) {
                       {/* <span style={{ color: "red" }}> */}
                       {/* {formErrors.category} */}
                       {/* </span> */}
+                      <p className={classes.warningPara}>
+                        {formErrors.category}
+                      </p>
                     </GridItem>
 
                     <GridItem>
@@ -376,22 +442,31 @@ export default function WorkerPage(props) {
                         id="description"
                         label="Job Description"
                         name="description"
-                        value={job.description}
-                        onChange={handleInputs}
+                        value={formValues.description}
+                        onChange={handleChange}
                       />
                       {/* <span style={{ color: "red" }}>
                         {formErrors.description}
                       </span> */}
+                      <p className={classes.warningPara}>
+                        {formErrors.description}
+                      </p>
                     </GridItem>
 
                     <GridItem>
+                      {/* {console.log(Object.keys(formErrors).length)} */}
+
                       <Button
                         color="black"
-                        href="/customjobs-page"
-                        onClick={postData}
+                        // href="/customjobs-page"
+                        onClick={handleSubmit}
                       >
                         Post job
                       </Button>
+                      {Object.keys(formErrors).length === 0 && isSubmit
+                        ? // <div className="ui message success">Signed in successfully</div>
+                          checkData()
+                        : console.log("Error in form!")}
                     </GridItem>
                   </GridContainer>
                 </form>

@@ -32,7 +32,7 @@ const useStyles = makeStyles(styles);
 
 export default function LoginPage(props) {
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
-  // const { isAuthenticated } = useMoralis();
+  const { isAuthenticated } = useMoralis();
   setTimeout(function () {
     setCardAnimation("");
   }, 700);
@@ -41,7 +41,7 @@ export default function LoginPage(props) {
   ////blockchain
   // const [email, setEmail] = useState();
   // const [password, setPassword] = useState();
-  const { isAuthenticated, authError, login } = useMoralis();
+  const { authError, login } = useMoralis();
   const history = useHistory();
   if (isAuthenticated) {
     // const history = useHistory();
@@ -50,11 +50,10 @@ export default function LoginPage(props) {
   ///reset password
   const loginFunction = async (email, password) => {
     await login(email, password);
+    console.log("Login called");
     // const id = Moralis.User.current();
     // var log = "login";
     // var user;
-
-    history.push("/landing-page");
   };
   // const resetPassword = () => {
   //   //getting email from email input
@@ -86,14 +85,29 @@ export default function LoginPage(props) {
     e.preventDefault();
     setFormErrors(validate(formValues));
     setIsSubmit(true);
-  };
+    // console.log(Object.keys(formErrors).length);
+    // console.log(isSubmit);
+    // if (Object.keys(formErrors).length === 0) {
 
+    // }
+  };
+  function checkData() {
+    loginFunction(formValues.email, formValues.password);
+    history.push("/landing-page");
+  }
   useEffect(() => {
-    console.log(formErrors);
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
-      console.log(formValues);
-    }
-  }, [formErrors]);
+    // console.log(formErrors);
+    // if (Object.keys(formErrors).length === 0 && isSubmit) {
+    //   console.log(formValues);
+    // }
+    return () => {
+      setFormValues({}); // This worked for me
+      setFormErrors({});
+      setIsSubmit({});
+      setCardAnimation({});
+      loginFunction({});
+    };
+  }, []);
   const validate = (values) => {
     const errors = {};
     const regex = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/;
@@ -252,7 +266,7 @@ export default function LoginPage(props) {
                   <CardFooter className={classes.cardFooter}>
                     {Object.keys(formErrors).length === 0 && isSubmit
                       ? // <div className="ui message success">Signed in successfully</div>
-                        loginFunction(formValues.email, formValues.password)
+                        checkData()
                       : console.log("Error in form!")}
                     <Button
                       color="black"

@@ -31,6 +31,7 @@ router.post("/gig/create", upload.single("picture"), gigController.create);
 router.patch("/gig/", gigController.edit);
 router.delete("/gig/:id", gigController.delete);
 router.get("/gig/:id", gigController.show);
+router.get("/gig/get/:workerId", gigController.getGigs);
 router.get("/gig/category-wise/:category", gigController.filteredgigs);
 router.get("/check", gigController.check);
 
@@ -57,10 +58,11 @@ router.patch("/job/", jobController.edit);
 router.delete("/job/:id", jobController.delete);
 // router.get("/job/:id", jobController.show);
 router.get("/jobs/check/:id", jobController.check);
+router.get("/jobs/get/:id", jobController.get);
 // router.get("/job/:id", jobController.show);
 router.get("/job/:key", jobController.search);
 router.get("/jobs/getAll", jobController.getAllJobs);
-router.delete("/job/:id", jobController.delete);
+// router.delete("/job/:id", jobController.delete);
 
 //testimonial routes
 router.get("/testimonial/", testimonialController.index);

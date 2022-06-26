@@ -66,6 +66,7 @@ export default function HeaderLinks(props) {
 
   // console.log(user.attributes.username);
   if (isAuthenticated) {
+    // console.log(isAuthenticated);
     // const idddd = user.id;
     // console.log(idddd);
     const id_of = Moralis.User.current();

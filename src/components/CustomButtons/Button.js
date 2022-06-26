@@ -76,6 +76,7 @@ RegularButton.propTypes = {
   round: PropTypes.bool,
   fullWidth: PropTypes.bool,
   onClick: PropTypes.func,
+
   disabled: PropTypes.bool,
   block: PropTypes.bool,
   link: PropTypes.bool,

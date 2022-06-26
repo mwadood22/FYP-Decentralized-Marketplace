@@ -188,6 +188,24 @@ exports.check = async (req, res) => {
   //   res.json({ message: "Ok" });
   // }
 };
+exports.get = async (req, res) => {
+  const id = req.params.id;
+  // console.log(id);
+  dbo
+    .collection("CustomJobs")
+    .findOne({ _id: ObjectId(id) }, function (err, jobs) {
+      if (err) {
+        return res.status(400).json({ msg: "Error" });
+      }
+      //   console.log(gigs);
+      return res.json(jobs);
+    });
+  // if (req.headers.accept === "text/event-stream") {
+  //   sendEvent(req, res);
+  // } else {
+  //   res.json({ message: "Ok" });
+  // }
+};
 
 exports.index = async (req, res) => {
   //   console.log("All gigs list");
@@ -304,7 +322,7 @@ exports.edit = async (req, res) => {
             title: job.title,
             budget: job.budget,
             category: job.category,
-            description: job.gigdescription,
+            description: job.description,
             city: job.city,
             address: job.address,
           },

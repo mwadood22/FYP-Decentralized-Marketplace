@@ -59,6 +59,8 @@ import Person from "@material-ui/icons/Person";
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 //////BCK
 import { useMoralis } from "react-moralis";
+import { useHistory } from "react-router-dom";
+
 // import { useState } from "react";
 import { ErrorBox } from "components/errorbox/Error";
 const useStyles = makeStyles(styles);
@@ -83,10 +85,14 @@ export default function ProfilePage(props) {
     status: "",
   });
   //const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
-  const { user, userError, setUserData } = useMoralis();
+  const { isUnauthenticated, user, userError, setUserData } = useMoralis();
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const history = useHistory();
+  if (isUnauthenticated) {
+    history.push("/signup-page");
+  }
   const getWorkerProjects = async (client_id) => {
     try {
       // const id = await user.id;

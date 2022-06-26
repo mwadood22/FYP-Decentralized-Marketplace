@@ -6,6 +6,9 @@ const workerPageStyle = {
   card: {
     padding: "20px",
   },
+  warningPara: {
+    color: "red",
+  },
   card2: {
     padding: "20px",
     marginLeft: "250px",

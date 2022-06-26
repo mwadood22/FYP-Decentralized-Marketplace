@@ -14,6 +14,7 @@ import SignupPage from "views/SignupPage/SignupPage.js";
 import ContactPage from "views/ContactPage/ContactPage.js";
 import ServicePage from "views/ServicePage/ServicePage.js";
 import GigsPage from "views/GigsPage/GigsPage.js";
+import WorkerGigsPage from "views/WorkerGigsPage/WorkerGigsPage.js";
 import CustomJobs from "views/CustomJob/CustomJobs.js";
 import GuideBuyPage from "views/GuideBuyPage/GuideBuyPage.js";
 import GuideSellPage from "views/GuideSellPage/GuideSellPage.js";
@@ -21,7 +22,9 @@ import WorkerPage from "views/WorkerPage/WorkerPage.js";
 import FindJobs from "views/FindJobs/FindJobs.js";
 import WorkerDashboard from "views/WorkerDashboard/WorkerDashboard.js";
 import CreateGig from "views/GigsPage/Sections/CreateGig.js";
+import CreateWorkerGig from "views/WorkerGigsPage/Sections/CreateGig.js";
 import UpdateGig from "views/GigsPage/Sections/UpdateGig.js";
+import UpdateWorkerGig from "views/WorkerGigsPage/Sections/UpdateGig.js";
 import CreateJob from "views/CustomJob/Sections/CreateJob.js";
 import UpdateJob from "views/CustomJob/Sections/UpdateJob.js";
 import MakePayment from "views/MakePayment/MakePayment.js";
@@ -50,6 +53,7 @@ ReactDOM.render(
         <Route path="/contact-page" component={ContactPage} />
         <Route path="/service-page/:category" component={ServicePage} />
         <Route path="/gigs-page" component={GigsPage} />
+        <Route path="/workerGigs-page/:workerId" component={WorkerGigsPage} />
         <Route path="/customjobs-page/:userId" component={CustomJobs} />
         <Route path="/guidebuy-page" component={GuideBuyPage} />
         <Route path="/guidesell-page" component={GuideSellPage} />
@@ -60,7 +64,12 @@ ReactDOM.render(
           component={WorkerDashboard}
         />
         <Route path="/creategig-page" component={CreateGig} />
+        <Route path="/createWorkerGig-page" component={CreateWorkerGig} />
         <Route path="/updategig-page/:gigId" component={UpdateGig} />
+        <Route
+          path="/updateWorkerGig-page/:gigId"
+          component={UpdateWorkerGig}
+        />
         <Route path="/createjob-page" component={CreateJob} />
         <Route path="/updatejob-page/:jobId" component={UpdateJob} />
         <Route path="/payment-page" component={MakePayment} />

@@ -3,7 +3,6 @@ import React from "react";
 import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import Button from "components/CustomButtons/Button.js";
 
 // @material-ui/icons
 
@@ -14,8 +13,10 @@ import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 //import Button from "components/CustomButtons/Button.js";
-import HeaderLinks from "components/Header/HeaderLinks.js";
+import WorkerHeaderLinks from "components/Header/WorkerHeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
+import Button from "components/CustomButtons/Button.js";
+
 //import CustomInput from "components/CustomInput/CustomInput.js";
 //import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 //import Search from "@material-ui/icons/Search";
@@ -27,31 +28,23 @@ import styles from "assets/jss/material-kit-react/views/GigPage.js";
 //import TeamSection from "./Sections/TeamSection.js";
 //import WorkSection from "./Sections/WorkSection.js";
 //import ClientSection from "./Sections/ClientSection.js";
-import CustomJobsView from "views/CustomJob/Sections/CustomJobsView.js";
-import { useMoralis } from "react-moralis";
-import { useHistory } from "react-router-dom";
+import GigView from "views/WorkerGigsPage/Sections/GigView.js";
 
 const dashboardRoutes = [];
 
 const useStyles = makeStyles(styles);
 
-export default function CustomJobs(props) {
+export default function WorkerGigsPage(props) {
   const classes = useStyles();
   const { ...rest } = props;
-  // console.log(rest);
-  const { isUnauthenticated } = useMoralis();
-  const history = useHistory();
-  if (isUnauthenticated) {
-    history.push("/signup-page");
-  }
-  // console.log(props);
+  console.log(rest);
   return (
     <div>
       <Header
         color="transparent"
         routes={dashboardRoutes}
         brand="MARKAZ"
-        rightLinks={<HeaderLinks />}
+        rightLinks={<WorkerHeaderLinks />}
         fixed
         changeColorOnScroll={{
           height: 100,
@@ -62,24 +55,33 @@ export default function CustomJobs(props) {
       <Parallax className={classes.background}>
         <div className={classes.container}>
           <GridContainer>
-            <GridItem xs={12} sm={12} md={7}>
-              <h1 className={classes.title}>Create Custom Job Posts</h1>
+            <GridItem xs={12} sm={12} md={8}>
+              <h1 className={classes.title}>Create your gigs</h1>
               <h4>
-                Specify your details and hire the perfect worker for your
-                everyday tasks.
+                Let your customers know about your services. Attract more
+                clients and earn more money.
               </h4>
               <Button
                 color="black"
                 size="md"
-                href="/createjob-page"
+                href="/createWorkerGig-page"
                 //target="_blank"
                 rel="noopener noreferrer"
                 className={classes.button}
                 //block
               >
-                {/*<i className="fas fa-play" />*/}
-                Post a new job
+                Create a new gig
               </Button>
+              {/* <Button
+                color="danger"
+                size="lg"
+                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i className="fas fa-play" />
+                Watch video
+              </Button> */}
             </GridItem>
           </GridContainer>
         </div>
@@ -87,7 +89,7 @@ export default function CustomJobs(props) {
 
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div className={classes.container}>
-          <CustomJobsView userId={rest.match.params.userId} />
+          <GigView workerId={rest.match.params.workerId} />
           {/* <ProductSection /> */}
 
           {/* <ClientSection /> */}

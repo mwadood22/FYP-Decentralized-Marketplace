@@ -158,16 +158,14 @@ exports.create = (req, res) => {
   //   req.session.success = false;
   // } else {
   console.log("fine block");
-  dbo
-    .collection("Gigs")
-    .insertOne({
-      gigTitle,
-      budget,
-      category,
-      gigdescription,
-      picture,
-      workerId,
-    });
+  dbo.collection("Gigs").insertOne({
+    gigTitle,
+    budget,
+    category,
+    gigdescription,
+    picture,
+    workerId,
+  });
   // return res.status(200).json({
   //   success: true,
   //   message: "Login successful",
@@ -190,9 +188,43 @@ exports.show = (req, res) => {
     if (err) {
       return res.status(400).json({ msg: "Error" });
     }
-    console.log(gigs);
+    // console.log(gigs);
     return res.json(gigs);
   });
+  //   return res.json({ gigs });
+};
+
+exports.getGigs = (req, res) => {
+  console.log("All gigs list");
+  const id = req.params.workerId;
+  console.log(id);
+  dbo
+    .collection("Gigs")
+    .find({
+      $or: [{ workerId: { $regex: req.params.workerId } }],
+    })
+    .toArray(function (err, gigs) {
+      if (err) {
+        return res.status(400).json({ msg: "Error" });
+      }
+      //   console.log(gigs);
+      return res.json({ gigs });
+    });
+  // if (req.headers.accept === "text/event-stream") {
+  //   sendEvent(req, res);
+  // } else {
+  //   res.json({ message: "Ok" });
+  // }
+  ///////
+  // const { id } = req.params;
+  // console.log(id);
+  // dbo.collection("Gigs").findOne({ _id: ObjectId(id) }, function (err, gigs) {
+  //   if (err) {
+  //     return res.status(400).json({ msg: "Error" });
+  //   }
+  //   console.log(gigs);
+  //   return res.json(gigs);
+  // });
   //   return res.json({ gigs });
 };
 
@@ -212,7 +244,7 @@ exports.edit = async (req, res) => {
         { _id: ObjectId(gig._id) },
         {
           $set: {
-            title: gig.title,
+            gigTitle: gig.gigTitle,
             budget: gig.budget,
             category: gig.category,
             gigdescription: gig.gigdescription,

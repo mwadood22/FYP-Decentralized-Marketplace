@@ -42,6 +42,7 @@ import { useMoralis } from "react-moralis";
 
 import styles from "assets/jss/material-kit-react/views/workerpage.js";
 import { useHistory } from "react-router-dom"; // version 5.2.0
+import { useEffect } from "react";
 
 // import image from "assets/img/bg7.jpg";
 // import helper from "assets/img/services/helper.jpg";
@@ -61,24 +62,120 @@ const useStyles = makeStyles(styles);
 // ];
 
 export default function WorkerPage(props) {
-  const { isAuthenticated, user } = useMoralis();
+  const { isUnauthenticated, isAuthenticated, user } = useMoralis();
+  console.log(isUnauthenticated);
   const history = useHistory();
-  if (!isAuthenticated) {
+
+  if (isUnauthenticated) {
     history.push("/signup-page");
   }
+
+  // if (!isAuthenticated) {
+  // console.log(isAuthenticated);
+  // console.log(user.id);
+  // console.log("Moralis crashed");
+  // history.push("/signup-page");
+  // }
   var id, worker_name;
   if (isAuthenticated) {
+    // console.log(isAuthenticated);
     id = user.id;
     worker_name = user.attributes.username;
   }
-  const [worker, setWorkerData] = useState({
+  const initialValues = {
     Name: "",
     picture: "",
     city: "",
     contact: "",
     skills: "",
     about: "",
-  });
+  };
+  const [formValues, setFormValues] = useState(initialValues);
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
+  };
+
+  const validate = (values) => {
+    const errors = {};
+    // const regex = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/;
+    const regex = /^[a-zA-Z ]*$/;
+
+    // if (!values.username) {
+    //   errors.username = "Username is required!";
+    // }
+    // if (!values.email) {
+    //   errors.email = "Email is required!";
+    // } else if (!regex.test(values.email)) {
+    //   errors.email = "This is not a valid email format!";
+    // }
+    // if (!values.password) {
+    //   errors.password = "Password is required";
+    // } else if (values.password.length < 4) {
+    //   errors.password = "Password must be more than 4 characters";
+    // } else if (values.password.length > 10) {
+    //   errors.password = "Password cannot exceed more than 10 characters";
+    // }
+
+    ////////////////////////////////////////////////////
+    console.log(values.Name);
+    if (!values.Name) {
+      errors.name = "Name is required!";
+    } else if (values.Name.length > 15) {
+      errors.name = "Name cannot exceed more than 15 characters";
+    }
+    console.log(values.contact);
+
+    if (!values.contact) {
+      errors.contact = "Budget is required!";
+    } else if (isNaN(values.contact)) {
+      errors.contact = "Please enter numeric value!";
+    }
+    // console.log(isNaN(values.budget), "HEEELLLLOOOOOOOOOOOOOOOOOOO");
+    // else if (!regex.test(values.email)) {
+    //   errors.email = "This is not a valid email format!";
+    // }
+    console.log(values.city);
+
+    if (!values.city) {
+      errors.city = "City is required";
+    } else if (!regex.test(values.city)) {
+      errors.city = "Invalid city";
+    }
+    console.log(values.skills);
+
+    if (!values.skills) {
+      errors.skills = "Skills is required";
+    }
+    //  else if (values.password.length < 4) {
+    //   errors.password = "Password must be more than 4 characters";
+    // }
+    console.log(values.about);
+
+    if (!values.about) {
+      errors.about = "About is required";
+    } else if (values.about.length > 150) {
+      errors.about = "About cannot exceed more than 150 characters";
+    }
+
+    if (!values.picture) {
+      errors.picture = "Picture is required";
+    }
+    /////////////////////////////////////
+    console.log(errors);
+    return errors;
+  };
+  // const [worker, setWorkerData] = useState({
+  //   Name: "",
+  //   picture: "",
+  //   city: "",
+  //   contact: "",
+  //   skills: "",
+  //   about: "",
+  // });
 
   // const [formErrors, setFormErrors] = useState({});
   // const [isSubmit, setIsSubmit] = useState(true);
@@ -111,19 +208,23 @@ export default function WorkerPage(props) {
   //   return errors;
   // };
 
-  let name, value;
-  const handleInputs = (e) => {
-    name = e.target.name;
-    value = e.target.value;
-    console.log(e);
-    setWorkerData({ ...worker, [name]: value });
-  };
+  // let name, value;
+  // const handleInputs = (e) => {
+  //   name = e.target.name;
+  //   value = e.target.value;
+  //   console.log(e);
+  //   setWorkerData({ ...worker, [name]: value });
+  // };
   const imageUpload = (e) => {
     //console.log(e.target.files[0]);
-    setWorkerData({ ...worker, picture: e.target.files[0] });
+    setFormValues({ ...formValues, picture: e.target.files[0] });
+    // setWorkerData({ ...worker, picture: e.target.files[0] });
   };
 
   const postData = async (id) => {
+    console.log("Post Data is called");
+    // console.log(Object.keys(formErrors).length);
+    // if (Object.keys(formErrors).length === 0 && isSubmit) {
     // e.preventDefault();
     // console.log(e.target.value);
     //const { Name, picture, city, contact, skills, about } = worker;
@@ -158,12 +259,12 @@ export default function WorkerPage(props) {
 
     //console.log("==", gig.picture, "===", gig.picture.name);
     console.log("data added");
-    formdata.append("picture", worker.picture, worker.picture.name);
+    formdata.append("picture", formValues.picture, formValues.picture.name);
     formdata.append("Name", workerName);
-    formdata.append("city", worker.city);
-    formdata.append("contact", worker.contact);
-    formdata.append("skills", worker.skills);
-    formdata.append("about", worker.about);
+    formdata.append("city", formValues.city);
+    formdata.append("contact", formValues.contact);
+    formdata.append("skills", formValues.skills);
+    formdata.append("about", formValues.about);
     formdata.append("user_id", user_id);
     //let url = "/gig/create";
     try {
@@ -190,7 +291,7 @@ export default function WorkerPage(props) {
       //   console.log(data);
       //   history.push("/gigs-page");
       // }
-      history.push("/worker-dashborad/" + id);
+      // history.push("/worker-dashborad/" + id);
 
       if (res.status === 42) {
         window.alert("Invalid registeration");
@@ -202,8 +303,28 @@ export default function WorkerPage(props) {
     } catch (e) {
       window.alert("catch block ");
     }
+    // }
   };
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Inside handle submit");
+    setFormErrors(validate(formValues));
+    setIsSubmit(true);
+    console.log(Object.keys(formErrors).length);
+    console.log(isSubmit);
+    // if (Object.keys(formErrors).length === 0 && isSubmit) {
+    //   postData(id);
+    //   history.push("/worker-dashboard/" + id);
+    // }
+  };
+  function checkData(id) {
+    console.log("inside Check data");
+    console.log(Object.keys(formErrors).length);
+    console.log(isSubmit);
+    postData(id);
+    history.push("/worker-dashboard/" + id);
+    // postData();
+  }
   // const [currency, setCurrency] = React.useState("None");
 
   // const handleChange = (event) => {
@@ -224,6 +345,20 @@ export default function WorkerPage(props) {
   //     paddingLeft: "20px",
   //   },
   // };
+
+  useEffect(() => {
+    doSomething();
+  }, [isAuthenticated]);
+  const doSomething = () => {
+    console.log(isAuthenticated);
+    // console.log("function executed");
+    // history.push("/signup-page");
+  };
+  // if (!isAuthenticated) {
+  //   console.log("isLoading");
+  //   return <span>loading...</span>;
+  //   // history.push("/signup-page");
+  // }
   return (
     <div>
       <Header
@@ -253,8 +388,8 @@ export default function WorkerPage(props) {
                         id="Name"
                         label="Name"
                         name="Name"
-                        value={worker.Name}
-                        onChange={handleInputs}
+                        value={formValues.Name}
+                        onChange={handleChange}
                         InputProps={{
                           type: "text",
                           endAdornment: (
@@ -265,6 +400,8 @@ export default function WorkerPage(props) {
                         }}
                         variant="standard"
                       />
+                      <p className={classes.warningPara}>{formErrors.name}</p>
+
                       {/* <span style={{ color: "red" }}>{formErrors.Name}</span> */}
                     </GridItem>
                     {/* <GridItem xs={6} sm={6} md={6}>
@@ -298,8 +435,8 @@ export default function WorkerPage(props) {
                         id="contact"
                         label="contact"
                         name="contact"
-                        value={worker.contact}
-                        onChange={handleInputs}
+                        value={formValues.contact}
+                        onChange={handleChange}
                         InputProps={{
                           type: "text",
                           endAdornment: (
@@ -310,6 +447,10 @@ export default function WorkerPage(props) {
                         }}
                         variant="standard"
                       />
+                      <p className={classes.warningPara}>
+                        {formErrors.contact}
+                      </p>
+
                       {/* <span style={{ color: "red" }}>{formErrors.contact}</span> */}
                     </GridItem>
                     <GridItem xs={6} sm={6} md={6}>
@@ -320,8 +461,8 @@ export default function WorkerPage(props) {
                         id="city"
                         label="city"
                         name="city"
-                        value={worker.city}
-                        onChange={handleInputs}
+                        value={formValues.city}
+                        onChange={handleChange}
                         InputProps={{
                           type: "text",
                           endAdornment: (
@@ -334,6 +475,8 @@ export default function WorkerPage(props) {
                         }}
                         variant="standard"
                       />
+                      <p className={classes.warningPara}>{formErrors.city}</p>
+
                       {/* <span style={{ color: "red" }}>{formErrors.city}</span> */}
                     </GridItem>
                     <GridItem xs={6} sm={6} md={6}>
@@ -344,8 +487,8 @@ export default function WorkerPage(props) {
                         id="skills"
                         label="Skills"
                         name="skills"
-                        value={worker.skills}
-                        onChange={handleInputs}
+                        value={formValues.skills}
+                        onChange={handleChange}
                         InputProps={{
                           type: "text",
                           endAdornment: (
@@ -356,6 +499,7 @@ export default function WorkerPage(props) {
                         }}
                         variant="standard"
                       />
+                      <p className={classes.warningPara}>{formErrors.skills}</p>
                     </GridItem>
                     <GridItem>
                       <TextField
@@ -368,9 +512,11 @@ export default function WorkerPage(props) {
                         id="about"
                         label="tell us about yourself"
                         name="about"
-                        value={worker.about}
-                        onChange={handleInputs}
+                        value={formValues.about}
+                        onChange={handleChange}
                       />
+                      <p className={classes.warningPara}>{formErrors.about}</p>
+
                       {/* <span style={{ color: "red" }}>{formErrors.about}</span> */}
                     </GridItem>
                     <GridItem>
@@ -381,23 +527,32 @@ export default function WorkerPage(props) {
                         color="green"
                         margin="normal"
                         //fullWidth
-                        value={worker.picture}
+                        value={formValues.picture}
                         onChange={imageUpload}
                       >
                         Upload Picture
                         <input type="file" hidden />
                       </Button>
+                      <p className={classes.warningPara}>
+                        {formErrors.picture}
+                      </p>
+
                       {/* <span style={{ color: "red" }}>{formErrors.picture}</span> */}
                     </GridItem>
-
+                    {Object.keys(formErrors).length === 0 && isSubmit
+                      ? // <div className="ui message success">Signed in successfully</div>
+                        checkData(id)
+                      : console.log("Error in form!")}
                     <GridItem>
                       <Button
                         color="black"
-                        href={"/worker-dashboard/" + id}
-                        onClick={() => postData(id)}
+                        // href={"/worker-dashboard/" + id}
+                        onClick={(e) => handleSubmit(e)}
+                        // onClick={() => postData(id)}
                       >
                         Get started
                       </Button>
+                      {/* {console.log(Object.keys(formErrors).length)} */}
                     </GridItem>
                   </GridContainer>
                 </form>

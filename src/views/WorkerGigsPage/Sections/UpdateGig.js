@@ -8,7 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 // import People from "@material-ui/icons/People";
 // core components
 import Header from "components/Header/Header.js";
-import HeaderLinks from "components/Header/HeaderLinks.js";
+import WorkerHeaderLinks from "components/Header/WorkerHeaderLinks.js";
 import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -26,8 +26,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 //import Icon from "@material-ui/core/Icon";
 //import Email from "@material-ui/icons/Email";
 import People from "@material-ui/icons/People";
-import LocationCity from "@material-ui/icons/LocationCity";
-import Language from "@material-ui/icons/Language";
+
 import Edit from "@material-ui/icons/Edit";
 import Budget from "@material-ui/icons/Money";
 //import Photo from "@material-ui/icons/Photo";
@@ -36,7 +35,6 @@ import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import { useHistory } from "react-router-dom"; // version 5.2.0
 import { useMoralis } from "react-moralis";
-
 // import Paper from "@mui/material/Paper";
 
 import styles from "assets/jss/material-kit-react/views/workerpage.js";
@@ -64,38 +62,38 @@ const currencies = [
   },
 ];
 
-export default function WorkerPage(props) {
+export default function UpdateWorkerGig(props) {
   //getting variables from form
   const { Moralis, isAuthenticated } = useMoralis();
-
-  const [jobs, setUserData] = useState({
+  const [gigs, setUserData] = useState({
     _id: "",
-    title: "",
+    gigTitle: "",
     budget: "",
-    city: "",
-    address: "",
-    description: "",
     category: "",
+    gigdescription: "",
   });
   const { ...temp } = props;
-  const jobId = temp.match.params.jobId;
-  // const [job, setJob] = useState({
-  //   _id: "",
-  //   title: "",
-  //   budget: "",
-  //   city: "",
-  //   address: "",
-  //   description: "",
-  //   category: "",
-  // });
-
+  const gigId = temp.match.params.gigId;
+  //   const [gig, setGig] = useState({
+  //     _id: "",
+  //     gigTitle: "",
+  //     budget: "",
+  //     category: "",
+  //     gigdescription: "",
+  //   });
+  //   let name, value;
+  //   const handleInputs = (e) => {
+  //     name = e.target.name;
+  //     value = e.target.value;
+  //     console.log(e);
+  //     setGig({ ...gig, [name]: value });
+  //   };
   const initialValues = {
-    title: "",
+    _id: "",
+    gigTitle: "",
     budget: "",
-    city: "",
-    address: "",
     category: "",
-    description: "",
+    gigdescription: "",
   };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
@@ -105,33 +103,24 @@ export default function WorkerPage(props) {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
   };
-  // let name, value;
-  // const handleInputs = (e) => {
-  //   name = e.target.name;
-  //   value = e.target.value;
-  //   console.log(e);
-  //   setJob({ ...job, [name]: value });
-  // };
   const history = useHistory();
   const postData = async () => {
     // e.preventDefault();
-    console.warn("inside post Data");
-    const { title, budget, city, address, description, category } = formValues;
-    const _id = jobs._id;
+    console.log("Inside post data");
+    const { gigTitle, budget, category, gigdescription } = formValues;
+    const _id = gigs._id;
     console.log(_id);
-    const res = await fetch("/job/", {
+    const res = await fetch("/gig/", {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         _id,
-        title,
+        gigTitle,
         budget,
-        city,
-        address,
-        description,
         category,
+        gigdescription,
       }),
     });
 
@@ -142,12 +131,12 @@ export default function WorkerPage(props) {
       console.log("Invalid registeration");
     } else {
       console.log(data);
-      // history.push("/customjobs-page");
+      history.push("/gigs-page");
     }
   };
   const callAboutPage = async () => {
     try {
-      const res = await fetch(`/jobs/get/${jobId}`, {
+      const res = await fetch(`/gig/${gigId}`, {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -155,7 +144,6 @@ export default function WorkerPage(props) {
         },
       });
       const data = await res.json();
-      console.log(jobId);
       console.log(data);
       setUserData(data);
       setFormValues(data);
@@ -178,39 +166,40 @@ export default function WorkerPage(props) {
     console.log(Object.keys(formErrors).length);
     console.log(isSubmit);
     postData();
-    history.push("/customjobs-page/" + id_of.id);
+    history.push("/workerGigs-page/" + id_of.id);
     // postData();
     console.log(id_of, history);
   }
   const validate = (values) => {
     const errors = {};
-    const regex = /^[a-zA-Z ]*$/;
+    // const regex = /^[a-zA-Z ]*$/;
 
     ////////////////////////////////////////////////////
-    if (!values.title) {
-      errors.title = "Title is required!";
-    } else if (values.title.length > 20) {
-      errors.title = "Title cannot exceed more than 20 characters";
+    if (!values.gigTitle) {
+      errors.gigTitle = "Title is required!";
+    } else if (values.gigTitle.length > 20) {
+      errors.gigTitle = "Title cannot exceed more than 20 characters";
     }
     if (!values.budget) {
       errors.budget = "Budget is required!";
     } else if (isNaN(values.budget)) {
       errors.budget = "Please enter numeric value!";
     }
-    if (!values.city) {
-      errors.city = "City is required";
-    } else if (!regex.test(values.city)) {
-      errors.city = "Invalid city";
-    }
+    // if (!values.city) {
+    //   errors.city = "City is required";
+    // } else if (!regex.test(values.city)) {
+    //   errors.city = "Invalid city";
+    // }
 
-    if (!values.address) {
-      errors.address = "Address is required";
-    }
+    // if (!values.address) {
+    //   errors.address = "Address is required";
+    // }
 
-    if (!values.description) {
-      errors.description = "Description is required";
-    } else if (values.description.length > 150) {
-      errors.description = "Description cannot exceed more than 150 characters";
+    if (!values.gigdescription) {
+      errors.gigdescription = "Description is required";
+    } else if (values.gigdescription.length > 150) {
+      errors.gigdescription =
+        "Description cannot exceed more than 150 characters";
     }
 
     if (!values.category) {
@@ -219,20 +208,11 @@ export default function WorkerPage(props) {
     /////////////////////////////////////
     return errors;
   };
-  const [category, setCategory] = React.useState("None");
-  let name, value;
-  const handleCategory = (event) => {
-    setCategory(event.target.value);
-    name = event.target.name;
-    value = event.target.value;
-    // console.log(e);
-    setFormValues({ ...formValues, [name]: value });
-    // setJobData({ ...job, [name]: value });
-  };
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormErrors(validate(formValues));
     setIsSubmit(true);
+    console.log("Inside handle submit");
     // console.log(Object.keys(formErrors).length);
     // console.log(isSubmit);
     // if (Object.keys(formErrors).length === 0 && isSubmit) {
@@ -272,7 +252,7 @@ export default function WorkerPage(props) {
         absolute
         color="black"
         brand="MARKAZ"
-        rightLinks={<HeaderLinks />}
+        rightLinks={<WorkerHeaderLinks />}
         {...rest}
       />
       <div className={classes.pageHeader}>
@@ -283,7 +263,7 @@ export default function WorkerPage(props) {
               <Card className={(classes[cardAnimaton], classes.card2)}>
                 <form className={classes.form}>
                   <CardHeader color="green" className={classes.cardHeader}>
-                    <h4>Update your Job!</h4>
+                    <h4>Update your gig!</h4>
                   </CardHeader>
                   <p className={classes.divider}></p>
                   <GridContainer>
@@ -292,11 +272,11 @@ export default function WorkerPage(props) {
                         margin="normal"
                         required
                         fullWidth
-                        name="title"
-                        value={formValues.title}
+                        name="gigTitle"
+                        value={formValues.gigTitle}
                         onChange={handleChange}
                         id="title"
-                        label="Job Title"
+                        label="Gig Title"
                         InputProps={{
                           type: "text",
                           endAdornment: (
@@ -307,7 +287,9 @@ export default function WorkerPage(props) {
                         }}
                         variant="standard"
                       />
-                      <p className={classes.warningPara}>{formErrors.title}</p>
+                      <p className={classes.warningPara}>
+                        {formErrors.gigTitle}
+                      </p>
                     </GridItem>
 
                     <GridItem xs={6} sm={6} md={6}>
@@ -340,10 +322,10 @@ export default function WorkerPage(props) {
                         select
                         margin="normal"
                         label=" "
-                        name="categeory"
-                        value={category}
-                        onChange={handleCategory}
-                        helperText="category"
+                        name="category"
+                        value={formValues.category}
+                        onChange={handleChange}
+                        helperText="Category"
                         InputProps={{
                           endAdornment: (
                             <InputAdornment position="start">
@@ -367,80 +349,32 @@ export default function WorkerPage(props) {
                       <TextField
                         margin="normal"
                         fullWidth
-                        name="city"
-                        value={formValues.city}
-                        onChange={handleChange}
-                        required
-                        textarea
-                        id="desc"
-                        label="City"
-                        InputProps={{
-                          type: "text",
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <LocationCity
-                                className={classes.inputIconsColor}
-                              />
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-                      <p className={classes.warningPara}>{formErrors.city}</p>
-                    </GridItem>
-
-                    <GridItem>
-                      <TextField
-                        margin="normal"
-                        fullWidth
-                        name="address"
-                        value={formValues.address}
-                        onChange={handleChange}
-                        required
-                        textarea
-                        id="desc"
-                        label="Address"
-                        InputProps={{
-                          type: "text",
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <Language className={classes.inputIconsColor} />
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-                      <p className={classes.warningPara}>
-                        {formErrors.address}
-                      </p>
-                    </GridItem>
-
-                    <GridItem>
-                      <TextField
-                        margin="normal"
-                        fullWidth
-                        name="description"
-                        value={formValues.description}
+                        name="gigdescription"
+                        value={formValues.gigdescription}
                         onChange={handleChange}
                         required
                         multiline
                         rows={8}
                         textarea
                         id="desc"
-                        label="Job Description"
+                        label="Gig Description"
                       />
                       <p className={classes.warningPara}>
-                        {formErrors.description}
+                        {formErrors.gigdescription}
                       </p>
                     </GridItem>
 
                     <GridItem>
                       <Button
                         color="black"
-                        href="/customjobs-page"
+                        // href="/gigs-page"
                         // disabled={gig.title === "" || gig.budget === ""}
                         onClick={handleSubmit}
                       >
-                        Update Job
+                        Update Gig
                       </Button>
+                      {console.log(formErrors)}
+                      {console.log(isSubmit)}
                       {Object.keys(formErrors).length === 0 && isSubmit
                         ? // <div className="ui message success">Signed in successfully</div>
                           checkData()

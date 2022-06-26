@@ -26,8 +26,59 @@ export default function HeaderLinks(props) {
   const classes = useStyles();
   const { isAuthenticated, logout, user } = useMoralis();
   var workerId;
+  // var id_of;
   if (isAuthenticated) {
     workerId = user.id;
+    // id_of = Moralis.User.current();
+  }
+  console.log(workerId);
+  var optionButton;
+  if (isAuthenticated) {
+    optionButton = (
+      <>
+        <ListItem className={classes.listItem}>
+          {console.log(workerId)}
+          <Link to={"/workerGigs-page/" + workerId} className={classes.newlink}>
+            <Button
+              color="transparent"
+              // href="/customjobs-page"
+              //target="_blank"
+              className={classes.navLink}
+            >
+              My Gigs
+            </Button>
+          </Link>
+          {/* <Button
+          color="transparent"
+          href={"/workerGigs-page/" + workerId}
+          //target="_blank"
+          className={classes.navLink}
+        >
+          My Gigs
+        </Button> */}
+        </ListItem>
+        <ListItem className={classes.listItem}>
+          <Button
+            color="transparent"
+            href="/findjobs-page"
+            //target="_blank"
+            className={classes.navLink}
+          >
+            Find jobs
+          </Button>
+        </ListItem>
+        <ListItem className={classes.listItem}>
+          <Button
+            color="transparent"
+            href="/landing-page"
+            //target="_blank"
+            className={classes.navLink}
+          >
+            Become a client
+          </Button>
+        </ListItem>
+      </>
+    );
   }
   return (
     <List className={classes.list}>
@@ -127,37 +178,7 @@ export default function HeaderLinks(props) {
         </Button>
         
     </ListItem>*/}
-      <ListItem className={classes.listItem}>
-        <Button
-          color="transparent"
-          href="/gigs-page"
-          //target="_blank"
-          className={classes.navLink}
-        >
-          My Gigs
-        </Button>
-      </ListItem>
-      <ListItem className={classes.listItem}>
-        <Button
-          color="transparent"
-          href="/findjobs-page"
-          //target="_blank"
-          className={classes.navLink}
-        >
-          Find jobs
-        </Button>
-      </ListItem>
-      <ListItem className={classes.listItem}>
-        <Button
-          color="transparent"
-          href="/landing-page"
-          //target="_blank"
-          className={classes.navLink}
-        >
-          Become a client
-        </Button>
-      </ListItem>
-
+      {optionButton}
       <ListItem className={classes.listItem}>
         <Tooltip
           id="instagram-tooltip"

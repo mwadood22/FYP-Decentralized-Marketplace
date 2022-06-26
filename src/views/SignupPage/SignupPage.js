@@ -109,6 +109,10 @@ export default function SignupPage(props) {
     setIsSubmit(true);
   };
 
+  function checkData() {
+    signup(formValues.username, formValues.password, formValues.email);
+    history.push("/landing-page");
+  }
   useEffect(() => {
     console.log(formErrors);
     if (Object.keys(formErrors).length === 0 && isSubmit) {
@@ -308,11 +312,7 @@ export default function SignupPage(props) {
                   <CardFooter className={classes.cardFooter}>
                     {Object.keys(formErrors).length === 0 && isSubmit
                       ? // <div className="ui message success">Signed in successfully</div>
-                        signup(
-                          formValues.username,
-                          formValues.password,
-                          formValues.email
-                        )
+                        checkData()
                       : console.log("Error in form!")}
                     <Button
                       color="black"
