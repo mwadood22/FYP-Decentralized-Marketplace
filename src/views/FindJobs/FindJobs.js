@@ -314,7 +314,6 @@ export default function FindJobs(props) {
                             name="job_id"
                             value={jobs._id}
                           /> */}
-                          {/* {console.log(jobs._id)} */}
                           <Button
                             color="green"
                             size="md"

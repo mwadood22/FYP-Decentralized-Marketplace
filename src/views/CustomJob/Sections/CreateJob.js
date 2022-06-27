@@ -72,10 +72,6 @@ const currencies = [
   {
     value: "Others",
   },
-
-  {
-    value: "Others",
-  },
 ];
 
 export default function WorkerPage(props) {

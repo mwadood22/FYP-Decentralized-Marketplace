@@ -378,11 +378,12 @@ export default function ProfilePage(props) {
                       tabIcon: Schedule,
                       tabContent: <Table4 projects={project} />,
                     },
-                    {
-                      tabButton: "Projects History",
-                      tabIcon: Schedule,
-                      tabContent: <Table3 />,
-                    },
+                    // {
+                    //   tabButton: "Projects History",
+                    //   tabIcon: Schedule,
+                    //   tabContent: <Table3 />,
+                    // },
+
                     // {
                     //   tabButton: "About Myself",
                     //   tabIcon: EmojiPeopleIcon,

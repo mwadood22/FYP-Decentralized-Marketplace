@@ -226,6 +226,7 @@ export default function Gig(props) {
   };
 
   const [gig, setGigData] = useState({
+    _id: "",
     gigTitle: "",
     budget: "",
     category: "",
@@ -380,9 +381,10 @@ export default function Gig(props) {
     // console.log(e.target.value);
 
     const clientId = id;
-    const worker = gig.workerId;
+    const workerId = gig.workerId;
     const clientName = clientname;
-    const { title, city, budget, address, description } = offer;
+
+    const { title, city, budget, address, description, gigId } = offer;
     const res = await fetch("/offer/create", {
       method: "POST",
       headers: {
@@ -396,7 +398,8 @@ export default function Gig(props) {
         description,
         clientId,
         clientName,
-        worker,
+        workerId,
+        gigId,
       }),
     });
     console.log(res);

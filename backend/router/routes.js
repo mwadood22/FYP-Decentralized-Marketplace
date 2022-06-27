@@ -87,10 +87,7 @@ router.patch(
   body("city").not().isEmpty().not().isInt(),
   body("contact").not().isEmpty().isInt({ no_symbols: true }),
   body("skills").not().isEmpty().not().isInt(),
-  body("about").not().isEmpty().not().isInt().isLength({
-    min: 30,
-    max: 100,
-  }),
+  body("about").not().isEmpty().not().isInt(),
   body("city").not().isEmpty().not().isInt(),
   workerController.edit
 );
@@ -100,18 +97,18 @@ router.get("/job/", jobController.index);
 router.post(
   "/job/create",
   upload.single("picture"),
-  body("title").not().isEmpty().not().isInt().isLength({
+  body("title").not().isEmpty().isLength({
     min: 15,
   }),
-  body("description").not().isEmpty().not().isInt().isLength({
+  body("description").not().isEmpty().isLength({
     min: 30,
-    max: 150,
+    // max: 150,
   }),
   body("budget").not().isEmpty().isInt({ no_symbols: true }),
   body("category").not().isEmpty(),
   body("address").not().isEmpty(),
   body("city").not().isEmpty().not().isInt(),
-  body("picture").not().isEmpty(),
+  // body("picture").not().isEmpty(),
   jobController.create
 );
 
@@ -172,7 +169,20 @@ router.get("/projects/client/:client_id", projectController.showByClient);
 
 //JobOffers routes
 
-router.post("/offer/create", jobOfferController.create);
+router.post(
+  "/offer/create",
+  body("title").not().isEmpty().isLength({
+    min: 15,
+  }),
+  body("description").not().isEmpty().isLength({
+    min: 30,
+    // max: 150,
+  }),
+  body("budget").not().isEmpty().isInt({ no_symbols: true }),
+  body("address").not().isEmpty(),
+  body("city").not().isEmpty().not().isInt(),
+  jobOfferController.create
+);
 router.get("/offers/getAll", jobOfferController.getAllOffers);
 router.delete("/offer/:id", jobOfferController.delete);
 

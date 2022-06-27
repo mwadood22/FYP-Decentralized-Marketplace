@@ -870,11 +870,12 @@ export default function ProfilePage(props) {
                       ),
                     },
 
-                    {
-                      tabButton: "Projects History",
-                      tabIcon: Schedule,
-                      tabContent: <Table />,
-                    },
+                    // {
+                    //   tabButton: "Projects History",
+                    //   tabIcon: Schedule,
+                    //   tabContent: <Table />,
+                    // },
+
                     // {
                     //   tabButton: "About Myself",
                     //   tabIcon: EmojiPeopleIcon,
