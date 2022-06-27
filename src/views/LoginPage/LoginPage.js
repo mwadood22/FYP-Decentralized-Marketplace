@@ -92,6 +92,7 @@ export default function LoginPage(props) {
     // }
   };
   function checkData() {
+    console.log("Inside check data function for login");
     loginFunction(formValues.email, formValues.password);
     history.push("/landing-page");
   }
@@ -270,7 +271,7 @@ export default function LoginPage(props) {
                       : console.log("Error in form!")}
                     <Button
                       color="black"
-                      href=""
+                      // href=""
                       onClick={handleSubmit}
                       // onClick={() => loginFunction(email, password)}
                     >

@@ -238,7 +238,7 @@ exports.getGigs = (req, res) => {
       if (err) {
         return res.status(400).json({ msg: "Error" });
       }
-      //   console.log(gigs);
+      // console.log(gigs);
       return res.json({ gigs });
     });
   // if (req.headers.accept === "text/event-stream") {

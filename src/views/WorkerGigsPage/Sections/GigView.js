@@ -220,7 +220,7 @@ export default function GigView(props) {
       <GridContainer>
         {console.log(gig)}
 
-        {gig.gigs.length > 1 ? (
+        {gig.gigs.length > 0 ? (
           gig.gigs.map((gigs, index) => {
             return (
               <GridItem xs={12} sm={12} md={3} key={index}>
