@@ -89,6 +89,7 @@ export default function WorkerPage(props) {
     contact: "",
     skills: "",
     about: "",
+    address: "",
   };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
@@ -149,6 +150,9 @@ export default function WorkerPage(props) {
 
     if (!values.skills) {
       errors.skills = "Skills is required";
+    }
+    if (!values.address) {
+      errors.address = "Address is required";
     }
     //  else if (values.password.length < 4) {
     //   errors.password = "Password must be more than 4 characters";
@@ -265,7 +269,9 @@ export default function WorkerPage(props) {
     formdata.append("contact", formValues.contact);
     formdata.append("skills", formValues.skills);
     formdata.append("about", formValues.about);
+    formdata.append("address", formValues.address);
     formdata.append("user_id", user_id);
+
     //let url = "/gig/create";
     try {
       const res = await axios.post("/worker/create", formdata);
@@ -500,6 +506,32 @@ export default function WorkerPage(props) {
                         variant="standard"
                       />
                       <p className={classes.warningPara}>{formErrors.skills}</p>
+                    </GridItem>
+                    <GridItem xs={6} sm={6} md={12}>
+                      <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="address"
+                        label="address"
+                        name="address"
+                        value={formValues.address}
+                        onChange={handleChange}
+                        InputProps={{
+                          type: "text",
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <LocationCity
+                                className={classes.inputIconsColor}
+                              />
+                            </InputAdornment>
+                          ),
+                        }}
+                        variant="standard"
+                      />
+                      <p className={classes.warningPara}>
+                        {formErrors.address}
+                      </p>
                     </GridItem>
                     <GridItem>
                       <TextField

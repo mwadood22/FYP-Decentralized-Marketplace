@@ -39,7 +39,7 @@ router.post(
   // .withMessage("Title must be alphabeticwith enough length"),
   body("gigdescription").not().isEmpty().not().isInt().isLength({
     min: 30,
-    max: 100,
+    max: 150,
   }),
   body("budget").not().isEmpty().isInt({ no_symbols: true }),
   body("category").not().isEmpty(),
@@ -54,10 +54,11 @@ router.patch(
   }),
   body("gigdescription").not().isEmpty().not().isInt().isLength({
     min: 30,
-    max: 100,
+    max: 150,
   }),
   body("budget").not().isEmpty().isInt({ no_symbols: true }),
   body("category").not().isEmpty(),
+  body("picture").not().isEmpty(),
   gigController.edit
 );
 
@@ -100,27 +101,28 @@ router.post(
   "/job/create",
   upload.single("picture"),
   body("title").not().isEmpty().not().isInt().isLength({
-    min: 20,
+    min: 15,
   }),
   body("description").not().isEmpty().not().isInt().isLength({
     min: 30,
-    max: 100,
+    max: 150,
   }),
   body("budget").not().isEmpty().isInt({ no_symbols: true }),
   body("category").not().isEmpty(),
-  body("address").not().isEmpty().not().isInt(),
+  body("address").not().isEmpty(),
   body("city").not().isEmpty().not().isInt(),
+  body("picture").not().isEmpty(),
   jobController.create
 );
 
 router.patch(
   "/job/",
   body("title").not().isEmpty().not().isInt().isLength({
-    min: 40,
+    min: 15,
   }),
   body("description").not().isEmpty().not().isInt().isLength({
-    min: 40,
-    max: 100,
+    min: 30,
+    max: 150,
   }),
   body("budget").not().isEmpty().isInt({ no_symbols: true }),
   body("category").not().isEmpty(),

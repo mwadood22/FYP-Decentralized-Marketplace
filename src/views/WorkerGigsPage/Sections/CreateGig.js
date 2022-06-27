@@ -227,8 +227,8 @@ export default function CreateWorkerGig(props) {
     ////////////////////////////////////////////////////
     if (!values.gigTitle) {
       errors.gigTitle = "Title is required!";
-    } else if (values.gigTitle.length > 20) {
-      errors.gigTitle = "Title cannot exceed more than 20 characters";
+    } else if (values.gigTitle.length < 20) {
+      errors.gigTitle = "Title cannot be less than 20 characters";
     }
     if (!values.budget) {
       errors.budget = "Budget is required!";
@@ -250,6 +250,8 @@ export default function CreateWorkerGig(props) {
     } else if (values.gigDescription.length > 150) {
       errors.gigDescription =
         "Description cannot exceed more than 150 characters";
+    } else if (values.gigDescription.length < 30) {
+      errors.gigDescription = "Description cannot be less than 30 characters";
     }
 
     if (!values.category) {

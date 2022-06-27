@@ -40,10 +40,18 @@ exports.create = (req, res) => {
   var contact = req.body.contact;
   var skills = req.body.skills;
   var about = req.body.about;
+  var address = req.body.address;
   var user_id = req.body.user_id;
-  dbo
-    .collection("WorkerData")
-    .insertOne({ Name, city, contact, skills, about, picture, user_id });
+  dbo.collection("WorkerData").insertOne({
+    Name,
+    city,
+    contact,
+    skills,
+    about,
+    picture,
+    address,
+    user_id,
+  });
   //return res.json({ worker });
   return;
 };
@@ -134,6 +142,7 @@ exports.edit = async (req, res) => {
             contact: worker.contact,
             skills: worker.skills,
             about: worker.about,
+            address: worker.address,
           },
         }
       );

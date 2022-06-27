@@ -225,41 +225,41 @@ export default function GigView(props) {
             return (
               <GridItem xs={12} sm={12} md={3} key={index}>
                 <Card className={classes.card}>
-                  <Link /*to={"gig/" + gigs._id}*/>
-                    {/* {(data = gigs.picture.toString("base64"))} */}
-                    {/* console.log(gigs.picture.toString("base64")) */}
-                    {/* {console.log(data)} */}
+                  {/* <Link to={"gig/" + gigs._id}> */}
+                  {/* {(data = gigs.picture.toString("base64"))} */}
+                  {/* console.log(gigs.picture.toString("base64")) */}
+                  {/* {console.log(data)} */}
 
-                    {/* <img src="" alt="..." className={imageClasses} /> */}
-                    {/* <img
+                  {/* <img src="" alt="..." className={imageClasses} /> */}
+                  {/* <img
                     src="data:image/<%=gigs.picture.image/png%>;base64,
                      <%=gigs.picture.data.toString('base64')%>"
                     alt="..."
                     className={imageClasses}
                   ></img> */}
-                    {/* <img
+                  {/* <img
                     src='data:image/png;base64,gigs.picture.toString("base64")'
                     className={imageClasses}
                   ></img> */}
-                    <img
-                      src={"data:image/png;base64," + gigs.picture}
-                      className={imageClasses}
-                    />
+                  <img
+                    src={"data:image/png;base64," + gigs.picture}
+                    className={imageClasses}
+                  />
 
-                    <CardBody>
-                      <h4 className={classes.cardTitle}>{gigs.title}</h4>
-                      <p className={classes.description}>
-                        {/* {console.log(userData, "HELLO!")} */}
-                        <strong>Budget: </strong>${gigs.budget}
-                        <br />
-                        <strong>Category: </strong>
-                        {gigs.category}
-                        <br />
-                        <strong>Description: </strong>
-                        {gigs.gigdescription}
-                      </p>
-                    </CardBody>
-                  </Link>
+                  <CardBody>
+                    <h4 className={classes.cardTitle}>{gigs.title}</h4>
+                    <p className={classes.description}>
+                      {/* {console.log(userData, "HELLO!")} */}
+                      <strong>Budget: </strong>${gigs.budget}
+                      <br />
+                      <strong>Category: </strong>
+                      {gigs.category}
+                      <br />
+                      <strong>Description: </strong>
+                      {gigs.gigdescription}
+                    </p>
+                  </CardBody>
+                  {/* </Link> */}
                   <GridContainer>
                     <GridItem xs={12} sm={12} md={6}>
                       <Link
