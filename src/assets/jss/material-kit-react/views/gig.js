@@ -33,6 +33,7 @@ const workerPageStyle = {
     flex: "1 1 auto",
     padding: "0.9375rem 1.875rem",
     webkitBoxFlex: "1",
+    textAlign: "center",
   },
   sliderImg: {
     margin: "10px auto 0",

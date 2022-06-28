@@ -66,6 +66,15 @@ const currencies = [
     value: "Gardener",
   },
   {
+    value: "Helper",
+  },
+  {
+    value: "Carpenter",
+  },
+  {
+    value: "Painter",
+  },
+  {
     value: "Others",
   },
 ];
@@ -241,8 +250,8 @@ export default function WorkerPage(props) {
     ////////////////////////////////////////////////////
     if (!values.title) {
       errors.title = "Title is required!";
-    } else if (values.title.length < 20) {
-      errors.title = "Title should be more than 20 characters";
+    } else if (values.title.length < 15) {
+      errors.title = "Title cannot be less than 15 characters";
     }
     if (!values.budget) {
       errors.budget = "Budget is required!";
@@ -263,6 +272,8 @@ export default function WorkerPage(props) {
       errors.description = "Description is required";
     } else if (values.description.length > 150) {
       errors.description = "Description cannot exceed more than 150 characters";
+    } else if (values.description.length < 30) {
+      errors.description = "Description cannot be less than 30 characters";
     }
 
     if (!values.category) {

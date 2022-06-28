@@ -20,7 +20,7 @@ import Table4 from "components/Table/Table4.js";
 //import Table2 from "components/Table2/Table2.js";
 import Parallax from "components/Parallax/Parallax.js";
 
-import profile from "assets/img/faces/face5.jpg";
+import profile from "assets/img/faces/ClientPicture.jpg";
 
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
@@ -383,11 +383,12 @@ export default function ProfilePage(props) {
                       tabIcon: Schedule,
                       tabContent: <Table4 projects={project} />,
                     },
-                    {
-                      tabButton: "Projects History",
-                      tabIcon: Schedule,
-                      tabContent: <Table3 />,
-                    },
+                    // {
+                    //   tabButton: "Projects History",
+                    //   tabIcon: Schedule,
+                    //   tabContent: <Table3 />,
+                    // },
+
                     // {
                     //   tabButton: "About Myself",
                     //   tabIcon: EmojiPeopleIcon,

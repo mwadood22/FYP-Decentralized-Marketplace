@@ -201,6 +201,7 @@ export default function ProfilePage(props) {
     _id: "",
     Name: "",
     city: "",
+    address: "",
     contact: "",
     skills: "",
     about: "",
@@ -370,7 +371,7 @@ export default function ProfilePage(props) {
   const postData = async (e) => {
     e.preventDefault();
 
-    const { Name, city, contact, skills, about } = worker;
+    const { Name, city, contact, skills, about, address } = worker;
     const _id = worker._id;
     console.log(_id);
     const res = await fetch("/worker/", {
@@ -385,6 +386,7 @@ export default function ProfilePage(props) {
         contact,
         skills,
         about,
+        address,
       }),
     });
 
@@ -566,7 +568,7 @@ export default function ProfilePage(props) {
 
                           <i className="fas fa-home"></i>
                           <b className={classes.desc}>Address</b>
-                          <p>{worker.city}</p>
+                          <p>{worker.address}</p>
                           <hr className={classes.hr} />
 
                           <i className="fas fa-map-marker"></i>
@@ -622,6 +624,26 @@ export default function ProfilePage(props) {
                                 id="city"
                                 name="city"
                                 value={worker.city}
+                                onChange={handleInputs}
+                                formControlProps={{
+                                  fullWidth: true,
+                                }}
+                                inputProps={{
+                                  type: "text",
+                                  endAdornment: (
+                                    <InputAdornment position="end">
+                                      <City
+                                        className={classes.inputIconsColor}
+                                      />
+                                    </InputAdornment>
+                                  ),
+                                }}
+                              />
+                              <CustomInput
+                                labelText="Edit Address"
+                                id="address"
+                                name="address"
+                                value={worker.address}
                                 onChange={handleInputs}
                                 formControlProps={{
                                   fullWidth: true,
@@ -875,11 +897,12 @@ export default function ProfilePage(props) {
                       ),
                     },
 
-                    {
-                      tabButton: "Projects History",
-                      tabIcon: Schedule,
-                      tabContent: <Table />,
-                    },
+                    // {
+                    //   tabButton: "Projects History",
+                    //   tabIcon: Schedule,
+                    //   tabContent: <Table />,
+                    // },
+
                     // {
                     //   tabButton: "About Myself",
                     //   tabIcon: EmojiPeopleIcon,

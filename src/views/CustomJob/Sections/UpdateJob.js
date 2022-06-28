@@ -45,7 +45,6 @@ import styles from "assets/jss/material-kit-react/views/workerpage.js";
 // import helper from "assets/img/services/helper.jpg";
 
 const useStyles = makeStyles(styles);
-
 const currencies = [
   {
     value: "Plumber",
@@ -58,6 +57,15 @@ const currencies = [
   },
   {
     value: "Gardener",
+  },
+  {
+    value: "Helper",
+  },
+  {
+    value: "Carpenter",
+  },
+  {
+    value: "Painter",
   },
   {
     value: "Others",

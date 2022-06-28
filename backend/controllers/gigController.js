@@ -208,6 +208,8 @@ exports.delete = (req, res) => {
   const { id } = req.params;
   console.log(id);
   dbo.collection("Gigs").remove({ _id: ObjectId(id) });
+
+  // dbo.collection("JobOffers").remove({ gigId: id });
   return res.json({ msg: "deleted" });
 };
 

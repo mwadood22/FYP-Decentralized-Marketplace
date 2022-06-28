@@ -39,7 +39,7 @@ router.post(
   // .withMessage("Title must be alphabeticwith enough length"),
   body("gigdescription").not().isEmpty().not().isInt().isLength({
     min: 30,
-    max: 100,
+    max: 150,
   }),
   body("budget").not().isEmpty().isInt({ no_symbols: true }),
   body("category").not().isEmpty(),
@@ -54,10 +54,11 @@ router.patch(
   }),
   body("gigdescription").not().isEmpty().not().isInt().isLength({
     min: 30,
-    max: 100,
+    max: 150,
   }),
   body("budget").not().isEmpty().isInt({ no_symbols: true }),
   body("category").not().isEmpty(),
+  body("picture").not().isEmpty(),
   gigController.edit
 );
 
@@ -86,10 +87,7 @@ router.patch(
   body("city").not().isEmpty().not().isInt(),
   body("contact").not().isEmpty().isInt({ no_symbols: true }),
   body("skills").not().isEmpty().not().isInt(),
-  body("about").not().isEmpty().not().isInt().isLength({
-    min: 30,
-    max: 100,
-  }),
+  body("about").not().isEmpty().not().isInt(),
   body("city").not().isEmpty().not().isInt(),
   workerController.edit
 );
@@ -99,28 +97,29 @@ router.get("/job/", jobController.index);
 router.post(
   "/job/create",
   upload.single("picture"),
-  body("title").not().isEmpty().not().isInt().isLength({
-    min: 20,
+  body("title").not().isEmpty().isLength({
+    min: 15,
   }),
-  body("description").not().isEmpty().not().isInt().isLength({
+  body("description").not().isEmpty().isLength({
     min: 30,
-    max: 100,
+    // max: 150,
   }),
   body("budget").not().isEmpty().isInt({ no_symbols: true }),
   body("category").not().isEmpty(),
-  body("address").not().isEmpty().not().isInt(),
+  body("address").not().isEmpty(),
   body("city").not().isEmpty().not().isInt(),
+  // body("picture").not().isEmpty(),
   jobController.create
 );
 
 router.patch(
   "/job/",
   body("title").not().isEmpty().not().isInt().isLength({
-    min: 20,
+    min: 15,
   }),
   body("description").not().isEmpty().not().isInt().isLength({
-    min: 40,
-    max: 100,
+    min: 30,
+    max: 150,
   }),
   body("budget").not().isEmpty().isInt({ no_symbols: true }),
   body("category").not().isEmpty(),
@@ -172,6 +171,21 @@ router.get("/projects/client/:client_id", projectController.showByClient);
 
 router.post("/offer/create", jobOfferController.create);
 router.get("/offers/:workerId", jobOfferController.getAllOffers);
+router.post(
+  "/offer/create",
+  body("title").not().isEmpty().isLength({
+    min: 15,
+  }),
+  body("description").not().isEmpty().isLength({
+    min: 30,
+    // max: 150,
+  }),
+  body("budget").not().isEmpty().isInt({ no_symbols: true }),
+  body("address").not().isEmpty(),
+  body("city").not().isEmpty().not().isInt(),
+  jobOfferController.create
+);
+router.get("/offers/getAll", jobOfferController.getAllOffers);
 router.delete("/offer/:id", jobOfferController.delete);
 // router.get("/offers/:workerId", jobOfferController.get);
 

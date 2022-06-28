@@ -28,7 +28,7 @@ import UpdateWorkerGig from "views/WorkerGigsPage/Sections/UpdateGig.js";
 import CreateJob from "views/CustomJob/Sections/CreateJob.js";
 import UpdateJob from "views/CustomJob/Sections/UpdateJob.js";
 import MakePayment from "views/MakePayment/MakePayment.js";
-import Gig from "views/GigsPage/Sections/Gig.js";
+import Gig from "views/WorkerGigsPage/Sections/Gig.js";
 import Gig2 from "views/GigsPage/Sections/Gig2.js";
 import App from "views/LandingPage/Sections/stripe.js";
 // import Chat from "components/Chat/Chat.js";

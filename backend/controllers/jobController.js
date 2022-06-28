@@ -280,7 +280,11 @@ exports.create = (req, res) => {
 exports.delete = (req, res) => {
   //   console.log("All gigs list");
   const { id } = req.params;
+
   console.log(id);
+  // dbo.collection("Bids").remove({ job_id: id });
+  // dbo.collection("Bids").deleteMany({ job_id: id });
+  //db.collection("Bids").deleteMany({ job_id: id });
   dbo.collection("CustomJobs").remove({ _id: ObjectId(id) });
   return res.json({ msg: "deleted" });
 };
