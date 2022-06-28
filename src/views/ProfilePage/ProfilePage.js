@@ -62,7 +62,7 @@ import { useMoralis } from "react-moralis";
 import { useHistory } from "react-router-dom";
 
 // import { useState } from "react";
-import { ErrorBox } from "components/errorbox/Error";
+import ErrorBox from "components/Errorbox/Error.js";
 const useStyles = makeStyles(styles);
 
 export default function ProfilePage(props) {
@@ -82,11 +82,14 @@ export default function ProfilePage(props) {
     _id: "",
     clientName: "",
     workerName: "",
-    bidPrice: "",
+    budget: "",
     status: "",
+    description: "",
     workerId: "",
     clientID: "",
+    job_id: "",
   });
+
   //const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
   const { isUnauthenticated, user, userError, setUserData } = useMoralis();
   const [username, setUsername] = useState();
@@ -112,6 +115,7 @@ export default function ProfilePage(props) {
       const data = await res.json();
       console.log(data);
       setWorkerProject(data);
+
       // if (data) {
       //   // console.log("WE HEREEE");
       //   setReference("/worker-dashboard");
@@ -158,6 +162,7 @@ export default function ProfilePage(props) {
         }}
         {...rest}
       />
+      {console.log(project)}
       <Parallax className={classes.background}></Parallax>
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div>

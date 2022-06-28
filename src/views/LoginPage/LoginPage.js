@@ -23,7 +23,7 @@ import styles from "assets/jss/material-kit-react/views/loginPage.js";
 //Blockchain code
 import { useMoralis } from "react-moralis";
 import { useState, useEffect } from "react";
-import { ErrorBox } from "components/errorbox/Error";
+import ErrorBox from "components/Errorbox/Error.js";
 import { useHistory } from "react-router-dom"; // version 5.2.0
 // import { useMoralis } from "react-moralis";
 
@@ -43,14 +43,17 @@ export default function LoginPage(props) {
   // const [password, setPassword] = useState();
   const { authError, login } = useMoralis();
   const history = useHistory();
+
   if (isAuthenticated) {
     // const history = useHistory();
+
     history.push("/landing-page");
   }
   ///reset password
   const loginFunction = async (email, password) => {
     await login(email, password);
     console.log("Login called");
+    // console.log(authError);
     // const id = Moralis.User.current();
     // var log = "login";
     // var user;
@@ -94,6 +97,7 @@ export default function LoginPage(props) {
   function checkData() {
     console.log("Inside check data function for login");
     loginFunction(formValues.email, formValues.password);
+
     history.push("/landing-page");
   }
   useEffect(() => {

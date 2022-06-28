@@ -40,29 +40,130 @@ import TextField from "@mui/material/TextField";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import { useMoralis } from "react-moralis";
+import { ethers } from "ethers";
 
+var ContractAddress = "";
+// var accountLinked = "";
+// var currentUser = 0;
+// var contract = 0;
+var provider = 0;
+var signer = 0;
+var numberContract = "";
+var ContractAbi = "";
 const useStyles = makeStyles(styles);
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 export default function FindJobs(props) {
   const { isAuthenticated, user } = useMoralis();
+  const setSeller = async (price, id) => {
+    try {
+      //   // const id = await user.id;
+      //   // console.log(user.id);
+
+      const res = await fetch(`/contract/${id}`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+      console.log(data);
+      ContractAddress = data.ContractAddress;
+      console.log(ContractAddress);
+
+      // if (data) {
+      //   // console.log("WE HEREEE");
+      //   setReference("/worker-dashboard");
+      //   // reference = "/worker-dashboard";
+      // } else {
+      //   setReference("/worker-page");
+      //   // reference = "/worker-page";
+      // }
+
+      if (!res.status === 200) {
+        const error = new Error(res.error);
+        throw error;
+      }
+    } catch (err) {
+      console.log(err);
+      // history.push('/login');
+    }
+    console.log("price:", price);
+    provider = new ethers.providers.Web3Provider(window.ethereum);
+    signer = provider.getSigner();
+    ContractAbi = [
+      "function setSeller(address payable _seller,address payable _owner, uint256 _price) escrowNotStarted public",
+    ];
+    numberContract = new ethers.Contract(ContractAddress, ContractAbi, signer);
+    const txResponse = await numberContract.setSeller(
+      user.attributes.ethAddress,
+      "0x5385f16f6d616B4a4b3ebFeAC012e1c6dcf11F4E",
+      price
+    );
+    await txResponse.wait();
+    console.log(txResponse.hash);
+    return;
+  };
   var idd, name_worker;
   if (isAuthenticated) {
     idd = user.id;
     console.log(user);
     name_worker = user.attributes.username;
   }
-  const [bid, setBidData] = useState({
+  // const [bid, setBidData] = useState({
+  //   price: "",
+  // });
+  // let name, value;
+  // const handleInputs = (e) => {
+  //   name = e.target.name;
+  //   value = e.target.value;
+  //   console.log(e);
+  //   setBidData({ ...bid, [name]: value });
+  // };
+  const initialValues = {
     price: "",
-  });
-  let name, value;
-  const handleInputs = (e) => {
-    name = e.target.name;
-    value = e.target.value;
-    console.log(e);
-    setBidData({ ...bid, [name]: value });
   };
+  const [formValues, setFormValues] = useState(initialValues);
+  const [formErrors, setFormErrors] = useState({});
+  // const [isSubmit, setIsSubmit] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
+  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   setFormErrors(validate(formValues));
+  //   setIsSubmit(true);
+  //   console.log(Object.keys(formErrors).length);
+  //   console.log(isSubmit);
+  //   // if (Object.keys(formErrors).length === 0 && isSubmit) {
+  //   //   postData();
+  //   //   history.push("/customjobs-page/" + id_of.id);
+  //   // }
+  // };
+  // function checkData(job_id, id) {
+  //   console.log("inside Check data");
+  //   console.log(Object.keys(formErrors).length);
+  //   console.log(isSubmit);
+  //   postBid(job_id, id);
+  //   // postData();
+  // }
+  // const validate = (values) => {
+  //   const errors = {};
+  //   // const regex = /^[a-zA-Z ]*$/;
+
+  //   ////////////////////////////////////////////////////
+  //   if (!values.price) {
+  //     errors.price = "Price is required!";
+  //   } else if (values.price < 1) {
+  //     errors.price = "Price should be greater than 0";
+  //   }
+  //   /////////////////////////////////////
+  //   return errors;
+  // };
   const [job, getJobData] = useState({
     jobs: [
       {
@@ -85,7 +186,19 @@ export default function FindJobs(props) {
     // const { job_id } = id;
     // console.log(id);
     // console.log(job_id);
-    const { price } = bid;
+    const errors = {};
+    if (!formValues.price) {
+      errors.price = "Price is required!";
+      setFormErrors(errors);
+      return;
+    } else if (formValues.price < 1) {
+      errors.price = "Price should be greater than 0";
+      setFormErrors(errors);
+      return;
+    }
+    setFormErrors(errors);
+    const { price } = formValues;
+    setSeller(price, job_id);
     const workerId = idd;
     const workerName = name_worker;
     const res = await fetch("/bids/create", {
@@ -303,10 +416,13 @@ export default function FindJobs(props) {
                             id="price"
                             label="Bid"
                             name="price"
-                            value={bid.price}
-                            onChange={handleInputs}
+                            value={formValues.price}
+                            onChange={handleChange}
                             sx={{ width: 60 }}
                           />
+                          <p className={classes.warningPara}>
+                            {formErrors.price}
+                          </p>
                           {/* <TextField
                             type="hidden"
                             id="job_id"
@@ -329,6 +445,10 @@ export default function FindJobs(props) {
                             <i className="fas fa-dollar-sign" />
                             Make Bid
                           </Button>
+                          {/* {Object.keys(formErrors).length === 0 && isSubmit
+                            ? // <div className="ui message success">Signed in successfully</div>
+                              checkData(jobs._id, id)
+                            : console.log("Error in form!")} */}
                         </React.Fragment>
                       }
                     />

@@ -30,7 +30,7 @@ import styles from "assets/jss/material-kit-react/views/loginPage.js";
 // import {Container,Heading} from '@chakra-ui/layout';
 import { useMoralis } from "react-moralis";
 // import { useState } from "react";
-import { ErrorBox } from "components/errorbox/Error";
+import ErrorBox from "components/Errorbox/Error.js";
 ////
 const useStyles = makeStyles(styles);
 export default function SignupPage(props) {

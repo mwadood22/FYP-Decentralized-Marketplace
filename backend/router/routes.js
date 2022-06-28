@@ -171,8 +171,9 @@ router.get("/projects/client/:client_id", projectController.showByClient);
 //JobOffers routes
 
 router.post("/offer/create", jobOfferController.create);
-router.get("/offers/getAll", jobOfferController.getAllOffers);
+router.get("/offers/:workerId", jobOfferController.getAllOffers);
 router.delete("/offer/:id", jobOfferController.delete);
+// router.get("/offers/:workerId", jobOfferController.get);
 
 //review routes
 router.post(

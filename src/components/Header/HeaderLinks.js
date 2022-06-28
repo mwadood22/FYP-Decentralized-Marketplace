@@ -5,6 +5,7 @@ import React from "react";
 // react components for routing our app without refresh
 import { Link } from "react-router-dom";
 import { useMoralis } from "react-moralis";
+import { ethers } from "ethers";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -22,16 +23,30 @@ import Button from "components/CustomButtons/Button.js";
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
 import { useState, useEffect } from "react";
 const useStyles = makeStyles(styles);
-
+var accountLinked = "";
+var currentUser = 0;
+var provider = 0;
+var signer = 0;
 export default function HeaderLinks(props) {
   const classes = useStyles();
   // const { ...rest } = props;
   // console.log(rest.props.location.state.id);
 
   const { isAuthenticated, logout, Moralis, user } = useMoralis();
-  var logoutButton, logoutButton1, signInButtons;
+  var logoutButton, logoutButton1, signInButtons, connectmeta;
   const [reference, setReference] = useState();
-
+  const LinkMetaMask = async () => {
+    await Moralis.enableWeb3();
+    currentUser = Moralis.User.current();
+    console.log(currentUser);
+    console.log(window.ethereum.selectedAddress);
+    const add = window.ethereum.selectedAddress;
+    window.confirm("Would you like to link this account to your user profile?");
+    accountLinked = await Moralis.link(add);
+    provider = new ethers.providers.Web3Provider(window.ethereum);
+    signer = provider.getSigner();
+    return accountLinked;
+  };
   const getWorker = async () => {
     try {
       // const id = await user.id;
@@ -95,6 +110,16 @@ export default function HeaderLinks(props) {
             className={classes.navLink}
           >
             Become a worker
+          </Button>
+        </ListItem>
+        <ListItem className={classes.listItem}>
+          <Button
+            color="transparent"
+            //target="_blank"
+            onClick={LinkMetaMask}
+            className={classes.navLink}
+          >
+            Connect Wallet
           </Button>
         </ListItem>
       </>

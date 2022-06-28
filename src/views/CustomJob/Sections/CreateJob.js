@@ -12,8 +12,9 @@ import HeaderLinks from "components/Header/HeaderLinks.js";
 import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
+// import { Preloader } from "components/UIHelper/preloader.jsx";
 
-import axios from "axios";
+// import axios from "axios";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 //import CardBody from "components/Card/CardBody.js";
@@ -41,10 +42,14 @@ import { useHistory } from "react-router-dom"; // version 5.2.0
 // import Paper from "@mui/material/Paper";
 
 import styles from "assets/jss/material-kit-react/views/workerpage.js";
+import { ethers } from "ethers";
+import { abi, bytecode } from "views/Contract/Contract.js";
 
 // import image from "assets/img/bg7.jpg";
 // import helper from "assets/img/services/helper.jpg";
-
+var contract = 0;
+var provider = 0;
+var signer = 0;
 const useStyles = makeStyles(styles);
 
 const currencies = [
@@ -66,6 +71,7 @@ const currencies = [
 ];
 
 export default function WorkerPage(props) {
+  // const [loading, setLoading] = useState(false);
   const { Moralis, isAuthenticated, user } = useMoralis();
   var id;
   if (isAuthenticated) {
@@ -80,7 +86,16 @@ export default function WorkerPage(props) {
   //   category: "",
   //   clientId: "",
   // });
-
+  const contractDeploy = async () => {
+    // console.log(bytecode);
+    provider = new ethers.providers.Web3Provider(window.ethereum);
+    signer = provider.getSigner();
+    const factory = new ethers.ContractFactory(abi, bytecode, signer);
+    contract = await factory.deploy();
+    console.log(contract.deployTransaction.hash);
+    await contract.deployed();
+    return contract.address;
+  };
   const initialValues = {
     title: "",
     budget: "",
@@ -102,61 +117,99 @@ export default function WorkerPage(props) {
   const history = useHistory();
 
   const postData = async () => {
+    console.log("Inside post data");
+
+    const ContractAddress = await contractDeploy();
     // e.preventDefault();
     // console.log(e.target.value);
     // console.log("Job is to be posted");
 
-    // const clientId = id;
-    // const { title, budget, city, address, description, category } = formValues;
-    // const res = await fetch("/job/create", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     title,
-    //     budget,
-    //     city,
-    //     address,
-    //     description,
-    //     category,
-    //     clientId,
-    //   }),
-    // });
+    const clientId = id;
+    const { title, budget, city, address, description, category } = formValues;
+    const res = await fetch("/job/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title,
+        budget,
+        city,
+        address,
+        description,
+        category,
+        clientId,
+      }),
+    });
 
-    // const data = await res.json();
+    const data = await res.json();
 
-    // if (data.status === 42 || !data) {
+    if (data.status === 42 || !data) {
+      window.alert("Invalid registeration");
+      console.log("Invalid registeration");
+    } else {
+      // console.log(data);
+      // history.push("/landing-page");
+    }
+    // }
+    // const formdata = new FormData();
+
+    // console.log("data added");
+    // formdata.append("picture", formValues.picture, formValues.picture.name);
+    // formdata.append("title", formValues.title);
+    // formdata.append("budget", formValues.budget);
+    // formdata.append("category", formValues.category);
+    // formdata.append("city", formValues.city);
+    // formdata.append("address", formValues.address);
+    // formdata.append("description", formValues.description);
+    // formdata.append("clientId", id);
+    // var res = " ";
+    // try {
+    // console.log("inside try block");
+
+    // const res = await axios
+    //   .post("/job/create", formdata)
+    //   .then(function (response) {
+    //     console.log(response.data);
+    //   });
+    // console.log(res);
+    // if (res.status === 42) {
     //   window.alert("Invalid registeration");
     //   console.log("Invalid registeration");
     // } else {
-    //   // console.log(data);
-    //   // history.push("/landing-page");
+    //   console.log(res);
     // }
-    // // }
-    const formdata = new FormData();
+    // console.log("inside try block");
+    // } catch (e) {
+    //   window.alert("catch block ");
+    // }
+    console.log("About to create contract");
+    // const data = await res.json();
+    console.log("customjobid:", data.job._id);
+    const jobOfferId = data.job._id;
+    const res1 = await fetch("/contract/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ContractAddress,
+        jobOfferId,
+      }),
+    });
 
-    console.log("data added");
-    formdata.append("picture", formValues.picture, formValues.picture.name);
-    formdata.append("title", formValues.title);
-    formdata.append("budget", formValues.budget);
-    formdata.append("category", formValues.category);
-    formdata.append("city", formValues.city);
-    formdata.append("address", formValues.address);
-    formdata.append("description", formValues.description);
-    formdata.append("clientId", id);
+    const data1 = await res1.json();
 
-    try {
-      const res = await axios.post("/job/create", formdata);
-      if (res.status === 42) {
-        window.alert("Invalid registeration");
-        console.log("Invalid registeration");
-      } else {
-        console.log(res);
-      }
-    } catch (e) {
-      window.alert("catch block ");
+    if (data1.status === 42 || !data1) {
+      window.alert("Invalid registeration");
+      console.log("Invalid registeration");
+    } else {
+      // console.log(data);
+      // history.push("/landing-page");
     }
+    console.log(history, id_of);
+
+    history.push("/customjobs-page/" + id_of.id);
   };
   let id_of;
   if (isAuthenticated) {
@@ -177,8 +230,8 @@ export default function WorkerPage(props) {
     console.log("inside Check data");
     console.log(Object.keys(formErrors).length);
     console.log(isSubmit);
+    // setLoading(true);
     postData();
-    history.push("/customjobs-page/" + id_of.id);
     // postData();
   }
   const validate = (values) => {
@@ -188,8 +241,8 @@ export default function WorkerPage(props) {
     ////////////////////////////////////////////////////
     if (!values.title) {
       errors.title = "Title is required!";
-    } else if (values.title.length > 20) {
-      errors.title = "Title cannot exceed more than 20 characters";
+    } else if (values.title.length < 20) {
+      errors.title = "Title should be more than 20 characters";
     }
     if (!values.budget) {
       errors.budget = "Budget is required!";
@@ -597,6 +650,7 @@ export default function WorkerPage(props) {
         </div>
         <Footer whiteFont />
       </div>
+      {/* <Preloader state={loading} /> */}
     </div>
   );
 }

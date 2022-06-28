@@ -34,6 +34,8 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
+import { Preloader } from "components/UIHelper/preloader.jsx";
+
 //import ListItemIcon from "@mui/material/ListItemIcon";
 //import Divider from "@mui/material/Divider";
 //import InboxIcon from "@mui/icons-material/Inbox";
@@ -45,10 +47,18 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 // import helper from "assets/img/services/helper.jpg";
 import team1 from "assets/img/faces/test1.jpg";
 import { useMoralis } from "react-moralis";
+import { ethers } from "ethers";
 
 // import team2 from "assets/img/faces/christian.jpg";
 // import team3 from "assets/img/faces/test3.jpg";
-
+var ContractAddress = "";
+// var accountLinked = "";
+// var currentUser = 0;
+var job_id = 0;
+var provider = 0;
+var signer = 0;
+var numberContract = "";
+var ContractAbi = "";
 const useStyles = makeStyles(styles);
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -58,10 +68,12 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 Transition.displayName = "Transition";
 
 export default function CustomJobsView(props) {
+  const [loading, setLoading] = useState(true);
+
   const { ...rest } = props;
   console.log(rest);
   const userId = rest.userId;
-
+  const [description, setDesc] = useState("");
   console.log(userId);
   // const userId = temp.match.params.userId;
   // const { isAuthenticated, user } = useMoralis();
@@ -74,7 +86,55 @@ export default function CustomJobsView(props) {
     clientName = user.attributes.username;
     // picture = user.attributes.picture;
   }
+  const deposit = async (cost) => {
+    console.log("jobID: ", job_id);
+    try {
+      // const id = await user.id;
+      // console.log(user.id);
 
+      const res = await fetch(`/contract/${job_id}`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+      console.log(data);
+      ContractAddress = data.ContractAddress;
+      // ContractAddress = data.ContractAddress;
+
+      console.log(ContractAddress);
+
+      // if (data) {
+      //   // console.log("WE HEREEE");
+      //   setReference("/worker-dashboard");
+      //   // reference = "/worker-dashboard";
+      // } else {
+      //   setReference("/worker-page");
+      //   // reference = "/worker-page";
+      // }
+
+      if (!res.status === 200) {
+        const error = new Error(res.error);
+        throw error;
+      }
+    } catch (err) {
+      console.log(err);
+      // history.push('/login');
+    }
+    const value = ethers.utils.parseEther(cost); // ether in this case MUST be a string
+    ContractAbi = ["function BuyerDeposit() onlyBuyer public payable"];
+    provider = new ethers.providers.Web3Provider(window.ethereum);
+    signer = provider.getSigner();
+    numberContract = new ethers.Contract(ContractAddress, ContractAbi, signer);
+    const txResponse = await numberContract.BuyerDeposit({
+      value: String(value),
+      gasPrice: 20e9,
+    });
+    await txResponse.wait();
+    console.log(txResponse.hash);
+  };
   const checkFunction = async (id) => {
     // console.log("IM CALLED");
     try {
@@ -88,6 +148,7 @@ export default function CustomJobsView(props) {
       const data = await res.json();
       console.log(data);
       getJobData(data);
+      setLoading(false);
 
       if (!res.status === 200) {
         const error = new Error(res.error);
@@ -193,9 +254,12 @@ export default function CustomJobsView(props) {
     const workerName = data.workerName;
     const workerId = data.workerId;
     const clientId = userId;
-    const bidPrice = data.price;
+    const budget = data.price;
     const status = "Ongoing";
-
+    const deposited = true;
+    // const consdition = "deposited";
+    //passing bid value to the deposit function
+    deposit(budget);
     // post request to enter project details in the project table
     const proejctRes = await fetch(`/projects/create`, {
       method: "POST",
@@ -207,8 +271,11 @@ export default function CustomJobsView(props) {
         clientId,
         workerName,
         workerId,
-        bidPrice,
+        budget,
+        description,
         status,
+        job_id,
+        deposited,
       }),
     });
 
@@ -223,10 +290,12 @@ export default function CustomJobsView(props) {
     }
   };
 
-  const viewBids = async (id) => {
+  const viewBids = async (id, jobDescription) => {
     // console.log("VIEW BIDS CALLED");
     // console.log(source);
-
+    setDesc(jobDescription);
+    job_id = id;
+    console.log("JobID in viewbids ", job_id);
     // // source = null;
     // console.log(source);
     setClassicModal(true);
@@ -351,7 +420,9 @@ export default function CustomJobsView(props) {
                               color="green"
                               size="md"
                               //rel="noopener noreferrer"
-                              onClick={() => viewBids(jobs._id)}
+                              onClick={() =>
+                                viewBids(jobs._id, jobs.description)
+                              }
                               className={classes.jobBtn}
                             >
                               <i className="fas fa-dollar-sign" />
@@ -590,6 +661,7 @@ export default function CustomJobsView(props) {
           </DialogActions>
         </Dialog>
       </List>
+      <Preloader state={loading} />
     </div>
   );
 }

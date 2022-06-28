@@ -11,6 +11,11 @@ import Button from "components/CustomButtons/Button.js";
 //////////
 import { ethers } from "ethers";
 // import { useMoralis } from "react-moralis";
+var provider = 0;
+var signer = 0;
+var numberContract = "";
+var ContractAbi = "";
+var ContractAddress = "";
 
 const columns = [
   { id: "id", label: "ID", minWidth: 120 },
@@ -26,25 +31,42 @@ function createData(id, client, worker, budget, status, finishjob) {
   return { id, client, worker, budget, status, finishjob };
 }
 
-// var ContractAddress = "";
 // var accountLinked = "";
 // var currentUser = 0;
 // var contract = 0;
-var provider = 0;
-var signer = 0;
-var numberContract = "";
-var ContractAbi = "";
 
 export default function StickyHeadTable(props) {
   // const { isAuthenticated, user, Moralis } = useMoralis();
   const { ...rest } = props;
   console.log(rest);
 
-  const jobDone = async () => {
+  const jobDone = async (jobOfferId) => {
+    var data;
+    try {
+      const res = await fetch(`/contract/${jobOfferId}`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      data = await res.json();
+      console.log(data);
+      ContractAddress = data.ContractAddress;
+      console.log(ContractAddress);
+
+      if (!res.status === 200) {
+        const error = new Error(res.error);
+        throw error;
+      }
+    } catch (err) {
+      console.log(err);
+    }
     console.log("ImCAlled");
-    var ContractAddress = rest.address;
+    // ContractAddress = "0x0625A6F85D21fcEAEd6De73C8d1970704C97Cd2e";
     provider = new ethers.providers.Web3Provider(window.ethereum);
     signer = provider.getSigner();
+    console.log("signer", signer);
     ContractAbi = ["function jobDone() payable public"];
     numberContract = new ethers.Contract(ContractAddress, ContractAbi, signer);
     const txResponse = await numberContract.jobDone();
@@ -57,9 +79,14 @@ export default function StickyHeadTable(props) {
         index + 1,
         projects.clientName,
         projects.workerName,
-        projects.bidPrice,
+        projects.budget,
         projects.status,
-        <Button onClick={jobDone} size="sm" color="black" href="">
+        <Button
+          onClick={() => jobDone(projects.job_id)}
+          size="sm"
+          color="black"
+          href=""
+        >
           Finish Job
         </Button>
       );

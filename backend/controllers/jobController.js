@@ -227,51 +227,54 @@ exports.index = async (req, res) => {
 
 exports.create = (req, res) => {
   //   console.log("All gigs list");
-  var profile = fs.readFileSync(req.file.path);
-  var encImg = profile.toString("base64");
-  var picture = new Buffer(encImg, "base64");
   // const job = req.body;
-  const errors = validationResult(req);
-
-  if (!errors.isEmpty()) {
-    return res.status(400).json({
-      success: false,
-      errors: errors.array(),
-      message: "job creation not successful",
-    });
-  }
-  // body("gigTitle").isLength({
-  //   min: 6,
-  // });
+  // var profile = fs.readFileSync(req.file.path);
+  // var encImg = profile.toString("base64");
+  // var picture = new Buffer(encImg, "base64");
+  // // const job = req.body;
   // const errors = validationResult(req);
-
   // if (!errors.isEmpty()) {
-  //   console.log("Form check");
   //   return res.status(400).json({
   //     success: false,
   //     errors: errors.array(),
+  //     message: "job creation not successful",
   //   });
-  // } else {
-  //   console.log(gig);
+  // }
+  // // body("gigTitle").isLength({
+  // //   min: 6,
+  // // });
+  // // const errors = validationResult(req);
+  // // if (!errors.isEmpty()) {
+  // //   console.log("Form check");
+  // //   return res.status(400).json({
+  // //     success: false,
+  // //     errors: errors.array(),
+  // //   });
+  // // } else {
+  // //   console.log(gig);
+  // var title = req.body.title;
+  // var budget = req.body.budget;
+  // var category = req.body.category;
+  // var description = req.body.description;
+  // var clientId = req.body.clientId;
+  // var city = req.body.city;
+  // var address = req.body.address;
+  // console.log("fine block");
+  // dbo.collection("CustomJobs").insertOne({
+  //   title,
+  //   budget,
+  //   category,
+  //   description,
+  //   picture,
+  //   clientId,
+  //   city,
+  //   address,
+  // });
+  // return res.json({ job });
+  const job = req.body;
 
-  var title = req.body.title;
-  var budget = req.body.budget;
-  var category = req.body.category;
-  var description = req.body.description;
-  var clientId = req.body.clientId;
-  var city = req.body.city;
-  var address = req.body.address;
-  console.log("fine block");
-  dbo.collection("CustomJobs").insertOne({
-    title,
-    budget,
-    category,
-    description,
-    picture,
-    clientId,
-    city,
-    address,
-  });
+  dbo.collection("CustomJobs").insert(job);
+  return res.json({ job });
 };
 
 exports.delete = (req, res) => {

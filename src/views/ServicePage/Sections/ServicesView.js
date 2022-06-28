@@ -24,6 +24,7 @@ import { Link } from "react-router-dom";
 
 import styles from "assets/jss/material-kit-react/views/landingPageSections/teamStyle.js";
 import GridContainer from "components/Grid/GridContainer";
+import { Preloader } from "components/UIHelper/preloader.jsx";
 
 //import team1 from "assets/img/faces/avatar.jpg";
 // import team2 from "assets/img/faces/christian.jpg";
@@ -38,6 +39,8 @@ import GridContainer from "components/Grid/GridContainer";
 const useStyles = makeStyles(styles);
 
 export default function ServicesView(props) {
+  const [loading, setLoading] = useState(true);
+
   const { ...rest } = props;
   console.log(rest);
 
@@ -110,6 +113,7 @@ export default function ServicesView(props) {
       const data = await res.json();
       // console.log(data);
       setGigData(data);
+      setLoading(false);
       // gigid = {
       //   pathname: "/gig",
       //   // param1: gig._id,
@@ -334,7 +338,7 @@ export default function ServicesView(props) {
                         {gigs.category}
                         <br />
                         <strong>Description: </strong>
-                        {gigs.gigDescription}
+                        {gigs.gigdescription}
                       </p>
                     </CardBody>
                   </Link>
@@ -474,6 +478,7 @@ export default function ServicesView(props) {
         color="info"
       ></Paginations> */}
       {/* </Slider> */}
+      <Preloader state={loading} />
     </div>
   );
 }

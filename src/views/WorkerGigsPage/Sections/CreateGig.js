@@ -227,8 +227,8 @@ export default function CreateWorkerGig(props) {
     ////////////////////////////////////////////////////
     if (!values.gigTitle) {
       errors.gigTitle = "Title is required!";
-    } else if (values.gigTitle.length > 20) {
-      errors.gigTitle = "Title cannot exceed more than 20 characters";
+    } else if (values.gigTitle.length < 20) {
+      errors.gigTitle = "Title should be more than 20 characters";
     }
     if (!values.budget) {
       errors.budget = "Budget is required!";

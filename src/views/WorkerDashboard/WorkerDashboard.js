@@ -83,8 +83,8 @@ import { ethers } from "ethers";
 // import { abi, bytecode } from "views/Contract/Contract.js";
 
 var ContractAddress = "";
-var accountLinked = "";
-var currentUser = 0;
+// var accountLinked = "";
+// var currentUser = 0;
 // var contract = 0;
 var provider = 0;
 var signer = 0;
@@ -97,30 +97,32 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 
 export default function ProfilePage(props) {
-  const { isAuthenticated, user, Moralis } = useMoralis();
+  const { isAuthenticated, user } = useMoralis();
+  // const { ...rest } = props;
+  // console.log(rest);
   //link metaMask
-  const LinkMetaMask = async () => {
-    await Moralis.enableWeb3();
-    currentUser = Moralis.User.current();
-    console.log(currentUser);
-    console.log(window.ethereum.selectedAddress);
-    const add = window.ethereum.selectedAddress;
-    // accountLinked = user.attributes.accounts;
-    // console.log("ACC:",accountLinked);
-    //   add
-    // );
-    window.confirm("Would you like to link this account to your user profile?");
-    accountLinked = await Moralis.link(add);
-    provider = new ethers.providers.Web3Provider(window.ethereum);
-    signer = provider.getSigner();
+  // const LinkMetaMask = async () => {
+  //   await Moralis.enableWeb3();
+  //   currentUser = Moralis.User.current();
+  //   console.log(currentUser);
+  //   console.log(window.ethereum.selectedAddress);
+  //   const add = window.ethereum.selectedAddress;
+  //   // accountLinked = user.attributes.accounts;
+  //   // console.log("ACC:",accountLinked);
+  //   //   add
+  //   // );
+  //   window.confirm("Would you like to link this account to your user profile?");
+  //   accountLinked = await Moralis.link(add);
+  //   provider = new ethers.providers.Web3Provider(window.ethereum);
+  //   signer = provider.getSigner();
 
-    console.log("signer", signer);
-    console.log("provi", provider);
-    console.log(user.attributes.ethAddress);
-    // numberContract = new ethers.Contract(ContractAddress, ContractAbi, signer);
-    return accountLinked;
-  };
-  const setSeller = async (id) => {
+  //   console.log("signer", signer);
+  //   console.log("provi", provider);
+  //   console.log(user.attributes.ethAddress);
+  //   // numberContract = new ethers.Contract(ContractAddress, ContractAbi, signer);
+  //   return accountLinked;
+  // };
+  const setSeller = async (id, budget) => {
     try {
       // const id = await user.id;
       // console.log(user.id);
@@ -157,25 +159,26 @@ export default function ProfilePage(props) {
     provider = new ethers.providers.Web3Provider(window.ethereum);
     signer = provider.getSigner();
     ContractAbi = [
-      "function setSeller(address payable _seller, uint256 _price) public",
+      "function setSeller(address payable _seller,address payable _owner, uint256 _price) escrowNotStarted public",
     ];
     numberContract = new ethers.Contract(ContractAddress, ContractAbi, signer);
     const txResponse = await numberContract.setSeller(
       user.attributes.ethAddress,
-      1
+      "0x5385f16f6d616B4a4b3ebFeAC012e1c6dcf11F4E",
+      budget
     );
 
     await txResponse.wait();
     console.log(txResponse.hash);
     return;
   };
-  const initialize = async () => {
-    ContractAbi = ["function initializeContract() escrowNotStarted public"];
-    numberContract = new ethers.Contract(ContractAddress, ContractAbi, signer);
-    const txResponse = await numberContract.initializeContract();
-    await txResponse.wait();
-    console.log(txResponse.hash);
-  };
+  // const initialize = async () => {
+  //   ContractAbi = ["function initializeContract() escrowNotStarted public"];
+  //   numberContract = new ethers.Contract(ContractAddress, ContractAbi, signer);
+  //   const txResponse = await numberContract.initializeContract();
+  //   await txResponse.wait();
+  //   console.log(txResponse.hash);
+  // };
 
   // const { isAuthenticated, user } = useMoralis();
   // const [workerId, setWorkerId] = useState();
@@ -205,10 +208,15 @@ export default function ProfilePage(props) {
   });
 
   const [project, setWorkerProject] = useState({
+    _id: "",
     clientName: "",
     workerName: "",
-    bidPrice: "",
+    budget: "",
     status: "",
+    description: "",
+    workerId: "",
+    clientID: "",
+    job_id: "",
   });
 
   const getWorker = async (worker_id) => {
@@ -416,18 +424,19 @@ export default function ProfilePage(props) {
       console.log(err);
     }
   };
+  // const deposited = false;
 
   const postProjects = async (
-    id,
+    job_id,
     budget,
     description,
     clientId,
     clientName
   ) => {
-    setSeller(id);
+    setSeller(job_id, budget);
     // setOpen(true);
     // e.preventDefault();
-
+    const deposited = false;
     console.log("form valid");
     // const clientId = offer.clientId;
     const workerId = idd;
@@ -450,6 +459,8 @@ export default function ProfilePage(props) {
         budget,
         description,
         status,
+        job_id,
+        deposited,
       }),
     });
     // setDisable((prevState) => [...prevState, id]);
@@ -468,7 +479,7 @@ export default function ProfilePage(props) {
   };
 
   const ShowJobOffers = () => {
-    const source = new EventSource(`http://localhost:6942/offers/getAll`);
+    const source = new EventSource(`http://localhost:6942/offers/${workerID}`);
 
     source.addEventListener("open", () => {
       console.log("SSE opened!");
@@ -572,9 +583,9 @@ export default function ProfilePage(props) {
                           <b className={classes.desc}>About Me</b>
                           <p>{worker.about}</p>
                           <hr className={classes.hr} />
-                          <Button color="black" onClick={LinkMetaMask}>
+                          {/* <Button color="black" onClick={LinkMetaMask}>
                             Connect to Crypto Wallet
-                          </Button>
+                          </Button> */}
                         </div>
                       ),
                     },
@@ -717,124 +728,140 @@ export default function ProfilePage(props) {
                       tabIcon: Schedule,
                       tabContent: (
                         <List>
-                          {offer.offers.map((offers, index) => {
-                            //const id = `b${index}`;
+                          {console.log(offer.offers)}
+                          {offer.offers.length > 0 ? (
+                            offer.offers.map((offers, index) => {
+                              //const id = `b${index}`;
 
-                            return (
-                              <ListItem alignItems="flex-start" key={index}>
-                                <Card className={classes.jobCard}>
-                                  <ListItemAvatar>
-                                    <Avatar alt="Remy Sharp" src={team1} />
-                                  </ListItemAvatar>
-                                  <ListItemText
-                                    primary={
-                                      <Typography className={classes.heading}>
-                                        <strong> {offers.clientName}</strong>
-                                      </Typography>
-                                    }
-                                    secondary={
-                                      <React.Fragment>
-                                        <br></br>
-                                        <Typography
-                                          className={classes.heading}
-                                          color="text.primary"
-                                        >
-                                          <strong>
-                                            {" "}
-                                            Title: {offers.title}
-                                          </strong>
-                                          {/* Get client name */}
+                              return (
+                                <ListItem alignItems="flex-start" key={index}>
+                                  <Card className={classes.jobCard}>
+                                    <ListItemAvatar>
+                                      <Avatar alt="Remy Sharp" src={team1} />
+                                    </ListItemAvatar>
+                                    <ListItemText
+                                      primary={
+                                        <Typography className={classes.heading}>
+                                          <strong> {offers.clientName}</strong>
                                         </Typography>
-                                        <br></br>
-                                        <Typography
-                                          className={classes.heading}
-                                          color="text.primary"
-                                        >
-                                          Address: {offers.address}
-                                        </Typography>
-                                        <Typography
-                                          className={classes.heading}
-                                          color="text.primary"
-                                        >
-                                          Budget: {offers.budget}
-                                        </Typography>
-                                        <Typography
-                                          className={classes.heading}
-                                          color="text.primary"
-                                        >
-                                          Detail: {offers.description}
-                                        </Typography>
-                                        <br /> <br />
-                                        <Divider
-                                          sx={{ width: 1000, m: 0.5 }}
-                                          orientation="horizontal"
-                                        />
-                                        <Button
-                                          color="green"
-                                          size="sm"
-                                          // href="/signup-page"
-                                          // target="_blank"
-                                          // disabled={disable}
-                                          rel="noopener noreferrer"
-                                          className={classes.jobBtn}
-                                          // onClick={handleClick}
-                                          onClick={() =>
-                                            postProjects(
-                                              offers._id,
-                                              offers.budget,
-                                              offers.description,
-                                              offers.clientId,
-                                              offers.clientName
-                                            )
-                                          }
-                                        >
-                                          <i className="fas fa-dollar-sign" />
-                                          Accept
-                                        </Button>
-                                        <Button
-                                          color="danger"
-                                          size="sm"
-                                          // href="/signup-page"
-                                          // target="_blank"
-                                          // disabled={disable}
-                                          rel="noopener noreferrer"
-                                          className={classes.jobBtn}
-                                          // onClick={handleClick}
-                                          onClick={() =>
-                                            DeleteOffer(offers._id)
-                                          }
-                                          key={index}
-                                        >
-                                          <i className="fas fa-dollar-sign" />
-                                          Decline
-                                        </Button>
-                                        <Button
+                                      }
+                                      secondary={
+                                        <React.Fragment>
+                                          <br></br>
+                                          <Typography
+                                            className={classes.heading}
+                                            color="text.primary"
+                                          >
+                                            <strong>
+                                              {" "}
+                                              Title: {offers.title}
+                                            </strong>
+                                            {/* Get client name */}
+                                          </Typography>
+                                          <br></br>
+                                          <Typography
+                                            className={classes.heading}
+                                            color="text.primary"
+                                          >
+                                            Address: {offers.address}
+                                          </Typography>
+                                          <Typography
+                                            className={classes.heading}
+                                            color="text.primary"
+                                          >
+                                            Budget: {offers.budget}
+                                          </Typography>
+                                          <Typography
+                                            className={classes.heading}
+                                            color="text.primary"
+                                          >
+                                            Detail: {offers.description}
+                                          </Typography>
+                                          <br /> <br />
+                                          <Divider
+                                            sx={{ width: 1000, m: 0.5 }}
+                                            orientation="horizontal"
+                                          />
+                                          <Button
+                                            color="green"
+                                            size="sm"
+                                            // href="/signup-page"
+                                            // target="_blank"
+                                            // disabled={disable}
+                                            rel="noopener noreferrer"
+                                            className={classes.jobBtn}
+                                            // onClick={handleClick}
+                                            onClick={() =>
+                                              postProjects(
+                                                offers._id,
+                                                offers.budget,
+                                                offers.description,
+                                                offers.clientId,
+                                                offers.clientName
+                                              )
+                                            }
+                                          >
+                                            <i className="fas fa-dollar-sign" />
+                                            Accept
+                                          </Button>
+                                          <Button
+                                            color="danger"
+                                            size="sm"
+                                            // href="/signup-page"
+                                            // target="_blank"
+                                            // disabled={disable}
+                                            rel="noopener noreferrer"
+                                            className={classes.jobBtn}
+                                            // onClick={handleClick}
+                                            onClick={() =>
+                                              DeleteOffer(offers._id)
+                                            }
+                                            key={index}
+                                          >
+                                            <i className="fas fa-dollar-sign" />
+                                            Decline
+                                          </Button>
+                                          {/* <Button
                                           size="sm"
                                           color="black"
                                           onClick={initialize}
                                         >
                                           Confirmation
-                                        </Button>
-                                        <Snackbar
-                                          open={open}
-                                          autoHideDuration={6000}
-                                          onClose={handleClose}
-                                        >
-                                          <Alert
+                                        </Button> */}
+                                          <Snackbar
+                                            open={open}
+                                            autoHideDuration={6000}
                                             onClose={handleClose}
-                                            severity="success"
-                                            sx={{ width: "100%" }}
                                           >
-                                            Job Started Successfully!
-                                          </Alert>
-                                        </Snackbar>
-                                      </React.Fragment>
-                                    }
-                                  />
-                                </Card>
-                              </ListItem>
-                            );
-                          })}
+                                            <Alert
+                                              onClose={handleClose}
+                                              severity="success"
+                                              sx={{ width: "100%" }}
+                                            >
+                                              Job Started Successfully!
+                                            </Alert>
+                                          </Snackbar>
+                                        </React.Fragment>
+                                      }
+                                    />
+                                  </Card>
+                                </ListItem>
+                              );
+                            })
+                          ) : (
+                            <ListItem alignItems="flex-start">
+                              <Card className={classes.jobCard}>
+                                <ListItemText
+                                  primary={
+                                    <Typography className={classes.heading}>
+                                      <strong>No Data Present!</strong>
+                                    </Typography>
+                                  }
+                                  secondary={<React.Fragment></React.Fragment>}
+                                />
+                              </Card>
+                            </ListItem>
+                          )}
                           {/* {console.log(ContractAddress)} */}
                         </List>
                       ),

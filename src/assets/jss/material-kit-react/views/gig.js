@@ -11,6 +11,9 @@ const workerPageStyle = {
     marginBottom: "0.75rem",
     textDecoration: "none",
   },
+  warningPara: {
+    color: "red",
+  },
   p: {
     fontStyle: "italic",
     fontSize: "1.0625rem",
@@ -135,6 +138,19 @@ const workerPageStyle = {
     paddingTop: "15vh",
     color: "#FFFFFF",
     paddingBottom: "100px",
+  },
+  container1: {
+    ...container,
+    // zIndex: "0",
+    // position: "relative",
+    paddingTop: "15vh",
+    color: "#FFFFFF",
+    paddingBottom: "100px",
+  },
+  loader: {
+    ...container,
+    zIndex: "2",
+    position: "relative",
   },
   cardHidden: {
     opacity: "0",

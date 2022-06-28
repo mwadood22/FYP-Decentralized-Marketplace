@@ -47,6 +47,8 @@ import styles from "assets/jss/material-kit-react/views/gig.js";
 import { useMoralis } from "react-moralis";
 import { ethers } from "ethers";
 import { abi, bytecode } from "views/Contract/Contract.js";
+import { useHistory } from "react-router-dom";
+import { Preloader } from "components/UIHelper/preloader.jsx";
 
 // import image from "assets/img/bg7.jpg";
 // import helper from "assets/img/services/helper.jpg";
@@ -75,42 +77,24 @@ const currencies = [
   },
 ];
 var ContractAddress = "";
-var accountLinked = "";
-var currentUser = 0;
+// var accountLinked = "";
+// var currentUser = 0;
 var contract = 0;
 var provider = 0;
 var signer = 0;
-var numberContract = "";
-var ContractAbi = "";
+// var numberContract = "";
+// var ContractAbi = "";
 
 export default function Gig(props) {
-  const { isAuthenticated, user, Moralis } = useMoralis();
+  const [loading, setLoading] = useState(true);
+
+  const { isAuthenticated, user } = useMoralis();
   //contract integration
-
-  // SETTING USER METAMASK
-  const LinkMetaMask = async () => {
-    await Moralis.enableWeb3();
-    currentUser = Moralis.User.current();
-    console.log(currentUser);
-    console.log(window.ethereum.selectedAddress);
-    const add = window.ethereum.selectedAddress;
-    // accountLinked = user.attributes.accounts;
-    // console.log("ACC:",accountLinked);
-    //   add
-    // );
-    window.confirm("Would you like to link this account to your user profile?");
-    accountLinked = await Moralis.link(add);
-    provider = new ethers.providers.Web3Provider(window.ethereum);
-    signer = provider.getSigner();
-
-    console.log("signer", signer);
-    console.log("provi", provider);
-    console.log(user.attributes.ethAddress);
-    // numberContract = new ethers.Contract(ContractAddress, ContractAbi, signer);
-    return accountLinked;
-  };
-  const contractDeploy = () => {
+  const openmodel = () => {
     setClassicModal(true);
+  };
+  const contractDeploy = async () => {
+    // setClassicModal(true);
     // console.log("hello")
     // provider.send("seth_requestAccounts", []);
 
@@ -127,87 +111,33 @@ export default function Gig(props) {
     // const walconst = new ethers.Walconst(privateKey, provider);
 
     // Deployment is asynchronous, so we use an async IIFE
-    (async function () {
-      console.log(bytecode);
-      provider = new ethers.providers.Web3Provider(window.ethereum);
-      signer = provider.getSigner();
-      // Create an instance of a Contract Factory
-      const factory = new ethers.ContractFactory(abi, bytecode, signer);
-
-      // Notice we pass in "Hello World" as the parameter to the constructor
-      contract = await factory.deploy();
-
-      // The address the Contract WILL have once mined
-      // See: https://ropsten.etherscan.io/address/0x2bd9aaa2953f988153c8629926d22a6a5f69b14e
-      ContractAddress = contract.address;
-
-      console.log(ContractAddress);
-      // "0x2bD9aAa2953F988153c8629926D22A6a5F69b14E"
-
-      // The transaction that was sent to the network to deploy the Contract
-      // See: https://ropsten.etherscan.io/tx/0x159b76843662a15bd67e482dcfbee55e8e44efad26c5a614245e12a00d4b1a51
-      console.log(contract.deployTransaction.hash);
-      // "0x159b76843662a15bd67e482dcfbee55e8e44efad26c5a614245e12a00d4b1a51"
-
-      // The contract is NOT deployed yet; we must wait until it is mined
-      await contract.deployed();
-      console.log(ContractAddress);
-
-      // Done! The contract is deployed.
-    })();
-  };
-  const setBuyer = async () => {
+    console.log(bytecode);
     provider = new ethers.providers.Web3Provider(window.ethereum);
     signer = provider.getSigner();
+    // Create an instance of a Contract Factory
+    const factory = new ethers.ContractFactory(abi, bytecode, signer);
+
+    // Notice we pass in "Hello World" as the parameter to the constructor
+    contract = await factory.deploy();
+
+    // The address the Contract WILL have once mined
+    // See: https://ropsten.etherscan.io/address/0x2bd9aaa2953f988153c8629926d22a6a5f69b14e
+    ContractAddress = contract.address;
+
     console.log(ContractAddress);
-    // const txResponse =  await numberContract.getValue();
-    ContractAbi = ["function setBuyer(address _buyer) public"];
-    numberContract = new ethers.Contract(ContractAddress, ContractAbi, signer);
-    const txResponse = await numberContract.setBuyer(
-      user.attributes.ethAddress
-    );
-    await txResponse.wait();
-    console.log(txResponse.hash);
-  };
-  const initialize = async () => {
-    ContractAbi = ["function initializeContract() escrowNotStarted public"];
-    numberContract = new ethers.Contract(ContractAddress, ContractAbi, signer);
-    const txResponse = await numberContract.initializeContract();
-    await txResponse.wait();
-    console.log(txResponse.hash);
-    return;
-  };
-  const Deposit = async () => {
-    // const overrides = {
-    // To convert Ether to Wei:
-    const value = ethers.utils.parseEther("1"); // ether in this case MUST be a string
+    // "0x2bD9aAa2953F988153c8629926D22A6a5F69b14E"
 
-    // Or you can use Wei directly if you have that:
-    // value: someBigNumber
-    // value: 1234   // Note that using JavaScript numbers requires they are less than Number.MAX_SAFE_INTEGER
-    // value: "1234567890"
-    // value: "0x1234"
+    // The transaction that was sent to the network to deploy the Contract
+    // See: https://ropsten.etherscan.io/tx/0x159b76843662a15bd67e482dcfbee55e8e44efad26c5a614245e12a00d4b1a51
+    console.log(contract.deployTransaction.hash);
+    // "0x159b76843662a15bd67e482dcfbee55e8e44efad26c5a614245e12a00d4b1a51"
 
-    // Or, promises are also supported:
-    // value: provider.getBalance(addr)
-    // };
-    ContractAbi = ["function deposit() onlyBuyer public payable"];
-    numberContract = new ethers.Contract(ContractAddress, ContractAbi, signer);
-    const txResponse = await numberContract.deposit({
-      value: String(value),
-      gasPrice: 20e9,
-    });
-    await txResponse.wait();
-    console.log(txResponse.hash);
+    // The contract is NOT deployed yet; we must wait until it is mined
+    await contract.deployed();
+    console.log(ContractAddress);
+    return contract.address;
+    // Done! The contract is deployed.
   };
-  const jobDone = async () => {
-    ContractAbi = ["function jobDone() payable public"];
-    numberContract = new ethers.Contract(ContractAddress, ContractAbi, signer);
-    const txResponse = await numberContract.jobDone();
-    await txResponse.wait();
-    console.log(txResponse.hash);
-  };
-  ///////////////
   var id;
   var clientname;
   if (isAuthenticated) {
@@ -217,11 +147,11 @@ export default function Gig(props) {
     // console.log("email: ", email);
   }
 
-  const [currency, setCurrency] = React.useState("None");
-  const handleChange = (event) => {
-    setCurrency(event.target.value);
-  };
-
+  // const [currency, setCurrency] = React.useState("None");
+  // const handleChange = (event) => {
+  //   setCurrency(event.target.value);
+  // };
+  const history = useHistory();
   const [gig, setGigData] = useState({
     gigTitle: "",
     budget: "",
@@ -240,24 +170,95 @@ export default function Gig(props) {
     picture: "",
   });
 
-  const [offer, setJobOfferData] = useState({
+  // const [offer, setJobOfferData] = useState({
+  //   title: "",
+  //   city: "",
+  //   budget: "",
+  //   address: "",
+  //   description: "",
+  //   // clientId: "",
+  //   // clientName: "",
+  // });
+
+  const initialValues = {
     title: "",
-    city: "",
     budget: "",
+    city: "",
     address: "",
+    // category: "",
     description: "",
     // clientId: "",
-    // clientName: "",
-  });
-
-  let name, value;
-  const handleInputs = (e) => {
-    console.log("Handle inputs block");
-    name = e.target.name;
-    value = e.target.value;
-    console.log(e);
-    setJobOfferData({ ...offer, [name]: value });
+    // picture: "",
   };
+  const [formValues, setFormValues] = useState(initialValues);
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
+  };
+
+  const validate = (values) => {
+    const errors = {};
+    const regex = /^[a-zA-Z ]*$/;
+
+    ////////////////////////////////////////////////////
+    if (!values.title) {
+      errors.title = "Title is required!";
+    } else if (values.title.length < 20) {
+      errors.title = "Title should be more than 20 characters";
+    }
+    if (!values.budget) {
+      errors.budget = "Budget is required!";
+    } else if (isNaN(values.budget)) {
+      errors.budget = "Please enter numeric value!";
+    }
+    if (!values.city) {
+      errors.city = "City is required";
+    } else if (!regex.test(values.city)) {
+      errors.city = "Invalid city";
+    }
+
+    if (!values.address) {
+      errors.address = "Address is required";
+    }
+
+    if (!values.description) {
+      errors.description = "Description is required";
+    } else if (values.description.length > 150) {
+      errors.description = "Description cannot exceed more than 150 characters";
+    }
+
+    // if (!values.category) {
+    //   errors.category = "Category is required";
+    // }
+
+    // if (!values.picture) {
+    //   errors.picture = "Picture is required";
+    // }
+    /////////////////////////////////////
+    return errors;
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setFormErrors(validate(formValues));
+    setIsSubmit(true);
+    console.log(Object.keys(formErrors).length);
+    console.log(isSubmit);
+    // if (Object.keys(formErrors).length === 0 && isSubmit) {
+    //   postData();
+    //   history.push("/customjobs-page/" + id_of.id);
+    // }
+  };
+  // let name, value;
+  // const handleInputs = (e) => {
+  //   console.log("Handle inputs block");
+  //   name = e.target.name;
+  //   value = e.target.value;
+  //   console.log(e);
+  //   setJobOfferData({ ...offer, [name]: value });
+  // };
 
   const [otherGigs, setOtherGigsData] = useState({
     gigs: [
@@ -321,6 +322,7 @@ export default function Gig(props) {
       const data1 = await res1.json();
       console.log(data1);
       setReviewData(data1);
+
       if (!res1.status === 200) {
         const error = new Error(res1.error);
         throw error;
@@ -358,7 +360,7 @@ export default function Gig(props) {
       const data3 = await res3.json();
       console.log(data3);
       setOtherGigsData(data3);
-
+      setLoading(false);
       if (!res3.status === 200) {
         const error = new Error(res3.error);
         throw error;
@@ -369,17 +371,17 @@ export default function Gig(props) {
     }
   };
 
-  const sendJobOffer = async (e) => {
+  const sendJobOffer = async () => {
     //contract function call
-    initialize();
+    ContractAddress = await contractDeploy();
     ////
-    e.preventDefault();
+    // e.preventDefault();
     // console.log(e.target.value);
 
     const clientId = id;
     const worker = gig.workerId;
     const clientName = clientname;
-    const { title, city, budget, address, description } = offer;
+    const { title, city, budget, category, address, description } = formValues;
     const res = await fetch("/offer/create", {
       method: "POST",
       headers: {
@@ -391,6 +393,7 @@ export default function Gig(props) {
         city,
         address,
         description,
+        category,
         clientId,
         clientName,
         worker,
@@ -427,7 +430,15 @@ export default function Gig(props) {
       // console.log(data);
       // history.push("/landing-page");
     }
+    history.push("/landing-page");
   };
+  function checkData() {
+    console.log("inside Check data");
+    console.log(Object.keys(formErrors).length);
+    console.log(isSubmit);
+    sendJobOffer();
+    // postData();
+  }
 
   // const getReviewData = async () => {
   //   console.log("Check");
@@ -496,6 +507,8 @@ export default function Gig(props) {
 
   return (
     <div>
+      {console.log(loading)}
+
       <Header
         absolute
         color="black"
@@ -504,8 +517,11 @@ export default function Gig(props) {
         {...rest}
       />
       <div className={classes.pageHeader}>
-        <div className={classes.container}>
+        <div className={loading ? classes.container1 : classes.container}>
           {/* <Paper elevation={3} style={styles.paperContainer}> */}
+          <div className={classes.loader}>
+            <Preloader state={loading} />
+          </div>
           <GridContainer xs={12} sm={12} md={12}>
             <GridItem xs={12} sm={12} md={12}>
               <Card className={(classes[cardAnimaton], classes.card)}>
@@ -550,13 +566,13 @@ export default function Gig(props) {
                       </h4> */}
                       <h4>
                         {" "}
-                        <Button color="green" onClick={contractDeploy}>
+                        <Button color="green" onClick={openmodel}>
                           {" "}
                           Send job offer
                         </Button>
-                        <Button color="black" onClick={LinkMetaMask}>
+                        {/* <Button color="black" onClick={LinkMetaMask}>
                           Connect to Crypto Wallet
-                        </Button>
+                        </Button> */}
                         {/* <Button color="green" href="/payment-page">
                           {" "}
                           Make Payment
@@ -605,9 +621,12 @@ export default function Gig(props) {
                                       label="Job Title"
                                       name="title"
                                       variant="standard"
-                                      value={offer.title}
-                                      onChange={handleInputs}
+                                      value={formValues.title}
+                                      onChange={handleChange}
                                     />
+                                    <p className={classes.warningPara}>
+                                      {formErrors.title}
+                                    </p>
                                   </GridItem>
 
                                   <GridItem xs={6} sm={6} md={6}>
@@ -618,8 +637,9 @@ export default function Gig(props) {
                                       id="outlined-select-currency"
                                       select
                                       margin="normal"
+                                      name="city"
                                       label="Select"
-                                      value={currency}
+                                      value={formValues.city}
                                       onChange={handleChange}
                                       helperText="city"
                                     >
@@ -632,6 +652,9 @@ export default function Gig(props) {
                                         </MenuItem>
                                       ))}
                                     </TextField>
+                                    <p className={classes.warningPara}>
+                                      {formErrors.city}
+                                    </p>
                                   </GridItem>
                                   <GridItem xs={6} sm={6} md={6}>
                                     <TextField
@@ -642,9 +665,12 @@ export default function Gig(props) {
                                       label="Your Budget"
                                       name="budget"
                                       variant="standard"
-                                      value={offer.budget}
-                                      onChange={handleInputs}
+                                      value={formValues.budget}
+                                      onChange={handleChange}
                                     />
+                                    <p className={classes.warningPara}>
+                                      {formErrors.budget}
+                                    </p>
                                   </GridItem>
 
                                   <GridItem xs={6} sm={6} md={12}>
@@ -656,9 +682,12 @@ export default function Gig(props) {
                                       label="Address"
                                       name="address"
                                       variant="standard"
-                                      value={offer.address}
-                                      onChange={handleInputs}
+                                      value={formValues.address}
+                                      onChange={handleChange}
                                     />
+                                    <p className={classes.warningPara}>
+                                      {formErrors.address}
+                                    </p>
                                   </GridItem>
 
                                   <GridItem>
@@ -672,19 +701,27 @@ export default function Gig(props) {
                                       id="description"
                                       name="description"
                                       label="Job Details"
-                                      value={offer.description}
-                                      onChange={handleInputs}
+                                      value={formValues.description}
+                                      onChange={handleChange}
                                     />
+                                    <p className={classes.warningPara}>
+                                      {formErrors.description}
+                                    </p>
                                   </GridItem>
                                   <GridItem>
                                     <Button
                                       color="green"
                                       href=""
-                                      onClick={sendJobOffer}
+                                      onClick={handleSubmit}
                                     >
                                       Send job offer
                                     </Button>
-                                    <Button
+                                    {Object.keys(formErrors).length === 0 &&
+                                    isSubmit
+                                      ? // <div className="ui message success">Signed in successfully</div>
+                                        checkData()
+                                      : console.log("Error in form!")}
+                                    {/* <Button
                                       color="green"
                                       href=""
                                       onClick={setBuyer}
@@ -704,7 +741,7 @@ export default function Gig(props) {
                                       onClick={jobDone}
                                     >
                                       Job Done
-                                    </Button>
+                                    </Button> */}
                                   </GridItem>
                                 </GridContainer>
                               </form>

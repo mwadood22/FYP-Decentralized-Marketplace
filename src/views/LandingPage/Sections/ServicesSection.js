@@ -34,12 +34,14 @@ import painter from "assets/img/services/painter.jpg";
 import plumbing from "assets/img/services/plumbing.jpg";
 import helper from "assets/img/services/helper.jpg";
 import others from "assets/img/services/others.jpg";
+import { Preloader } from "components/UIHelper/preloader.jsx";
 
 //import { cardTitle } from "assets/jss/material-kit-react";
 
 const useStyles = makeStyles(styles);
 
 export default function ServicesSection() {
+  const [loading, setLoading] = useState(true);
   const images = [
     electrician,
     plumbing,
@@ -74,6 +76,7 @@ export default function ServicesSection() {
       const data = await res.json();
       // console.log(data);
       setUserData(data);
+      setLoading(false);
       // gigid = {
       //   pathname: "/gig",
       //   // param1: gig._id,
@@ -394,6 +397,7 @@ export default function ServicesSection() {
         </GridItem> */}
       </Slider>
       {/* </Slider> */}
+      <Preloader state={loading} />
     </div>
     //  </div>
   );

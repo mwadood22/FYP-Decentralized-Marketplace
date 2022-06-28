@@ -9,6 +9,9 @@ const workerPageStyle = {
     margin: "27px 0px 0px 4px",
     height: "36px",
   },
+  warningPara: {
+    color: "red",
+  },
   searchInput: {
     width: "600px",
     border: "1.5px #DCDFDC",
