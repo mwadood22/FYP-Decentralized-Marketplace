@@ -15,7 +15,7 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import NavPills from "components/NavPills/NavPills.js";
-import Table3 from "components/Table/Table3.js";
+// import Table3 from "components/Table/Table3.js";
 import Table4 from "components/Table/Table4.js";
 //import Table2 from "components/Table2/Table2.js";
 import Parallax from "components/Parallax/Parallax.js";

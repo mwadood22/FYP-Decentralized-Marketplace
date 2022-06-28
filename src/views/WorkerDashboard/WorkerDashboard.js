@@ -31,7 +31,7 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import WorkerHeaderLinks from "components/Header/WorkerHeaderLinks.js";
 import NavPills from "components/NavPills/NavPills.js";
-import Table from "components/Table/Table.js";
+// import Table from "components/Table/Table.js";
 import Table2 from "components/Table/Table2.js";
 //import Table2 from "components/Table2/Table2.js";
 import Parallax from "components/Parallax/Parallax.js";
