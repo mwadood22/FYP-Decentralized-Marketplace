@@ -55,3 +55,6 @@ Contributions are welcome! To contribute to the repository, fork the repository 
 ## Contact
 
 For questions or feedback, please contact Muhammad Wadood ul Haq at muhammadwadoodulhaq@gmail.com.
+
+### Poster
+![fyp poster](https://github.com/mwadood22/FYP-Decentralized-Marketplace/blob/master/src/assets/img/Markaz.jpg?raw=true)
