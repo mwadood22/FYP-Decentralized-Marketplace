@@ -9,6 +9,9 @@ The Decentralized Marketplace is a blockchain and MERN stack based platform desi
 - **Selection Process:** Job posters can finalize a seller by selecting the one with the most feasible bid.
 - **Service Provider Search:** Users can search for service providers based on specific categories and request services from them.
 
+### Poster
+![fyp poster](https://github.com/mwadood22/FYP-Decentralized-Marketplace/blob/master/src/assets/img/Markaz.jpg?raw=true)
+
 ## Usage
 
 1. Create an account on the platform.
@@ -55,6 +58,3 @@ Contributions are welcome! To contribute to the repository, fork the repository 
 ## Contact
 
 For questions or feedback, please contact Muhammad Wadood ul Haq at muhammadwadoodulhaq@gmail.com.
-
-### Poster
-![fyp poster](https://github.com/mwadood22/FYP-Decentralized-Marketplace/blob/master/src/assets/img/Markaz.jpg?raw=true)
